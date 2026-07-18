@@ -93,6 +93,7 @@ const closeDescBtn = document.getElementById('closeDesc');
 const tabsViewport = document.querySelector('.tabs-viewport');
 
 let advanceTimer = null;
+let appLoaded = false;
 
 // Настройка переключателя языков (Десктоп)
 const langRuBtn = document.getElementById('langRu');
@@ -210,15 +211,19 @@ function renderDots(cat, idx){
   dotsEl.innerHTML = '';
   MENU[cat].forEach((_,i)=>{
     const s = document.createElement('div');
-    s.className = 'seg' + (i<idx ? ' done' : i===idx ? ' active' : '');
+    const isActive = (i === idx && appLoaded);
+    s.className = 'seg' + (i<idx ? ' done' : isActive ? ' active' : '');
     s.innerHTML = '<i></i>';
     dotsEl.appendChild(s);
   });
-  startAdvanceTimer(cat, idx);
+  if (appLoaded) {
+    startAdvanceTimer(cat, idx);
+  }
 }
 
 function startAdvanceTimer(cat, idx){
   clearTimeout(advanceTimer);
+  if (!appLoaded) return;
   advanceTimer = setTimeout(()=>{
     const items = MENU[cat];
     setDish(cat, (idx+1) % items.length);
@@ -608,5 +613,7 @@ window.addEventListener('resize', ()=>{
 window.addEventListener('load', ()=>{
   setTimeout(()=>{
     document.getElementById('preloader').classList.add('hide');
+    appLoaded = true;
+    renderDots(curCat, curIdx);
   }, 1900);
 });

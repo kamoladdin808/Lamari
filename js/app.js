@@ -263,13 +263,12 @@ function renderTabs(){
     
     t.onclick = ()=>{
       if(cat!==curCat) setDish(cat, 0);
-      centerTab(t);
     };
     tabsEl.appendChild(t);
   });
   requestAnimationFrame(()=>{
     const activeTab = tabsEl.querySelector('.cat-tab.active');
-    if(activeTab) centerTab(activeTab, false);
+    if(activeTab) centerTab(activeTab, true);
   });
 }
 

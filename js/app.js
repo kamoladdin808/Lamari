@@ -39,9 +39,15 @@ const CAT_NAMES = {
 
 const CATS = Object.keys(MENU);
 
-let curLang = 'ru';
-let curCat = CATS[0];
-let curIdx = 0;
+// Инициализация языка и текущего блюда из параметров URL (Deep Linking)
+const urlParams = new URLSearchParams(window.location.search);
+const catParam = urlParams.get('cat');
+const dishParam = parseInt(urlParams.get('dish'), 10);
+const langParam = urlParams.get('lang');
+
+let curLang = (langParam === 'ru' || langParam === 'uz') ? langParam : 'ru';
+let curCat = (catParam && MENU[catParam]) ? catParam : CATS[0];
+let curIdx = (!isNaN(dishParam) && dishParam >= 0 && dishParam < MENU[curCat].length) ? dishParam : 0;
 let showingA = true;
 const cart = {}; // itemId -> {qty, price, name: {ru, uz}, img}
 
@@ -185,6 +191,10 @@ function setDish(cat, idx){
   dishDesc.textContent = `${d.desc[curLang]} · ${d.weight}`;
 
   updateCartUI();
+
+  // Обновление URL без перезагрузки (Deep Linking)
+  const newUrl = `${window.location.pathname}?cat=${cat}&dish=${idx}&lang=${curLang}`;
+  window.history.replaceState(null, '', newUrl);
 
   renderDots(cat, idx);
   renderTabs();
@@ -458,7 +468,40 @@ closeLangBtn.addEventListener('click', closeLangModal);
 
 cartChip.addEventListener('animationend', () => cartChip.classList.remove('pop'));
 
-setDish(curCat, 0);
+const shareDishBtn = document.getElementById('shareDish');
+shareDishBtn.addEventListener('click', async () => {
+  const d = MENU[curCat][curIdx];
+  const shareUrl = window.location.href;
+  const shareTitle = d.name[curLang];
+  const shareText = curLang === 'ru' 
+    ? `Посмотри какое вкусное блюдо в La Mari: ${d.name[curLang]}` 
+    : `La Mari'dagi ajoyib taomni ko'ring: ${d.name[curLang]}`;
+    
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: shareTitle,
+        text: shareText,
+        url: shareUrl
+      });
+    } catch (err) {
+      console.log('Пользователь отменил шеринг');
+    }
+  } else {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      const copyText = curLang === 'ru' ? 'Ссылка скопирована!' : 'Havola nusxalandi!';
+      toastEl.textContent = copyText;
+      toastEl.classList.add('show');
+      clearTimeout(window._t);
+      window._t = setTimeout(()=> toastEl.classList.remove('show'), 1400);
+    } catch (err) {
+      console.error('Не удалось скопировать ссылку', err);
+    }
+  }
+});
+
+setDish(curCat, curIdx);
 renderTabs();
 updateCartUI();
 

@@ -354,6 +354,20 @@ body{
   color: var(--cream);
   text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
+.desc-modal-actions{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.share-btn{
+  width:28px; height:28px; border-radius:50%; border:none; background:rgba(255,255,255,.1);
+  font-size:14px; cursor:pointer; color:var(--cream);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.share-btn:active{ background: rgba(255,255,255,0.2); }
+.share-btn svg{ width: 13px; height: 13px; }
+
 #closeDesc{
   width:28px; height:28px; border-radius:50%; border:none; background:rgba(255,255,255,.1);
   font-size:14px; cursor:pointer; color:var(--cream);

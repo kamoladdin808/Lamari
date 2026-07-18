@@ -99,6 +99,7 @@ let slideElapsedBeforePause = 0;
 let isPausedOnHold = false;
 let holdStartTime = 0;
 let wasHold = false;
+let isTouchEvent = false;
 
 // Настройка переключателя языков (Десктоп)
 const langRuBtn = document.getElementById('langRu');
@@ -351,20 +352,36 @@ function resumeHold() {
 }
 
 swipeZone.addEventListener('touchstart', e => {
+  isTouchEvent = true;
   touchX = e.touches[0].clientX;
   pauseHold();
 }, { passive: true });
 
 swipeZone.addEventListener('touchend', e => {
-  resumeHold();
-  if (touchX === null) return;
-  const dx = e.changedTouches[0].clientX - touchX;
+  if (!appLoaded) return;
+  
+  isPausedOnHold = false;
+  dotsEl.classList.remove('paused');
+  
+  const holdDuration = Date.now() - holdStartTime;
+  const dx = touchX !== null ? e.changedTouches[0].clientX - touchX : 0;
   const items = MENU[curCat];
+  
   if (Math.abs(dx) > 50) {
     let next = curIdx + (dx < 0 ? 1 : -1);
     next = (next + items.length) % items.length;
     setDish(curCat, next);
+  } else if (holdDuration <= 220) {
+    const rect = swipeZone.getBoundingClientRect();
+    const x = e.changedTouches[0].clientX - rect.left;
+    let next = curIdx + (x < rect.width * 0.35 ? -1 : 1);
+    next = (next + items.length) % items.length;
+    setDish(curCat, next);
+  } else {
+    const remaining = Math.max(100, 4500 - slideElapsedBeforePause);
+    startAdvanceTimer(curCat, curIdx, remaining);
   }
+  
   touchX = null;
 }, { passive: true });
 
@@ -374,6 +391,10 @@ swipeZone.addEventListener('mouseleave', resumeHold);
 swipeZone.addEventListener('contextmenu', e => e.preventDefault());
 
 swipeZone.addEventListener('click', e => {
+  if (isTouchEvent) {
+    isTouchEvent = false;
+    return;
+  }
   if (wasHold) {
     wasHold = false;
     return;

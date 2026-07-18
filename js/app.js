@@ -97,6 +97,8 @@ let appLoaded = false;
 let slideStartTime = 0;
 let slideElapsedBeforePause = 0;
 let isPausedOnHold = false;
+let holdStartTime = 0;
+let wasHold = false;
 
 // Настройка переключателя языков (Десктоп)
 const langRuBtn = document.getElementById('langRu');
@@ -327,6 +329,8 @@ const swipeZone = document.getElementById('swipeZone');
 
 function pauseHold() {
   if (isPausedOnHold || !appLoaded) return;
+  holdStartTime = Date.now();
+  wasHold = false;
   isPausedOnHold = true;
   clearTimeout(advanceTimer);
   slideElapsedBeforePause = Date.now() - slideStartTime;
@@ -337,6 +341,12 @@ function resumeHold() {
   if (!isPausedOnHold || !appLoaded) return;
   isPausedOnHold = false;
   dotsEl.classList.remove('paused');
+  
+  const holdDuration = Date.now() - holdStartTime;
+  if (holdDuration > 220) {
+    wasHold = true;
+  }
+  
   const remaining = Math.max(100, 4500 - slideElapsedBeforePause);
   startAdvanceTimer(curCat, curIdx, remaining);
 }
@@ -364,6 +374,10 @@ swipeZone.addEventListener('mouseup', resumeHold);
 swipeZone.addEventListener('mouseleave', resumeHold);
 
 swipeZone.addEventListener('click', e => {
+  if (wasHold) {
+    wasHold = false;
+    return;
+  }
   const rect = swipeZone.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const items = MENU[curCat];

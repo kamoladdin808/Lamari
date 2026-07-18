@@ -247,6 +247,9 @@ body {
   animation: segFill linear forwards;
   animation-duration: var(--seg-dur, 4.5s);
 }
+.dots.paused .seg.active i {
+  animation-play-state: paused;
+}
 
 @keyframes segFill {
   from {

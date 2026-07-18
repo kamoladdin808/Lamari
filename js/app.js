@@ -94,6 +94,9 @@ const tabsViewport = document.querySelector('.tabs-viewport');
 
 let advanceTimer = null;
 let appLoaded = false;
+let slideStartTime = 0;
+let slideElapsedBeforePause = 0;
+let isPausedOnHold = false;
 
 // Настройка переключателя языков (Десктоп)
 const langRuBtn = document.getElementById('langRu');
@@ -221,13 +224,16 @@ function renderDots(cat, idx){
   }
 }
 
-function startAdvanceTimer(cat, idx){
+function startAdvanceTimer(cat, idx, remainingTime = 4500){
   clearTimeout(advanceTimer);
   if (!appLoaded) return;
+  
+  slideStartTime = Date.now() - (4500 - remainingTime);
+  
   advanceTimer = setTimeout(()=>{
     const items = MENU[cat];
     setDish(cat, (idx+1) % items.length);
-  }, 4500);
+  }, remainingTime);
 }
 
 function getCategoryCount(catKey) {
@@ -318,23 +324,50 @@ window.addEventListener('mouseup', ()=>{ if(dragging){ dragging = false; startAd
 
 let touchX = null;
 const swipeZone = document.getElementById('swipeZone');
-swipeZone.addEventListener('touchstart', e=>{ touchX = e.touches[0].clientX; });
-swipeZone.addEventListener('touchend', e=>{
-  if(touchX===null) return;
+
+function pauseHold() {
+  if (isPausedOnHold || !appLoaded) return;
+  isPausedOnHold = true;
+  clearTimeout(advanceTimer);
+  slideElapsedBeforePause = Date.now() - slideStartTime;
+  dotsEl.classList.add('paused');
+}
+
+function resumeHold() {
+  if (!isPausedOnHold || !appLoaded) return;
+  isPausedOnHold = false;
+  dotsEl.classList.remove('paused');
+  const remaining = Math.max(100, 4500 - slideElapsedBeforePause);
+  startAdvanceTimer(curCat, curIdx, remaining);
+}
+
+swipeZone.addEventListener('touchstart', e => {
+  touchX = e.touches[0].clientX;
+  pauseHold();
+}, { passive: true });
+
+swipeZone.addEventListener('touchend', e => {
+  resumeHold();
+  if (touchX === null) return;
   const dx = e.changedTouches[0].clientX - touchX;
   const items = MENU[curCat];
-  if(Math.abs(dx) > 50){
+  if (Math.abs(dx) > 50) {
     let next = curIdx + (dx < 0 ? 1 : -1);
     next = (next + items.length) % items.length;
     setDish(curCat, next);
   }
   touchX = null;
-});
-swipeZone.addEventListener('click', e=>{
+}, { passive: true });
+
+swipeZone.addEventListener('mousedown', pauseHold);
+swipeZone.addEventListener('mouseup', resumeHold);
+swipeZone.addEventListener('mouseleave', resumeHold);
+
+swipeZone.addEventListener('click', e => {
   const rect = swipeZone.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const items = MENU[curCat];
-  let next = curIdx + (x < rect.width*0.35 ? -1 : 1);
+  let next = curIdx + (x < rect.width * 0.35 ? -1 : 1);
   next = (next + items.length) % items.length;
   setDish(curCat, next);
 });

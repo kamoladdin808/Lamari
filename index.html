@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>La Mari — Живое меню кафе & пекарни в Ташкенте</title>
+  <meta name="description" content="Интерактивное «живое» меню кафе и пекарни La Mari. Ознакомьтесь с нашими сетами, свежей выпечкой, авторскими десертами, завтраками и ароматным кофе. Быстрый заказ и удобный выбор.">
+  <meta name="keywords" content="La Mari, ла мари, живое меню, кафе ташкент, пекарня, десерты, кофе, круассаны, завтраки, меню кафе">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="La Mari — Живое меню кафе & пекарни">
+  <meta property="og:description" content="Посмотрите наше живое интерактивное меню: вкуснейшие завтраки, кофе, свежая выпечка и десерты прямо на вашем экране.">
+  <meta property="og:image" content="img/p1.jpg">
+  <meta property="og:type" content="website">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="preloader">
+  <div class="pl-logo">La Mari</div>
+  <div class="pl-sub">Café &amp; Bakery</div>
+  <div class="pl-track"><div class="pl-bar"></div></div>
+</div>
+
+<div class="stage">
+
+  <div class="player" id="player">
+    <img id="imgA" alt="">
+    <img id="imgB" alt="">
+  </div>
+  <div class="veil-top"></div>
+  <div class="veil-bottom"></div>
+
+  <div class="swipe-zone" id="swipeZone"></div>
+
+  <div class="dots" id="dots"></div>
+
+  <div class="top-bar">
+    <div class="dish-info">
+      <div class="dish-cat-row">
+        <div class="dish-cat" id="dishCat">Завтраки</div>
+        <span class="dish-badge" id="dishBadge" style="display:none"></span>
+      </div>
+      <div class="dish-title" id="dishTitle">—</div>
+      <div class="dish-desc" id="dishDesc">—</div>
+      <div class="dish-more-btn" id="dishMoreBtn">
+        <span id="dishMoreText">Детали</span>
+      </div>
+    </div>
+    <div class="brand-mark">
+      <h1 class="wm">La Mari</h1>
+      <div class="wm-sub">Café &amp; Bakery</div>
+      <div class="header-controls">
+        <div class="lang-mobile-btn" id="langMobileBtn">RU</div>
+        <div class="lang-switch-desktop">
+          <span class="lang-btn active" id="langRu">RU</span>
+          <span class="lang-btn" id="langUz">UZ</span>
+        </div>
+        <div class="cart-chip" id="cartChip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+          <span class="badge" id="cartBadge">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Добавлено в корзину</div>
+
+  <div class="bottom-area">
+
+    <div class="price-pill" id="addBtn">
+      <span class="pill-minus" id="pillMinus">−</span>
+      <span id="pillLabel">В корзину · 0 сум</span>
+      <span class="plus" id="pillPlus">+</span>
+    </div>
+
+    <div class="tabs-viewport"><div class="cat-tabs" id="tabs"></div></div>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="drawer-handle"></div>
+    <div class="drawer-header" id="cartTitle">Корзина <button id="closeCart">✕</button></div>
+    <div class="drawer-list" id="cartList"></div>
+    <div class="drawer-footer">
+      <div class="drawer-total"><span id="cartTotalLabel">Итого</span> <b id="cartTotal">0 сум</b></div>
+      <button class="checkout-btn" id="checkoutBtn" disabled>Очистить заказ</button>
+    </div>
+  </div>
+
+  <div class="desc-overlay" id="descOverlay"></div>
+  <div class="desc-modal" id="descModal">
+    <div class="desc-modal-handle"></div>
+    <div class="desc-modal-header">
+      <div id="descModalTitle">—</div>
+      <button id="closeDesc">✕</button>
+    </div>
+    <div class="desc-modal-body">
+      <div id="descModalText">—</div>
+      <div id="descModalWeight" class="desc-modal-weight"></div>
+    </div>
+  </div>
+
+  <div class="lang-overlay" id="langOverlay"></div>
+  <div class="lang-modal" id="langModal">
+    <div class="lang-modal-handle"></div>
+    <div class="lang-modal-header">
+      <div id="langModalTitle">Выберите язык / Tilni tanlang</div>
+      <button id="closeLang">✕</button>
+    </div>
+    <div class="lang-modal-body">
+      <button class="lang-select-btn active" id="btnSelectRu">
+        <span class="flag">🇷🇺</span> Русский язык
+      </button>
+      <button class="lang-select-btn" id="btnSelectUz">
+        <span class="flag">🇺🇿</span> O'zbek tili
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

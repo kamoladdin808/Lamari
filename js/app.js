@@ -114,6 +114,8 @@ btnSelectRu.onclick = () => { setLanguage('ru'); closeLangModal(); };
 btnSelectUz.onclick = () => { setLanguage('uz'); closeLangModal(); };
 
 function openLangModal() {
+  langModal.style.transform = '';
+  langOverlay.style.opacity = '';
   langOverlay.classList.add('open');
   langModal.classList.add('open');
   clearTimeout(advanceTimer);
@@ -122,6 +124,10 @@ function openLangModal() {
 function closeLangModal() {
   langOverlay.classList.remove('open');
   langModal.classList.remove('open');
+  setTimeout(() => {
+    langModal.style.transform = '';
+    langOverlay.style.opacity = '';
+  }, 350);
   startAdvanceTimer(curCat, curIdx);
 }
 
@@ -427,8 +433,20 @@ function showAddToast(d) {
   window._t = setTimeout(()=> toastEl.classList.remove('show'), 1400);
 }
 
-function openCart(){ cartOverlay.classList.add('open'); cartDrawer.classList.add('open'); }
-function closeCart(){ cartOverlay.classList.remove('open'); cartDrawer.classList.remove('open'); }
+function openCart(){
+  cartDrawer.style.transform = '';
+  cartOverlay.style.opacity = '';
+  cartOverlay.classList.add('open');
+  cartDrawer.classList.add('open');
+}
+function closeCart(){
+  cartOverlay.classList.remove('open');
+  cartDrawer.classList.remove('open');
+  setTimeout(() => {
+    cartDrawer.style.transform = '';
+    cartOverlay.style.opacity = '';
+  }, 350);
+}
 cartChip.addEventListener('click', openCart);
 cartOverlay.addEventListener('click', closeCart);
 document.getElementById('closeCart').addEventListener('click', closeCart);
@@ -449,6 +467,8 @@ function openDesc(){
   descModalTitle.textContent = d.name[curLang];
   descModalText.textContent = d.desc[curLang];
   descModalWeight.textContent = d.weight;
+  descModal.style.transform = '';
+  descOverlay.style.opacity = '';
   descOverlay.classList.add('open');
   descModal.classList.add('open');
   clearTimeout(advanceTimer);
@@ -456,6 +476,10 @@ function openDesc(){
 function closeDesc(){
   descOverlay.classList.remove('open');
   descModal.classList.remove('open');
+  setTimeout(() => {
+    descModal.style.transform = '';
+    descOverlay.style.opacity = '';
+  }, 350);
   startAdvanceTimer(curCat, curIdx);
 }
 dishMoreBtn.addEventListener('click', openDesc);
@@ -500,6 +524,74 @@ shareDishBtn.addEventListener('click', async () => {
     }
   }
 });
+
+function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl = null) {
+  let startY = 0;
+  let currentY = 0;
+  let isDragging = false;
+  
+  function onTouchStart(e) {
+    if (scrollContainerEl && scrollContainerEl.scrollTop > 0) return;
+    startY = e.touches[0].clientY;
+    isDragging = false;
+    modalEl.style.transition = 'none';
+    overlayEl.style.transition = 'none';
+  }
+  
+  function onTouchMove(e) {
+    const clientY = e.touches[0].clientY;
+    const diffY = clientY - startY;
+    
+    if (diffY > 0) {
+      if (scrollContainerEl && scrollContainerEl.scrollTop > 0) return;
+      if (!isDragging) {
+        isDragging = true;
+        clearTimeout(advanceTimer);
+      }
+      currentY = diffY;
+      modalEl.style.transform = `translateY(${diffY}px)`;
+      
+      const progress = Math.max(0, 1 - (diffY / 320));
+      overlayEl.style.opacity = progress;
+      
+      if (e.cancelable) e.preventDefault();
+    }
+  }
+  
+  function onTouchEnd() {
+    if (!isDragging) {
+      modalEl.style.transition = '';
+      overlayEl.style.transition = '';
+      return;
+    }
+    isDragging = false;
+    modalEl.style.transition = '';
+    overlayEl.style.transition = '';
+    
+    if (currentY > 80) {
+      closeFn();
+    } else {
+      modalEl.style.transform = '';
+      overlayEl.style.opacity = '';
+      if (modalEl === descModal) {
+        startAdvanceTimer(curCat, curIdx);
+      }
+    }
+    currentY = 0;
+  }
+  
+  handleEl.addEventListener('touchstart', onTouchStart, { passive: true });
+  handleEl.addEventListener('touchmove', onTouchMove, { passive: false });
+  handleEl.addEventListener('touchend', onTouchEnd, { passive: true });
+  
+  modalEl.addEventListener('touchstart', onTouchStart, { passive: true });
+  modalEl.addEventListener('touchmove', onTouchMove, { passive: false });
+  modalEl.addEventListener('touchend', onTouchEnd, { passive: true });
+}
+
+makeDraggable(descModal, document.querySelector('.desc-modal-handle'), descOverlay, closeDesc);
+makeDraggable(cartDrawer, document.querySelector('.drawer-handle'), cartOverlay, closeCart, cartList);
+makeDraggable(langModal, document.querySelector('.lang-modal-handle'), langOverlay, closeLangModal);
 
 setDish(curCat, curIdx);
 renderTabs();

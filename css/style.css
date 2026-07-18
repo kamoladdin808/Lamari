@@ -803,6 +803,9 @@ body {
   position: absolute;
   inset: 0;
   z-index: 5;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 /* ===== BOTTOM OVERLAY ===== */

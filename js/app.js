@@ -371,6 +371,7 @@ swipeZone.addEventListener('touchend', e => {
 swipeZone.addEventListener('mousedown', pauseHold);
 swipeZone.addEventListener('mouseup', resumeHold);
 swipeZone.addEventListener('mouseleave', resumeHold);
+swipeZone.addEventListener('contextmenu', e => e.preventDefault());
 
 swipeZone.addEventListener('click', e => {
   if (wasHold) {

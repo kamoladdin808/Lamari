@@ -64,6 +64,10 @@ function money(n){ return n.toLocaleString('ru-RU') + ' сум'; }
 
 const imgA = document.getElementById('imgA');
 const imgB = document.getElementById('imgB');
+const videoA = document.getElementById('videoA');
+const videoB = document.getElementById('videoB');
+const soundBtn = document.getElementById('soundBtn');
+let isMuted = true;
 const dishCat = document.getElementById('dishCat');
 const dishTitle = document.getElementById('dishTitle');
 const dishBadge = document.getElementById('dishBadge');
@@ -182,12 +186,37 @@ function translateStaticUI() {
 function setDish(cat, idx){
   curCat = cat; curIdx = idx;
   const d = MENU[cat][idx];
-  const incoming = showingA ? imgB : imgA;
-  const outgoing = showingA ? imgA : imgB;
-  incoming.src = d.img;
-  incoming.classList.add('active');
-  outgoing.classList.remove('active');
+  const incomingImg = showingA ? imgB : imgA;
+  const outgoingImg = showingA ? imgA : imgB;
+  const incomingVideo = showingA ? videoB : videoA;
+  const outgoingVideo = showingA ? videoA : videoB;
   showingA = !showingA;
+
+  if (d.video) {
+    incomingVideo.src = d.video;
+    incomingVideo.muted = isMuted;
+    incomingVideo.currentTime = 0;
+    incomingVideo.play().catch(() => {});
+    incomingVideo.classList.add('active');
+
+    outgoingImg.classList.remove('active');
+    outgoingVideo.classList.remove('active');
+    incomingImg.classList.remove('active');
+    outgoingVideo.pause();
+
+    soundBtn.style.display = 'flex';
+  } else {
+    incomingImg.src = d.img;
+    incomingImg.classList.add('active');
+
+    outgoingImg.classList.remove('active');
+    outgoingVideo.classList.remove('active');
+    incomingVideo.classList.remove('active');
+    incomingVideo.pause();
+    outgoingVideo.pause();
+
+    soundBtn.style.display = 'none';
+  }
 
   dishCat.textContent = CAT_NAMES[cat][curLang];
   dishTitle.textContent = d.name[curLang];
@@ -335,6 +364,9 @@ function pauseHold() {
   clearTimeout(advanceTimer);
   slideElapsedBeforePause = Date.now() - slideStartTime;
   dotsEl.classList.add('paused');
+
+  if (videoA.classList.contains('active')) videoA.pause();
+  if (videoB.classList.contains('active')) videoB.pause();
 }
 
 function resumeHold() {
@@ -342,6 +374,9 @@ function resumeHold() {
   isPausedOnHold = false;
   dotsEl.classList.remove('paused');
   
+  if (videoA.classList.contains('active')) videoA.play().catch(() => {});
+  if (videoB.classList.contains('active')) videoB.play().catch(() => {});
+
   const holdDuration = Date.now() - holdStartTime;
   if (holdDuration > 220) {
     wasHold = true;
@@ -350,6 +385,16 @@ function resumeHold() {
   const remaining = Math.max(100, 4500 - slideElapsedBeforePause);
   startAdvanceTimer(curCat, curIdx, remaining);
 }
+
+soundBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  isMuted = !isMuted;
+  videoA.muted = isMuted;
+  videoB.muted = isMuted;
+  
+  soundBtn.querySelector('.sound-off').style.display = isMuted ? 'block' : 'none';
+  soundBtn.querySelector('.sound-on').style.display = isMuted ? 'none' : 'block';
+});
 
 swipeZone.addEventListener('touchstart', e => {
   isTouchEvent = true;

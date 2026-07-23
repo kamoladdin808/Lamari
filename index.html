@@ -28,6 +28,8 @@
   <div class="player" id="player">
     <img id="imgA" alt="">
     <img id="imgB" alt="">
+    <video id="videoA" playsinline webkit-playsinline muted loop></video>
+    <video id="videoB" playsinline webkit-playsinline muted loop></video>
   </div>
   <div class="veil-top"></div>
   <div class="veil-bottom"></div>
@@ -52,6 +54,10 @@
       <h1 class="wm">La Mari</h1>
       <div class="wm-sub">Café &amp; Bakery</div>
       <div class="header-controls">
+        <div class="sound-chip" id="soundBtn" style="display:none" title="Mute/Unmute">
+          <svg class="sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+          <svg class="sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </div>
         <div class="lang-mobile-btn" id="langMobileBtn">RU</div>
         <div class="lang-switch-desktop">
           <span class="lang-btn active" id="langRu">RU</span>

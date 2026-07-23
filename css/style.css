@@ -143,7 +143,8 @@ body {
   overflow: hidden;
 }
 
-.player img {
+.player img,
+.player video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -155,7 +156,8 @@ body {
   transition: opacity .8s cubic-bezier(0.25, 1, 0.5, 1), filter .8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.player img.active {
+.player img.active,
+.player video.active {
   opacity: 1;
   filter: blur(0);
   animation: kenBurns 6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -554,6 +556,32 @@ body {
 
 .lang-select-btn .flag {
   font-size: 20px;
+}
+
+.sound-chip {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s;
+}
+
+.sound-chip:active {
+  transform: scale(.85);
+}
+
+.sound-chip svg {
+  width: 16px;
+  height: 16px;
 }
 
 .cart-chip {

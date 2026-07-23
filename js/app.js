@@ -474,9 +474,63 @@ function renderCartList(){
         <button data-act="plus">+</button>
       </div>`;
     row.querySelector('[data-act="minus"]').onclick = ()=> addToCart(itemId,-1,c);
-    row.querySelector('[data-act="plus"]').onclick = ()=> addToCart(itemId,1,c);
+    row.querySelector('[data-act="plus"]').onclick = (e)=> {
+      addToCart(itemId,1,c);
+      animateFlyToCart(e.currentTarget, c.img);
+    };
     cartList.appendChild(row);
   });
+}
+
+function animateFlyToCart(startEl, imgSrc) {
+  if (!startEl || !cartChip) return;
+  const startRect = startEl.getBoundingClientRect();
+  const endRect = cartChip.getBoundingClientRect();
+
+  if (startRect.width === 0 || endRect.width === 0) return;
+
+  const startX = startRect.left + startRect.width / 2 - 22;
+  const startY = startRect.top + startRect.height / 2 - 22;
+  const endX = endRect.left + endRect.width / 2 - 12;
+  const endY = endRect.top + endRect.height / 2 - 12;
+
+  const flyer = document.createElement('img');
+  flyer.src = imgSrc || MENU[curCat][curIdx].img;
+  flyer.className = 'flying-dish-item';
+  flyer.style.left = `${startX}px`;
+  flyer.style.top = `${startY}px`;
+  document.body.appendChild(flyer);
+
+  const controlX = (startX + endX) / 2;
+  const controlY = Math.min(startY, endY) - 90;
+
+  const duration = 600;
+  const startTime = performance.now();
+
+  function step(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(1, elapsed / duration);
+
+    const currentX = (1 - t) * (1 - t) * startX + 2 * (1 - t) * t * controlX + t * t * endX;
+    const currentY = (1 - t) * (1 - t) * startY + 2 * (1 - t) * t * controlY + t * t * endY;
+
+    const scale = 1 - t * 0.65;
+    const opacity = t > 0.85 ? (1 - t) / 0.15 : 1;
+
+    flyer.style.transform = `translate3d(${currentX - startX}px, ${currentY - startY}px, 0) scale(${scale})`;
+    flyer.style.opacity = opacity;
+
+    if (t < 1) {
+      requestAnimationFrame(step);
+    } else {
+      flyer.remove();
+      cartChip.classList.remove('pop');
+      void cartChip.offsetWidth;
+      cartChip.classList.add('pop');
+    }
+  }
+
+  requestAnimationFrame(step);
 }
 
 addBtn.addEventListener('click', (e)=>{
@@ -486,13 +540,16 @@ addBtn.addEventListener('click', (e)=>{
   if (!cartItem) {
     addToCart(d.id, 1, d);
     showAddToast(d);
+    animateFlyToCart(addBtn, d.img);
   } else {
     if (e.target.closest('#pillMinus')) {
       addToCart(d.id, -1, d);
       e.stopPropagation();
     } else if (e.target.closest('#pillPlus')) {
+      const plusEl = document.getElementById('pillPlus');
       addToCart(d.id, 1, d);
       showAddToast(d);
+      animateFlyToCart(plusEl || addBtn, d.img);
       e.stopPropagation();
     }
   }

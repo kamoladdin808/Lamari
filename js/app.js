@@ -7,25 +7,25 @@ const P6 = "img/p6.jpg";
 
 const MENU = {
   'sets': [
-    { id: 'set_for_two', name: { ru: 'Сет для двоих', uz: 'Ikki kishilik set' }, desc: { ru: 'Ассорти брускетт, два горячих блинчика на выбор и чайник чая', uz: "Bruskettalar assortisi, tanlov bo'yicha ikkita issiq quymoq va choynak choy" }, weight: '750 г', price: 2685000, badge: '', img: P1 },
-    { id: 'weekend_set', name: { ru: 'Сет "Выходного дня"', uz: '"Dam olish kuni" seti' }, desc: { ru: 'Бенедикт с лососем, большой английский завтрак, два капучино и круассаны', uz: "Qizil baliqli Benedikt, katta inglizcha nonushta, ikkita kapuchino va kruassanlar" }, weight: '1100 г', price: 3190000, badge: 'HIT', img: P3 }
+    { id: 'set_for_two', name: { ru: 'Сет для двоих', uz: 'Ikki kishilik set' }, desc: { ru: 'Ассорти брускетт, два горячих блинчика на выбор и чайник чая', uz: "Bruskettalar assortisi, tanlov bo'yicha ikkita issiq quymoq va choynak choy" }, weight: '750 г', price: 2685000, badge: '', img: P1, recs: ['flat_white', 'croissant_classic', 'tiramisu', 'nut_raf'] },
+    { id: 'weekend_set', name: { ru: 'Сет "Выходного дня"', uz: '"Dam olish kuni" seti' }, desc: { ru: 'Бенедикт с лососем, большой английский завтрак, два капучино и круассаны', uz: "Qizil baliqli Benedikt, katta inglizcha nonushta, ikkita kapuchino va kruassanlar" }, weight: '1100 г', price: 3190000, badge: 'HIT', img: P3, recs: ['croissant_classic', 'tiramisu', 'chocolate_babka', 'nut_raf'] }
   ],
   'coffee': [
-    { id: 'flat_white', name: { ru: 'Флэт уайт', uz: 'Flet uayt' }, desc: { ru: 'Двойной эспрессо с нежной молочной пеной', uz: "Mayin sut ko'pigi bilan quyuq espresso" }, weight: '250 мл', price: 28000, badge: '', img: P2 },
-    { id: 'cappuccino', name: { ru: 'Капучино', uz: 'Kapuchino' }, desc: { ru: 'Классический кофейный напиток на основе эспрессо и молока', uz: "Espresso va sut asosidagi klassik kofe ichimligi" }, weight: '300 мл', price: 24000, badge: '', img: P5 },
-    { id: 'nut_raf', name: { ru: 'Раф ореховый', uz: "Yong'oqli raf" }, desc: { ru: 'Нежный кофейно-сливочный напиток с натуральным ореховым сиропом', uz: "Tabiiy yong'oq siropi bilan mayin qaymoqli kofe ichimligi" }, weight: '350 мл', price: 32000, badge: 'NEW', img: P4 }
+    { id: 'flat_white', name: { ru: 'Флэт уайт', uz: 'Flet uayt' }, desc: { ru: 'Двойной эспрессо с нежной молочной пеной', uz: "Mayin sut ko'pigi bilan quyuq espresso" }, weight: '250 мл', price: 28000, badge: '', img: P2, recs: ['croissant_classic', 'chocolate_babka', 'tiramisu', 'cheesecake_ny'] },
+    { id: 'cappuccino', name: { ru: 'Капучино', uz: 'Kapuchino' }, desc: { ru: 'Классический кофейный напиток на основе эспрессо и молока', uz: "Espresso va sut asosidagi klassik kofe ichimligi" }, weight: '300 мл', price: 24000, badge: '', img: P5, recs: ['croissant_classic', 'chocolate_babka', 'cheesecake_ny', 'tiramisu'] },
+    { id: 'nut_raf', name: { ru: 'Раф ореховый', uz: "Yong'oqli raf" }, desc: { ru: 'Нежный кофейно-сливочный напиток с натуральным ореховым сиропом', uz: "Tabiiy yong'oq siropi bilan mayin qaymoqli kofe ichimligi" }, weight: '350 мл', price: 32000, badge: 'NEW', img: P4, recs: ['croissant_classic', 'tiramisu', 'chocolate_babka', 'cheesecake_ny'] }
   ],
   'bakery': [
-    { id: 'croissant_classic', name: { ru: 'Круассан классик', uz: 'Klassik kruassan' }, desc: { ru: 'Хрустящий французский круассан на натуральном сливочном масле', uz: "Tabiiy sariyog'da tayyorlangan qarsildoq fransuz kruassani" }, weight: '90 г', price: 22000, badge: '', img: P3 },
-    { id: 'chocolate_babka', name: { ru: 'Бабка шоколадная', uz: 'Shokoladli babka' }, desc: { ru: 'Традиционная витая булочка с начинкой из темного шоколада', uz: "To'q shokolad bilan to'ldirilgan an'anaviy bulochka" }, weight: '150 г', price: 26000, badge: 'NEW', img: P6 }
+    { id: 'croissant_classic', name: { ru: 'Круассан классик', uz: 'Klassik kruassan' }, desc: { ru: 'Хрустящий французский круассан на натуральном сливочном масле', uz: "Tabiiy sariyog'da tayyorlangan qarsildoq fransuz kruassani" }, weight: '90 г', price: 22000, badge: '', img: P3, recs: ['cappuccino', 'flat_white', 'nut_raf', 'tiramisu'] },
+    { id: 'chocolate_babka', name: { ru: 'Бабка шоколадная', uz: 'Shokoladli babka' }, desc: { ru: 'Традиционная витая булочка с начинкой из темного шоколада', uz: "To'q shokolad bilan to'ldirilgan an'anaviy bulochka" }, weight: '150 г', price: 26000, badge: 'NEW', img: P6, recs: ['cappuccino', 'nut_raf', 'flat_white', 'cheesecake_ny'] }
   ],
   'desserts': [
-    { id: 'tiramisu', name: { ru: 'Тирамису', uz: 'Tiramisu' }, desc: { ru: 'Нежный десерт с маскарпоне, савоярди и вкусом натурального эспрессо', uz: "Maskarpone, savoyardi va tabiiy espresso ta'miga ega mayin desert" }, weight: '140 г', price: 35000, badge: '', img: P4 },
-    { id: 'cheesecake_ny', name: { ru: 'Чизкейк Нью-Йорк', uz: 'Nyu-York cheesecake' }, desc: { ru: 'Классический запеченный чизкейк на песочной основе', uz: "Uvoq xamirdan tayyorlangan klassik pishirilgan chizkeyk" }, weight: '160 г', price: 32000, badge: '', img: P1 }
+    { id: 'tiramisu', name: { ru: 'Тирамису', uz: 'Tiramisu' }, desc: { ru: 'Нежный десерт с маскарпоне, савоярди и вкусом натурального эспрессо', uz: "Maskarpone, savoyardi va tabiiy espresso ta'miga ega mayin desert" }, weight: '140 г', price: 35000, badge: '', img: P4, recs: ['flat_white', 'cappuccino', 'nut_raf', 'croissant_classic'] },
+    { id: 'cheesecake_ny', name: { ru: 'Чизкейк Нью-Йорк', uz: 'Nyu-York cheesecake' }, desc: { ru: 'Классический запеченный чизкейк на песочной основе', uz: "Uvoq xamirdan tayyorlangan klassik pishirilgan chizkeyk" }, weight: '160 г', price: 32000, badge: '', img: P1, recs: ['flat_white', 'cappuccino', 'nut_raf', 'chocolate_babka'] }
   ],
   'breakfasts': [
-    { id: 'avocado_toast', name: { ru: 'Авокадо тост', uz: 'Avokado tost' }, desc: { ru: 'Хрустящий тартин, спелый гуакамоле, яйцо пашот, черри и микрозелень', uz: "Qarsildoq tartin, pishgan guakamole, pashot tuxumi, cherri va mikroko'katlar" }, weight: '220 г', price: 42000, badge: 'HIT', img: P6 },
-    { id: 'truffle_omelette', name: { ru: 'Омлет с трюфелем', uz: 'Tryufelli omlet' }, desc: { ru: 'Пышный омлет с добавлением ароматной трюфельной пасты и пармезана', uz: "Xushbo'y tryufel pastasi va parmezan qo'shilgan yam-yashil omlet" }, weight: '200 г', price: 38000, badge: 'NEW', img: P5 }
+    { id: 'avocado_toast', name: { ru: 'Авокадо тост', uz: 'Avokado tost' }, desc: { ru: 'Хрустящий тартин, спелый гуакамоле, яйцо пашот, черри и микрозелень', uz: "Qarsildoq tartin, pishgan guakamole, pashot tuxumi, cherri va mikroko'katlar" }, weight: '220 г', price: 42000, badge: 'HIT', img: P6, recs: ['flat_white', 'cappuccino', 'croissant_classic', 'nut_raf'] },
+    { id: 'truffle_omelette', name: { ru: 'Омлет с трюфелем', uz: 'Tryufelli omlet' }, desc: { ru: 'Пышный омлет с добавлением ароматной трюфельной пасты и пармезана', uz: "Xushbo'y tryufel pastasi va parmezan qo'shilgan yam-yashil omlet" }, weight: '200 г', price: 38000, badge: 'NEW', img: P5, recs: ['flat_white', 'cappuccino', 'croissant_classic', 'cheesecake_ny'] }
   ]
 };
 
@@ -542,35 +542,58 @@ function animateFlyToCart(startEl, imgSrc) {
   requestAnimationFrame(step);
 }
 
-function getRecommendations(currentCat, currentDishId) {
-  let preferredCats = [];
-  if (currentCat === 'sets' || currentCat === 'breakfasts') {
-    preferredCats = ['coffee', 'bakery', 'desserts'];
-  } else if (currentCat === 'coffee') {
-    preferredCats = ['bakery', 'desserts', 'sets'];
-  } else if (currentCat === 'bakery') {
-    preferredCats = ['coffee', 'desserts'];
-  } else if (currentCat === 'desserts') {
-    preferredCats = ['coffee', 'sets'];
-  } else {
-    preferredCats = ['coffee', 'bakery', 'desserts'];
+function findDishById(id) {
+  for (const catKey in MENU) {
+    const item = MENU[catKey].find(d => d.id === id);
+    if (item) return item;
+  }
+  return null;
+}
+
+function getRecommendations(currentCat, mainDish) {
+  let recItems = [];
+
+  // 1. Приоритет: явные логические рекомендации для конкретного блюда
+  if (mainDish.recs && Array.isArray(mainDish.recs)) {
+    mainDish.recs.forEach(recId => {
+      const found = findDishById(recId);
+      if (found && found.id !== mainDish.id && !recItems.some(r => r.id === found.id)) {
+        recItems.push(found);
+      }
+    });
   }
 
-  let items = [];
-  preferredCats.forEach(c => {
-    if (MENU[c]) {
-      MENU[c].forEach(dish => {
-        if (dish.id !== currentDishId) {
-          items.push({ ...dish, category: c });
-        }
-      });
+  // 2. Резервный подбор по смежным категориям
+  if (recItems.length < 4) {
+    let preferredCats = [];
+    if (currentCat === 'sets' || currentCat === 'breakfasts') {
+      preferredCats = ['coffee', 'bakery', 'desserts'];
+    } else if (currentCat === 'coffee') {
+      preferredCats = ['bakery', 'desserts', 'sets'];
+    } else if (currentCat === 'bakery') {
+      preferredCats = ['coffee', 'desserts'];
+    } else if (currentCat === 'desserts') {
+      preferredCats = ['coffee', 'sets'];
+    } else {
+      preferredCats = ['coffee', 'bakery', 'desserts'];
     }
-  });
-  return items.slice(0, 5);
+
+    preferredCats.forEach(c => {
+      if (MENU[c]) {
+        MENU[c].forEach(dish => {
+          if (dish.id !== mainDish.id && !recItems.some(r => r.id === dish.id)) {
+            recItems.push(dish);
+          }
+        });
+      }
+    });
+  }
+
+  return recItems.slice(0, 4);
 }
 
 function openUpsell(mainDish) {
-  const recs = getRecommendations(curCat, mainDish.id);
+  const recs = getRecommendations(curCat, mainDish);
   if (recs.length === 0) return;
 
   if (curLang === 'ru') {

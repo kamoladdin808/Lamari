@@ -60,14 +60,10 @@ try {
   console.error("Ошибка парсинга корзины из localStorage:", e);
 }
 
-function money(n){ return n.toLocaleString('ru-RU') + ' сум'; }
+function money(n) { return n.toLocaleString('ru-RU') + ' сум'; }
 
 const imgA = document.getElementById('imgA');
 const imgB = document.getElementById('imgB');
-const videoA = document.getElementById('videoA');
-const videoB = document.getElementById('videoB');
-const soundBtn = document.getElementById('soundBtn');
-let isMuted = true;
 const dishCat = document.getElementById('dishCat');
 const dishTitle = document.getElementById('dishTitle');
 const dishBadge = document.getElementById('dishBadge');
@@ -118,6 +114,15 @@ const closeLangBtn = document.getElementById('closeLang');
 const btnSelectRu = document.getElementById('btnSelectRu');
 const btnSelectUz = document.getElementById('btnSelectUz');
 
+// Настройка модалки ИИ-рекомендаций (Upsell)
+const upsellOverlay = document.getElementById('upsellOverlay');
+const upsellModal = document.getElementById('upsellModal');
+const upsellTitle = document.getElementById('upsellTitle');
+const upsellSubtitle = document.getElementById('upsellSubtitle');
+const upsellList = document.getElementById('upsellList');
+const closeUpsellBtn = document.getElementById('closeUpsell');
+const upsellContinueBtn = document.getElementById('upsellContinueBtn');
+
 langRuBtn.onclick = () => setLanguage('ru');
 langUzBtn.onclick = () => setLanguage('uz');
 
@@ -145,18 +150,18 @@ function closeLangModal() {
 function setLanguage(lang) {
   if (curLang === lang) return;
   curLang = lang;
-  
+
   // Обновляем десктоп
   langRuBtn.classList.toggle('active', lang === 'ru');
   langUzBtn.classList.toggle('active', lang === 'uz');
-  
+
   // Обновляем мобильный триггер
   langMobileBtn.textContent = lang.toUpperCase();
-  
+
   // Обновляем кнопки в модалке
   btnSelectRu.classList.toggle('active', lang === 'ru');
   btnSelectUz.classList.toggle('active', lang === 'uz');
-  
+
   setDish(curCat, curIdx);
   renderTabs();
   updateCartUI();
@@ -166,7 +171,7 @@ function setLanguage(lang) {
 function translateStaticUI() {
   const cartTitle = document.getElementById('cartTitle');
   const cartTotalLabel = document.getElementById('cartTotalLabel');
-  
+
   if (curLang === 'ru') {
     cartTitle.innerHTML = 'Корзина <button id="closeCart">✕</button>';
     cartTotalLabel.textContent = 'Итого';
@@ -183,44 +188,19 @@ function translateStaticUI() {
   document.getElementById('closeCart').onclick = closeCart;
 }
 
-function setDish(cat, idx){
+function setDish(cat, idx) {
   curCat = cat; curIdx = idx;
   const d = MENU[cat][idx];
-  const incomingImg = showingA ? imgB : imgA;
-  const outgoingImg = showingA ? imgA : imgB;
-  const incomingVideo = showingA ? videoB : videoA;
-  const outgoingVideo = showingA ? videoA : videoB;
+  const incoming = showingA ? imgB : imgA;
+  const outgoing = showingA ? imgA : imgB;
+  incoming.src = d.img;
+  incoming.classList.add('active');
+  outgoing.classList.remove('active');
   showingA = !showingA;
-
-  if (d.video) {
-    incomingVideo.src = d.video;
-    incomingVideo.muted = isMuted;
-    incomingVideo.currentTime = 0;
-    incomingVideo.play().catch(() => {});
-    incomingVideo.classList.add('active');
-
-    outgoingImg.classList.remove('active');
-    outgoingVideo.classList.remove('active');
-    incomingImg.classList.remove('active');
-    outgoingVideo.pause();
-
-    soundBtn.style.display = 'flex';
-  } else {
-    incomingImg.src = d.img;
-    incomingImg.classList.add('active');
-
-    outgoingImg.classList.remove('active');
-    outgoingVideo.classList.remove('active');
-    incomingVideo.classList.remove('active');
-    incomingVideo.pause();
-    outgoingVideo.pause();
-
-    soundBtn.style.display = 'none';
-  }
 
   dishCat.textContent = CAT_NAMES[cat][curLang];
   dishTitle.textContent = d.name[curLang];
-  
+
   // Установка бейджа
   if (d.badge) {
     dishBadge.textContent = d.badge;
@@ -242,12 +222,12 @@ function setDish(cat, idx){
   renderTabs();
 }
 
-function renderDots(cat, idx){
+function renderDots(cat, idx) {
   dotsEl.innerHTML = '';
-  MENU[cat].forEach((_,i)=>{
+  MENU[cat].forEach((_, i) => {
     const s = document.createElement('div');
     const isActive = (i === idx && appLoaded);
-    s.className = 'seg' + (i<idx ? ' done' : isActive ? ' active' : '');
+    s.className = 'seg' + (i < idx ? ' done' : isActive ? ' active' : '');
     s.innerHTML = '<i></i>';
     dotsEl.appendChild(s);
   });
@@ -256,15 +236,15 @@ function renderDots(cat, idx){
   }
 }
 
-function startAdvanceTimer(cat, idx, remainingTime = 4500){
+function startAdvanceTimer(cat, idx, remainingTime = 4500) {
   clearTimeout(advanceTimer);
   if (!appLoaded) return;
-  
+
   slideStartTime = Date.now() - (4500 - remainingTime);
-  
-  advanceTimer = setTimeout(()=>{
+
+  advanceTimer = setTimeout(() => {
     const items = MENU[cat];
-    setDish(cat, (idx+1) % items.length);
+    setDish(cat, (idx + 1) % items.length);
   }, remainingTime);
 }
 
@@ -278,36 +258,36 @@ function getCategoryCount(catKey) {
   return count;
 }
 
-function renderTabs(){
+function renderTabs() {
   tabsEl.innerHTML = '';
-  CATS.forEach(cat=>{
+  CATS.forEach(cat => {
     const t = document.createElement('div');
-    t.className = 'cat-tab' + (cat===curCat ? ' active':'');
-    
+    t.className = 'cat-tab' + (cat === curCat ? ' active' : '');
+
     const count = getCategoryCount(cat);
     if (count > 0) {
       t.innerHTML = `${CAT_NAMES[cat][curLang]} <span class="tab-badge">${count}</span>`;
     } else {
       t.textContent = CAT_NAMES[cat][curLang];
     }
-    
-    t.onclick = ()=>{
-      if(cat!==curCat) setDish(cat, 0);
+
+    t.onclick = () => {
+      if (cat !== curCat) setDish(cat, 0);
     };
     tabsEl.appendChild(t);
   });
-  requestAnimationFrame(()=>{
+  requestAnimationFrame(() => {
     const activeTab = tabsEl.querySelector('.cat-tab.active');
-    if(activeTab) centerTab(activeTab, true);
+    if (activeTab) centerTab(activeTab, true);
   });
 }
 
 let tabsOffset = 0, tabsMin = 0, tabsMax = 0;
 
-function computeTabsBounds(){
+function computeTabsBounds() {
   const trackW = tabsEl.scrollWidth;
   const viewW = tabsViewport.clientWidth;
-  if(trackW <= viewW){
+  if (trackW <= viewW) {
     tabsMin = tabsMax = (viewW - trackW) / 2;
   } else {
     tabsMax = 0;
@@ -315,43 +295,43 @@ function computeTabsBounds(){
   }
 }
 
-function setTabsOffset(x, animate=true){
+function setTabsOffset(x, animate = true) {
   computeTabsBounds();
   x = Math.max(tabsMin, Math.min(tabsMax, x));
   tabsOffset = x;
   tabsEl.style.transition = animate ? '' : 'none';
   tabsEl.style.transform = `translateX(${x}px)`;
-  if(!animate) requestAnimationFrame(()=>{ tabsEl.style.transition = ''; });
+  if (!animate) requestAnimationFrame(() => { tabsEl.style.transition = ''; });
 }
 
-function centerTab(tabEl, animate=true){
+function centerTab(tabEl, animate = true) {
   computeTabsBounds();
   const viewW = tabsViewport.clientWidth;
-  const target = -(tabEl.offsetLeft - (viewW - tabEl.offsetWidth)/2);
+  const target = -(tabEl.offsetLeft - (viewW - tabEl.offsetWidth) / 2);
   setTabsOffset(target, animate);
 }
 
 let dragStartX = null, dragStartOffset = 0, dragging = false;
-tabsViewport.addEventListener('touchstart', e=>{
+tabsViewport.addEventListener('touchstart', e => {
   dragStartX = e.touches[0].clientX; dragStartOffset = tabsOffset; dragging = true;
   clearTimeout(advanceTimer);
-}, {passive:true});
-tabsViewport.addEventListener('touchmove', e=>{
-  if(!dragging) return;
+}, { passive: true });
+tabsViewport.addEventListener('touchmove', e => {
+  if (!dragging) return;
   const dx = e.touches[0].clientX - dragStartX;
   setTabsOffset(dragStartOffset + dx, false);
-}, {passive:true});
-tabsViewport.addEventListener('touchend', ()=>{ dragging = false; startAdvanceTimer(curCat, curIdx); });
+}, { passive: true });
+tabsViewport.addEventListener('touchend', () => { dragging = false; startAdvanceTimer(curCat, curIdx); });
 
-tabsViewport.addEventListener('mousedown', e=>{
+tabsViewport.addEventListener('mousedown', e => {
   dragStartX = e.clientX; dragStartOffset = tabsOffset; dragging = true;
   clearTimeout(advanceTimer); e.preventDefault();
 });
-window.addEventListener('mousemove', e=>{
-  if(!dragging) return;
+window.addEventListener('mousemove', e => {
+  if (!dragging) return;
   setTabsOffset(dragStartOffset + (e.clientX - dragStartX), false);
 });
-window.addEventListener('mouseup', ()=>{ if(dragging){ dragging = false; startAdvanceTimer(curCat, curIdx); } });
+window.addEventListener('mouseup', () => { if (dragging) { dragging = false; startAdvanceTimer(curCat, curIdx); } });
 
 let touchX = null;
 const swipeZone = document.getElementById('swipeZone');
@@ -364,37 +344,21 @@ function pauseHold() {
   clearTimeout(advanceTimer);
   slideElapsedBeforePause = Date.now() - slideStartTime;
   dotsEl.classList.add('paused');
-
-  if (videoA.classList.contains('active')) videoA.pause();
-  if (videoB.classList.contains('active')) videoB.pause();
 }
 
 function resumeHold() {
   if (!isPausedOnHold || !appLoaded) return;
   isPausedOnHold = false;
   dotsEl.classList.remove('paused');
-  
-  if (videoA.classList.contains('active')) videoA.play().catch(() => {});
-  if (videoB.classList.contains('active')) videoB.play().catch(() => {});
 
   const holdDuration = Date.now() - holdStartTime;
   if (holdDuration > 220) {
     wasHold = true;
   }
-  
+
   const remaining = Math.max(100, 4500 - slideElapsedBeforePause);
   startAdvanceTimer(curCat, curIdx, remaining);
 }
-
-soundBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  isMuted = !isMuted;
-  videoA.muted = isMuted;
-  videoB.muted = isMuted;
-  
-  soundBtn.querySelector('.sound-off').style.display = isMuted ? 'block' : 'none';
-  soundBtn.querySelector('.sound-on').style.display = isMuted ? 'none' : 'block';
-});
 
 swipeZone.addEventListener('touchstart', e => {
   isTouchEvent = true;
@@ -404,14 +368,14 @@ swipeZone.addEventListener('touchstart', e => {
 
 swipeZone.addEventListener('touchend', e => {
   if (!appLoaded) return;
-  
+
   isPausedOnHold = false;
   dotsEl.classList.remove('paused');
-  
+
   const holdDuration = Date.now() - holdStartTime;
   const dx = touchX !== null ? e.changedTouches[0].clientX - touchX : 0;
   const items = MENU[curCat];
-  
+
   if (Math.abs(dx) > 50) {
     let next = curIdx + (dx < 0 ? 1 : -1);
     next = (next + items.length) % items.length;
@@ -426,7 +390,7 @@ swipeZone.addEventListener('touchend', e => {
     const remaining = Math.max(100, 4500 - slideElapsedBeforePause);
     startAdvanceTimer(curCat, curIdx, remaining);
   }
-  
+
   touchX = null;
 }, { passive: true });
 
@@ -452,29 +416,29 @@ swipeZone.addEventListener('click', e => {
   setDish(curCat, next);
 });
 
-function addToCart(itemId, qtyDelta, ctx){
+function addToCart(itemId, qtyDelta, ctx) {
   const d = ctx || MENU[curCat].find(item => item.id === itemId);
-  if(!cart[itemId]) cart[itemId] = { qty:0, price:d.price, name:d.name, img:d.img };
+  if (!cart[itemId]) cart[itemId] = { qty: 0, price: d.price, name: d.name, img: d.img };
   cart[itemId].qty += qtyDelta;
-  if(cart[itemId].qty <= 0) delete cart[itemId];
-  
+  if (cart[itemId].qty <= 0) delete cart[itemId];
+
   // Сохраняем в localStorage
   localStorage.setItem('lamari_cart', JSON.stringify(cart));
-  
+
   updateCartUI();
-  if(qtyDelta > 0) {
+  if (qtyDelta > 0) {
     cartChip.classList.remove('pop');
     void cartChip.offsetWidth;
     cartChip.classList.add('pop');
   }
 }
 
-function updateCartUI(){
+function updateCartUI() {
   let count = 0, sum = 0;
-  Object.values(cart).forEach(c=>{ count += c.qty; sum += c.qty*c.price; });
+  Object.values(cart).forEach(c => { count += c.qty; sum += c.qty * c.price; });
   cartBadge.textContent = count;
-  cartBadge.style.display = count>0 ? 'flex' : 'none';
-  
+  cartBadge.style.display = count > 0 ? 'flex' : 'none';
+
   // Обновление состояния и текста кнопки добавления
   const currentDish = MENU[curCat][curIdx];
   const cartItem = cart[currentDish.id];
@@ -487,22 +451,22 @@ function updateCartUI(){
     const inCartText = curLang === 'ru' ? 'В корзину' : 'Savatga';
     pillLabel.textContent = `${inCartText} · ${money(currentDish.price)}`;
   }
-  
+
   cartTotal.textContent = money(sum);
-  checkoutBtn.disabled = count===0;
+  checkoutBtn.disabled = count === 0;
   renderCartList();
   renderTabs();
 }
 
-function renderCartList(){
+function renderCartList() {
   const itemIds = Object.keys(cart);
-  if(itemIds.length===0){
+  if (itemIds.length === 0) {
     const emptyText = curLang === 'ru' ? 'Корзина пуста — выберите блюдо' : 'Savat bo\'sh — taom tanlang';
     cartList.innerHTML = `<div class="empty-cart">${emptyText}</div>`;
     return;
   }
   cartList.innerHTML = '';
-  itemIds.forEach((itemId, idx)=>{
+  itemIds.forEach((itemId, idx) => {
     const c = cart[itemId];
     const row = document.createElement('div');
     row.className = 'cart-row';
@@ -511,16 +475,16 @@ function renderCartList(){
       <img src="${c.img}" alt="">
       <div class="cr-info">
         <div class="cr-name">${c.name[curLang]}</div>
-        <div class="cr-price">${money(c.price)} × ${c.qty} = ${money(c.price*c.qty)}</div>
+        <div class="cr-price">${money(c.price)} × ${c.qty} = ${money(c.price * c.qty)}</div>
       </div>
       <div class="cr-qty">
         <button data-act="minus">−</button>
         <span>${c.qty}</span>
         <button data-act="plus">+</button>
       </div>`;
-    row.querySelector('[data-act="minus"]').onclick = ()=> addToCart(itemId,-1,c);
-    row.querySelector('[data-act="plus"]').onclick = (e)=> {
-      addToCart(itemId,1,c);
+    row.querySelector('[data-act="minus"]').onclick = () => addToCart(itemId, -1, c);
+    row.querySelector('[data-act="plus"]').onclick = (e) => {
+      addToCart(itemId, 1, c);
       animateFlyToCart(e.currentTarget, c.img);
     };
     cartList.appendChild(row);
@@ -578,14 +542,113 @@ function animateFlyToCart(startEl, imgSrc) {
   requestAnimationFrame(step);
 }
 
-addBtn.addEventListener('click', (e)=>{
+function getRecommendations(currentCat, currentDishId) {
+  let preferredCats = [];
+  if (currentCat === 'sets' || currentCat === 'breakfasts') {
+    preferredCats = ['coffee', 'bakery', 'desserts'];
+  } else if (currentCat === 'coffee') {
+    preferredCats = ['bakery', 'desserts', 'sets'];
+  } else if (currentCat === 'bakery') {
+    preferredCats = ['coffee', 'desserts'];
+  } else if (currentCat === 'desserts') {
+    preferredCats = ['coffee', 'sets'];
+  } else {
+    preferredCats = ['coffee', 'bakery', 'desserts'];
+  }
+
+  let items = [];
+  preferredCats.forEach(c => {
+    if (MENU[c]) {
+      MENU[c].forEach(dish => {
+        if (dish.id !== currentDishId) {
+          items.push({ ...dish, category: c });
+        }
+      });
+    }
+  });
+  return items.slice(0, 5);
+}
+
+function openUpsell(mainDish) {
+  const recs = getRecommendations(curCat, mainDish.id);
+  if (recs.length === 0) return;
+
+  if (curLang === 'ru') {
+    upsellTitle.textContent = `Идеально к «${mainDish.name.ru}»`;
+    upsellSubtitle.textContent = 'Гости также часто заказывают:';
+    upsellContinueBtn.textContent = 'Продолжить';
+  } else {
+    upsellTitle.textContent = `«${mainDish.name.uz}» bilan ajoyib`;
+    upsellSubtitle.textContent = 'Mijozlar tez-tez birga buyurtma qilishadi:';
+    upsellContinueBtn.textContent = 'Davom etish';
+  }
+
+  upsellList.innerHTML = '';
+  recs.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'upsell-card';
+
+    const btnText = curLang === 'ru' ? '+ Добавить' : '+ Qo\'shish';
+    const addedText = curLang === 'ru' ? '✓ Добавлено' : '✓ Qo\'shildi';
+
+    const isInCart = cart[item.id] && cart[item.id].qty > 0;
+
+    card.innerHTML = `
+      <img src="${item.img}" alt="${item.name[curLang]}">
+      <div class="upsell-card-name">${item.name[curLang]}</div>
+      <div class="upsell-card-price">${money(item.price)}</div>
+      <button class="upsell-add-btn" data-id="${item.id}" style="${isInCart ? 'background: rgba(191, 233, 79, 0.2); color: #BFE94F;' : ''}">
+        ${isInCart ? addedText : btnText}
+      </button>
+    `;
+
+    const addBtnEl = card.querySelector('.upsell-add-btn');
+    addBtnEl.onclick = (e) => {
+      e.stopPropagation();
+      addToCart(item.id, 1, item);
+      showAddToast(item);
+      animateFlyToCart(addBtnEl, item.img);
+
+      addBtnEl.textContent = addedText;
+      addBtnEl.style.background = 'rgba(191, 233, 79, 0.2)';
+      addBtnEl.style.color = '#BFE94F';
+    };
+
+    upsellList.appendChild(card);
+  });
+
+  upsellOverlay.style.opacity = '';
+  upsellModal.style.transform = '';
+  upsellOverlay.classList.add('open');
+  upsellModal.classList.add('open');
+  clearTimeout(advanceTimer);
+}
+
+function closeUpsell() {
+  upsellOverlay.classList.remove('open');
+  upsellModal.classList.remove('open');
+  setTimeout(() => {
+    upsellModal.style.transform = '';
+    upsellOverlay.style.opacity = '';
+  }, 350);
+  startAdvanceTimer(curCat, curIdx);
+}
+
+closeUpsellBtn.onclick = closeUpsell;
+upsellOverlay.onclick = closeUpsell;
+upsellContinueBtn.onclick = closeUpsell;
+
+addBtn.addEventListener('click', (e) => {
   const d = MENU[curCat][curIdx];
   const cartItem = cart[d.id];
-  
+
   if (!cartItem) {
     addToCart(d.id, 1, d);
     showAddToast(d);
     animateFlyToCart(addBtn, d.img);
+    setTimeout(() => {
+      openUpsell(d);
+    }, 450);
   } else {
     if (e.target.closest('#pillMinus')) {
       addToCart(d.id, -1, d);
@@ -605,16 +668,16 @@ function showAddToast(d) {
   toastEl.textContent = `${d.name[curLang]} ${toastText} · ×${cart[d.id].qty}`;
   toastEl.classList.add('show');
   clearTimeout(window._t);
-  window._t = setTimeout(()=> toastEl.classList.remove('show'), 1400);
+  window._t = setTimeout(() => toastEl.classList.remove('show'), 1400);
 }
 
-function openCart(){
+function openCart() {
   cartDrawer.style.transform = '';
   cartOverlay.style.opacity = '';
   cartOverlay.classList.add('open');
   cartDrawer.classList.add('open');
 }
-function closeCart(){
+function closeCart() {
   cartOverlay.classList.remove('open');
   cartDrawer.classList.remove('open');
   setTimeout(() => {
@@ -625,7 +688,7 @@ function closeCart(){
 cartChip.addEventListener('click', openCart);
 cartOverlay.addEventListener('click', closeCart);
 document.getElementById('closeCart').addEventListener('click', closeCart);
-checkoutBtn.addEventListener('click', ()=>{
+checkoutBtn.addEventListener('click', () => {
   Object.keys(cart).forEach(k => delete cart[k]);
   localStorage.removeItem('lamari_cart');
   updateCartUI();
@@ -634,10 +697,10 @@ checkoutBtn.addEventListener('click', ()=>{
   toastEl.textContent = clearedText;
   toastEl.classList.add('show');
   clearTimeout(window._t);
-  window._t = setTimeout(()=> toastEl.classList.remove('show'), 1400);
+  window._t = setTimeout(() => toastEl.classList.remove('show'), 1400);
 });
 
-function openDesc(){
+function openDesc() {
   const d = MENU[curCat][curIdx];
   descModalTitle.textContent = d.name[curLang];
   descModalText.textContent = d.desc[curLang];
@@ -648,7 +711,7 @@ function openDesc(){
   descModal.classList.add('open');
   clearTimeout(advanceTimer);
 }
-function closeDesc(){
+function closeDesc() {
   descOverlay.classList.remove('open');
   descModal.classList.remove('open');
   setTimeout(() => {
@@ -672,10 +735,10 @@ shareDishBtn.addEventListener('click', async () => {
   const d = MENU[curCat][curIdx];
   const shareUrl = window.location.href;
   const shareTitle = d.name[curLang];
-  const shareText = curLang === 'ru' 
-    ? `Посмотри какое вкусное блюдо в La Mari: ${d.name[curLang]}` 
+  const shareText = curLang === 'ru'
+    ? `Посмотри какое вкусное блюдо в La Mari: ${d.name[curLang]}`
     : `La Mari'dagi ajoyib taomni ko'ring: ${d.name[curLang]}`;
-    
+
   if (navigator.share) {
     try {
       await navigator.share({
@@ -693,7 +756,7 @@ shareDishBtn.addEventListener('click', async () => {
       toastEl.textContent = copyText;
       toastEl.classList.add('show');
       clearTimeout(window._t);
-      window._t = setTimeout(()=> toastEl.classList.remove('show'), 1400);
+      window._t = setTimeout(() => toastEl.classList.remove('show'), 1400);
     } catch (err) {
       console.error('Не удалось скопировать ссылку', err);
     }
@@ -704,7 +767,7 @@ function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl 
   let startY = 0;
   let currentY = 0;
   let isDragging = false;
-  
+
   function onTouchStart(e) {
     if (scrollContainerEl && scrollContainerEl.scrollTop > 0) return;
     startY = e.touches[0].clientY;
@@ -712,11 +775,11 @@ function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl 
     modalEl.style.transition = 'none';
     overlayEl.style.transition = 'none';
   }
-  
+
   function onTouchMove(e) {
     const clientY = e.touches[0].clientY;
     const diffY = clientY - startY;
-    
+
     if (diffY > 0) {
       if (scrollContainerEl && scrollContainerEl.scrollTop > 0) return;
       if (!isDragging) {
@@ -725,14 +788,14 @@ function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl 
       }
       currentY = diffY;
       modalEl.style.transform = `translateY(${diffY}px)`;
-      
+
       const progress = Math.max(0, 1 - (diffY / 320));
       overlayEl.style.opacity = progress;
-      
+
       if (e.cancelable) e.preventDefault();
     }
   }
-  
+
   function onTouchEnd() {
     if (!isDragging) {
       modalEl.style.transition = '';
@@ -742,7 +805,7 @@ function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl 
     isDragging = false;
     modalEl.style.transition = '';
     overlayEl.style.transition = '';
-    
+
     if (currentY > 80) {
       closeFn();
     } else {
@@ -754,11 +817,11 @@ function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl 
     }
     currentY = 0;
   }
-  
+
   handleEl.addEventListener('touchstart', onTouchStart, { passive: true });
   handleEl.addEventListener('touchmove', onTouchMove, { passive: false });
   handleEl.addEventListener('touchend', onTouchEnd, { passive: true });
-  
+
   modalEl.addEventListener('touchstart', onTouchStart, { passive: true });
   modalEl.addEventListener('touchmove', onTouchMove, { passive: false });
   modalEl.addEventListener('touchend', onTouchEnd, { passive: true });
@@ -767,21 +830,22 @@ function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl 
 makeDraggable(descModal, document.querySelector('.desc-modal-handle'), descOverlay, closeDesc);
 makeDraggable(cartDrawer, document.querySelector('.drawer-handle'), cartOverlay, closeCart, cartList);
 makeDraggable(langModal, document.querySelector('.lang-modal-handle'), langOverlay, closeLangModal);
+makeDraggable(upsellModal, document.querySelector('.upsell-handle'), upsellOverlay, closeUpsell, upsellList);
 
 setDish(curCat, curIdx);
 renderTabs();
 updateCartUI();
 
-function setVH(){ document.documentElement.style.setProperty('--vh', (window.innerHeight*0.01)+'px'); }
+function setVH() { document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px'); }
 setVH();
-window.addEventListener('resize', ()=>{
+window.addEventListener('resize', () => {
   setVH();
   const activeTab = tabsEl.querySelector('.cat-tab.active');
-  if(activeTab) centerTab(activeTab, false);
+  if (activeTab) centerTab(activeTab, false);
 });
 
-window.addEventListener('load', ()=>{
-  setTimeout(()=>{
+window.addEventListener('load', () => {
+  setTimeout(() => {
     document.getElementById('preloader').classList.add('hide');
     appLoaded = true;
     renderDots(curCat, curIdx);

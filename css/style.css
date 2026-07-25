@@ -1238,6 +1238,46 @@ body {
   .header-controls {
     gap: 6px;
   }
+
+  /* Адаптив ИИ-модалки для маленьких экранов */
+  .upsell-modal {
+    padding: 14px 14px calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .upsell-title {
+    font-size: 15.5px;
+  }
+
+  .upsell-subtitle {
+    font-size: 11.5px;
+    margin-bottom: 8px;
+  }
+
+  .upsell-card {
+    width: 118px;
+    padding: 8px;
+    border-radius: 14px;
+  }
+
+  .upsell-card img {
+    width: 68px;
+    height: 68px;
+    border-radius: 10px;
+  }
+
+  .upsell-card-name {
+    font-size: 11.5px;
+    height: 28px;
+  }
+
+  .upsell-card-price {
+    font-size: 11px;
+  }
+
+  .upsell-add-btn {
+    font-size: 10.5px;
+    padding: 5.5px 0;
+  }
 }
 
 /* 2. Планшеты и широкие экраны */
@@ -1275,6 +1315,34 @@ body {
     border-radius: 18px;
     padding: 2px;
     gap: 2px;
+  }
+
+  /* Адаптив ИИ-модалки для больших экранов */
+  .upsell-modal {
+    padding: 20px 28px calc(24px + env(safe-area-inset-bottom));
+  }
+
+  .upsell-title {
+    font-size: 20px;
+  }
+
+  .upsell-scroll {
+    gap: 16px;
+    padding-bottom: 16px;
+  }
+
+  .upsell-card {
+    width: 155px;
+    padding: 12px;
+  }
+
+  .upsell-card img {
+    width: 96px;
+    height: 96px;
+  }
+
+  .upsell-card-name {
+    font-size: 13.5px;
   }
 }
 

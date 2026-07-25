@@ -43,14 +43,28 @@
 
     <div class="dots" id="dots"></div>
 
+    <div class="shorts-indicator" id="shortsIndicator">
+      <span class="shorts-dot"></span> ⚡ Restaurant Shorts Mode · Нажмите в любом месте
+    </div>
+
     <div class="top-bar">
       <div class="dish-info">
         <div class="dish-cat-row">
           <div class="dish-cat" id="dishCat">Завтраки</div>
           <span class="dish-badge" id="dishBadge" style="display:none"></span>
+          <span class="freshness-badge" id="freshnessBadge" style="display:none"></span>
         </div>
         <div class="dish-title" id="dishTitle">—</div>
         <div class="dish-desc" id="dishDesc">—</div>
+        
+        <!-- FLAVOR / MOOD MATCHER BAR -->
+        <div class="mood-bar" id="moodBar">
+          <button class="mood-chip" data-mood="sweet">🍰 Сладкое</button>
+          <button class="mood-chip" data-mood="hearty">🥑 Сытно</button>
+          <button class="mood-chip" data-mood="coffee">☕ К кофе</button>
+          <button class="mood-chip" data-mood="snack">🥐 Перекус</button>
+        </div>
+
         <div class="dish-more-btn" id="dishMoreBtn">
           <span id="dishMoreText">Детали</span>
         </div>
@@ -59,6 +73,9 @@
         <h1 class="wm">La Mari</h1>
         <div class="wm-sub">Café &amp; Bakery</div>
         <div class="header-controls">
+          <div class="service-chip" id="serviceBtn" title="Вызвать официанта / Сервис">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
           <div class="lang-mobile-btn" id="langMobileBtn">RU</div>
           <div class="lang-switch-desktop">
             <span class="lang-btn active" id="langRu">RU</span>
@@ -79,6 +96,12 @@
     <div class="toast" id="toast">Добавлено в корзину</div>
 
     <div class="bottom-area">
+
+      <!-- 1-TAP COMBO PAIRING PILL -->
+      <div class="combo-pill" id="comboPill" style="display:none">
+        <div class="combo-info" id="comboText">🥐+☕ Сет: Выпечка + Флэт Уайт (-10%)</div>
+        <button class="combo-add-btn" id="comboAddBtn">+ Сделать сет</button>
+      </div>
 
       <div class="price-pill" id="addBtn">
         <span class="pill-minus" id="pillMinus">−</span>
@@ -156,6 +179,47 @@
       </div>
       <div class="upsell-footer">
         <button class="upsell-continue-btn" id="upsellContinueBtn">Продолжить</button>
+      </div>
+    </div>
+
+    <!-- SERVICE BELL MODAL (1-TAP SERVICE) -->
+    <div class="service-overlay" id="serviceOverlay"></div>
+    <div class="service-modal" id="serviceModal">
+      <div class="service-handle"></div>
+      <div class="service-header">
+        <div id="serviceModalTitle">🔔 Сервис за столиком</div>
+        <button id="closeService">✕</button>
+      </div>
+      <div class="service-body">
+        <div class="service-table-select">
+          <span>Столик:</span>
+          <select id="tableSelect">
+            <option value="1">Столик №1</option>
+            <option value="2">Столик №2</option>
+            <option value="3">Столик №3</option>
+            <option value="4" selected>Столик №4</option>
+            <option value="5">Столик №5</option>
+            <option value="6">VIP / Терраса</option>
+          </select>
+        </div>
+        <div class="service-grid">
+          <button class="service-option-btn" data-action="waiter">
+            <span class="icon">🙋‍♂️</span>
+            <span class="label">Вызвать официанта</span>
+          </button>
+          <button class="service-option-btn" data-action="water">
+            <span class="icon">💧</span>
+            <span class="label">Принести воду / Салфетки</span>
+          </button>
+          <button class="service-option-btn" data-action="bill_card">
+            <span class="icon">💳</span>
+            <span class="label">Счет (Картой)</span>
+          </button>
+          <button class="service-option-btn" data-action="bill_cash">
+            <span class="icon">💵</span>
+            <span class="label">Счет (Наличные)</span>
+          </button>
+        </div>
       </div>
     </div>
 

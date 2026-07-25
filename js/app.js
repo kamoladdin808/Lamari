@@ -676,11 +676,14 @@ addBtn.addEventListener('click', (e) => {
     if (e.target.closest('#pillMinus')) {
       addToCart(d.id, -1, d);
       e.stopPropagation();
-    } else if (e.target.closest('#pillPlus')) {
+    } else {
       const plusEl = document.getElementById('pillPlus');
       addToCart(d.id, 1, d);
       showAddToast(d);
       animateFlyToCart(plusEl || addBtn, d.img);
+      setTimeout(() => {
+        openUpsell(d);
+      }, 450);
       e.stopPropagation();
     }
   }

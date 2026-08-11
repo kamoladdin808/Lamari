@@ -123,25 +123,6 @@ const upsellList = document.getElementById('upsellList');
 const closeUpsellBtn = document.getElementById('closeUpsell');
 const upsellContinueBtn = document.getElementById('upsellContinueBtn');
 
-// ===== NEW LIVE FEATURES DOM & STATE =====
-const serviceBtn = document.getElementById('serviceBtn');
-const serviceOverlay = document.getElementById('serviceOverlay');
-const serviceModal = document.getElementById('serviceModal');
-const closeServiceBtn = document.getElementById('closeService');
-const tableSelect = document.getElementById('tableSelect');
-
-const freshnessBadge = document.getElementById('freshnessBadge');
-const moodBar = document.getElementById('moodBar');
-const shortsIndicator = document.getElementById('shortsIndicator');
-
-const comboPill = document.getElementById('comboPill');
-const comboText = document.getElementById('comboText');
-const comboAddBtn = document.getElementById('comboAddBtn');
-
-let activeMood = null;
-let isShortsMode = false;
-let idleTimer = null;
-
 langRuBtn.onclick = () => setLanguage('ru');
 langUzBtn.onclick = () => setLanguage('uz');
 
@@ -230,46 +211,6 @@ function setDish(cat, idx) {
 
   // Установка описания и веса
   dishDesc.textContent = `${d.desc[curLang]} · ${d.weight}`;
-
-  // 3. Real-time Бадж Свежести
-  if (cat === 'bakery') {
-    const minAgo = Math.floor(Math.random() * 15) + 6;
-    freshnessBadge.textContent = curLang === 'ru' ? `🔥 Из печи ${minAgo} мин назад` : `🔥 Pishirilgan: ${minAgo} daqiqa oldin`;
-    freshnessBadge.style.display = 'inline-flex';
-  } else if (cat === 'breakfasts') {
-    freshnessBadge.textContent = curLang === 'ru' ? `🔥 Свежая подача` : `🔥 Yangi tayyorlangan`;
-    freshnessBadge.style.display = 'inline-flex';
-  } else {
-    freshnessBadge.style.display = 'none';
-  }
-
-  // 4. 1-Tap Combo Pairing Deal
-  if (d.recs && d.recs.length > 0) {
-    const pairedDish = findDishById(d.recs[0]);
-    if (pairedDish) {
-      const comboDiscountPrice = Math.round((d.price + pairedDish.price) * 0.9);
-      const comboTitleText = curLang === 'ru'
-        ? `✨ Сет: ${d.name.ru} + ${pairedDish.name.ru} (-10%)`
-        : `✨ Set: ${d.name.uz} + ${pairedDish.name.uz} (-10%)`;
-      const btnText = curLang === 'ru' ? `+ Сделать сет · ${money(comboDiscountPrice)}` : `+ Set qilish · ${money(comboDiscountPrice)}`;
-
-      comboText.textContent = comboTitleText;
-      comboAddBtn.textContent = btnText;
-      comboPill.style.display = 'flex';
-
-      comboAddBtn.onclick = () => {
-        addToCart(d.id, 1, d);
-        addToCart(pairedDish.id, 1, pairedDish);
-        animateFlyToCart(comboAddBtn, d.img);
-        setTimeout(() => animateFlyToCart(comboAddBtn, pairedDish.img), 180);
-        showAddToast({ name: { ru: 'Идеальный сет', uz: 'Ajoyib set' }, id: d.id });
-      };
-    } else {
-      comboPill.style.display = 'none';
-    }
-  } else {
-    comboPill.style.display = 'none';
-  }
 
   updateCartUI();
 
@@ -912,124 +853,10 @@ function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl 
   modalEl.addEventListener('touchend', onTouchEnd, { passive: true });
 }
 
-// ===== 1. FLAVOR / MOOD MATCHER LOGIC =====
-const MOOD_MAP = {
-  'sweet': ['bakery', 'desserts'],
-  'hearty': ['breakfasts', 'sets'],
-  'coffee': ['coffee'],
-  'snack': ['bakery', 'breakfasts']
-};
-
-moodBar.querySelectorAll('.mood-chip').forEach(btn => {
-  btn.onclick = (e) => {
-    e.stopPropagation();
-    const mood = btn.getAttribute('data-mood');
-
-    if (activeMood === mood) {
-      activeMood = null;
-      btn.classList.remove('active');
-    } else {
-      moodBar.querySelectorAll('.mood-chip').forEach(b => b.classList.remove('active'));
-      activeMood = mood;
-      btn.classList.add('active');
-
-      const targetCats = MOOD_MAP[mood] || ['sets'];
-      const targetCat = targetCats[0];
-      setDish(targetCat, 0);
-    }
-  };
-});
-
-// ===== 2. KIOSK RESTAURANT SHORTS MODE (IDLE 30 SEC) =====
-let shortsInterval = null;
-
-function resetIdleTimer() {
-  if (isShortsMode) {
-    stopShortsMode();
-  }
-  clearTimeout(idleTimer);
-  idleTimer = setTimeout(startShortsMode, 30000);
-}
-
-function startShortsMode() {
-  if (isShortsMode) return;
-  isShortsMode = true;
-  shortsIndicator.classList.add('active');
-
-  clearInterval(shortsInterval);
-  shortsInterval = setInterval(() => {
-    const cats = Object.keys(MENU);
-    const randomCatIdx = Math.floor(Math.random() * cats.length);
-    const cat = cats[randomCatIdx];
-    const dishIdx = Math.floor(Math.random() * MENU[cat].length);
-    setDish(cat, dishIdx);
-  }, 4500);
-}
-
-function stopShortsMode() {
-  isShortsMode = false;
-  shortsIndicator.classList.remove('active');
-  clearInterval(shortsInterval);
-}
-
-['touchstart', 'mousedown', 'mousemove', 'keydown', 'scroll'].forEach(evt => {
-  window.addEventListener(evt, resetIdleTimer, { passive: true });
-});
-resetIdleTimer();
-
-// ===== 5. SERVICE BELL MODAL LOGIC =====
-function openServiceModal() {
-  serviceOverlay.style.opacity = '';
-  serviceModal.style.transform = '';
-  serviceOverlay.classList.add('open');
-  serviceModal.classList.add('open');
-  clearTimeout(advanceTimer);
-}
-
-function closeServiceModal() {
-  serviceOverlay.classList.remove('open');
-  serviceModal.classList.remove('open');
-  setTimeout(() => {
-    serviceModal.style.transform = '';
-    serviceOverlay.style.opacity = '';
-  }, 350);
-  startAdvanceTimer(curCat, curIdx);
-}
-
-serviceBtn.onclick = openServiceModal;
-closeServiceBtn.onclick = closeServiceModal;
-serviceOverlay.onclick = closeServiceModal;
-
-serviceModal.querySelectorAll('.service-option-btn').forEach(btn => {
-  btn.onclick = () => {
-    const action = btn.getAttribute('data-action');
-    const tableNo = tableSelect.value;
-    let msg = '';
-
-    if (action === 'waiter') {
-      msg = curLang === 'ru' ? `🙋‍♂️ Официант вызван к столику №${tableNo}` : `🙋‍♂️ Ofitsiant чаqirildi: Stold №${tableNo}`;
-    } else if (action === 'water') {
-      msg = curLang === 'ru' ? `💧 Вода и салфетки запрошены (Столик №${tableNo})` : `💧 Suv va salfetka so'raldi (Stold №${tableNo})`;
-    } else if (action === 'bill_card') {
-      msg = curLang === 'ru' ? `💳 Оплата картой (Столик №${tableNo})` : `💳 Karta bilan to'lov (Stold №${tableNo})`;
-    } else if (action === 'bill_cash') {
-      msg = curLang === 'ru' ? `💵 Оплата наличными (Столик №${tableNo})` : `💵 Naqd pulda to'lov (Stold №${tableNo})`;
-    }
-
-    toastEl.textContent = msg;
-    toastEl.classList.add('show');
-    clearTimeout(window._t);
-    window._t = setTimeout(() => toastEl.classList.remove('show'), 2200);
-
-    closeServiceModal();
-  };
-});
-
 makeDraggable(descModal, document.querySelector('.desc-modal-handle'), descOverlay, closeDesc);
 makeDraggable(cartDrawer, document.querySelector('.drawer-handle'), cartOverlay, closeCart, cartList);
 makeDraggable(langModal, document.querySelector('.lang-modal-handle'), langOverlay, closeLangModal);
 makeDraggable(upsellModal, document.querySelector('.upsell-handle'), upsellOverlay, closeUpsell, upsellList);
-makeDraggable(serviceModal, document.querySelector('.service-handle'), serviceOverlay, closeServiceModal);
 
 setDish(curCat, curIdx);
 renderTabs();

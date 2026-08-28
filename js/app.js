@@ -6,35 +6,285 @@ const P5 = "img/p5.jpg";
 const P6 = "img/p6.jpg";
 
 const MENU = {
-  'sets': [
-    { id: 'set_for_two', name: { ru: 'Сет для двоих', uz: 'Ikki kishilik set' }, desc: { ru: 'Ассорти брускетт, два горячих блинчика на выбор и чайник чая', uz: "Bruskettalar assortisi, tanlov bo'yicha ikkita issiq quymoq va choynak choy" }, weight: '750 г', price: 2685000, badge: '', img: P1, recs: ['flat_white', 'croissant_classic', 'tiramisu', 'nut_raf'] },
-    { id: 'weekend_set', name: { ru: 'Сет "Выходного дня"', uz: '"Dam olish kuni" seti' }, desc: { ru: 'Бенедикт с лососем, большой английский завтрак, два капучино и круассаны', uz: "Qizil baliqli Benedikt, katta inglizcha nonushta, ikkita kapuchino va kruassanlar" }, weight: '1100 г', price: 3190000, badge: 'HIT', img: P3, recs: ['croissant_classic', 'tiramisu', 'chocolate_babka', 'nut_raf'] }
+  'breakfasts': [
+    { id: 'french_toast', name: { ru: 'Французский тост с ягодами', uz: 'Rezavorli fransuz tosti' }, desc: { ru: 'Нежный тост со свежими ягодами и натуральным сиропом', uz: 'Yangi rezavorlar va tabiiy sirop bilan mayin fransuz tosti' }, weight: '', price: 35000, badge: '', img: P1 },
+    { id: 'benedict_salmon', name: { ru: 'Бенедикт с лососем', uz: 'Qizil baliqli Benedikt' }, desc: { ru: 'Бенедикт со слабосоленым лососем и голландским соусом', uz: 'Qizil baliq va golland sousi bilan klassik Benedikt' }, weight: '', price: 65000, badge: 'HIT', img: P5 },
+    { id: 'granola_strawberry', name: { ru: 'Гранола с клубникой', uz: 'Qulupnayli granola' }, desc: { ru: 'Хрустящая запеченная гранола с натуральным йогуртом и клубникой', uz: 'Qarsildoq granola, tabiiy yogurt va yangi qulupnay' }, weight: '', price: 50000, badge: '', img: P3 },
+    { id: 'granola_mango', name: { ru: 'Гранола с манго', uz: 'Mangolik granola' }, desc: { ru: 'Хрустящая гранола с натуральным йогуртом и кусочками спелого манго', uz: 'Qarsildoq granola, tabiiy yogurt va pishgan mango' }, weight: '', price: 50000, badge: '', img: P3 },
+    { id: 'draniki_salmon', name: { ru: 'Драники с лососем', uz: 'Qizil baliqli draniklar' }, desc: { ru: 'Золотистые картофельные драники с нежным лососем и сметаной', uz: 'Qizil baliq va smetana bilan tillarang kartoshka draniklar' }, weight: '', price: 75000, badge: '', img: P5 },
+    { id: 'shakshuka', name: { ru: 'Шакшука', uz: 'Shakshuka' }, desc: { ru: 'Яйца в ароматном томатном соусе со специями и хрустящим тостом', uz: "Xushbo'y pomidor sousida pishirilgan tuxumlar" }, weight: '', price: 55000, badge: '', img: P6 },
+    { id: 'oatmeal', name: { ru: 'Каша Овсяная', uz: 'Suli kasha' }, desc: { ru: 'Нежная овсяная каша на молоке со сливочным маслом', uz: 'Sutda pishirilgan mayin suli kasha' }, weight: '', price: 30000, badge: '', img: P1 },
+    { id: 'semolina', name: { ru: 'Каша манная', uz: 'Manniy kasha' }, desc: { ru: 'Традиционная манная каша со сливочным маслом', uz: "Sariyog' bilan tayyorlangan klassik manniy kasha" }, weight: '', price: 30000, badge: '', img: P1 },
+    { id: 'omelette_mushroom', name: { ru: 'Омлет с грибами', uz: "Qo'ziqorinli omlet" }, desc: { ru: 'Пышный омлет с обжаренными лесными грибами и зеленью', uz: "Qovurilgan qo'ziqorinlar bilan yam-yashil omlet" }, weight: '', price: 48000, badge: '', img: P5 },
+    { id: 'omelette_chicken', name: { ru: 'Омлет с курицей', uz: 'Tovuqli omlet' }, desc: { ru: 'Пышный омлет с нежным куриным филе и травами', uz: "Mayin tovuq filesi bilan to'yimli omlet" }, weight: '', price: 48000, badge: '', img: P5 },
+    { id: 'omelette_cheese', name: { ru: 'Омлет с сыром', uz: 'Pishloqli omlet' }, desc: { ru: 'Нежный классический омлет с тянущимся сыром', uz: "Cho'ziluvchi pishloq bilan mayin klassik omlet" }, weight: '', price: 35000, badge: '', img: P5 },
+    { id: 'syrniki', name: { ru: 'Сырники', uz: 'Sirniklar' }, desc: { ru: 'Нежные творожные сырники со сметаной и ягодным соусом', uz: 'Tvorogli mayin sirniklar, smetana va rezavor sousi' }, weight: '', price: 45000, badge: '', img: P3 },
+    { id: 'pancakes_honey', name: { ru: 'Блинчики с медом', uz: 'Asalli blinchiklar' }, desc: { ru: 'Тонкие домашние блинчики со сливочным маслом и натуральным медом', uz: "Sariyog' va tabiiy asal bilan yupqa blinchiklar" }, weight: '', price: 45000, badge: '', img: P3 }
+  ],
+  'set_breakfast': [
+    { id: 'set_italian', name: { ru: 'Итальянский завтрак', uz: 'Italyan nonushtasi' }, desc: { ru: 'Сет: хрустящая фокачча, моцарелла, томаты, яйцо и кофе', uz: 'Set: qarsildoq fokachcha, motsarella, pomidor, tuxum va kofe' }, weight: '', price: 85000, badge: 'СЕТ', img: P1 },
+    { id: 'set_french', name: { ru: 'Французский завтрак', uz: 'Fransuz nonushtasi' }, desc: { ru: 'Сет: свежий круассан, сливочное масло, ягодный конфитюр и кофе', uz: "Set: yangi kruassan, sariyog', rezavor jem va kofe" }, weight: '', price: 65000, badge: 'СЕТ', img: P3 },
+    { id: 'set_english', name: { ru: 'Английский завтрак', uz: 'Ingliz nonushtasi' }, desc: { ru: 'Сет: яичница, бекон, сосиски, тосты, фасоль в томате и напиток', uz: 'Set: tuxum, bekon, sosiskalar, tostlar, loviya va ichimlik' }, weight: '', price: 55000, badge: 'СЕТ', img: P5 }
+  ],
+  'salads': [
+    { id: 'salad_burrata', name: { ru: 'Салат Буррата', uz: 'Burrata salati' }, desc: { ru: 'Сливочный мешочек бурраты со сладкими томатами и соусом песто', uz: 'Shirin pomidorlar va pesto sousi bilan qaymoqli burrata' }, weight: '', price: 85000, badge: '', img: P6 },
+    { id: 'salad_greek', name: { ru: 'Салат Греческий', uz: 'Grek salati' }, desc: { ru: 'Свежие огурцы, томаты, болгарский перец, сыр фета, маслины и оливковое масло', uz: "Bodring, pomidor, bulg'or qalampiri, feta pishlog'i va zaytun" }, weight: '', price: 50000, badge: '', img: P6 },
+    { id: 'salad_grill', name: { ru: 'Салат Грилл', uz: 'Grill salati' }, desc: { ru: 'Овощи на гриле с пикантной авторской заправкой и зеленью', uz: "Mualliflik sousi va ko'katlar bilan grilda pishirilgan sabzavotlar" }, weight: '', price: 70000, badge: '', img: P6 },
+    { id: 'salad_roastbeef', name: { ru: 'Салат Ростбиф', uz: 'Rostbif salati' }, desc: { ru: 'Сочные ломтики ростбифа с рукколой, черри и выдержанным пармезаном', uz: "Rukkola, cherri va parmezan bilan suvli rostbif bo'laklari" }, weight: '', price: 80000, badge: '', img: P5 },
+    { id: 'salad_stracciatella', name: { ru: 'Салат Страчателла с томатами', uz: 'Pomidorli Strachatella salati' }, desc: { ru: 'Нежнейшая страчателла со спелыми томатами, бальзамиком и базиликом', uz: 'Pishgan pomidorlar, balzamik va rayhon bilan mayin strachatella' }, weight: '', price: 85000, badge: 'NEW', img: P6 },
+    { id: 'salad_tropical', name: { ru: 'Салат Тропический', uz: 'Tropik salat' }, desc: { ru: 'Освежающий микс с тропическими фруктами, свежей зеленью и цитрусовой заправкой', uz: "Tropik mevalar, yangi ko'katlar va sitrus sousli tetiklantiruvchi salat" }, weight: '', price: 45000, badge: '', img: P6 },
+    { id: 'salad_eggplant', name: { ru: 'Салат Хрустящий баклажан', uz: 'Qarsildoq baqlajon salati' }, desc: { ru: 'Хрустящие баклажаны в сладком чили с томатами черри, кинзой и кунжутом', uz: 'Shirin chili sousidagi qarsildoq baqlajon, cherri pomidor va kunjut' }, weight: '', price: 60000, badge: '', img: P6 },
+    { id: 'salad_caesar', name: { ru: 'Салат Цезарь', uz: 'Sezar salati' }, desc: { ru: 'Хрустящий романо, обжаренное филе курицы, гренки, пармезан и соус цезарь', uz: 'Qarsildoq romano, tovuq filesi, suxariklar, parmezan va sezar sousi' }, weight: '', price: 60000, badge: 'HIT', img: P6 }
+  ],
+  'sandwiches': [
+    { id: 'club_sandwich', name: { ru: 'Клаб сэндвич', uz: 'Klab sendvich' }, desc: { ru: 'Трехслойный тостовый хлеб, куриное филе, бекон, яйцо, томаты и соус', uz: 'Uch qavatli tost noni, tovuq filesi, bekon, tuxum, pomidor va sous' }, weight: '', price: 65000, badge: '', img: P3 },
+    { id: 'smash_burger', name: { ru: 'Смэш бургер', uz: 'Smesh burger' }, desc: { ru: 'Фирменная булочка бриошь, сочная котлета с корочкой, сыр чеддер и соус', uz: "Brioshe bulochkasi, suvli qarsildoq kotlet, chedder pishlog'i va maxsus sous" }, weight: '', price: 70000, badge: 'HIT', img: P5 },
+    { id: 'texas_sandwich', name: { ru: 'Сэндвич по-техасски', uz: 'Texas sendvichi' }, desc: { ru: 'Сэндвич с сочной говядиной, соусом BBQ, хрустящим луком и маринованным огурчиком', uz: "Mol go'shti, BBQ sousi, qarsildoq piyoz va tuzlangan bodring bilan sendvich" }, weight: '', price: 65000, badge: '', img: P3 },
+    { id: 'mortadella_sandwich', name: { ru: 'Сэндвич с мортаделлой', uz: 'Mortadellali sendvich' }, desc: { ru: 'Итальянская мортаделла, сливочный сыр, руккола и фисташковый акцент', uz: 'Italyan mortadellasi, qaymoqli pishloq, rukkola va pista' }, weight: '', price: 65000, badge: '', img: P3 }
+  ],
+  'soups': [
+    { id: 'mexican_soup', name: { ru: 'Суп мексиканский', uz: "Meksika sho'rvasi" }, desc: { ru: 'Пряный наваристый суп с фасолью, кукурузой, фаршем и перцем чили', uz: "Loviya, makkajo'xori, qiyma va achchiq chili bilan ziravorli sho'rva" }, weight: '', price: 40000, badge: '', img: P4 },
+    { id: 'minestrone', name: { ru: 'Суп Минестроне', uz: "Minestrone sho'rvasi" }, desc: { ru: 'Легкий классический итальянский суп из сезонных овощей с добавлением пасты', uz: "Mavsumiy sabzavotlar va mayda makaron bilan klassik italyan sho'rvasi" }, weight: '', price: 35000, badge: '', img: P4 },
+    { id: 'tom_yam', name: { ru: 'Суп Том ям с лососем', uz: 'Qizil baliqli Tom yam' }, desc: { ru: 'Знаменитый тайский кисло-острый суп с лососем, кокосовым молоком и грибами', uz: "Qizil baliq, kokos suti va qo'ziqorinlar bilan nordon-achchiq tayland sho'rvasi" }, weight: '', price: 55000, badge: 'HIT', img: P4 },
+    { id: 'lentil_soup', name: { ru: 'Чечевичный суп', uz: "Yasmiq sho'rvasi" }, desc: { ru: 'Бархатистый крем-суп из красной чечевицы с восточными специями и лимоном', uz: "Sharqona ziravorlar va limon bilan qizil yasmiqdan tayyorlangan krem-sho'rva" }, weight: '', price: 35000, badge: '', img: P4 }
+  ],
+  'mains': [
+    { id: 'lamb_rack', name: { ru: 'Баранья корейка с овощами', uz: "Sabzavotli qo'y qovurg'asi" }, desc: { ru: 'Нежная обжаренная корейка ягненка с гарниром из овощей гриль', uz: "Grilda pishirilgan sabzavotlar bilan mayin qo'y qovurg'asi" }, weight: '', price: 135000, badge: '', img: P5 },
+    { id: 'bone_steak', name: { ru: 'Бон-стейк с картофелем пайе', uz: 'Kartoshka paye bilan Bon-steyk' }, desc: { ru: 'Сочный премиальный стейк на кости с хрустящей соломкой картофеля пайе', uz: 'Qarsildoq kartoshka paye bilan suyakda pishirilgan suvli steyk' }, weight: '', price: 150000, badge: 'HIT', img: P5 },
+    { id: 'chicken_mushroom', name: { ru: 'Куриное филе с грибным соусом', uz: "Qo'ziqorin sousli tovuq filesi" }, desc: { ru: 'Нежнейшее куриное филе под сливочно-грибным соусом с травами', uz: "Qaymoqli-qo'ziqorinli sousda pishirilgan mayin tovuq filesi" }, weight: '', price: 75000, badge: '', img: P5 },
+    { id: 'salmon_hollandaise', name: { ru: 'Лосось под голландским соусом', uz: 'Golland sousli qizil baliq' }, desc: { ru: 'Стейк из лосося идеальной прожарки под шелковистым соусом голландез', uz: 'Ipakdek mayin golland sousi bilan pishirilgan qizil baliq steyki' }, weight: '', price: 160000, badge: '', img: P5 },
+    { id: 'medallion_gratin', name: { ru: 'Медальон с гратеном', uz: 'Gratenli medalon' }, desc: { ru: 'Медальоны из вырезки говядины с запеченным сырно-картофельным гратеном', uz: "Pishloqli-kartoshkali graten bilan mol go'shti medalonlari" }, weight: '', price: 160000, badge: '', img: P5 },
+    { id: 'perlotto_truffle', name: { ru: 'Перлотто с трюфельным соусом', uz: 'Tryufel sousli perlotto' }, desc: { ru: 'Нежное перловое ризотто с благородным трюфельным соусом и пармезаном', uz: "Xushbo'y tryufel sousi va parmezan bilan tayyorlangan arpa risottosi" }, weight: '', price: 60000, badge: 'NEW', img: P4 }
+  ],
+  'bowls': [
+    { id: 'bowl_green', name: { ru: 'Боул зелень с авокадо', uz: "Ko'katli avokado bouli" }, desc: { ru: 'Свежий микс салатов, спелый авокадо, огурцы, эдамаме, семена и легкая заправка', uz: "Yangi salat miksi, pishgan avokado, bodring, edamame va urug'lar" }, weight: '', price: 135000, badge: '', img: P6 },
+    { id: 'bowl_salmon', name: { ru: 'Боул с лососем', uz: 'Qizil baliqli boul' }, desc: { ru: 'Свежий лосось, рис, авокадо, бобы эдамаме, чука и кунжутный соус', uz: 'Yangi qizil baliq, guruch, avokado, edamame, chuka va kunjut sousi' }, weight: '', price: 150000, badge: 'HIT', img: P6 },
+    { id: 'bowl_tuna', name: { ru: 'Боул с тунцом', uz: 'Tunetsli boul' }, desc: { ru: 'Обожженный тунец, рис, свежие овощи, водоросли нори и соус понзу', uz: 'Yengil qovurilgan tunets, guruch, yangi sabzavotlar va ponzu sousi' }, weight: '', price: 75000, badge: '', img: P6 }
+  ],
+  'sides': [
+    { id: 'potato_village', name: { ru: 'Картофель по-деревенски', uz: 'Qishloqcha kartoshka' }, desc: { ru: 'Ароматные картофельные дольки, запеченные с розмарином и чесноком', uz: "Rozmarin va sarimsoq bilan pishirilgan xushbo'y kartoshka" }, weight: '160 г', price: 15000, badge: '', img: P4 },
+    { id: 'fries', name: { ru: 'Картофель фри', uz: 'Kartoshka fri' }, desc: { ru: 'Классический хрустящий картофель фри с легкой солью', uz: 'Klassik qarsildoq kartoshka fri' }, weight: '160 г', price: 15000, badge: '', img: P4 },
+    { id: 'mashed_potato', name: { ru: 'Картофельное пюре', uz: 'Kartoshka pyuresi' }, desc: { ru: 'Воздушное нежное пюре из отборного картофеля со сливочным маслом и молоком', uz: "Sariyog' va sut bilan tayyorlangan mayin kartoshka pyuresi" }, weight: '', price: 20000, badge: '', img: P4 },
+    { id: 'grilled_veg', name: { ru: 'Овощи на гриле', uz: 'Grildagi sabzavotlar' }, desc: { ru: 'Цукини, баклажан, болгарский перец, томаты и грибы с дымком', uz: "Kabaxti, baqlajon, bulg'or qalampiri, pomidor va qo'ziqorinlar" }, weight: '', price: 28000, badge: '', img: P6 },
+    { id: 'rice', name: { ru: 'Отварной рис', uz: 'Qaynatilgan guruch' }, desc: { ru: 'Рассыпчатый длиннозерный отварной рис со сливочным маслом', uz: "Sariyog' bilan tayyorlangan mayda qaynatilgan guruch" }, weight: '', price: 15000, badge: '', img: P4 }
+  ],
+  'pizza': [
+    { id: 'pizza_al_polo', name: { ru: 'Пицца Аль Поло', uz: 'Al Polo pitsa' }, desc: { ru: 'Нежное куриное филе, грибы, моцарелла и ароматный томатный соус', uz: "Tovuq filesi, qo'ziqorinlar, motsarella va xushbo'y pomidor sousi" }, weight: '', price: 85000, badge: '', img: P3 },
+    { id: 'pizza_burrata', name: { ru: 'Пицца Буррата', uz: 'Burrata pitsa' }, desc: { ru: 'Хрустящее тесто, томатный соус, свежая буррата, черри и базилик', uz: 'Qarsildoq xamir, pomidor sousi, yangi burrata, cherri va rayhon' }, weight: '', price: 110000, badge: '', img: P3 },
+    { id: 'pizza_margherita', name: { ru: 'Пицца Маргарита', uz: 'Margarita pitsa' }, desc: { ru: 'Классика Неаполя: фирменный томатный соус, моцарелла и свежий базилик', uz: 'Neapol klassikasi: maxsus pomidor sousi, motsarella va yangi rayhon' }, weight: '', price: 75000, badge: '', img: P3 },
+    { id: 'pizza_pepperoni', name: { ru: 'Пицца Пепперони', uz: 'Pepperoni pitsa' }, desc: { ru: 'Пикантная пепперони, много тянущейся моцареллы и томатный соус', uz: "Pikant pepperoni, ko'p cho'ziluvchi motsarella va pomidor sousi" }, weight: '', price: 85000, badge: 'HIT', img: P3 },
+    { id: 'pizza_roastbeef', name: { ru: 'Пицца Ростбиф', uz: 'Rostbif pitsa' }, desc: { ru: 'Ломтики ростбифа, сыр моцарелла, свежая руккола и соус бальзамик', uz: "Rostbif bo'laklari, motsarella, yangi rukkola va balzamik sousi" }, weight: '', price: 105000, badge: '', img: P3 },
+    { id: 'pizza_truffle', name: { ru: 'Пицца с трюфельной пастой', uz: 'Tryufel pastali pitsa' }, desc: { ru: 'Белый сливочный соус, моцарелла, шампиньоны и ароматная трюфельная паста', uz: "Oq qaymoqli sous, motsarella, shampinyonlar va xushbo'y tryufel pastasi" }, weight: '', price: 90000, badge: '', img: P3 },
+    { id: 'pizza_salmon', name: { ru: 'Пицца Сальмон бьянка', uz: 'Salmon byanka pitsa' }, desc: { ru: 'Сливочная основа, филе лосося, сыр моцарелла, каперсы и зелень', uz: "Qaymoqli asos, qizil baliq filesi, motsarella va ko'katlar" }, weight: '', price: 110000, badge: '', img: P3 },
+    { id: 'pizza_stracciatella', name: { ru: 'Пицца Страчателла с томатами', uz: 'Pomidorli Strachatella pitsa' }, desc: { ru: 'Хрустящий бортик, сливочная страчателла, сладкие томаты черри и песто', uz: 'Qarsildoq xamir, qaymoqli strachatella, shirin cherri va pesto' }, weight: '', price: 110000, badge: '', img: P3 },
+    { id: 'pizza_cheese', name: { ru: 'Пицца Сырная', uz: 'Pishloqli pitsa' }, desc: { ru: 'Четыре благородных сыра: моцарелла, горгонзола, пармезан и гауда', uz: "To'rt xil oliy navli pishloq: motsarella, gorgonzola, parmezan va gauda" }, weight: '', price: 90000, badge: '', img: P3 }
+  ],
+  'waffles': [
+    {
+      id: 'waffle_belgian',
+      name: { ru: 'Бельгийские вафли', uz: 'Belgiya vafllari' },
+      desc: { ru: 'Пышные вафли · Топпинги на выбор: бельгийский шоколад / Nutella / фисташка, клубника, банан, мороженое', uz: "Vafllar · Tanlov bo'yicha toppinglar: shokolad / Nutella / pista, qulupnay, banan, muzqaymoq" },
+      weight: '',
+      price: 35000,
+      badge: '',
+      img: P1,
+      hasToppings: true
+    },
+    {
+      id: 'waffle_superset',
+      name: { ru: 'Супер сет вафель', uz: 'Super vafl seti' },
+      desc: { ru: 'Большой сет вафель с топпингом на выбор: бельгийский шоколад / Nutella / фисташковый шоколад', uz: "Katta vafl seti, tanlov bo'yicha shokolad: belgiya shokoladi / Nutella / pista shokoladi" },
+      weight: '',
+      price: 150000,
+      badge: 'СЕТ',
+      img: P1,
+      variants: [
+        { id: 'waffle_superset_belgian', label: { ru: 'Бельгийский', uz: 'Belgiya' }, price: 150000 },
+        { id: 'waffle_superset_nutella', label: { ru: 'Nutella', uz: 'Nutella' }, price: 150000 },
+        { id: 'waffle_superset_pistachio', label: { ru: 'Фисташковый', uz: 'Pistali' }, price: 150000 }
+      ]
+    }
   ],
   'coffee': [
-    { id: 'flat_white', name: { ru: 'Флэт уайт', uz: 'Flet uayt' }, desc: { ru: 'Двойной эспрессо с нежной молочной пеной', uz: "Mayin sut ko'pigi bilan quyuq espresso" }, weight: '250 мл', price: 28000, badge: '', img: P2, recs: ['croissant_classic', 'chocolate_babka', 'tiramisu', 'cheesecake_ny'] },
-    { id: 'cappuccino', name: { ru: 'Капучино', uz: 'Kapuchino' }, desc: { ru: 'Классический кофейный напиток на основе эспрессо и молока', uz: "Espresso va sut asosidagi klassik kofe ichimligi" }, weight: '300 мл', price: 24000, badge: '', img: P5, recs: ['croissant_classic', 'chocolate_babka', 'cheesecake_ny', 'tiramisu'] },
-    { id: 'nut_raf', name: { ru: 'Раф ореховый', uz: "Yong'oqli raf" }, desc: { ru: 'Нежный кофейно-сливочный напиток с натуральным ореховым сиропом', uz: "Tabiiy yong'oq siropi bilan mayin qaymoqli kofe ichimligi" }, weight: '350 мл', price: 32000, badge: 'NEW', img: P4, recs: ['croissant_classic', 'tiramisu', 'chocolate_babka', 'cheesecake_ny'] }
+    { id: 'iced_americano', name: { ru: 'Айс Американо', uz: 'Ays Amerikano' }, desc: { ru: 'Двойной эспрессо с фильтрованной холодной водой и кубиками льда', uz: "Muz va sovuq suv bilan tayyorlangan tetiklantiruvchi espresso" }, weight: '', price: 30000, badge: '', img: P2 },
+    { id: 'iced_latte', name: { ru: 'Айс Латте', uz: 'Ays Latte' }, desc: { ru: 'Эспрессо со свежим холодным молоком и кубиками льда', uz: "Yangi sovuq sut, espresso va muz bo'laklari" }, weight: '', price: 35000, badge: '', img: P2 },
+    { id: 'americano', name: { ru: 'Американо', uz: 'Amerikano' }, desc: { ru: 'Классический эспрессо с добавлением горячей воды', uz: "Issiq suv qo'shilgan klassik espresso" }, weight: '', price: 25000, badge: '', img: P2 },
+    { id: 'bumble', name: { ru: 'Бамбл-кофе', uz: 'Bambl-kofe' }, desc: { ru: 'Слоистый кофейный коктейль: эспрессо, апельсиновый сок и карамельный сироп', uz: 'Espresso, yangi apelsin sharbati va karamel siropi' }, weight: '', price: 35000, badge: 'NEW', img: P2 },
+    {
+      id: 'cappuccino',
+      name: { ru: 'Капучино', uz: 'Kapuchino' },
+      desc: { ru: 'Идеальный баланс эспрессо и бархатистой молочной пены', uz: "Espresso va mayin sut ko'pigi muvozanati" },
+      weight: '',
+      price: 30000,
+      badge: '',
+      img: P2,
+      variants: [
+        { id: 'cappuccino_m', label: { ru: 'M', uz: 'M' }, price: 30000 },
+        { id: 'cappuccino_l', label: { ru: 'L', uz: 'L' }, price: 35000 }
+      ]
+    },
+    {
+      id: 'latte',
+      name: { ru: 'Латте', uz: 'Latte' },
+      desc: { ru: 'Нежный кофейный напиток с большим количеством вспененного молока', uz: "Ko'p miqdorda ko'pirtirilgan sutli mayin kofe" },
+      weight: '',
+      price: 30000,
+      badge: '',
+      img: P2,
+      variants: [
+        { id: 'latte_s', label: { ru: 'S', uz: 'S' }, price: 30000 },
+        { id: 'latte_l', label: { ru: 'L', uz: 'L' }, price: 35000 }
+      ]
+    },
+    { id: 'raf', name: { ru: 'Раф', uz: 'Raf' }, desc: { ru: 'Эспрессо, взбитый со сливками и ванильным сахаром в нежную пену', uz: "Qaymoq va vanil shakari bilan birga ko'pirtirilgan kofe" }, weight: '', price: 40000, badge: '', img: P2 },
+    { id: 'espresso', name: { ru: 'Эспрессо', uz: 'Espresso' }, desc: { ru: 'Насыщенный шот кофе с плотной золотистой пенкой crema', uz: "Qalin tillarang krema bilan to'yingan klassik espresso" }, weight: '', price: 25000, badge: '', img: P2 },
+    { id: 'espresso_tonic', name: { ru: 'Эспрессо-тоник', uz: 'Espresso-tonik' }, desc: { ru: 'Освежающий микс тоника, эспрессо, льда и ломтика лайма', uz: "Tonik, espresso, muz va laym bo'lagi bilan tetiklantiruvchi ichimlik" }, weight: '', price: 35000, badge: '', img: P2 },
+    { id: 'filter_coffee', name: { ru: 'Фильтр-кофе (Batch brew)', uz: 'Filtr-kofe' }, desc: { ru: 'Мягкий кофе фильтр-заваривания, раскрывающий все тонкие ноты зерна', uz: "Kofe donalarining barcha mayin ta'mlarini ochib beruvchi filtr-kofe" }, weight: '', price: 25000, badge: '', img: P2 }
   ],
-  'bakery': [
-    { id: 'croissant_classic', name: { ru: 'Круассан классик', uz: 'Klassik kruassan' }, desc: { ru: 'Хрустящий французский круассан на натуральном сливочном масле', uz: "Tabiiy sariyog'da tayyorlangan qarsildoq fransuz kruassani" }, weight: '90 г', price: 22000, badge: '', img: P3, recs: ['cappuccino', 'flat_white', 'nut_raf', 'avocado_toast'] },
-    { id: 'chocolate_babka', name: { ru: 'Бабка шоколадная', uz: 'Shokoladli babka' }, desc: { ru: 'Традиционная витая булочка с начинкой из темного шоколада', uz: "To'q shokolad bilan to'ldirilgan an'anaviy bulochka" }, weight: '150 г', price: 26000, badge: 'NEW', img: P6, recs: ['cappuccino', 'flat_white', 'nut_raf', 'truffle_omelette'] }
+  'lemonades': [
+    {
+      id: 'lemon_raspberry',
+      name: { ru: 'Лимонад Малина-маракуйя', uz: 'Malina-marakuya limonadi' },
+      desc: { ru: 'Освежающий лимонад со спелой малиной и сочной маракуйей', uz: 'Yangi malina va sharbatli marakuya bilan limonad' },
+      weight: '',
+      price: 40000,
+      badge: '',
+      img: P4,
+      variants: [
+        { id: 'lemon_rasp_glass', label: { ru: 'Стакан', uz: 'Stakan' }, price: 40000 },
+        { id: 'lemon_rasp_carafe', label: { ru: 'Графин', uz: 'Grafin' }, price: 80000 }
+      ]
+    },
+    {
+      id: 'lemon_mango',
+      name: { ru: 'Лимонад Манго-маракуйя', uz: 'Mango-marakuya limonadi' },
+      desc: { ru: 'Яркий тропический лимонад из манго и маракуйи', uz: 'Yorqin tropik mango va marakuya limonadi' },
+      weight: '',
+      price: 40000,
+      badge: '',
+      img: P4,
+      variants: [
+        { id: 'lemon_mango_glass', label: { ru: 'Стакан', uz: 'Stakan' }, price: 40000 },
+        { id: 'lemon_mango_carafe', label: { ru: 'Графин', uz: 'Grafin' }, price: 80000 }
+      ]
+    },
+    { id: 'pina_colada', name: { ru: 'Лимонад Пина Колада', uz: 'Pina Kolada limonadi' }, desc: { ru: 'Безалкогольный тропический коктейль с кокосовым молоком и ананасом', uz: 'Kokos suti va ananas sharbatli alkogolsiz kokteyl' }, weight: '', price: 40000, badge: '', img: P4 },
+    {
+      id: 'mojito_classic',
+      name: { ru: 'Мохито Классический', uz: 'Klassik Moxito' },
+      desc: { ru: 'Свежая мята, лайм, содовая и тростниковый сахар со льдом', uz: 'Yalpiz, laym, gazlangan suv va muz' },
+      weight: '',
+      price: 35000,
+      badge: '',
+      img: P4,
+      variants: [
+        { id: 'mojito_classic_glass', label: { ru: 'Стакан', uz: 'Stakan' }, price: 35000 },
+        { id: 'mojito_classic_carafe', label: { ru: 'Графин', uz: 'Grafin' }, price: 70000 }
+      ]
+    },
+    {
+      id: 'mojito_strawberry',
+      name: { ru: 'Мохито Клубничный', uz: 'Qulupnayli Moxito' },
+      desc: { ru: 'Классический мохито с добавлением натурального клубничного пюре', uz: 'Tabiiy qulupnay pyuresi bilan moxito' },
+      weight: '',
+      price: 35000,
+      badge: 'HIT',
+      img: P4,
+      variants: [
+        { id: 'mojito_strawberry_glass', label: { ru: 'Стакан', uz: 'Stakan' }, price: 35000 },
+        { id: 'mojito_strawberry_carafe', label: { ru: 'Графин', uz: 'Grafin' }, price: 70000 }
+      ]
+    },
+    {
+      id: 'mojito_kiwi',
+      name: { ru: 'Мохито с Киви', uz: 'Kivili Moxito' },
+      desc: { ru: 'Освежающий мохито со свежим киви, лаймом и мятой', uz: 'Yangi kivi, laym va yalpiz bilan moxito' },
+      weight: '',
+      price: 35000,
+      badge: '',
+      img: P4,
+      variants: [
+        { id: 'mojito_kiwi_glass', label: { ru: 'Стакан', uz: 'Stakan' }, price: 35000 },
+        { id: 'mojito_kiwi_carafe', label: { ru: 'Графин', uz: 'Grafin' }, price: 70000 }
+      ]
+    },
+    { id: 'smoothie_mint', name: { ru: 'Смузи мятный', uz: 'Yalpizli smuzi' }, desc: { ru: 'Густой освежающий смузи со свежей мятой, лаймом и яблоком', uz: 'Yalpiz, laym va olma bilan quyuq tetiklantiruvchi smuzi' }, weight: '', price: 45000, badge: '', img: P4 },
+    { id: 'smoothie_berry', name: { ru: 'Смузи ягодный', uz: 'Rezavorli smuzi' }, desc: { ru: 'Густой витаминный смузи из лесных и садовых ягод', uz: "O'rmon va bog' rezavorlaridan tayyorlangan vitaminli smuzi" }, weight: '', price: 45000, badge: '', img: P4 }
+  ],
+  'matcha': [
+    { id: 'anchan_peach', name: { ru: 'Анчан Персик-манго', uz: 'Anchan Shaftoli-mango' }, desc: { ru: 'Натуральный синий чай анчан с сочным персиком и манго со льдом', uz: "Muz, shaftoli va mango bilan tabiiy ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: P2 },
+    { id: 'anchan_blueberry', name: { ru: 'Анчан с Черникой', uz: 'Chernikali Anchan' }, desc: { ru: 'Натуральный синий чай анчан с черничным пюре и льдом', uz: "Chernika pyuresi va muz bilan ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: P2 },
+    { id: 'matcha_strawberry', name: { ru: 'Матча Клубничный', uz: 'Qulupnayli Matcha' }, desc: { ru: 'Церемониальная матча со взбитым молоком и сочным клубничным слоем', uz: "Ko'pirtirilgan sut, qulupnay qatlami va yapon matcha choyi" }, weight: '', price: 45000, badge: 'HIT', img: P2 },
+    { id: 'matcha_kiwi', name: { ru: 'Матча с Киви', uz: 'Kivili Matcha' }, desc: { ru: 'Японская зеленая матча с молоком и натуральным пюре из киви', uz: 'Sut va tabiiy kivi pyuresi bilan yashil matcha' }, weight: '', price: 45000, badge: '', img: P2 },
+    { id: 'matcha_apple', name: { ru: 'Матча Яблоко-киви', uz: 'Matcha Olma-kivi' }, desc: { ru: 'Освежающий матча-коктейль с зеленым яблоком и киви', uz: 'Yashil olma va kivi bilan tetiklantiruvchi matcha kokteyli' }, weight: '', price: 45000, badge: '', img: P2 }
+  ],
+  'milkshakes': [
+    { id: 'milk_banana', name: { ru: 'Милкшейк Банановый', uz: 'Bananli milksheyk' }, desc: { ru: 'Сливочное мороженое, свежее молоко и спелый банан', uz: 'Qaymoqli muzqaymoq, yangi sut va pishgan banan' }, weight: '', price: 35000, badge: '', img: P4 },
+    { id: 'milk_strawberry', name: { ru: 'Милкшейк Клубничный', uz: 'Qulupnayli milksheyk' }, desc: { ru: 'Густой молочный коктейль со сливочным пломбиром и клубникой', uz: 'Qaymoqli plombir va yangi qulupnayli quyuq kokteyl' }, weight: '', price: 35000, badge: '', img: P4 },
+    { id: 'milk_chocolate', name: { ru: 'Милкшейк Шоколадный', uz: 'Shokoladli milksheyk' }, desc: { ru: 'Насыщенный шоколадный пломбир, молоко и топленый шоколад', uz: 'Shokoladli plombir, sut va eritilgan shokolad' }, weight: '', price: 35000, badge: '', img: P4 }
+  ],
+  'fresh': [
+    { id: 'juice_orange', name: { ru: 'Сок Апельсиновый', uz: 'Apelsin freshi' }, desc: { ru: '100% свежевыжатый сок из сладких отборных апельсинов', uz: '100% yangi siqilgan shirin apelsin sharbati' }, weight: '', price: 50000, badge: '', img: P4 },
+    { id: 'juice_grapefruit', name: { ru: 'Сок Грейпфрутовый', uz: 'Greypfrut freshi' }, desc: { ru: '100% свежевыжатый сок с приятной благородной горчинкой', uz: '100% yangi siqilgan greypfrut sharbati' }, weight: '', price: 50000, badge: '', img: P4 },
+    { id: 'juice_passion', name: { ru: 'Сок Маракуйи', uz: 'Marakuya sharbati' }, desc: { ru: 'Натуральный тропический сок из спелой маракуйи', uz: 'Pishgan marakuyadan tayyorlangan tabiiy tropik sharbat' }, weight: '', price: 25000, badge: '', img: P4 },
+    { id: 'juice_apple', name: { ru: 'Сок Яблочный', uz: 'Olma freshi' }, desc: { ru: '100% свежевыжатый сок из хрустящих зеленых яблок', uz: '100% yangi siqilgan qarsildoq olma sharbati' }, weight: '', price: 35000, badge: '', img: P4 }
+  ],
+  'tea_author': [
+    { id: 'tea_mango', name: { ru: 'Чай Манго-маракуйя', uz: 'Mango-marakuya choyi' }, desc: { ru: 'Горячий авторский чай с сочным манго, маракуйей и цитрусами в чайнике', uz: 'Mango, marakuya va sitruslar bilan qaynoq mualliflik choyi' }, weight: '', price: 45000, badge: '', img: P2 },
+    { id: 'tea_sea_buckthorn', name: { ru: 'Чай Облепиховый', uz: 'Chakandali choy' }, desc: { ru: 'Согревающий витаминный чай с натуральной облепихой, медом и имбирем', uz: "Tabiiy chakanda, asal va zanjabil bilan vitaminli choy" }, weight: '', price: 45000, badge: 'HIT', img: P2 },
+    { id: 'tea_herbal', name: { ru: 'Чай Травяной', uz: "O'tli choy" }, desc: { ru: 'Успокаивающий сбор из душистых горных трав, ромашки и мяты', uz: "Tog' o'tlari, moychechak va yalpizdan tayyorlangan tinchlantiruvchi choy" }, weight: '', price: 30000, badge: '', img: P2 },
+    { id: 'tea_apple_cinnamon', name: { ru: 'Чай Яблоко-корица', uz: 'Olma-dolchin choyi' }, desc: { ru: 'Пряный чай со свежими яблоками, палочкой корицы и бадьяном', uz: 'Yangi olma, dolchin tayoqchasi va badyan bilan ziravorli choy' }, weight: '', price: 35000, badge: '', img: P2 },
+    { id: 'tea_berry', name: { ru: 'Чай Ягодный', uz: 'Rezavorli choy' }, desc: { ru: 'Ароматный чай со сбором лесных ягод, мятой и медом', uz: "O'rmon rezavorlari, yalpiz va asal bilan xushbo'y choy" }, weight: '', price: 45000, badge: '', img: P2 }
+  ],
+  'tea_classic': [
+    { id: 'tea_earl_grey', name: { ru: 'Чай Earl Grey', uz: 'Earl Grey choyi' }, desc: { ru: 'Благородный черный чай с натуральным маслом бергамота в чайнике', uz: 'Bergamot moyi bilan boyitilgan oliy navli qora choy' }, weight: '', price: 20000, badge: '', img: P2 },
+    { id: 'tea_milky_way', name: { ru: 'Чай Milky Way', uz: 'Milky Way choyi' }, desc: { ru: 'Фирменный чай с мягкими сливочно-карамельными нотками', uz: "Mayin qaymoqli-karamel ta'mli maxsus choy" }, weight: '', price: 30000, badge: '', img: P2 },
+    { id: 'tea_dahongpao', name: { ru: 'Чай Да Хун Пао', uz: 'Da Xun Pao choyi' }, desc: { ru: 'Знаменитый китайский утесный улун с глубоким дымно-карамельным вкусом', uz: "Chuqur tutunli-karamel ta'mga ega mashhur xitoy ulun choyi" }, weight: '', price: 30000, badge: '', img: P2 },
+    { id: 'tea_jasmine', name: { ru: 'Чай Жасмин', uz: 'Yasminli choy' }, desc: { ru: 'Зеленый чай высшего сорта с натуральными цветками жасмина', uz: "Tabiiy yasmin gullari bilan xushbo'y yashil choy" }, weight: '', price: 20000, badge: '', img: P2 },
+    { id: 'tea_milk_oolong', name: { ru: 'Чай Молочный улун', uz: 'Sutli ulun choyi' }, desc: { ru: 'Слабоферментированный улун с нежным сливочно-молочным ароматом', uz: "Mayin qaymoqli-sutli xushbo'ylikka ega yashil ulun choyi" }, weight: '', price: 25000, badge: '', img: P2 }
+  ],
+  'soft': [
+    { id: 'bonaqua', name: { ru: 'BonAqua', uz: 'BonAqua' }, desc: { ru: 'Чистая питьевая вода без газа / с газом', uz: 'Gazsiz / gazli toza ichimlik suvi' }, weight: '0.5 л', price: 5000, badge: '', img: P4 },
+    { id: 'borjomi', name: { ru: 'Borjomi', uz: 'Borjomi' }, desc: { ru: 'Легендарная минеральная природная газированная вода', uz: 'Tabiiy gazlangan mineral suv' }, weight: '0.33 л', price: 20000, badge: '', img: P4 },
+    { id: 'cola_zero', name: { ru: 'Coca-Cola Zero', uz: 'Coca-Cola Zero' }, desc: { ru: 'Освежающий газированный напиток без сахара', uz: 'Shakarsiz tetiklantiruvchi gazlangan ichimlik' }, weight: '0.25 л', price: 15000, badge: '', img: P4 },
+    { id: 'fanta', name: { ru: 'Fanta', uz: 'Fanta' }, desc: { ru: 'Апельсиновый газированный напиток', uz: 'Apelsinli gazlangan ichimlik' }, weight: '0.25 л', price: 15000, badge: '', img: P4 },
+    { id: 'schweppes', name: { ru: 'Schweppes', uz: 'Schweppes' }, desc: { ru: 'Классический горьковатый тоник', uz: 'Klassik nordon-achchiq tonik' }, weight: '0.25 л', price: 15000, badge: '', img: P4 },
+    { id: 'sprite', name: { ru: 'Sprite', uz: 'Sprite' }, desc: { ru: 'Лимонно-лаймовый газированный напиток', uz: 'Limon va laymli gazlangan ichimlik' }, weight: '0.25 л', price: 15000, badge: '', img: P4 },
+    { id: 'rich', name: { ru: 'Сок Rich', uz: 'Rich sharbati' }, desc: { ru: 'Премиальный пакетированный сок в ассортименте', uz: 'Assortimentdagi premium paketlangan sharbat' }, weight: '0.25 л', price: 20000, badge: '', img: P4 },
+    { id: 'viko', name: { ru: 'Сок Viko', uz: 'Viko sharbati' }, desc: { ru: 'Пакетированный сок в ассортименте', uz: 'Assortimentdagi paketlangan sharbat' }, weight: '0.25 л', price: 10000, badge: '', img: P4 }
   ],
   'desserts': [
-    { id: 'tiramisu', name: { ru: 'Тирамису', uz: 'Tiramisu' }, desc: { ru: 'Нежный десерт с маскарпоне, савоярди и вкусом натурального эспрессо', uz: "Maskarpone, savoyardi va tabiiy espresso ta'miga ega mayin desert" }, weight: '140 г', price: 35000, badge: '', img: P4, recs: ['flat_white', 'cappuccino', 'nut_raf', 'avocado_toast'] },
-    { id: 'cheesecake_ny', name: { ru: 'Чизкейк Нью-Йорк', uz: 'Nyu-York cheesecake' }, desc: { ru: 'Классический запеченный чизкейк на песочной основе', uz: "Uvoq xamirdan tayyorlangan klassik pishirilgan chizkeyk" }, weight: '160 г', price: 32000, badge: '', img: P1, recs: ['flat_white', 'cappuccino', 'nut_raf', 'truffle_omelette'] }
-  ],
-  'breakfasts': [
-    { id: 'avocado_toast', name: { ru: 'Авокадо тост', uz: 'Avokado tost' }, desc: { ru: 'Хрустящий тартин, спелый гуакамоле, яйцо пашот, черри и микрозелень', uz: "Qarsildoq tartin, pishgan guakamole, pashot tuxumi, cherri va mikroko'katlar" }, weight: '220 г', price: 42000, badge: 'HIT', img: P6, recs: ['flat_white', 'cappuccino', 'croissant_classic', 'nut_raf'] },
-    { id: 'truffle_omelette', name: { ru: 'Омлет с трюфелем', uz: 'Tryufelli omlet' }, desc: { ru: 'Пышный омлет с добавлением ароматной трюфельной пасты и пармезана', uz: "Xushbo'y tryufel pastasi va parmezan qo'shilgan yam-yashil omlet" }, weight: '200 г', price: 38000, badge: 'NEW', img: P5, recs: ['flat_white', 'cappuccino', 'croissant_classic', 'cheesecake_ny'] }
+    { id: 'san_seb_nutella', name: { ru: 'Сан-Себастьян с нутеллой', uz: 'Nutellali San-Sebastyan' }, desc: { ru: 'Нежнейший баскский обожженный чизкейк с щедрой порцией Nutella', uz: 'Nutella bilan qoplangan mayin bask chizkeyki' }, weight: '', price: 50000, badge: '', img: P4 },
+    { id: 'san_seb_blueberry', name: { ru: 'Сан-Себастьян с голубикой', uz: "Ko'k rezavorli San-Sebastyan" }, desc: { ru: 'Баскский обожженный чизкейк со свежей голубикой и ягодным соусом', uz: "Yangi ko'k rezavor va sous bilan bask chizkeyki" }, weight: '', price: 50000, badge: '', img: P4 },
+    { id: 'san_seb_pistachio', name: { ru: 'Сан-Себастьян с фисташками', uz: 'Pistali San-Sebastyan' }, desc: { ru: 'Баскский обожженный чизкейк с натуральной фисташковой пастой', uz: "Tabiiy pista pastasi va pista bo'laklari bilan bask chizkeyki" }, weight: '', price: 60000, badge: 'HIT', img: P4 },
+    { id: 'cheesecake_oreo', name: { ru: 'Чизкейк Oreo', uz: 'Oreo chizkeyk' }, desc: { ru: 'Нежный сливочный чизкейк с кусочками хрустящего печенья Oreo', uz: "Qarsildoq Oreo pechenesi bo'laklari bilan mayin chizkeyk" }, weight: '', price: 40000, badge: '', img: P4 },
+    { id: 'cheesecake_hazelnut', name: { ru: 'Чизкейк с фундуком', uz: 'Funduqli chizkeyk' }, desc: { ru: 'Сливочный чизкейк с карамелизированным дробленым фундуком', uz: 'Karamellangan maydalangan funduq bilan qaymoqli chizkeyk' }, weight: '', price: 35000, badge: '', img: P4 },
+    { id: 'cheesecake_pistachio', name: { ru: 'Чизкейк Фисташковый', uz: 'Pistali chizkeyk' }, desc: { ru: 'Изысканный чизкейк с бархатным вкусом отборной фисташки', uz: "Tanlangan pista ta'miga ega nafis qaymoqli chizkeyk" }, weight: '', price: 40000, badge: '', img: P4 },
+    { id: 'medovik', name: { ru: 'Медовик классический', uz: 'Klassik medovik' }, desc: { ru: 'Тонкие медовые коржи со сметанно-сливочным кремом по домашнему рецепту', uz: 'Mayin smetana-qaymoq kremi bilan klassik asalli tort' }, weight: '', price: 30000, badge: '', img: P4 },
+    { id: 'napoleon', name: { ru: 'Наполеон с фисташкой и малиной', uz: 'Pista va malinali Napoleon' }, desc: { ru: 'Хрустящие слоеные коржи с фисташковым заварным кремом и свежей малиной', uz: 'Pista kremi va yangi malina bilan qarsildoq qavatli Napoleon' }, weight: '', price: 30000, badge: 'NEW', img: P4 }
   ]
 };
 
 const CAT_NAMES = {
-  'sets': { ru: 'Сеты', uz: 'Setlar' },
+  'breakfasts': { ru: 'Завтраки', uz: 'Nonushta' },
+  'set_breakfast': { ru: 'Сет Завтрак', uz: 'Set Nonushta' },
+  'salads': { ru: 'Салаты', uz: 'Salatlar' },
+  'sandwiches': { ru: 'Сэндвичи', uz: 'Sendvichlar' },
+  'soups': { ru: 'Супы', uz: "Sho'rvalar" },
+  'mains': { ru: 'Основное блюдо', uz: 'Asosiy taomlar' },
+  'bowls': { ru: 'Боулы', uz: 'Boullar' },
+  'sides': { ru: 'Гарниры', uz: 'Garnirlar' },
+  'pizza': { ru: 'Пицца', uz: 'Pitsa' },
+  'waffles': { ru: 'Вафли и Сеты', uz: 'Vafli va Setlar' },
   'coffee': { ru: 'Кофе', uz: 'Kofe' },
-  'bakery': { ru: 'Выпечка', uz: 'Pishiriqlar' },
-  'desserts': { ru: 'Десерты', uz: 'Desertlar' },
-  'breakfasts': { ru: 'Завтраки', uz: 'Nonushta' }
+  'lemonades': { ru: 'Лимонады и Смузи', uz: 'Limonadlar' },
+  'matcha': { ru: 'Матча', uz: 'Matcha' },
+  'milkshakes': { ru: 'Молочные коктейли', uz: 'Milksheyklar' },
+  'fresh': { ru: 'Фреши', uz: 'Yangi sharbatlar' },
+  'tea_author': { ru: 'Авторские чаи', uz: 'Mualliflik choylari' },
+  'tea_classic': { ru: 'Классический чай', uz: 'Klassik choy' },
+  'soft': { ru: 'Напитки', uz: 'Ichimliklar' },
+  'desserts': { ru: 'Десерты', uz: 'Desertlar' }
 };
 
 const CATS = Object.keys(MENU);
@@ -46,8 +296,14 @@ const dishParam = parseInt(urlParams.get('dish'), 10);
 const langParam = urlParams.get('lang');
 
 let curLang = (langParam === 'ru' || langParam === 'uz') ? langParam : 'ru';
-let curCat = (catParam && MENU[catParam]) ? catParam : CATS[0];
-let curIdx = (!isNaN(dishParam) && dishParam >= 0 && dishParam < MENU[curCat].length) ? dishParam : 0;
+let curCat = 'breakfasts';
+let curIdx = 0;
+
+// Если открыта ссылка, очищаем адресную строку для будущих обновлений по F5
+if (window.location.search) {
+  window.history.replaceState(null, '', window.location.pathname);
+}
+let curVariantIdx = 0;
 let showingA = true;
 const cart = {}; // itemId -> {qty, price, name: {ru, uz}, img}
 
@@ -62,11 +318,18 @@ try {
 
 function money(n) { return n.toLocaleString('ru-RU') + ' сум'; }
 
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
 const imgA = document.getElementById('imgA');
 const imgB = document.getElementById('imgB');
 const dishCat = document.getElementById('dishCat');
 const dishTitle = document.getElementById('dishTitle');
 const dishBadge = document.getElementById('dishBadge');
+const dishTimeBadge = document.getElementById('dishTimeBadge');
 const dishDesc = document.getElementById('dishDesc');
 const pillLabel = document.getElementById('pillLabel');
 const addBtn = document.getElementById('addBtn');
@@ -80,15 +343,24 @@ const cartDrawer = document.getElementById('cartDrawer');
 const cartList = document.getElementById('cartList');
 const cartTotal = document.getElementById('cartTotal');
 const checkoutBtn = document.getElementById('checkoutBtn');
+const variantSelector = document.getElementById('variantSelector');
 
 const descOverlay = document.getElementById('descOverlay');
 const descModal = document.getElementById('descModal');
 const descModalTitle = document.getElementById('descModalTitle');
 const descModalText = document.getElementById('descModalText');
 const descModalWeight = document.getElementById('descModalWeight');
+const descTimeNotice = document.getElementById('descTimeNotice');
 const dishMoreBtn = document.getElementById('dishMoreBtn');
 const dishMoreText = document.getElementById('dishMoreText');
 const closeDescBtn = document.getElementById('closeDesc');
+
+const waffleOverlay = document.getElementById('waffleOverlay');
+const waffleModal = document.getElementById('waffleModal');
+const waffleModalTitle = document.getElementById('waffleModalTitle');
+const waffleModalBody = document.getElementById('waffleModalBody');
+const waffleAddCartBtn = document.getElementById('waffleAddCartBtn');
+const closeWaffleBtn = document.getElementById('closeWaffle');
 
 const tabsViewport = document.querySelector('.tabs-viewport');
 
@@ -100,6 +372,7 @@ let isPausedOnHold = false;
 let holdStartTime = 0;
 let wasHold = false;
 let isTouchEvent = false;
+let toastTimer = null;
 
 // Настройка переключателя языков (Десктоп)
 const langRuBtn = document.getElementById('langRu');
@@ -114,24 +387,14 @@ const closeLangBtn = document.getElementById('closeLang');
 const btnSelectRu = document.getElementById('btnSelectRu');
 const btnSelectUz = document.getElementById('btnSelectUz');
 
-// Настройка модалки ИИ-рекомендаций (Upsell)
-const upsellOverlay = document.getElementById('upsellOverlay');
-const upsellModal = document.getElementById('upsellModal');
-const upsellTitle = document.getElementById('upsellTitle');
-const upsellSubtitle = document.getElementById('upsellSubtitle');
-const upsellList = document.getElementById('upsellList');
-const closeUpsellBtn = document.getElementById('closeUpsell');
-const upsellContinueBtn = document.getElementById('upsellContinueBtn');
-
 langRuBtn.onclick = () => setLanguage('ru');
 langUzBtn.onclick = () => setLanguage('uz');
-
 btnSelectRu.onclick = () => { setLanguage('ru'); closeLangModal(); };
 btnSelectUz.onclick = () => { setLanguage('uz'); closeLangModal(); };
 
 function openLangModal() {
-  langModal.style.transform = '';
   langOverlay.style.opacity = '';
+  langModal.style.transform = '';
   langOverlay.classList.add('open');
   langModal.classList.add('open');
   clearTimeout(advanceTimer);
@@ -162,38 +425,106 @@ function setLanguage(lang) {
   btnSelectRu.classList.toggle('active', lang === 'ru');
   btnSelectUz.classList.toggle('active', lang === 'uz');
 
-  setDish(curCat, curIdx);
   renderTabs();
+  setDish(curCat, curIdx);
   updateCartUI();
   translateStaticUI();
 }
 
 function translateStaticUI() {
-  const cartTitle = document.getElementById('cartTitle');
+  const cartTitleEl = document.getElementById('cartTitle');
   const cartTotalLabel = document.getElementById('cartTotalLabel');
 
+  const titleText = curLang === 'ru' ? 'Корзина ' : 'Savat ';
+  const firstChild = cartTitleEl.firstChild;
+  if (firstChild && firstChild.nodeType === Node.TEXT_NODE) {
+    firstChild.textContent = titleText;
+  } else {
+    cartTitleEl.insertBefore(document.createTextNode(titleText), cartTitleEl.firstChild);
+  }
+
   if (curLang === 'ru') {
-    cartTitle.innerHTML = 'Корзина <button id="closeCart">✕</button>';
     cartTotalLabel.textContent = 'Итого';
     checkoutBtn.textContent = 'Очистить заказ';
     dishMoreText.textContent = 'Детали';
     langModalTitle.textContent = 'Выберите язык';
   } else {
-    cartTitle.innerHTML = 'Savat <button id="closeCart">✕</button>';
     cartTotalLabel.textContent = 'Jami';
     checkoutBtn.textContent = 'Savatni tozalash';
     dishMoreText.textContent = 'Batafsil';
     langModalTitle.textContent = 'Tilni tanlang';
   }
-  document.getElementById('closeCart').onclick = closeCart;
+}
+
+// Получить текущий контекст блюда с учетом выбранного варианта
+function getCurrentCartContext() {
+  const d = MENU[curCat][curIdx];
+  if (d.variants && d.variants[curVariantIdx]) {
+    const v = d.variants[curVariantIdx];
+    return {
+      id: v.id,
+      name: {
+        ru: `${d.name.ru} (${v.label.ru})`,
+        uz: `${d.name.uz} (${v.label.uz})`
+      },
+      price: v.price,
+      img: d.img,
+      isVariant: true
+    };
+  }
+  return {
+    id: d.id,
+    name: d.name,
+    price: d.price,
+    img: d.img,
+    isVariant: false
+  };
+}
+
+function renderVariantSelector(d) {
+  variantSelector.innerHTML = '';
+  if (d.variants && d.variants.length > 0) {
+    variantSelector.style.display = 'flex';
+    const allSamePrice = d.variants.every(v => v.price === d.variants[0].price);
+    d.variants.forEach((v, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'var-btn' + (i === curVariantIdx ? ' active' : '');
+      if (allSamePrice) {
+        btn.textContent = v.label[curLang];
+      } else {
+        btn.textContent = `${v.label[curLang]} · ${money(v.price)}`;
+      }
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        curVariantIdx = i;
+        renderVariantSelector(d);
+        updateCartUI();
+      };
+      variantSelector.appendChild(btn);
+    });
+  } else if (d.hasToppings) {
+    variantSelector.style.display = 'flex';
+    const btn = document.createElement('button');
+    btn.className = 'var-btn active';
+    btn.textContent = curLang === 'ru' ? 'Выбрать топпинги' : 'Toppinglarni tanlash';
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      openWaffleModal();
+    };
+    variantSelector.appendChild(btn);
+  } else {
+    variantSelector.style.display = 'none';
+  }
 }
 
 function setDish(cat, idx) {
   curCat = cat; curIdx = idx;
+  curVariantIdx = 0;
   const d = MENU[cat][idx];
   const incoming = showingA ? imgB : imgA;
   const outgoing = showingA ? imgA : imgB;
   incoming.src = d.img;
+  incoming.alt = d.name[curLang];
   incoming.classList.add('active');
   outgoing.classList.remove('active');
   showingA = !showingA;
@@ -209,17 +540,50 @@ function setDish(cat, idx) {
     dishBadge.style.display = 'none';
   }
 
-  // Установка описания и веса
-  dishDesc.textContent = `${d.desc[curLang]} · ${d.weight}`;
+  // Установка времени подачи (Завтраки до 15:00)
+  const isBreakfast = (cat === 'breakfasts' || cat === 'set_breakfast');
+  if (isBreakfast) {
+    dishTimeBadge.textContent = curLang === 'ru' ? 'до 15:00' : '15:00 gacha';
+    dishTimeBadge.style.display = 'inline-flex';
+  } else {
+    dishTimeBadge.style.display = 'none';
+  }
 
+  // Установка описания и веса
+  if (d.weight) {
+    dishDesc.textContent = `${d.desc[curLang]} · ${d.weight}`;
+  } else {
+    dishDesc.textContent = d.desc[curLang];
+  }
+
+  renderVariantSelector(d);
   updateCartUI();
 
-  // Обновление URL без перезагрузки (Deep Linking)
-  const newUrl = `${window.location.pathname}?cat=${cat}&dish=${idx}&lang=${curLang}`;
-  window.history.replaceState(null, '', newUrl);
-
   renderDots(cat, idx);
-  renderTabs();
+  updateActiveTab(true);
+}
+
+function nextDish() {
+  const items = MENU[curCat];
+  if (curIdx + 1 < items.length) {
+    setDish(curCat, curIdx + 1);
+  } else {
+    // Переход на следующую категорию
+    const catIdx = CATS.indexOf(curCat);
+    const nextCat = CATS[(catIdx + 1) % CATS.length];
+    setDish(nextCat, 0);
+  }
+}
+
+function prevDish() {
+  if (curIdx > 0) {
+    setDish(curCat, curIdx - 1);
+  } else {
+    // Переход на предыдущую категорию
+    const catIdx = CATS.indexOf(curCat);
+    const prevCat = CATS[(catIdx - 1 + CATS.length) % CATS.length];
+    setDish(prevCat, MENU[prevCat].length - 1);
+  }
 }
 
 function renderDots(cat, idx) {
@@ -236,102 +600,87 @@ function renderDots(cat, idx) {
   }
 }
 
-function startAdvanceTimer(cat, idx, remainingTime = 4500) {
+function startAdvanceTimer(cat, idx, customDelay = 4500) {
   clearTimeout(advanceTimer);
-  if (!appLoaded) return;
-
-  slideStartTime = Date.now() - (4500 - remainingTime);
+  slideStartTime = Date.now();
+  slideElapsedBeforePause = 0;
+  isPausedOnHold = false;
+  dotsEl.classList.remove('paused');
 
   advanceTimer = setTimeout(() => {
-    const items = MENU[cat];
-    setDish(cat, (idx + 1) % items.length);
-  }, remainingTime);
-}
-
-function getCategoryCount(catKey) {
-  let count = 0;
-  MENU[catKey].forEach(dish => {
-    if (cart[dish.id]) {
-      count += cart[dish.id].qty;
-    }
-  });
-  return count;
+    nextDish();
+  }, customDelay);
 }
 
 function renderTabs() {
   tabsEl.innerHTML = '';
-  CATS.forEach(cat => {
-    const t = document.createElement('div');
-    t.className = 'cat-tab' + (cat === curCat ? ' active' : '');
-
-    const count = getCategoryCount(cat);
-    if (count > 0) {
-      t.innerHTML = `${CAT_NAMES[cat][curLang]} <span class="tab-badge">${count}</span>`;
-    } else {
-      t.textContent = CAT_NAMES[cat][curLang];
-    }
-
-    t.onclick = () => {
-      if (cat !== curCat) setDish(cat, 0);
+  CATS.forEach(c => {
+    const tab = document.createElement('div');
+    tab.className = 'cat-tab' + (c === curCat ? ' active' : '');
+    tab.setAttribute('data-cat', c);
+    tab.textContent = CAT_NAMES[c][curLang];
+    tab.onclick = () => {
+      if (hasDraggedTabs) return;
+      if (curCat !== c) {
+        setDish(c, 0);
+      }
     };
-    tabsEl.appendChild(t);
+    tabsEl.appendChild(tab);
   });
-  requestAnimationFrame(() => {
-    const activeTab = tabsEl.querySelector('.cat-tab.active');
-    if (activeTab) centerTab(activeTab, true);
-  });
+  updateActiveTab(false);
 }
 
-let tabsOffset = 0, tabsMin = 0, tabsMax = 0;
-
-function computeTabsBounds() {
-  const trackW = tabsEl.scrollWidth;
-  const viewW = tabsViewport.clientWidth;
-  if (trackW <= viewW) {
-    tabsMin = tabsMax = (viewW - trackW) / 2;
-  } else {
-    tabsMax = 0;
-    tabsMin = viewW - trackW;
+function updateActiveTab(smooth = true) {
+  const tabs = tabsEl.querySelectorAll('.cat-tab');
+  let activeTabEl = null;
+  tabs.forEach(tab => {
+    const isAct = (tab.getAttribute('data-cat') === curCat);
+    tab.classList.toggle('active', isAct);
+    if (isAct) activeTabEl = tab;
+  });
+  if (activeTabEl) {
+    centerTab(activeTabEl, smooth);
   }
 }
 
-function setTabsOffset(x, animate = true) {
-  computeTabsBounds();
-  x = Math.max(tabsMin, Math.min(tabsMax, x));
-  tabsOffset = x;
-  tabsEl.style.transition = animate ? '' : 'none';
-  tabsEl.style.transform = `translateX(${x}px)`;
-  if (!animate) requestAnimationFrame(() => { tabsEl.style.transition = ''; });
-}
-
-function centerTab(tabEl, animate = true) {
-  computeTabsBounds();
+function centerTab(tabEl, smooth = true) {
+  if (!tabEl || !tabsViewport) return;
   const viewW = tabsViewport.clientWidth;
-  const target = -(tabEl.offsetLeft - (viewW - tabEl.offsetWidth) / 2);
-  setTabsOffset(target, animate);
+  const tabLeft = tabEl.offsetLeft;
+  const tabW = tabEl.offsetWidth;
+  const targetScrollLeft = tabLeft - (viewW - tabW) / 2;
+  tabsViewport.scrollTo({
+    left: targetScrollLeft,
+    behavior: smooth ? 'smooth' : 'auto'
+  });
 }
 
-let dragStartX = null, dragStartOffset = 0, dragging = false;
-tabsViewport.addEventListener('touchstart', e => {
-  dragStartX = e.touches[0].clientX; dragStartOffset = tabsOffset; dragging = true;
-  clearTimeout(advanceTimer);
-}, { passive: true });
-tabsViewport.addEventListener('touchmove', e => {
-  if (!dragging) return;
-  const dx = e.touches[0].clientX - dragStartX;
-  setTabsOffset(dragStartOffset + dx, false);
-}, { passive: true });
-tabsViewport.addEventListener('touchend', () => { dragging = false; startAdvanceTimer(curCat, curIdx); });
+let isTabMouseDown = false;
+let tabStartX = 0;
+let tabScrollLeft = 0;
+let hasDraggedTabs = false;
 
-tabsViewport.addEventListener('mousedown', e => {
-  dragStartX = e.clientX; dragStartOffset = tabsOffset; dragging = true;
-  clearTimeout(advanceTimer); e.preventDefault();
+tabsViewport.addEventListener('mousedown', (e) => {
+  isTabMouseDown = true;
+  hasDraggedTabs = false;
+  tabStartX = e.pageX - tabsViewport.offsetLeft;
+  tabScrollLeft = tabsViewport.scrollLeft;
+  tabsViewport.style.cursor = 'grabbing';
 });
-window.addEventListener('mousemove', e => {
-  if (!dragging) return;
-  setTabsOffset(dragStartOffset + (e.clientX - dragStartX), false);
+
+window.addEventListener('mousemove', (e) => {
+  if (!isTabMouseDown) return;
+  const x = e.pageX - tabsViewport.offsetLeft;
+  const walk = (x - tabStartX) * 1.4;
+  if (Math.abs(walk) > 6) hasDraggedTabs = true;
+  tabsViewport.scrollLeft = tabScrollLeft - walk;
 });
-window.addEventListener('mouseup', () => { if (dragging) { dragging = false; startAdvanceTimer(curCat, curIdx); } });
+
+window.addEventListener('mouseup', () => {
+  isTabMouseDown = false;
+  tabsViewport.style.cursor = 'grab';
+  setTimeout(() => { hasDraggedTabs = false; }, 60);
+});
 
 let touchX = null;
 const swipeZone = document.getElementById('swipeZone');
@@ -374,18 +723,21 @@ swipeZone.addEventListener('touchend', e => {
 
   const holdDuration = Date.now() - holdStartTime;
   const dx = touchX !== null ? e.changedTouches[0].clientX - touchX : 0;
-  const items = MENU[curCat];
 
   if (Math.abs(dx) > 50) {
-    let next = curIdx + (dx < 0 ? 1 : -1);
-    next = (next + items.length) % items.length;
-    setDish(curCat, next);
+    if (dx < 0) {
+      nextDish();
+    } else {
+      prevDish();
+    }
   } else if (holdDuration <= 220) {
     const rect = swipeZone.getBoundingClientRect();
     const x = e.changedTouches[0].clientX - rect.left;
-    let next = curIdx + (x < rect.width * 0.35 ? -1 : 1);
-    next = (next + items.length) % items.length;
-    setDish(curCat, next);
+    if (x < rect.width * 0.35) {
+      prevDish();
+    } else {
+      nextDish();
+    }
   } else {
     const remaining = Math.max(100, 4500 - slideElapsedBeforePause);
     startAdvanceTimer(curCat, curIdx, remaining);
@@ -410,17 +762,21 @@ swipeZone.addEventListener('click', e => {
   }
   const rect = swipeZone.getBoundingClientRect();
   const x = e.clientX - rect.left;
-  const items = MENU[curCat];
-  let next = curIdx + (x < rect.width * 0.35 ? -1 : 1);
-  next = (next + items.length) % items.length;
-  setDish(curCat, next);
+  if (x < rect.width * 0.35) {
+    prevDish();
+  } else {
+    nextDish();
+  }
 });
 
 function addToCart(itemId, qtyDelta, ctx) {
-  const d = ctx || MENU[curCat].find(item => item.id === itemId);
-  if (!cart[itemId]) cart[itemId] = { qty: 0, price: d.price, name: d.name, img: d.img };
-  cart[itemId].qty += qtyDelta;
-  if (cart[itemId].qty <= 0) delete cart[itemId];
+  const activeCtx = ctx || getCurrentCartContext();
+  const id = itemId || activeCtx.id;
+  if (!cart[id]) {
+    cart[id] = { qty: 0, price: activeCtx.price, name: activeCtx.name, img: activeCtx.img };
+  }
+  cart[id].qty += qtyDelta;
+  if (cart[id].qty <= 0) delete cart[id];
 
   // Сохраняем в localStorage
   localStorage.setItem('lamari_cart', JSON.stringify(cart));
@@ -440,8 +796,8 @@ function updateCartUI() {
   cartBadge.style.display = count > 0 ? 'flex' : 'none';
 
   // Обновление состояния и текста кнопки добавления
-  const currentDish = MENU[curCat][curIdx];
-  const cartItem = cart[currentDish.id];
+  const activeCtx = getCurrentCartContext();
+  const cartItem = cart[activeCtx.id];
   if (cartItem) {
     addBtn.classList.add('added');
     const itemsText = curLang === 'ru' ? 'шт в корзине' : 'ta savatda';
@@ -449,89 +805,95 @@ function updateCartUI() {
   } else {
     addBtn.classList.remove('added');
     const inCartText = curLang === 'ru' ? 'В корзину' : 'Savatga';
-    pillLabel.textContent = `${inCartText} · ${money(currentDish.price)}`;
+    pillLabel.textContent = `${inCartText} · ${money(activeCtx.price)}`;
   }
 
   cartTotal.textContent = money(sum);
   checkoutBtn.disabled = count === 0;
   renderCartList();
-  renderTabs();
 }
 
 function renderCartList() {
   const itemIds = Object.keys(cart);
   if (itemIds.length === 0) {
-    const emptyText = curLang === 'ru' ? 'Корзина пуста — выберите блюдо' : 'Savat bo\'sh — taom tanlang';
-    cartList.innerHTML = `<div class="empty-cart">${emptyText}</div>`;
+    const emptyText = curLang === 'ru' ? 'В корзине пока пусто' : 'Savat hozircha bo\'sh';
+    cartList.innerHTML = `<div class="empty-cart-msg">${emptyText}</div>`;
     return;
   }
+
   cartList.innerHTML = '';
-  itemIds.forEach((itemId, idx) => {
-    const c = cart[itemId];
-    const row = document.createElement('div');
-    row.className = 'cart-row';
-    row.style.animationDelay = (idx * 0.05) + 's';
-    row.innerHTML = `
-      <img src="${c.img}" alt="">
-      <div class="cr-info">
-        <div class="cr-name">${c.name[curLang]}</div>
-        <div class="cr-price">${money(c.price)} × ${c.qty} = ${money(c.price * c.qty)}</div>
+  itemIds.forEach(id => {
+    const item = cart[id];
+    const el = document.createElement('div');
+    el.className = 'drawer-item';
+    el.innerHTML = `
+      <img src="${escapeHTML(item.img)}" alt="${escapeHTML(item.name[curLang])}">
+      <div class="drawer-item-info">
+        <div class="drawer-item-title">${escapeHTML(item.name[curLang])}</div>
+        <div class="drawer-item-price">${money(item.price)}</div>
       </div>
-      <div class="cr-qty">
-        <button data-act="minus">−</button>
-        <span>${c.qty}</span>
-        <button data-act="plus">+</button>
-      </div>`;
-    row.querySelector('[data-act="minus"]').onclick = () => addToCart(itemId, -1, c);
-    row.querySelector('[data-act="plus"]').onclick = (e) => {
-      addToCart(itemId, 1, c);
-      animateFlyToCart(e.currentTarget, c.img);
-    };
-    cartList.appendChild(row);
+      <div class="drawer-item-controls">
+        <button class="btn-minus" data-id="${escapeHTML(id)}">−</button>
+        <span class="qty">${item.qty}</span>
+        <button class="btn-plus" data-id="${escapeHTML(id)}">+</button>
+      </div>
+    `;
+
+    el.querySelector('.btn-minus').onclick = () => addToCart(id, -1);
+    el.querySelector('.btn-plus').onclick = () => addToCart(id, 1);
+
+    cartList.appendChild(el);
   });
 }
 
-function animateFlyToCart(startEl, imgSrc) {
-  if (!startEl || !cartChip) return;
-  const startRect = startEl.getBoundingClientRect();
-  const endRect = cartChip.getBoundingClientRect();
+function animateFlyToCart(fromElement, imgSrc) {
+  const flyer = document.createElement('img');
+  flyer.src = imgSrc;
+  flyer.className = 'flying-dish-item';
+  document.body.appendChild(flyer);
 
-  if (startRect.width === 0 || endRect.width === 0) return;
+  const startRect = fromElement.getBoundingClientRect();
+  const endRect = cartChip.getBoundingClientRect();
 
   const startX = startRect.left + startRect.width / 2 - 22;
   const startY = startRect.top + startRect.height / 2 - 22;
-  const endX = endRect.left + endRect.width / 2 - 12;
-  const endY = endRect.top + endRect.height / 2 - 12;
 
-  const flyer = document.createElement('img');
-  flyer.src = imgSrc || MENU[curCat][curIdx].img;
-  flyer.className = 'flying-dish-item';
-  flyer.style.left = `${startX}px`;
-  flyer.style.top = `${startY}px`;
-  document.body.appendChild(flyer);
+  const endX = endRect.left + endRect.width / 2 - 22;
+  const endY = endRect.top + endRect.height / 2 - 22;
 
-  const controlX = (startX + endX) / 2;
-  const controlY = Math.min(startY, endY) - 90;
-
-  const duration = 600;
   const startTime = performance.now();
+  const duration = 650;
 
-  function step(now) {
-    const elapsed = now - startTime;
-    const t = Math.min(1, elapsed / duration);
+  const safetyTimeout = setTimeout(() => {
+    if (flyer.parentNode) {
+      flyer.remove();
+      cartChip.classList.remove('pop');
+      void cartChip.offsetWidth;
+      cartChip.classList.add('pop');
+    }
+  }, 1000);
 
-    const currentX = (1 - t) * (1 - t) * startX + 2 * (1 - t) * t * controlX + t * t * endX;
-    const currentY = (1 - t) * (1 - t) * startY + 2 * (1 - t) * t * controlY + t * t * endY;
+  function step(currentTime) {
+    const elapsed = currentTime - startTime;
+    const t = Math.min(elapsed / duration, 1);
+
+    const easeT = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+    const curX = startX + (endX - startX) * easeT;
+    const curY = startY + (endY - startY) * easeT - Math.sin(t * Math.PI) * 120;
 
     const scale = 1 - t * 0.65;
-    const opacity = t > 0.85 ? (1 - t) / 0.15 : 1;
+    const opacity = 1 - t * 0.2;
 
-    flyer.style.transform = `translate3d(${currentX - startX}px, ${currentY - startY}px, 0) scale(${scale})`;
+    flyer.style.left = `${curX}px`;
+    flyer.style.top = `${curY}px`;
+    flyer.style.transform = `scale(${scale})`;
     flyer.style.opacity = opacity;
 
     if (t < 1) {
       requestAnimationFrame(step);
     } else {
+      clearTimeout(safetyTimeout);
       flyer.remove();
       cartChip.classList.remove('pop');
       void cartChip.offsetWidth;
@@ -542,162 +904,213 @@ function animateFlyToCart(startEl, imgSrc) {
   requestAnimationFrame(step);
 }
 
-function findDishById(id) {
-  for (const catKey in MENU) {
-    const item = MENU[catKey].find(d => d.id === id);
-    if (item) return item;
-  }
-  return null;
-}
+// WAFFLE CUSTOMIZER LOGIC
+let selectedWaffleChocolate = 'belgian';
+let selectedWaffleFruits = [];
+let selectedWaffleIceCream = false;
 
-function getRecommendations(currentCat, mainDish) {
-  let recItems = [];
+function openWaffleModal() {
+  const d = MENU[curCat][curIdx];
+  waffleModalTitle.textContent = curLang === 'ru' ? 'Настроить Бельгийские вафли' : 'Belgiya vaflisini sozlash';
 
-  // 1. Приоритет: явные логические рекомендации для конкретного блюда
-  if (mainDish.recs && Array.isArray(mainDish.recs)) {
-    mainDish.recs.forEach(recId => {
-      const found = findDishById(recId);
-      if (found && found.id !== mainDish.id && !recItems.some(r => r.id === found.id)) {
-        recItems.push(found);
-      }
+  const chocoOptions = [
+    { id: 'none', label: { ru: 'Без шоколада', uz: 'Shokoladsiz' }, price: 0 },
+    { id: 'belgian', label: { ru: 'Бельгийский шоколад', uz: 'Belgiya shokoladi' }, price: 15000 },
+    { id: 'nutella', label: { ru: 'Шоколад Nutella', uz: 'Nutella shokoladi' }, price: 15000 },
+    { id: 'pistachio', label: { ru: 'Фисташковый шоколад', uz: 'Pista shokoladi' }, price: 15000 }
+  ];
+
+  const fruitOptions = [
+    { id: 'strawberry', label: { ru: 'Клубника', uz: 'Qulupnay' }, price: 10000 },
+    { id: 'banana', label: { ru: 'Банан', uz: 'Banan' }, price: 10000 }
+  ];
+
+  const extraOptions = [
+    { id: 'icecream', label: { ru: 'Мороженое', uz: 'Muzqaymoq' }, price: 12000 }
+  ];
+
+  function renderWaffleBody() {
+    let total = d.price;
+    const currentChoco = chocoOptions.find(c => c.id === selectedWaffleChocolate);
+    if (currentChoco) total += currentChoco.price;
+    selectedWaffleFruits.forEach(fId => {
+      const f = fruitOptions.find(item => item.id === fId);
+      if (f) total += f.price;
     });
-  }
+    if (selectedWaffleIceCream) total += extraOptions[0].price;
 
-  // 2. Резервный подбор по смежным категориям
-  if (recItems.length < 4) {
-    let preferredCats = [];
-    if (currentCat === 'sets' || currentCat === 'breakfasts') {
-      preferredCats = ['coffee', 'bakery', 'desserts'];
-    } else if (currentCat === 'coffee') {
-      preferredCats = ['bakery', 'desserts', 'sets'];
-    } else if (currentCat === 'bakery') {
-      preferredCats = ['coffee', 'desserts'];
-    } else if (currentCat === 'desserts') {
-      preferredCats = ['coffee', 'sets'];
-    } else {
-      preferredCats = ['coffee', 'bakery', 'desserts'];
-    }
+    waffleModalBody.innerHTML = `
+      <div>
+        <div class="waffle-sec-title">${curLang === 'ru' ? '1. Шоколад (на выбор)' : '1. Shokolad (tanlov bo\'yicha)'}</div>
+        <div class="waffle-opt-grid">
+          ${chocoOptions.map(c => `
+            <button class="waffle-opt-chip ${selectedWaffleChocolate === c.id ? 'active' : ''}" data-choco="${c.id}">
+              <span>${c.label[curLang]}</span>
+              <span class="waffle-opt-price">${c.price > 0 ? `+${money(c.price)}` : '0 сум'}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
 
-    preferredCats.forEach(c => {
-      if (MENU[c]) {
-        MENU[c].forEach(dish => {
-          if (dish.id !== mainDish.id && !recItems.some(r => r.id === dish.id)) {
-            recItems.push(dish);
-          }
-        });
-      }
-    });
-  }
+      <div>
+        <div class="waffle-sec-title">${curLang === 'ru' ? '2. Фрукты и ягоды' : '2. Mevalar va rezavorlar'}</div>
+        <div class="waffle-opt-grid">
+          ${fruitOptions.map(f => `
+            <button class="waffle-opt-chip ${selectedWaffleFruits.includes(f.id) ? 'active' : ''}" data-fruit="${f.id}">
+              <span>${f.label[curLang]}</span>
+              <span class="waffle-opt-price">+${money(f.price)}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
 
-  return recItems.slice(0, 4);
-}
-
-function openUpsell(mainDish) {
-  const recs = getRecommendations(curCat, mainDish);
-  if (recs.length === 0) return;
-
-  if (curLang === 'ru') {
-    upsellTitle.textContent = `Идеально к «${mainDish.name.ru}»`;
-    upsellSubtitle.textContent = 'Гости также часто заказывают:';
-    upsellContinueBtn.textContent = 'Продолжить';
-  } else {
-    upsellTitle.textContent = `«${mainDish.name.uz}» bilan ajoyib`;
-    upsellSubtitle.textContent = 'Mijozlar tez-tez birga buyurtma qilishadi:';
-    upsellContinueBtn.textContent = 'Davom etish';
-  }
-
-  upsellList.innerHTML = '';
-  recs.forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'upsell-card';
-
-    const btnText = curLang === 'ru' ? '+ Добавить' : '+ Qo\'shish';
-    const addedText = curLang === 'ru' ? '✓ Добавлено' : '✓ Qo\'shildi';
-
-    const isInCart = cart[item.id] && cart[item.id].qty > 0;
-
-    card.innerHTML = `
-      <img src="${item.img}" alt="${item.name[curLang]}">
-      <div class="upsell-card-name">${item.name[curLang]}</div>
-      <div class="upsell-card-price">${money(item.price)}</div>
-      <button class="upsell-add-btn" data-id="${item.id}" style="${isInCart ? 'background: rgba(191, 233, 79, 0.2); color: #BFE94F;' : ''}">
-        ${isInCart ? addedText : btnText}
-      </button>
+      <div>
+        <div class="waffle-sec-title">${curLang === 'ru' ? '3. Дополнительно' : '3. Qo\'shimcha'}</div>
+        <div class="waffle-opt-grid">
+          ${extraOptions.map(e => `
+            <button class="waffle-opt-chip ${selectedWaffleIceCream ? 'active' : ''}" data-extra="${e.id}">
+              <span>${e.label[curLang]}</span>
+              <span class="waffle-opt-price">+${money(e.price)}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
     `;
 
-    const addBtnEl = card.querySelector('.upsell-add-btn');
-    addBtnEl.onclick = (e) => {
-      e.stopPropagation();
-      addToCart(item.id, 1, item);
-      showAddToast(item);
-      animateFlyToCart(addBtnEl, item.img);
+    waffleAddCartBtn.textContent = `${curLang === 'ru' ? 'В корзину' : 'Savatga'} · ${money(total)}`;
 
-      addBtnEl.textContent = addedText;
-      addBtnEl.style.background = 'rgba(191, 233, 79, 0.2)';
-      addBtnEl.style.color = '#BFE94F';
-    };
+    // Bind chips
+    waffleModalBody.querySelectorAll('[data-choco]').forEach(btn => {
+      btn.onclick = () => {
+        selectedWaffleChocolate = btn.getAttribute('data-choco');
+        renderWaffleBody();
+      };
+    });
 
-    upsellList.appendChild(card);
-  });
+    waffleModalBody.querySelectorAll('[data-fruit]').forEach(btn => {
+      btn.onclick = () => {
+        const fruitId = btn.getAttribute('data-fruit');
+        if (selectedWaffleFruits.includes(fruitId)) {
+          selectedWaffleFruits = selectedWaffleFruits.filter(id => id !== fruitId);
+        } else {
+          selectedWaffleFruits.push(fruitId);
+        }
+        renderWaffleBody();
+      };
+    });
 
-  upsellOverlay.style.opacity = '';
-  upsellModal.style.transform = '';
-  upsellOverlay.classList.add('open');
-  upsellModal.classList.add('open');
+    waffleModalBody.querySelectorAll('[data-extra]').forEach(btn => {
+      btn.onclick = () => {
+        selectedWaffleIceCream = !selectedWaffleIceCream;
+        renderWaffleBody();
+      };
+    });
+  }
+
+  renderWaffleBody();
+
+  waffleOverlay.style.opacity = '';
+  waffleModal.style.transform = '';
+  waffleOverlay.classList.add('open');
+  waffleModal.classList.add('open');
   clearTimeout(advanceTimer);
 }
 
-function closeUpsell() {
-  upsellOverlay.classList.remove('open');
-  upsellModal.classList.remove('open');
+function closeWaffleModal() {
+  waffleOverlay.classList.remove('open');
+  waffleModal.classList.remove('open');
   setTimeout(() => {
-    upsellModal.style.transform = '';
-    upsellOverlay.style.opacity = '';
+    waffleModal.style.transform = '';
+    waffleOverlay.style.opacity = '';
   }, 350);
   startAdvanceTimer(curCat, curIdx);
 }
 
-closeUpsellBtn.onclick = closeUpsell;
-upsellOverlay.onclick = closeUpsell;
-upsellContinueBtn.onclick = closeUpsell;
+waffleAddCartBtn.onclick = () => {
+  const d = MENU[curCat][curIdx];
+  const partsRu = [];
+  const partsUz = [];
+
+  let totalPrice = d.price;
+
+  if (selectedWaffleChocolate === 'belgian') {
+    partsRu.push('Бельгийский шоколад'); partsUz.push('Belgiya shokoladi'); totalPrice += 15000;
+  } else if (selectedWaffleChocolate === 'nutella') {
+    partsRu.push('Nutella'); partsUz.push('Nutella'); totalPrice += 15000;
+  } else if (selectedWaffleChocolate === 'pistachio') {
+    partsRu.push('Фисташковый шоколад'); partsUz.push('Pista shokoladi'); totalPrice += 15000;
+  }
+
+  if (selectedWaffleFruits.includes('strawberry')) {
+    partsRu.push('Клубника'); partsUz.push('Qulupnay'); totalPrice += 10000;
+  }
+  if (selectedWaffleFruits.includes('banana')) {
+    partsRu.push('Банан'); partsUz.push('Banan'); totalPrice += 10000;
+  }
+  if (selectedWaffleIceCream) {
+    partsRu.push('Мороженое'); partsUz.push('Muzqaymoq'); totalPrice += 12000;
+  }
+
+  const customKey = `waffle_custom_${selectedWaffleChocolate}_${selectedWaffleFruits.sort().join('_')}_${selectedWaffleIceCream ? 'ice' : 'noice'}`;
+  const suffixRu = partsRu.length > 0 ? ` (${partsRu.join(', ')})` : '';
+  const suffixUz = partsUz.length > 0 ? ` (${partsUz.join(', ')})` : '';
+
+  const customWaffle = {
+    id: customKey,
+    name: {
+      ru: `${d.name.ru}${suffixRu}`,
+      uz: `${d.name.uz}${suffixUz}`
+    },
+    price: totalPrice,
+    img: d.img
+  };
+
+  addToCart(customKey, 1, customWaffle);
+  showAddToast(customWaffle);
+  animateFlyToCart(waffleAddCartBtn, d.img);
+  closeWaffleModal();
+};
+
+closeWaffleBtn.onclick = closeWaffleModal;
+waffleOverlay.onclick = closeWaffleModal;
 
 addBtn.addEventListener('click', (e) => {
   const d = MENU[curCat][curIdx];
-  const cartItem = cart[d.id];
+  const activeCtx = getCurrentCartContext();
+  const cartItem = cart[activeCtx.id];
 
   if (!cartItem) {
-    addToCart(d.id, 1, d);
-    showAddToast(d);
-    animateFlyToCart(addBtn, d.img);
-    setTimeout(() => {
-      openUpsell(d);
-    }, 450);
+    if (d.hasToppings) {
+      openWaffleModal();
+      return;
+    }
+    addToCart(activeCtx.id, 1, activeCtx);
+    showAddToast(activeCtx);
+    animateFlyToCart(addBtn, activeCtx.img);
   } else {
     if (e.target.closest('#pillMinus')) {
-      addToCart(d.id, -1, d);
+      addToCart(activeCtx.id, -1, activeCtx);
       e.stopPropagation();
     } else {
       const plusEl = document.getElementById('pillPlus');
-      addToCart(d.id, 1, d);
-      showAddToast(d);
-      animateFlyToCart(plusEl || addBtn, d.img);
-      setTimeout(() => {
-        openUpsell(d);
-      }, 450);
+      addToCart(activeCtx.id, 1, activeCtx);
+      showAddToast(activeCtx);
+      animateFlyToCart(plusEl || addBtn, activeCtx.img);
       e.stopPropagation();
     }
   }
 });
 
 function showAddToast(d) {
-  const toastText = curLang === 'ru' ? 'добавлен' : 'qo\'shildi';
-  toastEl.textContent = `${d.name[curLang]} ${toastText} · ×${cart[d.id].qty}`;
+  const addedText = curLang === 'ru' ? 'Добавлено в корзину: ' : 'Savatga qo\'shildi: ';
+  toastEl.textContent = `${addedText}${d.name[curLang]}`;
   toastEl.classList.add('show');
-  clearTimeout(window._t);
-  window._t = setTimeout(() => toastEl.classList.remove('show'), 1400);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2000);
 }
 
 function openCart() {
+  updateCartUI();
   cartDrawer.style.transform = '';
   cartOverlay.style.opacity = '';
   cartOverlay.classList.add('open');
@@ -722,15 +1135,33 @@ checkoutBtn.addEventListener('click', () => {
   const clearedText = curLang === 'ru' ? 'Корзина очищена' : 'Savat tozalandi';
   toastEl.textContent = clearedText;
   toastEl.classList.add('show');
-  clearTimeout(window._t);
-  window._t = setTimeout(() => toastEl.classList.remove('show'), 1400);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1400);
 });
 
 function openDesc() {
   const d = MENU[curCat][curIdx];
+  const isBreakfast = (curCat === 'breakfasts' || curCat === 'set_breakfast');
+
   descModalTitle.textContent = d.name[curLang];
   descModalText.textContent = d.desc[curLang];
-  descModalWeight.textContent = d.weight;
+
+  if (isBreakfast) {
+    descTimeNotice.textContent = curLang === 'ru'
+      ? 'Подаются ежедневно до 15:00'
+      : 'Har kuni 15:00 gacha tortiladi';
+    descTimeNotice.style.display = 'flex';
+  } else {
+    descTimeNotice.style.display = 'none';
+  }
+
+  if (d.weight) {
+    descModalWeight.textContent = d.weight;
+    descModalWeight.style.display = 'inline-block';
+  } else {
+    descModalWeight.textContent = '';
+    descModalWeight.style.display = 'none';
+  }
   descModal.style.transform = '';
   descOverlay.style.opacity = '';
   descOverlay.classList.add('open');
@@ -759,7 +1190,7 @@ cartChip.addEventListener('animationend', () => cartChip.classList.remove('pop')
 const shareDishBtn = document.getElementById('shareDish');
 shareDishBtn.addEventListener('click', async () => {
   const d = MENU[curCat][curIdx];
-  const shareUrl = window.location.href;
+  const shareUrl = `${window.location.origin}${window.location.pathname}?cat=${curCat}&dish=${curIdx}&lang=${curLang}`;
   const shareTitle = d.name[curLang];
   const shareText = curLang === 'ru'
     ? `Посмотри какое вкусное блюдо в La Mari: ${d.name[curLang]}`
@@ -778,46 +1209,39 @@ shareDishBtn.addEventListener('click', async () => {
   } else {
     try {
       await navigator.clipboard.writeText(shareUrl);
-      const copyText = curLang === 'ru' ? 'Ссылка скопирована!' : 'Havola nusxalandi!';
-      toastEl.textContent = copyText;
+      const copiedText = curLang === 'ru' ? 'Ссылка скопирована!' : 'Havola nusxalandi!';
+      toastEl.textContent = copiedText;
       toastEl.classList.add('show');
-      clearTimeout(window._t);
-      window._t = setTimeout(() => toastEl.classList.remove('show'), 1400);
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1400);
     } catch (err) {
-      console.error('Не удалось скопировать ссылку', err);
+      console.error('Ошибка копирования ссылки:', err);
     }
   }
 });
 
-function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl = null) {
-  let startY = 0;
-  let currentY = 0;
-  let isDragging = false;
+function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollableChild = null) {
+  let startY = 0, currentY = 0, isDragging = false;
 
   function onTouchStart(e) {
-    if (scrollContainerEl && scrollContainerEl.scrollTop > 0) return;
+    if (scrollableChild && scrollableChild.scrollTop > 0) return;
     startY = e.touches[0].clientY;
-    isDragging = false;
+    currentY = 0;
+    isDragging = true;
     modalEl.style.transition = 'none';
     overlayEl.style.transition = 'none';
   }
 
   function onTouchMove(e) {
-    const clientY = e.touches[0].clientY;
-    const diffY = clientY - startY;
+    if (!isDragging) return;
+    const y = e.touches[0].clientY;
+    const dy = y - startY;
 
-    if (diffY > 0) {
-      if (scrollContainerEl && scrollContainerEl.scrollTop > 0) return;
-      if (!isDragging) {
-        isDragging = true;
-        clearTimeout(advanceTimer);
-      }
-      currentY = diffY;
-      modalEl.style.transform = `translateY(${diffY}px)`;
-
-      const progress = Math.max(0, 1 - (diffY / 320));
-      overlayEl.style.opacity = progress;
-
+    if (dy > 0) {
+      currentY = dy;
+      modalEl.style.transform = `translateY(${dy}px)`;
+      const opacity = Math.max(0, 1 - dy / 250);
+      overlayEl.style.opacity = opacity;
       if (e.cancelable) e.preventDefault();
     }
   }
@@ -856,10 +1280,10 @@ function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollContainerEl 
 makeDraggable(descModal, document.querySelector('.desc-modal-handle'), descOverlay, closeDesc);
 makeDraggable(cartDrawer, document.querySelector('.drawer-handle'), cartOverlay, closeCart, cartList);
 makeDraggable(langModal, document.querySelector('.lang-modal-handle'), langOverlay, closeLangModal);
-makeDraggable(upsellModal, document.querySelector('.upsell-handle'), upsellOverlay, closeUpsell, upsellList);
+makeDraggable(waffleModal, document.querySelector('.waffle-handle'), waffleOverlay, closeWaffleModal, waffleModalBody);
 
-setDish(curCat, curIdx);
 renderTabs();
+setDish(curCat, curIdx);
 updateCartUI();
 
 function setVH() { document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px'); }

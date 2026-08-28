@@ -214,9 +214,6 @@ body {
 }
 
 /* ===== TOP OVERLAY (Instagram Stories Progress Bar Style) ===== */
-.story-bar {
-  display: none;
-}
 
 .dots {
   position: absolute;
@@ -321,6 +318,23 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dish-time-badge {
+  background: rgba(201, 168, 118, 0.18);
+  color: #E8D3B1;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid rgba(201, 168, 118, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .dish-desc {
@@ -622,6 +636,8 @@ body {
 .cart-chip svg {
   width: 16px;
   height: 16px;
+  margin-top: -1px;
+  margin-right: 1px;
 }
 
 .cart-chip .badge {
@@ -775,51 +791,20 @@ body {
   border: 1px solid rgba(201, 168, 118, 0.15);
 }
 
-.story-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 11;
+.desc-time-notice {
+  background: rgba(201, 168, 118, 0.12);
+  border: 1px solid rgba(201, 168, 118, 0.28);
+  color: #E8D3B1;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  font-weight: 500;
+  margin-bottom: 12px;
   display: flex;
-  gap: 5px;
-  padding: 12px 14px 0;
+  align-items: center;
+  gap: 6px;
 }
 
-.story-seg {
-  flex: 1;
-  height: 3px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, .28);
-  overflow: hidden;
-}
-
-.story-seg i {
-  display: block;
-  height: 100%;
-  width: 0%;
-  background: #fff;
-  border-radius: 3px;
-}
-
-.story-seg.done i {
-  width: 100%;
-}
-
-.story-seg.active i {
-  animation: storyFill linear forwards;
-  animation-duration: var(--seg-dur, 4s);
-}
-
-@keyframes storyFill {
-  from {
-    width: 0%;
-  }
-
-  to {
-    width: 100%;
-  }
-}
 
 .swipe-zone {
   position: absolute;
@@ -912,37 +897,258 @@ body {
   background: rgba(58, 47, 30, .12);
 }
 
-.tabs-viewport {
-  width: auto;
+/* ===== VARIANT SELECTOR ===== */
+.variant-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+  width: 100%;
   max-width: 100%;
-  overflow: hidden;
-  margin: 16px auto 0;
+  padding: 0 4px;
+}
+
+.var-btn {
+  background: rgba(25, 22, 20, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 18px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.var-btn:active {
+  transform: scale(0.95);
+}
+
+.var-btn.active {
+  background: #BFE94F;
+  color: #20301a;
+  border-color: #BFE94F;
+  box-shadow: 0 4px 14px rgba(191, 233, 79, 0.4);
+}
+
+/* ===== WAFFLE CUSTOMIZER MODAL ===== */
+.waffle-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 45;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+.waffle-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.waffle-modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 46;
+  background: rgba(25, 22, 20, 0.96);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  color: var(--cream);
+  border-radius: 24px 24px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  transform: translateY(100%);
+  transition: transform .38s cubic-bezier(.2, .8, .2, 1);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+  padding: 16px 20px calc(24px + env(safe-area-inset-bottom));
+  max-width: 900px;
+  margin: 0 auto;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.waffle-modal.open {
+  transform: translateY(0);
+}
+
+.waffle-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--cream);
+  opacity: .2;
+  margin: 0 auto 14px;
+}
+
+.waffle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.waffle-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cream);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+#closeWaffle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, .1);
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+#closeWaffle:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.waffle-body {
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 12px;
+}
+
+.waffle-sec-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.waffle-opt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.waffle-opt-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 10px 12px;
+  color: var(--cream);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.waffle-opt-chip:active {
+  transform: scale(0.97);
+}
+
+.waffle-opt-chip.active {
+  background: rgba(191, 233, 79, 0.16);
+  border-color: #BFE94F;
+  color: #BFE94F;
+}
+
+.waffle-opt-price {
+  font-size: 11.5px;
+  opacity: 0.75;
+  font-weight: 600;
+}
+
+.waffle-footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.waffle-add-btn {
+  width: 100%;
+  background: #BFE94F;
+  color: #20301a;
+  border: none;
+  border-radius: 16px;
+  padding: 14px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(191, 233, 79, 0.3);
+  transition: transform 0.15s;
+}
+
+.waffle-add-btn:active {
+  transform: scale(0.98);
+}
+
+.tabs-viewport {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 14px auto 0;
+  padding: 4px 0 8px;
+  cursor: grab;
+  user-select: none;
+  scroll-behavior: smooth;
+}
+
+.tabs-viewport::-webkit-scrollbar {
+  display: none;
 }
 
 .cat-tabs {
   display: flex;
   gap: 10px;
-  transition: transform .38s cubic-bezier(.2, .8, .2, 1);
-  will-change: transform;
-  padding: 8px 10px 10px;
+  padding: 0 16px;
+  width: max-content;
 }
 
 .cat-tab {
   position: relative;
   flex: 0 0 auto;
-  padding: 13px 21px;
+  padding: 12px 20px;
   border-radius: 14px;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 600;
   color: rgba(255, 255, 255, .75);
-  background: rgba(20, 17, 15, .45);
+  background: rgba(20, 17, 15, .55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, .08);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, .1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
   white-space: nowrap;
   cursor: pointer;
-  transition: border-color 0.25s, color 0.25s, background-color 0.25s, transform 0.2s;
+  transition: border-color 0.25s, color 0.25s, background-color 0.25s, transform 0.2s, box-shadow 0.25s;
 }
 
 .cat-tab:active {
@@ -952,7 +1158,8 @@ body {
 .cat-tab.active {
   border-color: #BFE94F;
   color: #BFE94F;
-  background: rgba(20, 17, 15, .7);
+  background: rgba(32, 48, 26, 0.7);
+  box-shadow: 0 4px 16px rgba(191, 233, 79, 0.25);
 }
 
 .tab-badge {
@@ -1207,93 +1414,155 @@ body {
   }
 }
 
-/* МЕДИА-ЗАПРОСЫ ДЛЯ АДАПТИВНОСТИ НОВЫХ ЭЛЕМЕНТОВ */
-
-/* 1. Маленькие мобильные экраны (iPhone SE, узкие Android-устройства) */
-@media (max-width: 360px) {
-  .top-bar {
-    padding: 28px 14px 0;
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
   }
-
-  .dish-title {
-    font-size: 18px;
-  }
-
-  .lang-btn {
-    font-size: 10px;
-    padding: 3px 6px;
-  }
-
-  .lang-mobile-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 10px;
-  }
-
-  .cart-chip {
-    width: 32px;
-    height: 32px;
-  }
-
-  .header-controls {
-    gap: 6px;
-  }
-
-  /* Адаптив ИИ-модалки для маленьких экранов */
-  .upsell-modal {
-    padding: 14px 14px calc(16px + env(safe-area-inset-bottom));
-  }
-
-  .upsell-title {
-    font-size: 15.5px;
-  }
-
-  .upsell-subtitle {
-    font-size: 11.5px;
-    margin-bottom: 8px;
-  }
-
-  .upsell-card {
-    width: 118px;
-    padding: 8px;
-    border-radius: 14px;
-  }
-
-  .upsell-card img {
-    width: 68px;
-    height: 68px;
-    border-radius: 10px;
-  }
-
-  .upsell-card-name {
-    font-size: 11.5px;
-    height: 28px;
-  }
-
-  .upsell-card-price {
-    font-size: 11px;
-  }
-
-  .upsell-add-btn {
-    font-size: 10.5px;
-    padding: 5.5px 0;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* 2. Планшеты и широкие экраны */
-@media (min-width: 768px) {
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES (Адаптивный дизайн для всех экранов и устройств)
+   ========================================================================== */
+
+/* --- 1. Safe Areas для экранов с вырезами / Dynamic Island (iPhone / Android) --- */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .dots {
+    top: max(12px, calc(env(safe-area-inset-top) + 4px));
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+  }
+
+  .top-bar {
+    padding-top: max(34px, calc(env(safe-area-inset-top) + 16px));
+    padding-left: max(18px, calc(env(safe-area-inset-left) + 12px));
+    padding-right: max(18px, calc(env(safe-area-inset-right) + 12px));
+  }
+
+  .bottom-area {
+    padding-bottom: max(32px, calc(env(safe-area-inset-bottom) + 16px));
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+}
+
+/* --- 2. Маленькие мобильные экраны (iPhone SE, 5, mini, Galaxy Fold: width <= 375px) --- */
+@media (max-width: 375px) {
+  .top-bar {
+    padding: 28px 12px 0;
+  }
+
+  .wm {
+    font-size: 32px;
+  }
+
+  .wm-sub {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .dish-title {
+    font-size: 19px;
+    margin-top: 4px;
+  }
+
+  .dish-cat {
+    font-size: 9.5px;
+    letter-spacing: 1.8px;
+  }
+
+  .dish-time-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  .dish-more-btn {
+    font-size: 11px;
+    padding: 5px 10px;
+    margin-top: 6px;
+  }
+
+  .lang-mobile-btn,
+  .cart-chip {
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
+  }
+
+  .cart-chip svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .price-pill {
+    padding: 10px 6px 10px 16px;
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .price-pill .plus,
+  .price-pill .pill-minus {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .cat-tab {
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+
+  .variant-selector {
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .var-btn {
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+
+  .bottom-area {
+    padding-bottom: 24px;
+  }
+
+  .waffle-opt-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+}
+
+/* --- 3. Средние экраны и фаблеты (width: 376px - 599px) --- */
+@media (min-width: 376px) and (max-width: 599px) {
+  .dish-title {
+    font-size: clamp(20px, 6vw, 24px);
+  }
+
+  .cat-tab {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+}
+
+/* --- 4. Планшеты (iPad, Android Tablets: width: 600px - 1024px) --- */
+@media (min-width: 600px) and (max-width: 1024px) {
   .top-bar {
     padding: 40px 24px 0;
   }
 
   .dish-title {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .dish-desc {
     display: block;
-    font-size: 13.5px;
-    max-width: 400px;
+    font-size: 14px;
+    max-width: 440px;
     padding: 8px 14px;
     margin-top: 8px;
   }
@@ -1317,275 +1586,232 @@ body {
     gap: 2px;
   }
 
-  /* Адаптив ИИ-модалки для больших экранов */
-  .upsell-modal {
-    padding: 20px 28px calc(24px + env(safe-area-inset-bottom));
+  .cart-chip {
+    width: 38px;
+    height: 38px;
   }
 
-  .upsell-title {
-    font-size: 20px;
+  .cart-chip svg {
+    width: 18px;
+    height: 18px;
   }
 
-  .upsell-scroll {
-    gap: 16px;
-    padding-bottom: 16px;
+  .price-pill {
+    padding: 14px 10px 14px 26px;
+    font-size: 16px;
   }
 
-  .upsell-card {
-    width: 155px;
-    padding: 12px;
+  .cat-tab {
+    padding: 14px 24px;
+    font-size: 15.5px;
   }
 
-  .upsell-card img {
-    width: 96px;
-    height: 96px;
+  .var-btn {
+    font-size: 14px;
+    padding: 9px 18px;
   }
 
-  .upsell-card-name {
+  .cart-drawer,
+  .desc-modal,
+  .waffle-modal,
+  .lang-modal {
+    max-width: 520px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    border-radius: 28px 28px 0 0;
+  }
+
+  .cart-drawer.open,
+  .desc-modal.open,
+  .waffle-modal.open,
+  .lang-modal.open {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* --- 5. Десктопы и ноутбуки (width >= 1025px) --- */
+@media (min-width: 1025px) {
+  body {
+    background: #0d0c0b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stage {
+    max-width: 520px;
+    height: min(920px, 94vh);
+    border-radius: 36px;
+    margin: auto;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+
+  .top-bar {
+    padding: 36px 24px 0;
+  }
+
+  .dish-title {
+    font-size: 26px;
+  }
+
+  .dish-desc {
+    display: block;
     font-size: 13.5px;
+    max-width: 360px;
+    padding: 8px 12px;
+    margin-top: 8px;
+  }
+
+  .dish-more-btn {
+    display: none;
+  }
+
+  .lang-mobile-btn {
+    display: none;
+  }
+
+  .lang-switch-desktop {
+    display: flex;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .bottom-area {
+    padding-bottom: 28px;
+  }
+
+  .cart-drawer,
+  .desc-modal,
+  .waffle-modal,
+  .lang-modal {
+    max-width: 520px;
+    border-radius: 28px 28px 0 0;
+  }
+
+  /* Desktop Hover Effects */
+  .cat-tab:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .cat-tab.active:hover {
+    background: rgba(32, 48, 26, 0.85);
+    border-color: #BFE94F;
+    color: #BFE94F;
+  }
+
+  .price-pill:hover {
+    transform: scale(1.03) translateY(-1px);
+    box-shadow: 0 10px 30px rgba(191, 233, 79, 0.38);
+  }
+
+  .var-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+  }
+
+  .var-btn.active:hover {
+    background: #cbf55c;
+    color: #20301a;
+  }
+
+  .cart-chip:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: scale(1.08);
   }
 }
 
-/* ===== UPSELL AI MODAL ===== */
-.upsell-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 40;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .35s ease;
-}
-
-.upsell-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.upsell-modal {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 41;
-  background: rgba(22, 19, 17, 0.88);
-  backdrop-filter: blur(35px) saturate(180%);
-  -webkit-backdrop-filter: blur(35px) saturate(180%);
-  color: var(--cream);
-  border-radius: 24px 24px 0 0;
-  border-top: 1.2px solid rgba(255, 255, 255, 0.12);
-  transform: translateY(100%);
-  transition: transform .38s cubic-bezier(.2, .8, .2, 1);
-  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.5);
-  padding: 16px 20px calc(20px + env(safe-area-inset-bottom));
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.upsell-modal.open {
-  transform: translateY(0);
-}
-
-.upsell-handle {
-  width: 36px;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--cream);
-  opacity: .2;
-  margin: 0 auto 12px;
-}
-
-.upsell-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.upsell-title-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.upsell-ai-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #BFE94F;
-  background: rgba(191, 233, 79, 0.15);
-  border: 1px solid rgba(191, 233, 79, 0.3);
-  border-radius: 20px;
-  padding: 2px 10px;
-  width: fit-content;
-  letter-spacing: 0.3px;
-}
-
-.upsell-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--cream);
-  letter-spacing: -0.2px;
-}
-
-.close-upsell-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: var(--cream);
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.close-upsell-btn:active {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.upsell-subtitle {
-  font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 12px;
-}
-
-.upsell-scroll {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding: 4px 2px 12px;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.upsell-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.upsell-card {
-  width: 135px;
-  flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: transform 0.2s, background 0.2s;
-}
-
-.upsell-card:active {
-  transform: scale(0.97);
-}
-
-.upsell-card img {
-  width: 84px;
-  height: 84px;
-  border-radius: 14px;
-  object-fit: cover;
-  margin-bottom: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.upsell-card-name {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--cream);
-  line-height: 1.25;
-  height: 31px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: 4px;
-}
-
-.upsell-card-price {
-  font-size: 12px;
-  font-weight: 700;
-  color: #BFE94F;
-  margin-bottom: 8px;
-}
-
-.upsell-add-btn {
-  width: 100%;
-  background: #BFE94F;
-  color: #20301a;
-  border-radius: 12px;
-  padding: 7px 0;
-  font-size: 11.5px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(191, 233, 79, 0.25);
-}
-
-.upsell-add-btn:active {
-  transform: scale(0.95);
-}
-
-.upsell-footer {
-  margin-top: 10px;
-}
-
-.upsell-continue-btn {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--cream);
-  border-radius: 16px;
-  padding: 12px 0;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.upsell-continue-btn:active {
-  background: rgba(255, 255, 255, 0.18);
-}
-
-@keyframes contentFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
+/* --- 6. Горизонтальная ориентация на смартфонах (Landscape: height <= 500px) --- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .top-bar {
+    padding: 20px 16px 0;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .wm {
+    font-size: 26px;
+  }
+
+  .wm-sub {
+    display: none;
+  }
+
+  .dish-title {
+    font-size: 17px;
+    margin-top: 2px;
+  }
+
+  .dish-desc {
+    display: none;
+  }
+
+  .dish-more-btn {
+    display: inline-flex;
+    padding: 3px 8px;
+    font-size: 10px;
+    margin-top: 4px;
+  }
+
+  .bottom-area {
+    padding-bottom: 12px;
+  }
+
+  .variant-selector {
+    margin-bottom: 6px;
+  }
+
+  .var-btn {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+
+  .price-pill {
+    padding: 8px 6px 8px 14px;
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .price-pill .plus,
+  .price-pill .pill-minus {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+
+  .tabs-viewport {
+    margin-top: 6px;
+  }
+
+  .cat-tab {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .waffle-modal,
+  .cart-drawer,
+  .desc-modal {
+    max-height: 96vh;
+    padding: 12px 16px 16px;
   }
 }
 
+/* --- 7. Поддержка reduced-motion (для доступности) --- */
 @media (prefers-reduced-motion: reduce) {
-
-  .pl-logo,
-  .pl-sub,
-  .pl-track,
-  .pl-bar {
-    animation: none !important;
-    opacity: 1 !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-}
-
-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-}
-
-@media (prefers-reduced-motion: reduce) {
 
   .pl-logo,
   .pl-sub,

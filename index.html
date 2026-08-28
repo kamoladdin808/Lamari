@@ -9,6 +9,7 @@
     content="Интерактивное «живое» меню кафе и пекарни La Mari. Ознакомьтесь с нашими сетами, свежей выпечкой, авторскими десертами, завтраками и ароматным кофе. Быстрый заказ и удобный выбор.">
   <meta name="keywords"
     content="La Mari, ла мари, живое меню, кафе ташкент, пекарня, десерты, кофе, круассаны, завтраки, меню кафе">
+  <meta name="theme-color" content="#9E908B">
 
   <!-- Open Graph -->
   <meta property="og:title" content="La Mari — Живое меню кафе & пекарни">
@@ -48,6 +49,7 @@
         <div class="dish-cat-row">
           <div class="dish-cat" id="dishCat">Завтраки</div>
           <span class="dish-badge" id="dishBadge" style="display:none"></span>
+          <span class="dish-time-badge" id="dishTimeBadge" style="display:none">до 15:00</span>
         </div>
         <div class="dish-title" id="dishTitle">—</div>
         <div class="dish-desc" id="dishDesc">—</div>
@@ -79,6 +81,8 @@
     <div class="toast" id="toast">Добавлено в корзину</div>
 
     <div class="bottom-area">
+
+      <div class="variant-selector" id="variantSelector" style="display:none"></div>
 
       <div class="price-pill" id="addBtn">
         <span class="pill-minus" id="pillMinus">−</span>
@@ -117,8 +121,23 @@
         </div>
       </div>
       <div class="desc-modal-body">
+        <div id="descTimeNotice" class="desc-time-notice" style="display:none"></div>
         <div id="descModalText">—</div>
         <div id="descModalWeight" class="desc-modal-weight"></div>
+      </div>
+    </div>
+
+    <!-- WAFFLE CUSTOMIZER MODAL -->
+    <div class="waffle-overlay" id="waffleOverlay"></div>
+    <div class="waffle-modal" id="waffleModal">
+      <div class="waffle-handle"></div>
+      <div class="waffle-header">
+        <div class="waffle-title" id="waffleModalTitle">Топпинги на выбор</div>
+        <button id="closeWaffle">✕</button>
+      </div>
+      <div class="waffle-body" id="waffleModalBody"></div>
+      <div class="waffle-footer">
+        <button class="waffle-add-btn" id="waffleAddCartBtn">В корзину</button>
       </div>
     </div>
 
@@ -131,33 +150,15 @@
       </div>
       <div class="lang-modal-body">
         <button class="lang-select-btn active" id="btnSelectRu">
-          <span class="flag">🇷🇺</span> Русский язык
+          Русский язык
         </button>
         <button class="lang-select-btn" id="btnSelectUz">
-          <span class="flag">🇺🇿</span> O'zbek tili
+          O'zbek tili
         </button>
       </div>
     </div>
 
-    <!-- UPSELL AI MODAL -->
-    <div class="upsell-overlay" id="upsellOverlay"></div>
-    <div class="upsell-modal" id="upsellModal">
-      <div class="upsell-handle"></div>
-      <div class="upsell-header">
-        <div class="upsell-title-wrap">
-          <div class="upsell-ai-badge">✨ ИИ Рекомендует</div>
-          <div class="upsell-title" id="upsellTitle">Идеально к вашему выбору</div>
-        </div>
-        <button id="closeUpsell" class="close-upsell-btn">✕</button>
-      </div>
-      <div class="upsell-body">
-        <div class="upsell-subtitle" id="upsellSubtitle">Гости часто заказывают вместе:</div>
-        <div class="upsell-scroll" id="upsellList"></div>
-      </div>
-      <div class="upsell-footer">
-        <button class="upsell-continue-btn" id="upsellContinueBtn">Продолжить</button>
-      </div>
-    </div>
+
 
   </div>
 

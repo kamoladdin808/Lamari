@@ -1604,30 +1604,11 @@ body {
 /* --- 4. Планшеты и ноутбуки (width: 600px - 1024px) --- */
 @media (min-width: 600px) and (max-width: 1024px) {
   .top-bar {
-    padding: 40px 24px 0;
+    padding: 38px 24px 0;
   }
 
   .dish-title {
     font-size: 26px;
-  }
-
-  .dish-desc {
-    display: block;
-    font-size: 14px;
-    color: rgba(243, 239, 233, 0.88);
-    max-width: 440px;
-    margin-top: 8px;
-    line-height: 1.45;
-    background: transparent;
-    padding: 0;
-    border: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
-  }
-
-  .dish-more-btn {
-    display: none;
   }
 
   .lang-mobile-btn {
@@ -1669,23 +1650,6 @@ body {
     font-size: 13.5px;
     padding: 8px 16px;
   }
-
-  .cart-drawer,
-  .desc-modal,
-  .waffle-modal,
-  .lang-modal {
-    max-width: 500px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-    border-radius: 28px 28px 0 0;
-  }
-
-  .cart-drawer.open,
-  .desc-modal.open,
-  .waffle-modal.open,
-  .lang-modal.open {
-    transform: translateX(-50%) translateY(0);
-  }
 }
 
 /* --- 5. Десктопы и большие экраны (width >= 1025px) --- */
@@ -1696,25 +1660,6 @@ body {
 
   .dish-title {
     font-size: 28px;
-  }
-
-  .dish-desc {
-    display: block;
-    font-size: 14.5px;
-    color: rgba(243, 239, 233, 0.88);
-    max-width: 480px;
-    margin-top: 8px;
-    line-height: 1.45;
-    background: transparent;
-    padding: 0;
-    border: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
-  }
-
-  .dish-more-btn {
-    display: none;
   }
 
   .lang-mobile-btn {
@@ -1734,23 +1679,6 @@ body {
 
   .bottom-area {
     padding-bottom: 34px;
-  }
-
-  .cart-drawer,
-  .desc-modal,
-  .waffle-modal,
-  .lang-modal {
-    max-width: 500px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-    border-radius: 28px 28px 0 0;
-  }
-
-  .cart-drawer.open,
-  .desc-modal.open,
-  .waffle-modal.open,
-  .lang-modal.open {
-    transform: translateX(-50%) translateY(0);
   }
 
   /* Desktop Hover Effects */

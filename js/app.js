@@ -817,7 +817,7 @@ function renderCartList() {
   const itemIds = Object.keys(cart);
   if (itemIds.length === 0) {
     const emptyText = curLang === 'ru' ? 'В корзине пока пусто' : 'Savat hozircha bo\'sh';
-    cartList.innerHTML = `<div class="empty-cart-msg">${emptyText}</div>`;
+    cartList.innerHTML = `<div class="empty-cart">${emptyText}</div>`;
     return;
   }
 
@@ -825,16 +825,16 @@ function renderCartList() {
   itemIds.forEach(id => {
     const item = cart[id];
     const el = document.createElement('div');
-    el.className = 'drawer-item';
+    el.className = 'cart-row';
     el.innerHTML = `
       <img src="${escapeHTML(item.img)}" alt="${escapeHTML(item.name[curLang])}">
-      <div class="drawer-item-info">
-        <div class="drawer-item-title">${escapeHTML(item.name[curLang])}</div>
-        <div class="drawer-item-price">${money(item.price)}</div>
+      <div class="cr-info">
+        <div class="cr-name">${escapeHTML(item.name[curLang])}</div>
+        <div class="cr-price">${money(item.price)}</div>
       </div>
-      <div class="drawer-item-controls">
+      <div class="cr-qty">
         <button class="btn-minus" data-id="${escapeHTML(id)}">−</button>
-        <span class="qty">${item.qty}</span>
+        <span>${item.qty}</span>
         <button class="btn-plus" data-id="${escapeHTML(id)}">+</button>
       </div>
     `;

@@ -329,6 +329,7 @@ const imgB = document.getElementById('imgB');
 const dishCat = document.getElementById('dishCat');
 const dishTitle = document.getElementById('dishTitle');
 const dishBadge = document.getElementById('dishBadge');
+const dishInCartBadge = document.getElementById('dishInCartBadge');
 const dishTimeBadge = document.getElementById('dishTimeBadge');
 const dishDesc = document.getElementById('dishDesc');
 const pillLabel = document.getElementById('pillLabel');
@@ -859,14 +860,21 @@ function updateCartUI() {
   // Обновление состояния и текста кнопки добавления
   const activeCtx = getCurrentCartContext();
   const cartItem = cart[activeCtx.id];
-  if (cartItem) {
+  if (cartItem && cartItem.qty > 0) {
     addBtn.classList.add('added');
     const itemsText = curLang === 'ru' ? 'шт в корзине' : 'ta savatda';
     pillLabel.textContent = `${cartItem.qty} ${itemsText}`;
+    if (dishInCartBadge) {
+      dishInCartBadge.textContent = curLang === 'ru' ? `${cartItem.qty} в корзине` : `${cartItem.qty} savatda`;
+      dishInCartBadge.style.display = 'inline-flex';
+    }
   } else {
     addBtn.classList.remove('added');
     const inCartText = curLang === 'ru' ? 'В корзину' : 'Savatga';
     pillLabel.textContent = `${inCartText} · ${money(activeCtx.price)}`;
+    if (dishInCartBadge) {
+      dishInCartBadge.style.display = 'none';
+    }
   }
 
   cartTotal.textContent = money(sum);

@@ -1611,6 +1611,25 @@ body {
     font-size: 26px;
   }
 
+  .dish-desc {
+    display: block;
+    font-size: 14px;
+    color: rgba(243, 239, 233, 0.88);
+    max-width: 440px;
+    margin-top: 8px;
+    line-height: 1.45;
+    background: transparent;
+    padding: 0;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  }
+
+  .dish-more-btn {
+    display: none;
+  }
+
   .lang-mobile-btn {
     display: none;
   }
@@ -1677,6 +1696,25 @@ body {
 
   .dish-title {
     font-size: 28px;
+  }
+
+  .dish-desc {
+    display: block;
+    font-size: 14.5px;
+    color: rgba(243, 239, 233, 0.88);
+    max-width: 480px;
+    margin-top: 8px;
+    line-height: 1.45;
+    background: transparent;
+    padding: 0;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  }
+
+  .dish-more-btn {
+    display: none;
   }
 
   .lang-mobile-btn {

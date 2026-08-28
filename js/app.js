@@ -399,11 +399,13 @@ function openLangModal() {
   langOverlay.classList.add('open');
   langModal.classList.add('open');
   clearTimeout(advanceTimer);
+  dotsEl.classList.add('paused');
 }
 
 function closeLangModal() {
   langOverlay.classList.remove('open');
   langModal.classList.remove('open');
+  dotsEl.classList.remove('paused');
   setTimeout(() => {
     langModal.style.transform = '';
     langOverlay.style.opacity = '';
@@ -1085,11 +1087,13 @@ function openWaffleModal() {
   waffleOverlay.classList.add('open');
   waffleModal.classList.add('open');
   clearTimeout(advanceTimer);
+  dotsEl.classList.add('paused');
 }
 
 function closeWaffleModal() {
   waffleOverlay.classList.remove('open');
   waffleModal.classList.remove('open');
+  dotsEl.classList.remove('paused');
   setTimeout(() => {
     waffleModal.style.transform = '';
     waffleOverlay.style.opacity = '';
@@ -1186,14 +1190,18 @@ function openCart() {
   cartOverlay.style.opacity = '';
   cartOverlay.classList.add('open');
   cartDrawer.classList.add('open');
+  clearTimeout(advanceTimer);
+  dotsEl.classList.add('paused');
 }
 function closeCart() {
   cartOverlay.classList.remove('open');
   cartDrawer.classList.remove('open');
+  dotsEl.classList.remove('paused');
   setTimeout(() => {
     cartDrawer.style.transform = '';
     cartOverlay.style.opacity = '';
   }, 350);
+  startAdvanceTimer(curCat, curIdx);
 }
 cartChip.addEventListener('click', openCart);
 cartOverlay.addEventListener('click', closeCart);
@@ -1238,10 +1246,12 @@ function openDesc() {
   descOverlay.classList.add('open');
   descModal.classList.add('open');
   clearTimeout(advanceTimer);
+  dotsEl.classList.add('paused');
 }
 function closeDesc() {
   descOverlay.classList.remove('open');
   descModal.classList.remove('open');
+  dotsEl.classList.remove('paused');
   setTimeout(() => {
     descModal.style.transform = '';
     descOverlay.style.opacity = '';

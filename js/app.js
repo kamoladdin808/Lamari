@@ -586,12 +586,72 @@ function prevDish() {
   }
 }
 
+function getDishCartCount(dish) {
+  if (!dish) return 0;
+  let count = 0;
+  if (dish.variants) {
+    dish.variants.forEach(v => {
+      if (cart[v.id]) count += cart[v.id].qty;
+    });
+  } else {
+    if (cart[dish.id]) count += cart[dish.id].qty;
+  }
+  // Check any customized waffle variants
+  Object.keys(cart).forEach(cartId => {
+    if (cartId.startsWith(dish.id + '_')) {
+      count += cart[cartId].qty;
+    }
+  });
+  return count;
+}
+
+function getCatCartCount(cat) {
+  let count = 0;
+  const items = MENU[cat];
+  if (!items) return 0;
+  items.forEach(d => {
+    count += getDishCartCount(d);
+  });
+  return count;
+}
+
+function updateTabBadges() {
+  const tabs = tabsEl.querySelectorAll('.cat-tab');
+  tabs.forEach(tab => {
+    const c = tab.getAttribute('data-cat');
+    const count = getCatCartCount(c);
+    let badge = tab.querySelector('.tab-badge');
+    if (count > 0) {
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'tab-badge';
+        tab.appendChild(badge);
+      }
+      badge.textContent = count;
+    } else if (badge) {
+      badge.remove();
+    }
+  });
+}
+
+function updateDotsCartState() {
+  const segs = dotsEl.querySelectorAll('.seg');
+  segs.forEach((seg, i) => {
+    const dish = MENU[curCat] && MENU[curCat][i];
+    if (dish) {
+      const qty = getDishCartCount(dish);
+      seg.classList.toggle('in-cart', qty > 0);
+    }
+  });
+}
+
 function renderDots(cat, idx) {
   dotsEl.innerHTML = '';
-  MENU[cat].forEach((_, i) => {
+  MENU[cat].forEach((dish, i) => {
     const s = document.createElement('div');
     const isActive = (i === idx && appLoaded);
-    s.className = 'seg' + (i < idx ? ' done' : isActive ? ' active' : '');
+    const dishQty = getDishCartCount(dish);
+    s.className = 'seg' + (i < idx ? ' done' : isActive ? ' active' : '') + (dishQty > 0 ? ' in-cart' : '');
     s.innerHTML = '<i></i>';
     dotsEl.appendChild(s);
   });
@@ -628,6 +688,7 @@ function renderTabs() {
     tabsEl.appendChild(tab);
   });
   updateActiveTab(false);
+  updateTabBadges();
 }
 
 function updateActiveTab(smooth = true) {
@@ -811,6 +872,8 @@ function updateCartUI() {
   cartTotal.textContent = money(sum);
   checkoutBtn.disabled = count === 0;
   renderCartList();
+  updateTabBadges();
+  updateDotsCartState();
 }
 
 function renderCartList() {

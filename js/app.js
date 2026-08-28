@@ -5,12 +5,6 @@ const P4 = "img/p4.jpg";
 const P5 = "img/p5.jpg";
 const P6 = "img/p6.jpg";
 
-// Предзагрузка всех изображений в память для мгновенного переключения без задержек
-[P1, P2, P3, P4, P5, P6].forEach(src => {
-  const img = new Image();
-  img.src = src;
-});
-
 const MENU = {
   'breakfasts': [
     { id: 'french_toast', name: { ru: 'Французский тост с ягодами', uz: 'Rezavorli fransuz tosti' }, desc: { ru: 'Нежный тост со свежими ягодами и натуральным сиропом', uz: 'Yangi rezavorlar va tabiiy sirop bilan mayin fransuz tosti' }, weight: '', price: 35000, badge: '', img: P1 },
@@ -416,7 +410,7 @@ function closeLangModal() {
     langModal.style.transform = '';
     langOverlay.style.opacity = '';
   }, 350);
-  startAdvanceTimer(curCat, curIdx);
+  renderDots(curCat, curIdx);
 }
 
 function setLanguage(lang) {
@@ -654,9 +648,8 @@ function updateDotsCartState() {
   });
 }
 
-function renderDots(cat, idx, customDelay = 4500) {
+function renderDots(cat, idx) {
   dotsEl.innerHTML = '';
-  dotsEl.style.setProperty('--seg-dur', `${customDelay}ms`);
   MENU[cat].forEach((dish, i) => {
     const s = document.createElement('div');
     const isActive = (i === idx && appLoaded);
@@ -666,7 +659,7 @@ function renderDots(cat, idx, customDelay = 4500) {
     dotsEl.appendChild(s);
   });
   if (appLoaded) {
-    startAdvanceTimer(cat, idx, customDelay);
+    startAdvanceTimer(cat, idx);
   }
 }
 
@@ -1105,7 +1098,7 @@ function closeWaffleModal() {
     waffleModal.style.transform = '';
     waffleOverlay.style.opacity = '';
   }, 350);
-  startAdvanceTimer(curCat, curIdx);
+  renderDots(curCat, curIdx);
 }
 
 waffleAddCartBtn.onclick = () => {
@@ -1208,7 +1201,7 @@ function closeCart() {
     cartDrawer.style.transform = '';
     cartOverlay.style.opacity = '';
   }, 350);
-  startAdvanceTimer(curCat, curIdx);
+  renderDots(curCat, curIdx);
 }
 cartChip.addEventListener('click', openCart);
 cartOverlay.addEventListener('click', closeCart);
@@ -1263,7 +1256,7 @@ function closeDesc() {
     descModal.style.transform = '';
     descOverlay.style.opacity = '';
   }, 350);
-  startAdvanceTimer(curCat, curIdx);
+  renderDots(curCat, curIdx);
 }
 dishMoreBtn.addEventListener('click', openDesc);
 descOverlay.addEventListener('click', closeDesc);
@@ -1349,9 +1342,6 @@ function makeDraggable(modalEl, handleEl, overlayEl, closeFn, scrollableChild = 
     } else {
       modalEl.style.transform = '';
       overlayEl.style.opacity = '';
-      if (modalEl === descModal) {
-        startAdvanceTimer(curCat, curIdx);
-      }
     }
     currentY = 0;
   }

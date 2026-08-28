@@ -5,6 +5,12 @@ const P4 = "img/p4.jpg";
 const P5 = "img/p5.jpg";
 const P6 = "img/p6.jpg";
 
+// Предзагрузка всех изображений в память для мгновенного переключения без задержек
+[P1, P2, P3, P4, P5, P6].forEach(src => {
+  const img = new Image();
+  img.src = src;
+});
+
 const MENU = {
   'breakfasts': [
     { id: 'french_toast', name: { ru: 'Французский тост с ягодами', uz: 'Rezavorli fransuz tosti' }, desc: { ru: 'Нежный тост со свежими ягодами и натуральным сиропом', uz: 'Yangi rezavorlar va tabiiy sirop bilan mayin fransuz tosti' }, weight: '', price: 35000, badge: '', img: P1 },
@@ -648,8 +654,9 @@ function updateDotsCartState() {
   });
 }
 
-function renderDots(cat, idx) {
+function renderDots(cat, idx, customDelay = 4500) {
   dotsEl.innerHTML = '';
+  dotsEl.style.setProperty('--seg-dur', `${customDelay}ms`);
   MENU[cat].forEach((dish, i) => {
     const s = document.createElement('div');
     const isActive = (i === idx && appLoaded);
@@ -659,7 +666,7 @@ function renderDots(cat, idx) {
     dotsEl.appendChild(s);
   });
   if (appLoaded) {
-    startAdvanceTimer(cat, idx);
+    startAdvanceTimer(cat, idx, customDelay);
   }
 }
 

@@ -136,7 +136,7 @@ body {
   }
 }
 
-/* ===== IMAGE LAYERS (crossfade double buffer, Ken Burns + Blur transition) ===== */
+/* ===== IMAGE LAYERS (instant hardware-accelerated crossfade + Ken Burns) ===== */
 .player {
   position: absolute;
   inset: 0;
@@ -150,24 +150,22 @@ body {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  filter: blur(12px);
-  transform: scale(1.03);
-  transition: opacity .8s cubic-bezier(0.25, 1, 0.5, 1), filter .8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+  transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .player img.active {
   opacity: 1;
-  filter: blur(0);
-  animation: kenBurns 6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: kenBurns 5.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 @keyframes kenBurns {
   from {
-    transform: scale(1.03);
+    transform: scale(1.01);
   }
 
   to {
-    transform: scale(1.09);
+    transform: scale(1.06);
   }
 }
 

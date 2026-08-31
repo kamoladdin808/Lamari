@@ -5,6 +5,25 @@ const P4 = "img/p4.jpg";
 const P5 = "img/p5.jpg";
 const P6 = "img/p6.jpg";
 
+const ANCHAN_PERSIK_MANGO = "img/anchan_persik_mango.webp";
+const ANCHAN_CHERNIROY = "img/anchan_s_chernikoy.webp";
+const MATCHA_KLUBNIKA = "img/klubnikaz_matcha.webp";
+const MATCHA_KIVI = "img/kivi-matcha.webp";
+const CHAY_MANGO_MARAKUYA = "img/chay_mango_marakuya.webp";
+const CHAY_OBLEPIKHOVIY = "img/chay_oplepixoviy.webp";
+const CHAY_TRAVYANOY = "img/chay_travyanoy.webp";
+const CHAY_YAGODNIY = "img/chay_yagodniy.webp";
+
+// Предзагрузка всех изображений в память для мгновенного переключения без задержек
+[
+  P1, P2, P3, P4, P5, P6,
+  ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
+  CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY
+].forEach(src => {
+  const img = new Image();
+  img.src = src;
+});
+
 const MENU = {
   'breakfasts': [
     { id: 'french_toast', name: { ru: 'Французский тост с ягодами', uz: 'Rezavorli fransuz tosti' }, desc: { ru: 'Нежный тост со свежими ягодами и натуральным сиропом', uz: 'Yangi rezavorlar va tabiiy sirop bilan mayin fransuz tosti' }, weight: '', price: 35000, badge: '', img: P1 },
@@ -212,11 +231,11 @@ const MENU = {
     { id: 'smoothie_berry', name: { ru: 'Смузи ягодный', uz: 'Rezavorli smuzi' }, desc: { ru: 'Густой витаминный смузи из лесных и садовых ягод', uz: "O'rmon va bog' rezavorlaridan tayyorlangan vitaminli smuzi" }, weight: '', price: 45000, badge: '', img: P4 }
   ],
   'matcha': [
-    { id: 'anchan_peach', name: { ru: 'Анчан Персик-манго', uz: 'Anchan Shaftoli-mango' }, desc: { ru: 'Натуральный синий чай анчан с сочным персиком и манго со льдом', uz: "Muz, shaftoli va mango bilan tabiiy ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: P2 },
-    { id: 'anchan_blueberry', name: { ru: 'Анчан с Черникой', uz: 'Chernikali Anchan' }, desc: { ru: 'Натуральный синий чай анчан с черничным пюре и льдом', uz: "Chernika pyuresi va muz bilan ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: P2 },
-    { id: 'matcha_strawberry', name: { ru: 'Матча Клубничный', uz: 'Qulupnayli Matcha' }, desc: { ru: 'Церемониальная матча со взбитым молоком и сочным клубничным слоем', uz: "Ko'pirtirilgan sut, qulupnay qatlami va yapon matcha choyi" }, weight: '', price: 45000, badge: 'HIT', img: P2 },
-    { id: 'matcha_kiwi', name: { ru: 'Матча с Киви', uz: 'Kivili Matcha' }, desc: { ru: 'Японская зеленая матча с молоком и натуральным пюре из киви', uz: 'Sut va tabiiy kivi pyuresi bilan yashil matcha' }, weight: '', price: 45000, badge: '', img: P2 },
-    { id: 'matcha_apple', name: { ru: 'Матча Яблоко-киви', uz: 'Matcha Olma-kivi' }, desc: { ru: 'Освежающий матча-коктейль с зеленым яблоком и киви', uz: 'Yashil olma va kivi bilan tetiklantiruvchi matcha kokteyli' }, weight: '', price: 45000, badge: '', img: P2 }
+    { id: 'anchan_peach', name: { ru: 'Анчан Персик-манго', uz: 'Anchan Shaftoli-mango' }, desc: { ru: 'Натуральный синий чай анчан с сочным персиком и манго со льдом', uz: "Muz, shaftoli va mango bilan tabiiy ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: ANCHAN_PERSIK_MANGO },
+    { id: 'anchan_blueberry', name: { ru: 'Анчан с Черникой', uz: 'Chernikali Anchan' }, desc: { ru: 'Натуральный синий чай анчан с черничным пюре и льдом', uz: "Chernika pyuresi va muz bilan ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: ANCHAN_CHERNIROY },
+    { id: 'matcha_strawberry', name: { ru: 'Матча Клубничный', uz: 'Qulupnayli Matcha' }, desc: { ru: 'Церемониальная матча со взбитым молоком и сочным клубничным слоем', uz: "Ko'pirtirilgan sut, qulupnay qatlami va yapon matcha choyi" }, weight: '', price: 45000, badge: 'HIT', img: MATCHA_KLUBNIKA },
+    { id: 'matcha_kiwi', name: { ru: 'Матча с Киви', uz: 'Kivili Matcha' }, desc: { ru: 'Японская зеленая матча с молоком и натуральным пюре из киви', uz: 'Sut va tabiiy kivi pyuresi bilan yashil matcha' }, weight: '', price: 45000, badge: '', img: MATCHA_KIVI },
+    { id: 'matcha_apple', name: { ru: 'Матча Яблоко-киви', uz: 'Matcha Olma-kivi' }, desc: { ru: 'Освежающий матча-коктейль с зеленым яблоком и киви', uz: 'Yashil olma va kivi bilan tetiklantiruvchi matcha kokteyli' }, weight: '', price: 45000, badge: '', img: MATCHA_KIVI }
   ],
   'milkshakes': [
     { id: 'milk_banana', name: { ru: 'Милкшейк Банановый', uz: 'Bananli milksheyk' }, desc: { ru: 'Сливочное мороженое, свежее молоко и спелый банан', uz: 'Qaymoqli muzqaymoq, yangi sut va pishgan banan' }, weight: '', price: 35000, badge: '', img: P4 },
@@ -230,11 +249,11 @@ const MENU = {
     { id: 'juice_apple', name: { ru: 'Сок Яблочный', uz: 'Olma freshi' }, desc: { ru: '100% свежевыжатый сок из хрустящих зеленых яблок', uz: '100% yangi siqilgan qarsildoq olma sharbati' }, weight: '', price: 35000, badge: '', img: P4 }
   ],
   'tea_author': [
-    { id: 'tea_mango', name: { ru: 'Чай Манго-маракуйя', uz: 'Mango-marakuya choyi' }, desc: { ru: 'Горячий авторский чай с сочным манго, маракуйей и цитрусами в чайнике', uz: 'Mango, marakuya va sitruslar bilan qaynoq mualliflik choyi' }, weight: '', price: 45000, badge: '', img: P2 },
-    { id: 'tea_sea_buckthorn', name: { ru: 'Чай Облепиховый', uz: 'Chakandali choy' }, desc: { ru: 'Согревающий витаминный чай с натуральной облепихой, медом и имбирем', uz: "Tabiiy chakanda, asal va zanjabil bilan vitaminli choy" }, weight: '', price: 45000, badge: 'HIT', img: P2 },
-    { id: 'tea_herbal', name: { ru: 'Чай Травяной', uz: "O'tli choy" }, desc: { ru: 'Успокаивающий сбор из душистых горных трав, ромашки и мяты', uz: "Tog' o'tlari, moychechak va yalpizdan tayyorlangan tinchlantiruvchi choy" }, weight: '', price: 30000, badge: '', img: P2 },
+    { id: 'tea_mango', name: { ru: 'Чай Манго-маракуйя', uz: 'Mango-marakuya choyi' }, desc: { ru: 'Горячий авторский чай с сочным манго, маракуйей и цитрусами в чайнике', uz: 'Mango, marakuya va sitruslar bilan qaynoq mualliflik choyi' }, weight: '', price: 45000, badge: '', img: CHAY_MANGO_MARAKUYA },
+    { id: 'tea_sea_buckthorn', name: { ru: 'Чай Облепиховый', uz: 'Chakandali choy' }, desc: { ru: 'Согревающий витаминный чай с натуральной облепихой, медом и имбирем', uz: "Tabiiy chakanda, asal va zanjabil bilan vitaminli choy" }, weight: '', price: 45000, badge: 'HIT', img: CHAY_OBLEPIKHOVIY },
+    { id: 'tea_herbal', name: { ru: 'Чай Травяной', uz: "O'tli choy" }, desc: { ru: 'Успокаивающий сбор из душистых горных трав, ромашки и мяты', uz: "Tog' o'tlari, moychechak va yalpizdan tayyorlangan tinchlantiruvchi choy" }, weight: '', price: 30000, badge: '', img: CHAY_TRAVYANOY },
     { id: 'tea_apple_cinnamon', name: { ru: 'Чай Яблоко-корица', uz: 'Olma-dolchin choyi' }, desc: { ru: 'Пряный чай со свежими яблоками, палочкой корицы и бадьяном', uz: 'Yangi olma, dolchin tayoqchasi va badyan bilan ziravorli choy' }, weight: '', price: 35000, badge: '', img: P2 },
-    { id: 'tea_berry', name: { ru: 'Чай Ягодный', uz: 'Rezavorli choy' }, desc: { ru: 'Ароматный чай со сбором лесных ягод, мятой и медом', uz: "O'rmon rezavorlari, yalpiz va asal bilan xushbo'y choy" }, weight: '', price: 45000, badge: '', img: P2 }
+    { id: 'tea_berry', name: { ru: 'Чай Ягодный', uz: 'Rezavorli choy' }, desc: { ru: 'Ароматный чай со сбором лесных ягод, мятой и медом', uz: "O'rmon rezavorlari, yalpiz va asal bilan xushbo'y choy" }, weight: '', price: 45000, badge: '', img: CHAY_YAGODNIY }
   ],
   'tea_classic': [
     { id: 'tea_earl_grey', name: { ru: 'Чай Earl Grey', uz: 'Earl Grey choyi' }, desc: { ru: 'Благородный черный чай с натуральным маслом бергамота в чайнике', uz: 'Bergamot moyi bilan boyitilgan oliy navli qora choy' }, weight: '', price: 20000, badge: '', img: P2 },

@@ -60,6 +60,7 @@ const SIRNIKI = "img/sirniki.webp";
 const GRANOLA_MANGO = "img/granola_s_mango.webp";
 const GRANOLA_KLUBNIKA = "img/granola_s_klubnikoy.webp";
 const DRANIKI_LOSOS = "img/draniki_s_lososem.webp";
+const OMLET_KURITSA = "img/omlet_s_kuritsoy.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -77,7 +78,7 @@ const DRANIKI_LOSOS = "img/draniki_s_lososem.webp";
   SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
   SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
   ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI,
-  GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS
+  GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS, OMLET_KURITSA
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -94,7 +95,7 @@ const MENU = {
     { id: 'oatmeal', name: { ru: 'Каша Овсяная', uz: 'Suli kasha' }, desc: { ru: 'Нежная овсяная каша на молоке со сливочным маслом', uz: 'Sutda pishirilgan mayin suli kasha' }, weight: '', price: 30000, badge: '', img: KASHA_OVSYANAYA },
     { id: 'semolina', name: { ru: 'Каша манная', uz: 'Manniy kasha' }, desc: { ru: 'Традиционная манная каша со сливочным маслом', uz: "Sariyog' bilan tayyorlangan klassik manniy kasha" }, weight: '', price: 30000, badge: '', img: KASHA_MANNAYA },
     { id: 'omelette_mushroom', name: { ru: 'Омлет с грибами', uz: "Qo'ziqorinli omlet" }, desc: { ru: 'Пышный омлет с обжаренными лесными грибами и зеленью', uz: "Qovurilgan qo'ziqorinlar bilan yam-yashil omlet" }, weight: '', price: 48000, badge: '', img: P5 },
-    { id: 'omelette_chicken', name: { ru: 'Омлет с курицей', uz: 'Tovuqli omlet' }, desc: { ru: 'Пышный омлет с нежным куриным филе и травами', uz: "Mayin tovuq filesi bilan to'yimli omlet" }, weight: '', price: 48000, badge: '', img: P5 },
+    { id: 'omelette_chicken', name: { ru: 'Омлет с курицей', uz: 'Tovuqli omlet' }, desc: { ru: 'Пышный омлет с нежным куриным филе и травами', uz: "Mayin tovuq filesi bilan to'yimli omlet" }, weight: '', price: 48000, badge: '', img: OMLET_KURITSA },
     { id: 'omelette_cheese', name: { ru: 'Омлет с сыром', uz: 'Pishloqli omlet' }, desc: { ru: 'Нежный классический омлет с тянущимся сыром', uz: "Cho'ziluvchi pishloq bilan mayin klassik omlet" }, weight: '', price: 35000, badge: '', img: P5 },
     { id: 'syrniki', name: { ru: 'Сырники', uz: 'Sirniklar' }, desc: { ru: 'Нежные творожные сырники со сметаной и ягодным соусом', uz: 'Tvorogli mayin sirniklar, smetana va rezavor sousi' }, weight: '', price: 45000, badge: '', img: SIRNIKI },
     { id: 'pancakes_honey', name: { ru: 'Блинчики с медом', uz: 'Asalli blinchiklar' }, desc: { ru: 'Тонкие домашние блинчики со сливочным маслом и натуральным медом', uz: "Sariyog' va tabiiy asal bilan yupqa blinchiklar" }, weight: '', price: 45000, badge: '', img: BLINCHIK_S_MEDOM }

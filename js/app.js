@@ -50,6 +50,7 @@ const PIZZA_CHEESE = "img/pizza_sirniy.webp";
 const SALAT_CAESAR = "img/salat_tsezar.webp";
 const PIZZA_MARGHERITA = "img/pizza_margarita.webp";
 const SALAT_GRECHESKIY = "img/salat_grecheskiy.webp";
+const FRANCUZSKIY_TOST = "img/fransuskiy_tost_s_yagodami.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -65,7 +66,7 @@ const SALAT_GRECHESKIY = "img/salat_grecheskiy.webp";
   SALAT_STRACCIATELLA, PIZZA_AL_POLO, SALAT_ROSTBIF, PIZZA_ROSTBIF,
   SALAT_BURRATA, SALAT_BAKLAJAN, SALAT_TROPICAL, PIZZA_PEPPERONI,
   SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
-  SALAT_GRECHESKIY
+  SALAT_GRECHESKIY, FRANCUZSKIY_TOST
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -73,7 +74,7 @@ const SALAT_GRECHESKIY = "img/salat_grecheskiy.webp";
 
 const MENU = {
   'breakfasts': [
-    { id: 'french_toast', name: { ru: 'Французский тост с ягодами', uz: 'Rezavorli fransuz tosti' }, desc: { ru: 'Нежный тост со свежими ягодами и натуральным сиропом', uz: 'Yangi rezavorlar va tabiiy sirop bilan mayin fransuz tosti' }, weight: '', price: 35000, badge: '', img: P1 },
+    { id: 'french_toast', name: { ru: 'Французский тост с ягодами', uz: 'Rezavorli fransuz tosti' }, desc: { ru: 'Нежный тост со свежими ягодами и натуральным сиропом', uz: 'Yangi rezavorlar va tabiiy sirop bilan mayin fransuz tosti' }, weight: '', price: 35000, badge: '', img: FRANCUZSKIY_TOST },
     { id: 'benedict_salmon', name: { ru: 'Бенедикт с лососем', uz: 'Qizil baliqli Benedikt' }, desc: { ru: 'Бенедикт со слабосоленым лососем и голландским соусом', uz: 'Qizil baliq va golland sousi bilan klassik Benedikt' }, weight: '', price: 65000, badge: 'HIT', img: P5 },
     { id: 'granola_strawberry', name: { ru: 'Гранола с клубникой', uz: 'Qulupnayli granola' }, desc: { ru: 'Хрустящая запеченная гранола с натуральным йогуртом и клубникой', uz: 'Qarsildoq granola, tabiiy yogurt va yangi qulupnay' }, weight: '', price: 50000, badge: '', img: P3 },
     { id: 'granola_mango', name: { ru: 'Гранола с манго', uz: 'Mangolik granola' }, desc: { ru: 'Хрустящая гранола с натуральным йогуртом и кусочками спелого манго', uz: 'Qarsildoq granola, tabiiy yogurt va pishgan mango' }, weight: '', price: 50000, badge: '', img: P3 },

@@ -398,19 +398,17 @@ function openLangModal() {
   langModal.style.transform = '';
   langOverlay.classList.add('open');
   langModal.classList.add('open');
-  clearTimeout(advanceTimer);
-  dotsEl.classList.add('paused');
+  pauseSlider();
 }
 
 function closeLangModal() {
   langOverlay.classList.remove('open');
   langModal.classList.remove('open');
-  dotsEl.classList.remove('paused');
   setTimeout(() => {
     langModal.style.transform = '';
     langOverlay.style.opacity = '';
   }, 350);
-  renderDots(curCat, curIdx);
+  resumeSlider();
 }
 
 function setLanguage(lang) {
@@ -524,6 +522,11 @@ function setDish(cat, idx) {
   const catChanged = (curCat !== cat);
   curCat = cat; curIdx = idx;
   curVariantIdx = 0;
+  slideStartTime = Date.now();
+  slideElapsedBeforePause = 0;
+  isPausedOnHold = false;
+  dotsEl.classList.remove('paused');
+
   const d = MENU[cat][idx];
   const incoming = showingA ? imgB : imgA;
   const outgoing = showingA ? imgA : imgB;
@@ -666,8 +669,8 @@ function renderDots(cat, idx) {
 
 function startAdvanceTimer(cat, idx, customDelay = 4500) {
   clearTimeout(advanceTimer);
-  slideStartTime = Date.now();
-  slideElapsedBeforePause = 0;
+  slideStartTime = Date.now() - (4500 - customDelay);
+  slideElapsedBeforePause = 4500 - customDelay;
   isPausedOnHold = false;
   dotsEl.classList.remove('paused');
 
@@ -752,7 +755,7 @@ window.addEventListener('mouseup', () => {
 let touchX = null;
 const swipeZone = document.getElementById('swipeZone');
 
-function pauseHold() {
+function pauseSlider() {
   if (isPausedOnHold || !appLoaded) return;
   holdStartTime = Date.now();
   wasHold = false;
@@ -762,7 +765,7 @@ function pauseHold() {
   dotsEl.classList.add('paused');
 }
 
-function resumeHold() {
+function resumeSlider() {
   if (!isPausedOnHold || !appLoaded) return;
   isPausedOnHold = false;
   dotsEl.classList.remove('paused');
@@ -772,32 +775,37 @@ function resumeHold() {
     wasHold = true;
   }
 
-  const remaining = Math.max(100, 4500 - slideElapsedBeforePause);
-  startAdvanceTimer(curCat, curIdx, remaining);
+  const remaining = 4500 - slideElapsedBeforePause;
+  if (remaining <= 350) {
+    nextDish();
+  } else {
+    startAdvanceTimer(curCat, curIdx, remaining);
+  }
 }
 
 swipeZone.addEventListener('touchstart', e => {
   isTouchEvent = true;
   touchX = e.touches[0].clientX;
-  pauseHold();
+  pauseSlider();
 }, { passive: true });
 
 swipeZone.addEventListener('touchend', e => {
   if (!appLoaded) return;
 
-  isPausedOnHold = false;
-  dotsEl.classList.remove('paused');
-
-  const holdDuration = Date.now() - holdStartTime;
   const dx = touchX !== null ? e.changedTouches[0].clientX - touchX : 0;
+  const holdDuration = Date.now() - holdStartTime;
 
   if (Math.abs(dx) > 50) {
+    isPausedOnHold = false;
+    dotsEl.classList.remove('paused');
     if (dx < 0) {
       nextDish();
     } else {
       prevDish();
     }
   } else if (holdDuration <= 220) {
+    isPausedOnHold = false;
+    dotsEl.classList.remove('paused');
     const rect = swipeZone.getBoundingClientRect();
     const x = e.changedTouches[0].clientX - rect.left;
     if (x < rect.width * 0.35) {
@@ -806,16 +814,15 @@ swipeZone.addEventListener('touchend', e => {
       nextDish();
     }
   } else {
-    const remaining = Math.max(100, 4500 - slideElapsedBeforePause);
-    startAdvanceTimer(curCat, curIdx, remaining);
+    resumeSlider();
   }
 
   touchX = null;
 }, { passive: true });
 
-swipeZone.addEventListener('mousedown', pauseHold);
-swipeZone.addEventListener('mouseup', resumeHold);
-swipeZone.addEventListener('mouseleave', resumeHold);
+swipeZone.addEventListener('mousedown', pauseSlider);
+swipeZone.addEventListener('mouseup', resumeSlider);
+swipeZone.addEventListener('mouseleave', resumeSlider);
 swipeZone.addEventListener('contextmenu', e => e.preventDefault());
 
 swipeZone.addEventListener('click', e => {
@@ -1089,19 +1096,17 @@ function openWaffleModal() {
   waffleModal.style.transform = '';
   waffleOverlay.classList.add('open');
   waffleModal.classList.add('open');
-  clearTimeout(advanceTimer);
-  dotsEl.classList.add('paused');
+  pauseSlider();
 }
 
 function closeWaffleModal() {
   waffleOverlay.classList.remove('open');
   waffleModal.classList.remove('open');
-  dotsEl.classList.remove('paused');
   setTimeout(() => {
     waffleModal.style.transform = '';
     waffleOverlay.style.opacity = '';
   }, 350);
-  renderDots(curCat, curIdx);
+  resumeSlider();
 }
 
 waffleAddCartBtn.onclick = () => {
@@ -1193,18 +1198,16 @@ function openCart() {
   cartOverlay.style.opacity = '';
   cartOverlay.classList.add('open');
   cartDrawer.classList.add('open');
-  clearTimeout(advanceTimer);
-  dotsEl.classList.add('paused');
+  pauseSlider();
 }
 function closeCart() {
   cartOverlay.classList.remove('open');
   cartDrawer.classList.remove('open');
-  dotsEl.classList.remove('paused');
   setTimeout(() => {
     cartDrawer.style.transform = '';
     cartOverlay.style.opacity = '';
   }, 350);
-  renderDots(curCat, curIdx);
+  resumeSlider();
 }
 cartChip.addEventListener('click', openCart);
 cartOverlay.addEventListener('click', closeCart);
@@ -1248,18 +1251,16 @@ function openDesc() {
   descOverlay.style.opacity = '';
   descOverlay.classList.add('open');
   descModal.classList.add('open');
-  clearTimeout(advanceTimer);
-  dotsEl.classList.add('paused');
+  pauseSlider();
 }
 function closeDesc() {
   descOverlay.classList.remove('open');
   descModal.classList.remove('open');
-  dotsEl.classList.remove('paused');
   setTimeout(() => {
     descModal.style.transform = '';
     descOverlay.style.opacity = '';
   }, 350);
-  renderDots(curCat, curIdx);
+  resumeSlider();
 }
 dishMoreBtn.addEventListener('click', openDesc);
 descOverlay.addEventListener('click', closeDesc);

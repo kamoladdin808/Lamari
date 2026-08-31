@@ -13,12 +13,14 @@ const CHAY_MANGO_MARAKUYA = "img/chay_mango_marakuya.webp";
 const CHAY_OBLEPIKHOVIY = "img/chay_oplepixoviy.webp";
 const CHAY_TRAVYANOY = "img/chay_travyanoy.webp";
 const CHAY_YAGODNIY = "img/chay_yagodniy.webp";
+const KASHA_OVSYANAYA = "img/kasha_ovsyanaya.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
   P1, P2, P3, P4, P5, P6,
   ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
-  CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY
+  CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY,
+  KASHA_OVSYANAYA
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -32,7 +34,7 @@ const MENU = {
     { id: 'granola_mango', name: { ru: 'Гранола с манго', uz: 'Mangolik granola' }, desc: { ru: 'Хрустящая гранола с натуральным йогуртом и кусочками спелого манго', uz: 'Qarsildoq granola, tabiiy yogurt va pishgan mango' }, weight: '', price: 50000, badge: '', img: P3 },
     { id: 'draniki_salmon', name: { ru: 'Драники с лососем', uz: 'Qizil baliqli draniklar' }, desc: { ru: 'Золотистые картофельные драники с нежным лососем и сметаной', uz: 'Qizil baliq va smetana bilan tillarang kartoshka draniklar' }, weight: '', price: 75000, badge: '', img: P5 },
     { id: 'shakshuka', name: { ru: 'Шакшука', uz: 'Shakshuka' }, desc: { ru: 'Яйца в ароматном томатном соусе со специями и хрустящим тостом', uz: "Xushbo'y pomidor sousida pishirilgan tuxumlar" }, weight: '', price: 55000, badge: '', img: P6 },
-    { id: 'oatmeal', name: { ru: 'Каша Овсяная', uz: 'Suli kasha' }, desc: { ru: 'Нежная овсяная каша на молоке со сливочным маслом', uz: 'Sutda pishirilgan mayin suli kasha' }, weight: '', price: 30000, badge: '', img: P1 },
+    { id: 'oatmeal', name: { ru: 'Каша Овсяная', uz: 'Suli kasha' }, desc: { ru: 'Нежная овсяная каша на молоке со сливочным маслом', uz: 'Sutda pishirilgan mayin suli kasha' }, weight: '', price: 30000, badge: '', img: KASHA_OVSYANAYA },
     { id: 'semolina', name: { ru: 'Каша манная', uz: 'Manniy kasha' }, desc: { ru: 'Традиционная манная каша со сливочным маслом', uz: "Sariyog' bilan tayyorlangan klassik manniy kasha" }, weight: '', price: 30000, badge: '', img: P1 },
     { id: 'omelette_mushroom', name: { ru: 'Омлет с грибами', uz: "Qo'ziqorinli omlet" }, desc: { ru: 'Пышный омлет с обжаренными лесными грибами и зеленью', uz: "Qovurilgan qo'ziqorinlar bilan yam-yashil omlet" }, weight: '', price: 48000, badge: '', img: P5 },
     { id: 'omelette_chicken', name: { ru: 'Омлет с курицей', uz: 'Tovuqli omlet' }, desc: { ru: 'Пышный омлет с нежным куриным филе и травами', uz: "Mayin tovuq filesi bilan to'yimli omlet" }, weight: '', price: 48000, badge: '', img: P5 },

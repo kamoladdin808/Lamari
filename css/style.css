@@ -1243,11 +1243,13 @@ body {
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  margin: 14px auto 0;
+  margin: 12px auto 0;
   padding: 4px 0 8px;
   cursor: grab;
   user-select: none;
   scroll-behavior: smooth;
+  mask-image: linear-gradient(to right, transparent 0%, black 20px, black calc(100% - 20px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20px, black calc(100% - 20px), transparent 100%);
 }
 
 .tabs-viewport::-webkit-scrollbar {
@@ -1256,17 +1258,17 @@ body {
 
 .cat-tabs {
   display: flex;
-  gap: 10px;
-  padding: 0 16px;
+  gap: 8px;
+  padding: 0 20px;
   width: max-content;
 }
 
 .cat-tab {
   position: relative;
   flex: 0 0 auto;
-  padding: 12px 20px;
-  border-radius: 14px;
-  font-size: 14.5px;
+  padding: 10.5px 17px;
+  border-radius: 12px;
+  font-size: 13.5px;
   font-weight: 600;
   color: rgba(255, 255, 255, .75);
   background: rgba(20, 17, 15, .55);
@@ -1709,8 +1711,9 @@ body {
   }
 
   .cat-tab {
-    padding: 12px 18px;
-    font-size: 14px;
+    padding: 10.5px 17px;
+    font-size: 13.5px;
+    border-radius: 12px;
   }
 }
 

@@ -936,7 +936,7 @@ let priceAnimFrame = null;
 
 function animatePriceDisplay(targetPrice) {
   const inCartText = curLang === 'ru' ? 'В корзину' : 'Savatga';
-  
+
   if (lastPriceValue === null || lastPriceValue === targetPrice) {
     lastPriceValue = targetPrice;
     pillLabel.innerHTML = `${inCartText} · <span class="price-counter">${money(targetPrice)}</span>`;
@@ -954,7 +954,7 @@ function animatePriceDisplay(targetPrice) {
     const progress = Math.min(elapsed / duration, 1);
     const ease = 1 - Math.pow(1 - progress, 3);
     const currentVal = Math.round((startPrice + (targetPrice - startPrice) * ease) / 500) * 500;
-    
+
     pillLabel.innerHTML = `${inCartText} · <span class="price-counter ${progress < 1 ? 'rolling' : ''}">${money(currentVal)}</span>`;
 
     if (progress < 1) {

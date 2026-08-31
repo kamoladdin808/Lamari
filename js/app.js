@@ -147,6 +147,11 @@ const MENU = {
     { id: 'medallion_gratin', name: { ru: 'Медальон с гратеном', uz: 'Gratenli medalon' }, desc: { ru: 'Медальоны из вырезки говядины с запеченным сырно-картофельным гратеном', uz: "Pishloqli-kartoshkali graten bilan mol go'shti medalonlari" }, weight: '', price: 160000, badge: '', img: MEDALYON_GRATEN },
     { id: 'perlotto_truffle', name: { ru: 'Перлотто с трюфельным соусом', uz: 'Tryufel sousli perlotto' }, desc: { ru: 'Нежное перловое ризотто с благородным трюфельным соусом и пармезаном', uz: "Xushbo'y tryufel sousi va parmezan bilan tayyorlangan arpa risottosi" }, weight: '', price: 60000, badge: 'NEW', img: PERLOTTO_TRUFFLE }
   ],
+  'pasta': [
+    { id: 'fettuccine_alfredo', name: { ru: 'Феттучине Альфредо', uz: 'Fettuchine Alfredo' }, desc: { ru: 'Классическая паста феттучине в нежном сливочном соусе Альфредо с пармезаном', uz: 'Qaymoqli Alfredo sousi va parmezan bilan klassik fettuchine pastasi' }, weight: '', price: 65000, badge: '', img: P5 },
+    { id: 'spaghetti_bolognese', name: { ru: 'Спагетти Болоньезе', uz: 'Bolonyeze spagetti' }, desc: { ru: 'Традиционные спагетти с сочным мясным рагу Болоньезе и пармезаном', uz: "Suvli go'shtli Bolonyeze ragusi va parmezan bilan an'anaviy spagetti" }, weight: '', price: 65000, badge: '', img: P5 },
+    { id: 'tortiglioni_4_cheese', name: { ru: 'Тортильони 4 сыра', uz: 'Tortilyoni 4 pishloq' }, desc: { ru: 'Паста тортильони в насыщенном соусе из четырех благородных сыров', uz: "To'rt xil oliy navli pishloqli quyuq sousda tortilyoni pastasi" }, weight: '', price: 70000, badge: '', img: P5 }
+  ],
   'bowls': [
     { id: 'bowl_green', name: { ru: 'Боул зелень с авокадо', uz: "Ko'katli avokado bouli" }, desc: { ru: 'Свежий микс салатов, спелый авокадо, огурцы, эдамаме, семена и легкая заправка', uz: "Yangi salat miksi, pishgan avokado, bodring, edamame va urug'lar" }, weight: '', price: 135000, badge: '', img: BOUL_ZELEN },
     { id: 'bowl_salmon', name: { ru: 'Боул с лососем', uz: 'Qizil baliqli boul' }, desc: { ru: 'Свежий лосось, рис, авокадо, бобы эдамаме, чука и кунжутный соус', uz: 'Yangi qizil baliq, guruch, avokado, edamame, chuka va kunjut sousi' }, weight: '', price: 150000, badge: 'HIT', img: BOUL_LOSOS },
@@ -363,6 +368,7 @@ const CAT_NAMES = {
   'sandwiches': { ru: 'Сэндвичи', uz: 'Sendvichlar' },
   'soups': { ru: 'Супы', uz: "Sho'rvalar" },
   'mains': { ru: 'Основное блюдо', uz: 'Asosiy taomlar' },
+  'pasta': { ru: 'Пасты', uz: 'Pastalar' },
   'bowls': { ru: 'Боулы', uz: 'Boullar' },
   'sides': { ru: 'Гарниры', uz: 'Garnirlar' },
   'pizza': { ru: 'Пицца', uz: 'Pitsa' },
@@ -385,6 +391,7 @@ const CAT_TINTS = {
   'sandwiches': 'radial-gradient(ellipse at 50% 25%, rgba(255, 167, 38, 0.2) 0%, transparent 65%)',
   'soups': 'radial-gradient(ellipse at 50% 25%, rgba(255, 112, 67, 0.2) 0%, transparent 65%)',
   'mains': 'radial-gradient(ellipse at 50% 25%, rgba(255, 138, 101, 0.2) 0%, transparent 65%)',
+  'pasta': 'radial-gradient(ellipse at 50% 25%, rgba(255, 183, 77, 0.2) 0%, transparent 65%)',
   'bowls': 'radial-gradient(ellipse at 50% 25%, rgba(102, 187, 106, 0.2) 0%, transparent 65%)',
   'sides': 'radial-gradient(ellipse at 50% 25%, rgba(255, 202, 40, 0.18) 0%, transparent 65%)',
   'pizza': 'radial-gradient(ellipse at 50% 25%, rgba(255, 112, 67, 0.22) 0%, transparent 65%)',

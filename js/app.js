@@ -52,6 +52,7 @@ const PIZZA_MARGHERITA = "img/pizza_margarita.webp";
 const SALAT_GRECHESKIY = "img/salat_grecheskiy.webp";
 const FRANCUZSKIY_TOST = "img/fransuskiy_tost_s_yagodami.webp";
 const FRANCUZSKIY_ZAVTRAK = "img/fransuskiy_zavtrak.webp";
+const ITALYANSKIY_ZAVTRAK = "img/italyanskiy_zavtrak.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -67,7 +68,7 @@ const FRANCUZSKIY_ZAVTRAK = "img/fransuskiy_zavtrak.webp";
   SALAT_STRACCIATELLA, PIZZA_AL_POLO, SALAT_ROSTBIF, PIZZA_ROSTBIF,
   SALAT_BURRATA, SALAT_BAKLAJAN, SALAT_TROPICAL, PIZZA_PEPPERONI,
   SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
-  SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK
+  SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -90,7 +91,7 @@ const MENU = {
     { id: 'pancakes_honey', name: { ru: 'Блинчики с медом', uz: 'Asalli blinchiklar' }, desc: { ru: 'Тонкие домашние блинчики со сливочным маслом и натуральным медом', uz: "Sariyog' va tabiiy asal bilan yupqa blinchiklar" }, weight: '', price: 45000, badge: '', img: P3 }
   ],
   'set_breakfast': [
-    { id: 'set_italian', name: { ru: 'Итальянский завтрак', uz: 'Italyan nonushtasi' }, desc: { ru: 'Сет: хрустящая фокачча, моцарелла, томаты, яйцо и кофе', uz: 'Set: qarsildoq fokachcha, motsarella, pomidor, tuxum va kofe' }, weight: '', price: 85000, badge: 'СЕТ', img: P1 },
+    { id: 'set_italian', name: { ru: 'Итальянский завтрак', uz: 'Italyan nonushtasi' }, desc: { ru: 'Сет: хрустящая фокачча, моцарелла, томаты, яйцо и кофе', uz: 'Set: qarsildoq fokachcha, motsarella, pomidor, tuxum va kofe' }, weight: '', price: 85000, badge: 'СЕТ', img: ITALYANSKIY_ZAVTRAK },
     { id: 'set_french', name: { ru: 'Французский завтрак', uz: 'Fransuz nonushtasi' }, desc: { ru: 'Сет: свежий круассан, сливочное масло, ягодный конфитюр и кофе', uz: "Set: yangi kruassan, sariyog', rezavor jem va kofe" }, weight: '', price: 65000, badge: 'СЕТ', img: FRANCUZSKIY_ZAVTRAK },
     { id: 'set_english', name: { ru: 'Английский завтрак', uz: 'Ingliz nonushtasi' }, desc: { ru: 'Сет: яичница, бекон, сосиски, тосты, фасоль в томате и напиток', uz: 'Set: tuxum, bekon, sosiskalar, tostlar, loviya va ichimlik' }, weight: '', price: 55000, badge: 'СЕТ', img: P5 }
   ],

@@ -1509,6 +1509,39 @@ makeDraggable(cartDrawer, document.querySelector('.drawer-handle'), cartOverlay,
 makeDraggable(langModal, document.querySelector('.lang-modal-handle'), langOverlay, closeLangModal);
 makeDraggable(waffleModal, document.querySelector('.waffle-handle'), waffleOverlay, closeWaffleModal, waffleModalBody);
 
+function initAmbientParticles() {
+  const container = document.getElementById('particlesOverlay');
+  if (!container) return;
+  container.innerHTML = '';
+  const count = 12;
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'ambient-particle';
+
+    const size = 3 + Math.random() * 5; // 3px to 8px
+    const left = Math.random() * 100;
+    const delay = Math.random() * 10;
+    const duration = 10 + Math.random() * 10; // 10s to 20s
+    const sway = (Math.random() - 0.5) * 45;
+    const opacity = 0.2 + Math.random() * 0.35;
+
+    p.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${left}%;
+      bottom: -15px;
+      --max-opacity: ${opacity};
+      --sway: ${sway}px;
+      animation-duration: ${duration}s;
+      animation-delay: -${delay}s;
+    `;
+    container.appendChild(p);
+  }
+}
+
+initAmbientParticles();
+
 renderTabs();
 setDish(curCat, curIdx);
 updateCartUI();

@@ -589,6 +589,12 @@ function setDish(cat, idx) {
   }
   showingA = !showingA;
 
+  // Staggered text entrance — снимаем и заново запускаем анимацию
+  const dishInfoEl = document.querySelector('.dish-info');
+  dishInfoEl.classList.remove('stagger');
+  void dishInfoEl.offsetWidth;
+  dishInfoEl.classList.add('stagger');
+
   dishCat.textContent = CAT_NAMES[cat][curLang];
   dishTitle.textContent = d.name[curLang];
 

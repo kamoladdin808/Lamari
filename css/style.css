@@ -310,6 +310,45 @@ body {
   opacity: .85;
 }
 
+/* ===== STAGGERED TEXT ENTRANCE ===== */
+@keyframes slideUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dish-info .dish-cat-row,
+.dish-info .dish-title,
+.dish-info .dish-desc,
+.dish-info .dish-more-btn {
+  will-change: opacity, transform;
+}
+
+.dish-info.stagger .dish-cat-row {
+  animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0s;
+}
+
+.dish-info.stagger .dish-title {
+  animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.08s;
+}
+
+.dish-info.stagger .dish-desc {
+  animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.15s;
+}
+
+.dish-info.stagger .dish-more-btn {
+  animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.2s;
+}
+
 .dish-title {
   font-size: clamp(19px, 5.5vw, 23px);
   font-weight: 700;

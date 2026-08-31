@@ -49,6 +49,7 @@ const SALAT_GRILL = "img/salat_grill.webp";
 const PIZZA_CHEESE = "img/pizza_sirniy.webp";
 const SALAT_CAESAR = "img/salat_tsezar.webp";
 const PIZZA_MARGHERITA = "img/pizza_margarita.webp";
+const SALAT_GRECHESKIY = "img/salat_grecheskiy.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -63,7 +64,8 @@ const PIZZA_MARGHERITA = "img/pizza_margarita.webp";
   SUP_TOMYAM_LOSOS, SUP_CHECHEVICHNIY, SUP_MINESTRONE,
   SALAT_STRACCIATELLA, PIZZA_AL_POLO, SALAT_ROSTBIF, PIZZA_ROSTBIF,
   SALAT_BURRATA, SALAT_BAKLAJAN, SALAT_TROPICAL, PIZZA_PEPPERONI,
-  SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA
+  SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
+  SALAT_GRECHESKIY
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -92,7 +94,7 @@ const MENU = {
   ],
   'salads': [
     { id: 'salad_burrata', name: { ru: 'Салат Буррата', uz: 'Burrata salati' }, desc: { ru: 'Сливочный мешочек бурраты со сладкими томатами и соусом песто', uz: 'Shirin pomidorlar va pesto sousi bilan qaymoqli burrata' }, weight: '', price: 85000, badge: '', img: SALAT_BURRATA },
-    { id: 'salad_greek', name: { ru: 'Салат Греческий', uz: 'Grek salati' }, desc: { ru: 'Свежие огурцы, томаты, болгарский перец, сыр фета, маслины и оливковое масло', uz: "Bodring, pomidor, bulg'or qalampiri, feta pishlog'i va zaytun" }, weight: '', price: 50000, badge: '', img: P6 },
+    { id: 'salad_greek', name: { ru: 'Салат Греческий', uz: 'Grek salati' }, desc: { ru: 'Свежие огурцы, томаты, болгарский перец, сыр фета, маслины и оливковое масло', uz: "Bodring, pomidor, bulg'or qalampiri, feta pishlog'i va zaytun" }, weight: '', price: 50000, badge: '', img: SALAT_GRECHESKIY },
     { id: 'salad_grill', name: { ru: 'Салат Грилл', uz: 'Grill salati' }, desc: { ru: 'Овощи на гриле с пикантной авторской заправкой и зеленью', uz: "Mualliflik sousi va ko'katlar bilan grilda pishirilgan sabzavotlar" }, weight: '', price: 70000, badge: '', img: SALAT_GRILL },
     { id: 'salad_roastbeef', name: { ru: 'Салат Ростбиф', uz: 'Rostbif salati' }, desc: { ru: 'Сочные ломтики ростбифа с рукколой, черри и выдержанным пармезаном', uz: "Rukkola, cherri va parmezan bilan suvli rostbif bo'laklari" }, weight: '', price: 80000, badge: '', img: SALAT_ROSTBIF },
     { id: 'salad_stracciatella', name: { ru: 'Салат Страчателла с томатами', uz: 'Pomidorli Strachatella salati' }, desc: { ru: 'Нежнейшая страчателла со спелыми томатами, бальзамиком и базиликом', uz: 'Pishgan pomidorlar, balzamik va rayhon bilan mayin strachatella' }, weight: '', price: 85000, badge: 'NEW', img: SALAT_STRACCIATELLA },

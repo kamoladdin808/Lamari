@@ -56,6 +56,7 @@ const ITALYANSKIY_ZAVTRAK = "img/italyanskiy_zavtrak.webp";
 const ANGLIYSKIY_ZAVTRAK = "img/angliyskiy_zavtrak.webp";
 const BLINCHIK_S_MEDOM = "img/blinchik_s_medom.webp";
 const BENEDIKT_LOSOS = "img/benedikt_s_lasosem.webp";
+const SIRNIKI = "img/sirniki.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -72,7 +73,7 @@ const BENEDIKT_LOSOS = "img/benedikt_s_lasosem.webp";
   SALAT_BURRATA, SALAT_BAKLAJAN, SALAT_TROPICAL, PIZZA_PEPPERONI,
   SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
   SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
-  ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS
+  ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -91,7 +92,7 @@ const MENU = {
     { id: 'omelette_mushroom', name: { ru: 'Омлет с грибами', uz: "Qo'ziqorinli omlet" }, desc: { ru: 'Пышный омлет с обжаренными лесными грибами и зеленью', uz: "Qovurilgan qo'ziqorinlar bilan yam-yashil omlet" }, weight: '', price: 48000, badge: '', img: P5 },
     { id: 'omelette_chicken', name: { ru: 'Омлет с курицей', uz: 'Tovuqli omlet' }, desc: { ru: 'Пышный омлет с нежным куриным филе и травами', uz: "Mayin tovuq filesi bilan to'yimli omlet" }, weight: '', price: 48000, badge: '', img: P5 },
     { id: 'omelette_cheese', name: { ru: 'Омлет с сыром', uz: 'Pishloqli omlet' }, desc: { ru: 'Нежный классический омлет с тянущимся сыром', uz: "Cho'ziluvchi pishloq bilan mayin klassik omlet" }, weight: '', price: 35000, badge: '', img: P5 },
-    { id: 'syrniki', name: { ru: 'Сырники', uz: 'Sirniklar' }, desc: { ru: 'Нежные творожные сырники со сметаной и ягодным соусом', uz: 'Tvorogli mayin sirniklar, smetana va rezavor sousi' }, weight: '', price: 45000, badge: '', img: P3 },
+    { id: 'syrniki', name: { ru: 'Сырники', uz: 'Sirniklar' }, desc: { ru: 'Нежные творожные сырники со сметаной и ягодным соусом', uz: 'Tvorogli mayin sirniklar, smetana va rezavor sousi' }, weight: '', price: 45000, badge: '', img: SIRNIKI },
     { id: 'pancakes_honey', name: { ru: 'Блинчики с медом', uz: 'Asalli blinchiklar' }, desc: { ru: 'Тонкие домашние блинчики со сливочным маслом и натуральным медом', uz: "Sariyog' va tabiiy asal bilan yupqa blinchiklar" }, weight: '', price: 45000, badge: '', img: BLINCHIK_S_MEDOM }
   ],
   'set_breakfast': [

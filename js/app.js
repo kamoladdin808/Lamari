@@ -605,7 +605,12 @@ function setDish(cat, idx) {
   // Установка бейджа
   if (d.badge) {
     dishBadge.textContent = d.badge;
-    dishBadge.style.display = 'inline-block';
+    dishBadge.className = 'dish-badge';
+    if (d.badge === 'HIT') dishBadge.classList.add('badge-hit');
+    else if (d.badge === 'NEW') dishBadge.classList.add('badge-new');
+    else if (d.badge === 'СЕТ') dishBadge.classList.add('badge-set');
+    void dishBadge.offsetWidth;
+    dishBadge.style.display = 'inline-flex';
   } else {
     dishBadge.style.display = 'none';
   }

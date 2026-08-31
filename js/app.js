@@ -446,7 +446,11 @@ function setLanguage(lang) {
   btnSelectRu.classList.toggle('active', lang === 'ru');
   btnSelectUz.classList.toggle('active', lang === 'uz');
 
+  // Сохраняем позицию скролла табов, чтобы не дергалось
+  const savedScroll = tabsViewport.scrollLeft;
   renderTabs();
+  tabsViewport.scrollLeft = savedScroll;
+
   setDish(curCat, curIdx);
   updateCartUI();
   translateStaticUI();

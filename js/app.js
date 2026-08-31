@@ -605,12 +605,7 @@ function setDish(cat, idx) {
   // Установка бейджа
   if (d.badge) {
     dishBadge.textContent = d.badge;
-    dishBadge.className = 'dish-badge';
-    if (d.badge === 'HIT') dishBadge.classList.add('badge-hit');
-    else if (d.badge === 'NEW') dishBadge.classList.add('badge-new');
-    else if (d.badge === 'СЕТ') dishBadge.classList.add('badge-set');
-    void dishBadge.offsetWidth;
-    dishBadge.style.display = 'inline-flex';
+    dishBadge.style.display = 'inline-block';
   } else {
     dishBadge.style.display = 'none';
   }
@@ -936,7 +931,7 @@ let priceAnimFrame = null;
 
 function animatePriceDisplay(targetPrice) {
   const inCartText = curLang === 'ru' ? 'В корзину' : 'Savatga';
-
+  
   if (lastPriceValue === null || lastPriceValue === targetPrice) {
     lastPriceValue = targetPrice;
     pillLabel.innerHTML = `${inCartText} · <span class="price-counter">${money(targetPrice)}</span>`;
@@ -954,7 +949,7 @@ function animatePriceDisplay(targetPrice) {
     const progress = Math.min(elapsed / duration, 1);
     const ease = 1 - Math.pow(1 - progress, 3);
     const currentVal = Math.round((startPrice + (targetPrice - startPrice) * ease) / 500) * 500;
-
+    
     pillLabel.innerHTML = `${inCartText} · <span class="price-counter ${progress < 1 ? 'rolling' : ''}">${money(currentVal)}</span>`;
 
     if (progress < 1) {

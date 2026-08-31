@@ -316,7 +316,6 @@ body {
     opacity: 0;
     transform: translateY(18px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -358,62 +357,15 @@ body {
 }
 
 .dish-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   background: #BFE94F;
   color: #20301a;
   font-size: 9px;
-  font-weight: 800;
-  padding: 2.5px 7.5px;
+  font-weight: 700;
+  padding: 2px 6px;
   border-radius: 6px;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  animation: badgePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.dish-badge.badge-hit {
-  background: linear-gradient(135deg, #FFD200 0%, #F7971E 100%);
-  color: #3b2300;
-  box-shadow: 0 0 10px rgba(247, 151, 30, 0.55), 0 2px 6px rgba(0, 0, 0, 0.3);
-  animation: badgeHitGlow 2.4s infinite alternate ease-in-out, badgePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.dish-badge.badge-new {
-  background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
-  color: #03243d;
-  box-shadow: 0 0 10px rgba(79, 172, 254, 0.55), 0 2px 6px rgba(0, 0, 0, 0.3);
-  animation: badgeNewGlow 2.4s infinite alternate ease-in-out, badgePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.dish-badge.badge-set {
-  background: linear-gradient(135deg, #E0C3FC 0%, #8EC5FC 100%);
-  color: #1a203a;
-  box-shadow: 0 0 8px rgba(142, 197, 252, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
-  animation: badgePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes badgeHitGlow {
-  0% {
-    box-shadow: 0 0 6px rgba(247, 151, 30, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
-    transform: scale(1);
-  }
-  100% {
-    box-shadow: 0 0 14px rgba(255, 210, 0, 0.8), 0 0 22px rgba(247, 151, 30, 0.45);
-    transform: scale(1.04);
-  }
-}
-
-@keyframes badgeNewGlow {
-  0% {
-    box-shadow: 0 0 6px rgba(79, 172, 254, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
-    transform: scale(1);
-  }
-  100% {
-    box-shadow: 0 0 14px rgba(0, 242, 254, 0.8), 0 0 22px rgba(79, 172, 254, 0.45);
-    transform: scale(1.04);
-  }
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .dish-in-cart-badge {

@@ -8,9 +8,7 @@ const P6 = "img/p6.jpg";
 const ANCHAN_PERSIK_MANGO = "img/anchan_persik_mango.webp";
 const ANCHAN_CHERNIROY = "img/anchan_s_chernikoy.webp";
 const MATCHA_KLUBNIKA = "img/klubnikaz_matcha.webp";
-const MATCHA_KLUBNIKA_DESKTOP = "img/klubnikaz_matcha.JPG_2K_202608311545.webp";
 const MATCHA_KIVI = "img/kivi-matcha.webp";
-const MATCHA_KIVI_DESKTOP = "img/kivi-matcha.jpg_2K_202608311540.webp";
 const CHAY_MANGO_MARAKUYA = "img/chay_mango_marakuya.webp";
 const CHAY_OBLEPIKHOVIY = "img/chay_oplepixoviy.webp";
 const CHAY_TRAVYANOY = "img/chay_travyanoy.webp";
@@ -19,7 +17,7 @@ const CHAY_YAGODNIY = "img/chay_yagodniy.webp";
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
   P1, P2, P3, P4, P5, P6,
-  ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KLUBNIKA_DESKTOP, MATCHA_KIVI, MATCHA_KIVI_DESKTOP,
+  ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
   CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY
 ].forEach(src => {
   const img = new Image();
@@ -233,8 +231,8 @@ const MENU = {
     { id: 'smoothie_berry', name: { ru: 'Смузи ягодный', uz: 'Rezavorli smuzi' }, desc: { ru: 'Густой витаминный смузи из лесных и садовых ягод', uz: "O'rmon va bog' rezavorlaridan tayyorlangan vitaminli smuzi" }, weight: '', price: 45000, badge: '', img: P4 }
   ],
   'matcha': [
-    { id: 'matcha_kiwi', name: { ru: 'Матча с Киви', uz: 'Kivili Matcha' }, desc: { ru: 'Японская зеленая матча с молоком и натуральным пюре из киви', uz: 'Sut va tabiiy kivi pyuresi bilan yashil matcha' }, weight: '', price: 45000, badge: '', img: MATCHA_KIVI, imgDesktop: MATCHA_KIVI_DESKTOP },
-    { id: 'matcha_strawberry', name: { ru: 'Матча Клубничный', uz: 'Qulupnayli Matcha' }, desc: { ru: 'Церемониальная матча со взбитым молоком и сочным клубничным слоем', uz: "Ko'pirtirilgan sut, qulupnay qatlami va yapon matcha choyi" }, weight: '', price: 45000, badge: 'HIT', img: MATCHA_KLUBNIKA, imgDesktop: MATCHA_KLUBNIKA_DESKTOP },
+    { id: 'matcha_kiwi', name: { ru: 'Матча с Киви', uz: 'Kivili Matcha' }, desc: { ru: 'Японская зеленая матча с молоком и натуральным пюре из киви', uz: 'Sut va tabiiy kivi pyuresi bilan yashil matcha' }, weight: '', price: 45000, badge: '', img: MATCHA_KIVI },
+    { id: 'matcha_strawberry', name: { ru: 'Матча Клубничный', uz: 'Qulupnayli Matcha' }, desc: { ru: 'Церемониальная матча со взбитым молоком и сочным клубничным слоем', uz: "Ko'pirtirilgan sut, qulupnay qatlami va yapon matcha choyi" }, weight: '', price: 45000, badge: 'HIT', img: MATCHA_KLUBNIKA },
     { id: 'matcha_apple', name: { ru: 'Матча Яблоко-киви', uz: 'Matcha Olma-kivi' }, desc: { ru: 'Освежающий матча-коктейль с зеленым яблоком и киви', uz: 'Yashil olma va kivi bilan tetiklantiruvchi matcha kokteyli' }, weight: '', price: 45000, badge: '', img: P2 },
     { id: 'anchan_peach', name: { ru: 'Анчан Персик-манго', uz: 'Anchan Shaftoli-mango' }, desc: { ru: 'Натуральный синий чай анчан с сочным персиком и манго со льдом', uz: "Muz, shaftoli va mango bilan tabiiy ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: ANCHAN_PERSIK_MANGO },
     { id: 'anchan_blueberry', name: { ru: 'Анчан с Черникой', uz: 'Chernikali Anchan' }, desc: { ru: 'Натуральный синий чай анчан с черничным пюре и льдом', uz: "Chernika pyuresi va muz bilan ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: ANCHAN_CHERNIROY }

@@ -41,6 +41,14 @@ const SALAT_STRACCIATELLA = "img/salat_strachella_s_tomatom.webp";
 const PIZZA_AL_POLO = "img/pizza_al_polo.webp";
 const SALAT_ROSTBIF = "img/salat_rostbif.webp";
 const PIZZA_ROSTBIF = "img/pizza_rostbif.webp";
+const SALAT_BURRATA = "img/salat_burrata.webp";
+const SALAT_BAKLAJAN = "img/salat_xrustashiy_baklajan.webp";
+const SALAT_TROPICAL = "img/salat_tropicheskiy.webp";
+const PIZZA_PEPPERONI = "img/pizza_peperoni.webp";
+const SALAT_GRILL = "img/salat_grill.webp";
+const PIZZA_CHEESE = "img/pizza_sirniy.webp";
+const SALAT_CAESAR = "img/salat_tsezar.webp";
+const PIZZA_MARGHERITA = "img/pizza_margarita.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -53,7 +61,9 @@ const PIZZA_ROSTBIF = "img/pizza_rostbif.webp";
   SANDWICH_TEXAS, SMASH_BURGER, BOUL_ZELEN, BOUL_LOSOS, BOUL_TUNA,
   PIZZA_TRUFFLE, PIZZA_SALMON, PIZZA_STRACCIATELLA,
   SUP_TOMYAM_LOSOS, SUP_CHECHEVICHNIY, SUP_MINESTRONE,
-  SALAT_STRACCIATELLA, PIZZA_AL_POLO, SALAT_ROSTBIF, PIZZA_ROSTBIF
+  SALAT_STRACCIATELLA, PIZZA_AL_POLO, SALAT_ROSTBIF, PIZZA_ROSTBIF,
+  SALAT_BURRATA, SALAT_BAKLAJAN, SALAT_TROPICAL, PIZZA_PEPPERONI,
+  SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -81,14 +91,14 @@ const MENU = {
     { id: 'set_english', name: { ru: 'Английский завтрак', uz: 'Ingliz nonushtasi' }, desc: { ru: 'Сет: яичница, бекон, сосиски, тосты, фасоль в томате и напиток', uz: 'Set: tuxum, bekon, sosiskalar, tostlar, loviya va ichimlik' }, weight: '', price: 55000, badge: 'СЕТ', img: P5 }
   ],
   'salads': [
-    { id: 'salad_burrata', name: { ru: 'Салат Буррата', uz: 'Burrata salati' }, desc: { ru: 'Сливочный мешочек бурраты со сладкими томатами и соусом песто', uz: 'Shirin pomidorlar va pesto sousi bilan qaymoqli burrata' }, weight: '', price: 85000, badge: '', img: P6 },
+    { id: 'salad_burrata', name: { ru: 'Салат Буррата', uz: 'Burrata salati' }, desc: { ru: 'Сливочный мешочек бурраты со сладкими томатами и соусом песто', uz: 'Shirin pomidorlar va pesto sousi bilan qaymoqli burrata' }, weight: '', price: 85000, badge: '', img: SALAT_BURRATA },
     { id: 'salad_greek', name: { ru: 'Салат Греческий', uz: 'Grek salati' }, desc: { ru: 'Свежие огурцы, томаты, болгарский перец, сыр фета, маслины и оливковое масло', uz: "Bodring, pomidor, bulg'or qalampiri, feta pishlog'i va zaytun" }, weight: '', price: 50000, badge: '', img: P6 },
-    { id: 'salad_grill', name: { ru: 'Салат Грилл', uz: 'Grill salati' }, desc: { ru: 'Овощи на гриле с пикантной авторской заправкой и зеленью', uz: "Mualliflik sousi va ko'katlar bilan grilda pishirilgan sabzavotlar" }, weight: '', price: 70000, badge: '', img: P6 },
+    { id: 'salad_grill', name: { ru: 'Салат Грилл', uz: 'Grill salati' }, desc: { ru: 'Овощи на гриле с пикантной авторской заправкой и зеленью', uz: "Mualliflik sousi va ko'katlar bilan grilda pishirilgan sabzavotlar" }, weight: '', price: 70000, badge: '', img: SALAT_GRILL },
     { id: 'salad_roastbeef', name: { ru: 'Салат Ростбиф', uz: 'Rostbif salati' }, desc: { ru: 'Сочные ломтики ростбифа с рукколой, черри и выдержанным пармезаном', uz: "Rukkola, cherri va parmezan bilan suvli rostbif bo'laklari" }, weight: '', price: 80000, badge: '', img: SALAT_ROSTBIF },
     { id: 'salad_stracciatella', name: { ru: 'Салат Страчателла с томатами', uz: 'Pomidorli Strachatella salati' }, desc: { ru: 'Нежнейшая страчателла со спелыми томатами, бальзамиком и базиликом', uz: 'Pishgan pomidorlar, balzamik va rayhon bilan mayin strachatella' }, weight: '', price: 85000, badge: 'NEW', img: SALAT_STRACCIATELLA },
-    { id: 'salad_tropical', name: { ru: 'Салат Тропический', uz: 'Tropik salat' }, desc: { ru: 'Освежающий микс с тропическими фруктами, свежей зеленью и цитрусовой заправкой', uz: "Tropik mevalar, yangi ko'katlar va sitrus sousli tetiklantiruvchi salat" }, weight: '', price: 45000, badge: '', img: P6 },
-    { id: 'salad_eggplant', name: { ru: 'Салат Хрустящий баклажан', uz: 'Qarsildoq baqlajon salati' }, desc: { ru: 'Хрустящие баклажаны в сладком чили с томатами черри, кинзой и кунжутом', uz: 'Shirin chili sousidagi qarsildoq baqlajon, cherri pomidor va kunjut' }, weight: '', price: 60000, badge: '', img: P6 },
-    { id: 'salad_caesar', name: { ru: 'Салат Цезарь', uz: 'Sezar salati' }, desc: { ru: 'Хрустящий романо, обжаренное филе курицы, гренки, пармезан и соус цезарь', uz: 'Qarsildoq romano, tovuq filesi, suxariklar, parmezan va sezar sousi' }, weight: '', price: 60000, badge: 'HIT', img: P6 }
+    { id: 'salad_tropical', name: { ru: 'Салат Тропический', uz: 'Tropik salat' }, desc: { ru: 'Освежающий микс с тропическими фруктами, свежей зеленью и цитрусовой заправкой', uz: "Tropik mevalar, yangi ko'katlar va sitrus sousli tetiklantiruvchi salat" }, weight: '', price: 45000, badge: '', img: SALAT_TROPICAL },
+    { id: 'salad_eggplant', name: { ru: 'Салат Хрустящий баклажан', uz: 'Qarsildoq baqlajon salati' }, desc: { ru: 'Хрустящие баклажаны в сладком чили с томатами черри, кинзой и кунжутом', uz: 'Shirin chili sousidagi qarsildoq baqlajon, cherri pomidor va kunjut' }, weight: '', price: 60000, badge: '', img: SALAT_BAKLAJAN },
+    { id: 'salad_caesar', name: { ru: 'Салат Цезарь', uz: 'Sezar salati' }, desc: { ru: 'Хрустящий романо, обжаренное филе курицы, гренки, пармезан и соус цезарь', uz: 'Qarsildoq romano, tovuq filesi, suxariklar, parmezan va sezar sousi' }, weight: '', price: 60000, badge: 'HIT', img: SALAT_CAESAR }
   ],
   'sandwiches': [
     { id: 'club_sandwich', name: { ru: 'Клаб сэндвич', uz: 'Klab sendvich' }, desc: { ru: 'Трехслойный тостовый хлеб, куриное филе, бекон, яйцо, томаты и соус', uz: 'Uch qavatli tost noni, tovuq filesi, bekon, tuxum, pomidor va sous' }, weight: '', price: 65000, badge: '', img: KLAB_SANDWICH },
@@ -125,13 +135,13 @@ const MENU = {
   'pizza': [
     { id: 'pizza_al_polo', name: { ru: 'Пицца Аль Поло', uz: 'Al Polo pitsa' }, desc: { ru: 'Нежное куриное филе, грибы, моцарелла и ароматный томатный соус', uz: "Tovuq filesi, qo'ziqorinlar, motsarella va xushbo'y pomidor sousi" }, weight: '', price: 85000, badge: '', img: PIZZA_AL_POLO },
     { id: 'pizza_burrata', name: { ru: 'Пицца Буррата', uz: 'Burrata pitsa' }, desc: { ru: 'Хрустящее тесто, томатный соус, свежая буррата, черри и базилик', uz: 'Qarsildoq xamir, pomidor sousi, yangi burrata, cherri va rayhon' }, weight: '', price: 110000, badge: '', img: P3 },
-    { id: 'pizza_margherita', name: { ru: 'Пицца Маргарита', uz: 'Margarita pitsa' }, desc: { ru: 'Классика Неаполя: фирменный томатный соус, моцарелла и свежий базилик', uz: 'Neapol klassikasi: maxsus pomidor sousi, motsarella va yangi rayhon' }, weight: '', price: 75000, badge: '', img: P3 },
-    { id: 'pizza_pepperoni', name: { ru: 'Пицца Пепперони', uz: 'Pepperoni pitsa' }, desc: { ru: 'Пикантная пепперони, много тянущейся моцареллы и томатный соус', uz: "Pikant pepperoni, ko'p cho'ziluvchi motsarella va pomidor sousi" }, weight: '', price: 85000, badge: 'HIT', img: P3 },
+    { id: 'pizza_margherita', name: { ru: 'Пицца Маргарита', uz: 'Margarita pitsa' }, desc: { ru: 'Классика Неаполя: фирменный томатный соус, моцарелла и свежий базилик', uz: 'Neapol klassikasi: maxsus pomidor sousi, motsarella va yangi rayhon' }, weight: '', price: 75000, badge: '', img: PIZZA_MARGHERITA },
+    { id: 'pizza_pepperoni', name: { ru: 'Пицца Пепперони', uz: 'Pepperoni pitsa' }, desc: { ru: 'Пикантная пепперони, много тянущейся моцареллы и томатный соус', uz: "Pikant pepperoni, ko'p cho'ziluvchi motsarella va pomidor sousi" }, weight: '', price: 85000, badge: 'HIT', img: PIZZA_PEPPERONI },
     { id: 'pizza_roastbeef', name: { ru: 'Пицца Ростбиф', uz: 'Rostbif pitsa' }, desc: { ru: 'Ломтики ростбифа, сыр моцарелла, свежая руккола и соус бальзамик', uz: "Rostbif bo'laklari, motsarella, yangi rukkola va balzamik sousi" }, weight: '', price: 105000, badge: '', img: PIZZA_ROSTBIF },
     { id: 'pizza_truffle', name: { ru: 'Пицца с трюфельной пастой', uz: 'Tryufel pastali pitsa' }, desc: { ru: 'Белый сливочный соус, моцарелла, шампиньоны и ароматная трюфельная паста', uz: "Oq qaymoqli sous, motsarella, shampinyonlar va xushbo'y tryufel pastasi" }, weight: '', price: 90000, badge: '', img: PIZZA_TRUFFLE },
     { id: 'pizza_salmon', name: { ru: 'Пицца Сальмон бьянка', uz: 'Salmon byanka pitsa' }, desc: { ru: 'Сливочная основа, филе лосося, сыр моцарелла, каперсы и зелень', uz: "Qaymoqli asos, qizil baliq filesi, motsarella va ko'katlar" }, weight: '', price: 110000, badge: '', img: PIZZA_SALMON },
     { id: 'pizza_stracciatella', name: { ru: 'Пицца Страчателла с томатами', uz: 'Pomidorli Strachatella pitsa' }, desc: { ru: 'Хрустящий бортик, сливочная страчателла, сладкие томаты черри и песто', uz: 'Qarsildoq xamir, qaymoqli strachatella, shirin cherri va pesto' }, weight: '', price: 110000, badge: '', img: PIZZA_STRACCIATELLA },
-    { id: 'pizza_cheese', name: { ru: 'Пицца Сырная', uz: 'Pishloqli pitsa' }, desc: { ru: 'Четыре благородных сыра: моцарелла, горгонзола, пармезан и гауда', uz: "To'rt xil oliy navli pishloq: motsarella, gorgonzola, parmezan va gauda" }, weight: '', price: 90000, badge: '', img: P3 }
+    { id: 'pizza_cheese', name: { ru: 'Пицца Сырная', uz: 'Pishloqli pitsa' }, desc: { ru: 'Четыре благородных сыра: моцарелла, горгонзола, пармезан и гауда', uz: "To'rt xil oliy navli pishloq: motsarella, gorgonzola, parmezan va gauda" }, weight: '', price: 90000, badge: '', img: PIZZA_CHEESE }
   ],
   'waffles': [
     {

@@ -14,13 +14,17 @@ const CHAY_OBLEPIKHOVIY = "img/chay_oplepixoviy.webp";
 const CHAY_TRAVYANOY = "img/chay_travyanoy.webp";
 const CHAY_YAGODNIY = "img/chay_yagodniy.webp";
 const KASHA_OVSYANAYA = "img/kasha_ovsyanaya.webp";
+const KASHA_MANNAYA = "img/kasha_mannaya.webp";
+const SHAKSHUKA = "img/shakshuka.webp";
+const OTVARNOY_RIS = "img/otvarnoy_ris.webp";
+const OVOSHI_NA_GRILE = "img/ovoshi_na_grile.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
   P1, P2, P3, P4, P5, P6,
   ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
   CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY,
-  KASHA_OVSYANAYA
+  KASHA_OVSYANAYA, KASHA_MANNAYA, SHAKSHUKA, OTVARNOY_RIS, OVOSHI_NA_GRILE
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -33,9 +37,9 @@ const MENU = {
     { id: 'granola_strawberry', name: { ru: 'Гранола с клубникой', uz: 'Qulupnayli granola' }, desc: { ru: 'Хрустящая запеченная гранола с натуральным йогуртом и клубникой', uz: 'Qarsildoq granola, tabiiy yogurt va yangi qulupnay' }, weight: '', price: 50000, badge: '', img: P3 },
     { id: 'granola_mango', name: { ru: 'Гранола с манго', uz: 'Mangolik granola' }, desc: { ru: 'Хрустящая гранола с натуральным йогуртом и кусочками спелого манго', uz: 'Qarsildoq granola, tabiiy yogurt va pishgan mango' }, weight: '', price: 50000, badge: '', img: P3 },
     { id: 'draniki_salmon', name: { ru: 'Драники с лососем', uz: 'Qizil baliqli draniklar' }, desc: { ru: 'Золотистые картофельные драники с нежным лососем и сметаной', uz: 'Qizil baliq va smetana bilan tillarang kartoshka draniklar' }, weight: '', price: 75000, badge: '', img: P5 },
-    { id: 'shakshuka', name: { ru: 'Шакшука', uz: 'Shakshuka' }, desc: { ru: 'Яйца в ароматном томатном соусе со специями и хрустящим тостом', uz: "Xushbo'y pomidor sousida pishirilgan tuxumlar" }, weight: '', price: 55000, badge: '', img: P6 },
+    { id: 'shakshuka', name: { ru: 'Шакшука', uz: 'Shakshuka' }, desc: { ru: 'Яйца в ароматном томатном соусе со специями и хрустящим тостом', uz: "Xushbo'y pomidor sousida pishirilgan tuxumlar" }, weight: '', price: 55000, badge: '', img: SHAKSHUKA },
     { id: 'oatmeal', name: { ru: 'Каша Овсяная', uz: 'Suli kasha' }, desc: { ru: 'Нежная овсяная каша на молоке со сливочным маслом', uz: 'Sutda pishirilgan mayin suli kasha' }, weight: '', price: 30000, badge: '', img: KASHA_OVSYANAYA },
-    { id: 'semolina', name: { ru: 'Каша манная', uz: 'Manniy kasha' }, desc: { ru: 'Традиционная манная каша со сливочным маслом', uz: "Sariyog' bilan tayyorlangan klassik manniy kasha" }, weight: '', price: 30000, badge: '', img: P1 },
+    { id: 'semolina', name: { ru: 'Каша манная', uz: 'Manniy kasha' }, desc: { ru: 'Традиционная манная каша со сливочным маслом', uz: "Sariyog' bilan tayyorlangan klassik manniy kasha" }, weight: '', price: 30000, badge: '', img: KASHA_MANNAYA },
     { id: 'omelette_mushroom', name: { ru: 'Омлет с грибами', uz: "Qo'ziqorinli omlet" }, desc: { ru: 'Пышный омлет с обжаренными лесными грибами и зеленью', uz: "Qovurilgan qo'ziqorinlar bilan yam-yashil omlet" }, weight: '', price: 48000, badge: '', img: P5 },
     { id: 'omelette_chicken', name: { ru: 'Омлет с курицей', uz: 'Tovuqli omlet' }, desc: { ru: 'Пышный омлет с нежным куриным филе и травами', uz: "Mayin tovuq filesi bilan to'yimli omlet" }, weight: '', price: 48000, badge: '', img: P5 },
     { id: 'omelette_cheese', name: { ru: 'Омлет с сыром', uz: 'Pishloqli omlet' }, desc: { ru: 'Нежный классический омлет с тянущимся сыром', uz: "Cho'ziluvchi pishloq bilan mayin klassik omlet" }, weight: '', price: 35000, badge: '', img: P5 },
@@ -86,8 +90,8 @@ const MENU = {
     { id: 'potato_village', name: { ru: 'Картофель по-деревенски', uz: 'Qishloqcha kartoshka' }, desc: { ru: 'Ароматные картофельные дольки, запеченные с розмарином и чесноком', uz: "Rozmarin va sarimsoq bilan pishirilgan xushbo'y kartoshka" }, weight: '160 г', price: 15000, badge: '', img: P4 },
     { id: 'fries', name: { ru: 'Картофель фри', uz: 'Kartoshka fri' }, desc: { ru: 'Классический хрустящий картофель фри с легкой солью', uz: 'Klassik qarsildoq kartoshka fri' }, weight: '160 г', price: 15000, badge: '', img: P4 },
     { id: 'mashed_potato', name: { ru: 'Картофельное пюре', uz: 'Kartoshka pyuresi' }, desc: { ru: 'Воздушное нежное пюре из отборного картофеля со сливочным маслом и молоком', uz: "Sariyog' va sut bilan tayyorlangan mayin kartoshka pyuresi" }, weight: '', price: 20000, badge: '', img: P4 },
-    { id: 'grilled_veg', name: { ru: 'Овощи на гриле', uz: 'Grildagi sabzavotlar' }, desc: { ru: 'Цукини, баклажан, болгарский перец, томаты и грибы с дымком', uz: "Kabaxti, baqlajon, bulg'or qalampiri, pomidor va qo'ziqorinlar" }, weight: '', price: 28000, badge: '', img: P6 },
-    { id: 'rice', name: { ru: 'Отварной рис', uz: 'Qaynatilgan guruch' }, desc: { ru: 'Рассыпчатый длиннозерный отварной рис со сливочным маслом', uz: "Sariyog' bilan tayyorlangan mayda qaynatilgan guruch" }, weight: '', price: 15000, badge: '', img: P4 }
+    { id: 'grilled_veg', name: { ru: 'Овощи на гриле', uz: 'Grildagi sabzavotlar' }, desc: { ru: 'Цукини, баклажан, болгарский перец, томаты и грибы с дымком', uz: "Kabaxti, baqlajon, bulg'or qalampiri, pomidor va qo'ziqorinlar" }, weight: '', price: 28000, badge: '', img: OVOSHI_NA_GRILE },
+    { id: 'rice', name: { ru: 'Отварной рис', uz: 'Qaynatilgan guruch' }, desc: { ru: 'Рассыпчатый длиннозерный отварной рис со сливочным маслом', uz: "Sariyog' bilan tayyorlangan mayda qaynatilgan guruch" }, weight: '', price: 15000, badge: '', img: OTVARNOY_RIS }
   ],
   'pizza': [
     { id: 'pizza_al_polo', name: { ru: 'Пицца Аль Поло', uz: 'Al Polo pitsa' }, desc: { ru: 'Нежное куриное филе, грибы, моцарелла и ароматный томатный соус', uz: "Tovuq filesi, qo'ziqorinlar, motsarella va xushbo'y pomidor sousi" }, weight: '', price: 85000, badge: '', img: P3 },

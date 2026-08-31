@@ -926,6 +926,43 @@ function addToCart(itemId, qtyDelta, ctx) {
   }
 }
 
+let lastPriceValue = null;
+let priceAnimFrame = null;
+
+function animatePriceDisplay(targetPrice) {
+  const inCartText = curLang === 'ru' ? 'В корзину' : 'Savatga';
+  
+  if (lastPriceValue === null || lastPriceValue === targetPrice) {
+    lastPriceValue = targetPrice;
+    pillLabel.innerHTML = `${inCartText} · <span class="price-counter">${money(targetPrice)}</span>`;
+    return;
+  }
+
+  const startPrice = lastPriceValue;
+  const startTime = performance.now();
+  const duration = 320;
+
+  if (priceAnimFrame) cancelAnimationFrame(priceAnimFrame);
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const currentVal = Math.round((startPrice + (targetPrice - startPrice) * ease) / 500) * 500;
+    
+    pillLabel.innerHTML = `${inCartText} · <span class="price-counter ${progress < 1 ? 'rolling' : ''}">${money(currentVal)}</span>`;
+
+    if (progress < 1) {
+      priceAnimFrame = requestAnimationFrame(update);
+    } else {
+      lastPriceValue = targetPrice;
+      pillLabel.innerHTML = `${inCartText} · <span class="price-counter">${money(targetPrice)}</span>`;
+    }
+  }
+
+  priceAnimFrame = requestAnimationFrame(update);
+}
+
 function updateCartUI() {
   let count = 0, sum = 0;
   Object.values(cart).forEach(c => { count += c.qty; sum += c.qty * c.price; });
@@ -939,14 +976,14 @@ function updateCartUI() {
     addBtn.classList.add('added');
     const itemsText = curLang === 'ru' ? 'шт в корзине' : 'ta savatda';
     pillLabel.textContent = `${cartItem.qty} ${itemsText}`;
+    lastPriceValue = activeCtx.price;
     if (dishInCartBadge) {
       dishInCartBadge.textContent = curLang === 'ru' ? `${cartItem.qty} в корзине` : `${cartItem.qty} savatda`;
       dishInCartBadge.style.display = 'inline-flex';
     }
   } else {
     addBtn.classList.remove('added');
-    const inCartText = curLang === 'ru' ? 'В корзину' : 'Savatga';
-    pillLabel.textContent = `${inCartText} · ${money(activeCtx.price)}`;
+    animatePriceDisplay(activeCtx.price);
     if (dishInCartBadge) {
       dishInCartBadge.style.display = 'none';
     }

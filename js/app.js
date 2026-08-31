@@ -26,6 +26,8 @@ const PERLOTTO_TRUFFLE = "img/perlotto_s_trufelnim_sousom.webp";
 const KURINOYE_FILE = "img/kuriniy_file_s_gribnim_sousom.webp";
 const LOSOS_HOLLANDAISE = "img/lasos_pod_godlanskiy_sous.webp";
 const KLAB_SANDWICH = "img/klab_sandwich.webp";
+const SANDWICH_TEXAS = "img/sandwich_po_texaski.webp";
+const SMASH_BURGER = "img/smash_burger.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -34,7 +36,8 @@ const KLAB_SANDWICH = "img/klab_sandwich.webp";
   CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY,
   KASHA_OVSYANAYA, KASHA_MANNAYA, SHAKSHUKA, OTVARNOY_RIS, OVOSHI_NA_GRILE,
   KARTOFEL_PYURE, BARANYA_KOREYKA, BONESTEYK_PAYE, MEDALYON_GRATEN,
-  PERLOTTO_TRUFFLE, KURINOYE_FILE, LOSOS_HOLLANDAISE, KLAB_SANDWICH
+  PERLOTTO_TRUFFLE, KURINOYE_FILE, LOSOS_HOLLANDAISE, KLAB_SANDWICH,
+  SANDWICH_TEXAS, SMASH_BURGER
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -73,8 +76,8 @@ const MENU = {
   ],
   'sandwiches': [
     { id: 'club_sandwich', name: { ru: 'Клаб сэндвич', uz: 'Klab sendvich' }, desc: { ru: 'Трехслойный тостовый хлеб, куриное филе, бекон, яйцо, томаты и соус', uz: 'Uch qavatli tost noni, tovuq filesi, bekon, tuxum, pomidor va sous' }, weight: '', price: 65000, badge: '', img: KLAB_SANDWICH },
-    { id: 'smash_burger', name: { ru: 'Смэш бургер', uz: 'Smesh burger' }, desc: { ru: 'Фирменная булочка бриошь, сочная котлета с корочкой, сыр чеддер и соус', uz: "Brioshe bulochkasi, suvli qarsildoq kotlet, chedder pishlog'i va maxsus sous" }, weight: '', price: 70000, badge: 'HIT', img: P5 },
-    { id: 'texas_sandwich', name: { ru: 'Сэндвич по-техасски', uz: 'Texas sendvichi' }, desc: { ru: 'Сэндвич с сочной говядиной, соусом BBQ, хрустящим луком и маринованным огурчиком', uz: "Mol go'shti, BBQ sousi, qarsildoq piyoz va tuzlangan bodring bilan sendvich" }, weight: '', price: 65000, badge: '', img: P3 },
+    { id: 'smash_burger', name: { ru: 'Смэш бургер', uz: 'Smesh burger' }, desc: { ru: 'Фирменная булочка бриошь, сочная котлета с корочкой, сыр чеддер и соус', uz: "Brioshe bulochkasi, suvli qarsildoq kotlet, chedder pishlog'i va maxsus sous" }, weight: '', price: 70000, badge: 'HIT', img: SMASH_BURGER },
+    { id: 'texas_sandwich', name: { ru: 'Сэндвич по-техасски', uz: 'Texas sendvichi' }, desc: { ru: 'Сэндвич с сочной говядиной, соусом BBQ, хрустящим луком и маринованным огурчиком', uz: "Mol go'shti, BBQ sousi, qarsildoq piyoz va tuzlangan bodring bilan sendvich" }, weight: '', price: 65000, badge: '', img: SANDWICH_TEXAS },
     { id: 'mortadella_sandwich', name: { ru: 'Сэндвич с мортаделлой', uz: 'Mortadellali sendvich' }, desc: { ru: 'Итальянская мортаделла, сливочный сыр, руккола и фисташковый акцент', uz: 'Italyan mortadellasi, qaymoqli pishloq, rukkola va pista' }, weight: '', price: 65000, badge: '', img: P3 }
   ],
   'soups': [

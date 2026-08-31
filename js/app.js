@@ -18,13 +18,23 @@ const KASHA_MANNAYA = "img/kasha_mannaya.webp";
 const SHAKSHUKA = "img/shakshuka.webp";
 const OTVARNOY_RIS = "img/otvarnoy_ris.webp";
 const OVOSHI_NA_GRILE = "img/ovoshi_na_grile.webp";
+const KARTOFEL_PYURE = "img/kartofel_pyure.webp";
+const BARANYA_KOREYKA = "img/baranya_koreyka_s_ovoshami.webp";
+const BONESTEYK_PAYE = "img/bonesteyk_s_kartofelem_paye.webp";
+const MEDALYON_GRATEN = "img/medalyon_s_granetom.webp";
+const PERLOTTO_TRUFFLE = "img/perlotto_s_trufelnim_sousom.webp";
+const KURINOYE_FILE = "img/kuriniy_file_s_gribnim_sousom.webp";
+const LOSOS_HOLLANDAISE = "img/lasos_pod_godlanskiy_sous.webp";
+const KLAB_SANDWICH = "img/klab_sandwich.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
   P1, P2, P3, P4, P5, P6,
   ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
   CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY,
-  KASHA_OVSYANAYA, KASHA_MANNAYA, SHAKSHUKA, OTVARNOY_RIS, OVOSHI_NA_GRILE
+  KASHA_OVSYANAYA, KASHA_MANNAYA, SHAKSHUKA, OTVARNOY_RIS, OVOSHI_NA_GRILE,
+  KARTOFEL_PYURE, BARANYA_KOREYKA, BONESTEYK_PAYE, MEDALYON_GRATEN,
+  PERLOTTO_TRUFFLE, KURINOYE_FILE, LOSOS_HOLLANDAISE, KLAB_SANDWICH
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -62,7 +72,7 @@ const MENU = {
     { id: 'salad_caesar', name: { ru: 'Салат Цезарь', uz: 'Sezar salati' }, desc: { ru: 'Хрустящий романо, обжаренное филе курицы, гренки, пармезан и соус цезарь', uz: 'Qarsildoq romano, tovuq filesi, suxariklar, parmezan va sezar sousi' }, weight: '', price: 60000, badge: 'HIT', img: P6 }
   ],
   'sandwiches': [
-    { id: 'club_sandwich', name: { ru: 'Клаб сэндвич', uz: 'Klab sendvich' }, desc: { ru: 'Трехслойный тостовый хлеб, куриное филе, бекон, яйцо, томаты и соус', uz: 'Uch qavatli tost noni, tovuq filesi, bekon, tuxum, pomidor va sous' }, weight: '', price: 65000, badge: '', img: P3 },
+    { id: 'club_sandwich', name: { ru: 'Клаб сэндвич', uz: 'Klab sendvich' }, desc: { ru: 'Трехслойный тостовый хлеб, куриное филе, бекон, яйцо, томаты и соус', uz: 'Uch qavatli tost noni, tovuq filesi, bekon, tuxum, pomidor va sous' }, weight: '', price: 65000, badge: '', img: KLAB_SANDWICH },
     { id: 'smash_burger', name: { ru: 'Смэш бургер', uz: 'Smesh burger' }, desc: { ru: 'Фирменная булочка бриошь, сочная котлета с корочкой, сыр чеддер и соус', uz: "Brioshe bulochkasi, suvli qarsildoq kotlet, chedder pishlog'i va maxsus sous" }, weight: '', price: 70000, badge: 'HIT', img: P5 },
     { id: 'texas_sandwich', name: { ru: 'Сэндвич по-техасски', uz: 'Texas sendvichi' }, desc: { ru: 'Сэндвич с сочной говядиной, соусом BBQ, хрустящим луком и маринованным огурчиком', uz: "Mol go'shti, BBQ sousi, qarsildoq piyoz va tuzlangan bodring bilan sendvich" }, weight: '', price: 65000, badge: '', img: P3 },
     { id: 'mortadella_sandwich', name: { ru: 'Сэндвич с мортаделлой', uz: 'Mortadellali sendvich' }, desc: { ru: 'Итальянская мортаделла, сливочный сыр, руккола и фисташковый акцент', uz: 'Italyan mortadellasi, qaymoqli pishloq, rukkola va pista' }, weight: '', price: 65000, badge: '', img: P3 }
@@ -74,12 +84,12 @@ const MENU = {
     { id: 'lentil_soup', name: { ru: 'Чечевичный суп', uz: "Yasmiq sho'rvasi" }, desc: { ru: 'Бархатистый крем-суп из красной чечевицы с восточными специями и лимоном', uz: "Sharqona ziravorlar va limon bilan qizil yasmiqdan tayyorlangan krem-sho'rva" }, weight: '', price: 35000, badge: '', img: P4 }
   ],
   'mains': [
-    { id: 'lamb_rack', name: { ru: 'Баранья корейка с овощами', uz: "Sabzavotli qo'y qovurg'asi" }, desc: { ru: 'Нежная обжаренная корейка ягненка с гарниром из овощей гриль', uz: "Grilda pishirilgan sabzavotlar bilan mayin qo'y qovurg'asi" }, weight: '', price: 135000, badge: '', img: P5 },
-    { id: 'bone_steak', name: { ru: 'Бон-стейк с картофелем пайе', uz: 'Kartoshka paye bilan Bon-steyk' }, desc: { ru: 'Сочный премиальный стейк на кости с хрустящей соломкой картофеля пайе', uz: 'Qarsildoq kartoshka paye bilan suyakda pishirilgan suvli steyk' }, weight: '', price: 150000, badge: 'HIT', img: P5 },
-    { id: 'chicken_mushroom', name: { ru: 'Куриное филе с грибным соусом', uz: "Qo'ziqorin sousli tovuq filesi" }, desc: { ru: 'Нежнейшее куриное филе под сливочно-грибным соусом с травами', uz: "Qaymoqli-qo'ziqorinli sousda pishirilgan mayin tovuq filesi" }, weight: '', price: 75000, badge: '', img: P5 },
-    { id: 'salmon_hollandaise', name: { ru: 'Лосось под голландским соусом', uz: 'Golland sousli qizil baliq' }, desc: { ru: 'Стейк из лосося идеальной прожарки под шелковистым соусом голландез', uz: 'Ipakdek mayin golland sousi bilan pishirilgan qizil baliq steyki' }, weight: '', price: 160000, badge: '', img: P5 },
-    { id: 'medallion_gratin', name: { ru: 'Медальон с гратеном', uz: 'Gratenli medalon' }, desc: { ru: 'Медальоны из вырезки говядины с запеченным сырно-картофельным гратеном', uz: "Pishloqli-kartoshkali graten bilan mol go'shti medalonlari" }, weight: '', price: 160000, badge: '', img: P5 },
-    { id: 'perlotto_truffle', name: { ru: 'Перлотто с трюфельным соусом', uz: 'Tryufel sousli perlotto' }, desc: { ru: 'Нежное перловое ризотто с благородным трюфельным соусом и пармезаном', uz: "Xushbo'y tryufel sousi va parmezan bilan tayyorlangan arpa risottosi" }, weight: '', price: 60000, badge: 'NEW', img: P4 }
+    { id: 'lamb_rack', name: { ru: 'Баранья корейка с овощами', uz: "Sabzavotli qo'y qovurg'asi" }, desc: { ru: 'Нежная обжаренная корейка ягненка с гарниром из овощей гриль', uz: "Grilda pishirilgan sabzavotlar bilan mayin qo'y qovurg'asi" }, weight: '', price: 135000, badge: '', img: BARANYA_KOREYKA },
+    { id: 'bone_steak', name: { ru: 'Бон-стейк с картофелем пайе', uz: 'Kartoshka paye bilan Bon-steyk' }, desc: { ru: 'Сочный премиальный стейк на кости с хрустящей соломкой картофеля пайе', uz: 'Qarsildoq kartoshka paye bilan suyakda pishirilgan suvli steyk' }, weight: '', price: 150000, badge: 'HIT', img: BONESTEYK_PAYE },
+    { id: 'chicken_mushroom', name: { ru: 'Куриное филе с грибным соусом', uz: "Qo'ziqorin sousli tovuq filesi" }, desc: { ru: 'Нежнейшее куриное филе под сливочно-грибным соусом с травами', uz: "Qaymoqli-qo'ziqorinli sousda pishirilgan mayin tovuq filesi" }, weight: '', price: 75000, badge: '', img: KURINOYE_FILE },
+    { id: 'salmon_hollandaise', name: { ru: 'Лосось под голландским соусом', uz: 'Golland sousli qizil baliq' }, desc: { ru: 'Стейк из лосося идеальной прожарки под шелковистым соусом голландез', uz: 'Ipakdek mayin golland sousi bilan pishirilgan qizil baliq steyki' }, weight: '', price: 160000, badge: '', img: LOSOS_HOLLANDAISE },
+    { id: 'medallion_gratin', name: { ru: 'Медальон с гратеном', uz: 'Gratenli medalon' }, desc: { ru: 'Медальоны из вырезки говядины с запеченным сырно-картофельным гратеном', uz: "Pishloqli-kartoshkali graten bilan mol go'shti medalonlari" }, weight: '', price: 160000, badge: '', img: MEDALYON_GRATEN },
+    { id: 'perlotto_truffle', name: { ru: 'Перлотто с трюфельным соусом', uz: 'Tryufel sousli perlotto' }, desc: { ru: 'Нежное перловое ризотто с благородным трюфельным соусом и пармезаном', uz: "Xushbo'y tryufel sousi va parmezan bilan tayyorlangan arpa risottosi" }, weight: '', price: 60000, badge: 'NEW', img: PERLOTTO_TRUFFLE }
   ],
   'bowls': [
     { id: 'bowl_green', name: { ru: 'Боул зелень с авокадо', uz: "Ko'katli avokado bouli" }, desc: { ru: 'Свежий микс салатов, спелый авокадо, огурцы, эдамаме, семена и легкая заправка', uz: "Yangi salat miksi, pishgan avokado, bodring, edamame va urug'lar" }, weight: '', price: 135000, badge: '', img: P6 },
@@ -89,7 +99,7 @@ const MENU = {
   'sides': [
     { id: 'potato_village', name: { ru: 'Картофель по-деревенски', uz: 'Qishloqcha kartoshka' }, desc: { ru: 'Ароматные картофельные дольки, запеченные с розмарином и чесноком', uz: "Rozmarin va sarimsoq bilan pishirilgan xushbo'y kartoshka" }, weight: '160 г', price: 15000, badge: '', img: P4 },
     { id: 'fries', name: { ru: 'Картофель фри', uz: 'Kartoshka fri' }, desc: { ru: 'Классический хрустящий картофель фри с легкой солью', uz: 'Klassik qarsildoq kartoshka fri' }, weight: '160 г', price: 15000, badge: '', img: P4 },
-    { id: 'mashed_potato', name: { ru: 'Картофельное пюре', uz: 'Kartoshka pyuresi' }, desc: { ru: 'Воздушное нежное пюре из отборного картофеля со сливочным маслом и молоком', uz: "Sariyog' va sut bilan tayyorlangan mayin kartoshka pyuresi" }, weight: '', price: 20000, badge: '', img: P4 },
+    { id: 'mashed_potato', name: { ru: 'Картофельное пюре', uz: 'Kartoshka pyuresi' }, desc: { ru: 'Воздушное нежное пюре из отборного картофеля со сливочным маслом и молоком', uz: "Sariyog' va sut bilan tayyorlangan mayin kartoshka pyuresi" }, weight: '', price: 20000, badge: '', img: KARTOFEL_PYURE },
     { id: 'grilled_veg', name: { ru: 'Овощи на гриле', uz: 'Grildagi sabzavotlar' }, desc: { ru: 'Цукини, баклажан, болгарский перец, томаты и грибы с дымком', uz: "Kabaxti, baqlajon, bulg'or qalampiri, pomidor va qo'ziqorinlar" }, weight: '', price: 28000, badge: '', img: OVOSHI_NA_GRILE },
     { id: 'rice', name: { ru: 'Отварной рис', uz: 'Qaynatilgan guruch' }, desc: { ru: 'Рассыпчатый длиннозерный отварной рис со сливочным маслом', uz: "Sariyog' bilan tayyorlangan mayda qaynatilgan guruch" }, weight: '', price: 15000, badge: '', img: OTVARNOY_RIS }
   ],

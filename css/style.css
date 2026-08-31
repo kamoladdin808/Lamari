@@ -211,46 +211,6 @@ body {
   pointer-events: none;
 }
 
-/* ===== AMBIENT FLOATING PARTICLES & BOKEH ===== */
-.ambient-particles {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.ambient-particle {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 248, 220, 0.95) 0%, rgba(201, 168, 118, 0.35) 60%, rgba(201, 168, 118, 0) 100%);
-  box-shadow: 0 0 10px rgba(255, 235, 180, 0.35);
-  opacity: 0;
-  will-change: transform, opacity;
-  animation: floatUp infinite linear;
-}
-
-@keyframes floatUp {
-  0% {
-    transform: translateY(0) translateX(0) scale(0.8);
-    opacity: 0;
-  }
-  15% {
-    opacity: var(--max-opacity, 0.45);
-  }
-  50% {
-    transform: translateY(-50vh) translateX(var(--sway, 20px)) scale(1.1);
-    opacity: var(--max-opacity, 0.45);
-  }
-  85% {
-    opacity: var(--max-opacity, 0.45);
-  }
-  100% {
-    transform: translateY(-105vh) translateX(calc(var(--sway, 20px) * -0.5)) scale(0.7);
-    opacity: 0;
-  }
-}
-
 /* ===== TOP OVERLAY (Instagram Stories Progress Bar Style) ===== */
 
 .dots {

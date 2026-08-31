@@ -404,18 +404,17 @@ body {
 .dish-desc {
   display: none;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
   margin-top: 6px;
   max-width: 280px;
   line-height: 1.45;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-  background: rgba(18, 15, 13, 0.45);
-  padding: 7px 12px;
-  border-radius: 12px;
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 10px;
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .dish-more-btn {
@@ -1029,10 +1028,10 @@ body {
 }
 
 .var-btn {
-  background: rgba(25, 22, 20, 0.55);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(25, 22, 20, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   color: rgba(255, 255, 255, 0.9);
   font-family: inherit;
   font-size: 12.5px;
@@ -1042,7 +1041,7 @@ body {
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .var-btn:active {
@@ -1053,7 +1052,7 @@ body {
   background: #BFE94F;
   color: #20301a;
   border-color: #BFE94F;
-  box-shadow: 0 4px 16px rgba(191, 233, 79, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(191, 233, 79, 0.4);
 }
 
 /* ===== WAFFLE CUSTOMIZER MODAL ===== */
@@ -1254,16 +1253,16 @@ body {
 .cat-tab {
   position: relative;
   flex: 0 0 auto;
-  padding: 11px 18px;
-  border-radius: 16px;
-  font-size: 14px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-size: 14.5px;
   font-weight: 600;
-  color: rgba(255, 255, 255, .8);
-  background: rgba(20, 17, 15, .45);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, .12);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, .75);
+  background: rgba(20, 17, 15, .55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
   white-space: nowrap;
   cursor: pointer;
   transition: border-color 0.25s, color 0.25s, background-color 0.25s, transform 0.2s, box-shadow 0.25s;
@@ -1276,10 +1275,8 @@ body {
 .cat-tab.active {
   border-color: #BFE94F;
   color: #BFE94F;
-  background: rgba(32, 48, 26, 0.65);
-  backdrop-filter: blur(16px) saturate(170%);
-  -webkit-backdrop-filter: blur(16px) saturate(170%);
-  box-shadow: 0 4px 18px rgba(191, 233, 79, 0.3), inset 0 1px 0 rgba(191, 233, 79, 0.25);
+  background: rgba(32, 48, 26, 0.7);
+  box-shadow: 0 4px 16px rgba(191, 233, 79, 0.25);
 }
 
 .tab-badge {

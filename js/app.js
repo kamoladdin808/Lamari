@@ -9,6 +9,7 @@ const ANCHAN_PERSIK_MANGO = "img/anchan_persik_mango.webp";
 const ANCHAN_CHERNIROY = "img/anchan_s_chernikoy.webp";
 const MATCHA_KLUBNIKA = "img/klubnikaz_matcha.webp";
 const MATCHA_KIVI = "img/kivi-matcha.webp";
+const MATCHA_KIVI_DESKTOP = "img/kivi-matcha.jpg_2K_202608311540.webp";
 const CHAY_MANGO_MARAKUYA = "img/chay_mango_marakuya.webp";
 const CHAY_OBLEPIKHOVIY = "img/chay_oplepixoviy.webp";
 const CHAY_TRAVYANOY = "img/chay_travyanoy.webp";
@@ -17,7 +18,7 @@ const CHAY_YAGODNIY = "img/chay_yagodniy.webp";
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
   P1, P2, P3, P4, P5, P6,
-  ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
+  ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI, MATCHA_KIVI_DESKTOP,
   CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY
 ].forEach(src => {
   const img = new Image();
@@ -234,7 +235,7 @@ const MENU = {
     { id: 'anchan_peach', name: { ru: 'Анчан Персик-манго', uz: 'Anchan Shaftoli-mango' }, desc: { ru: 'Натуральный синий чай анчан с сочным персиком и манго со льдом', uz: "Muz, shaftoli va mango bilan tabiiy ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: ANCHAN_PERSIK_MANGO },
     { id: 'anchan_blueberry', name: { ru: 'Анчан с Черникой', uz: 'Chernikali Anchan' }, desc: { ru: 'Натуральный синий чай анчан с черничным пюре и льдом', uz: "Chernika pyuresi va muz bilan ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: ANCHAN_CHERNIROY },
     { id: 'matcha_strawberry', name: { ru: 'Матча Клубничный', uz: 'Qulupnayli Matcha' }, desc: { ru: 'Церемониальная матча со взбитым молоком и сочным клубничным слоем', uz: "Ko'pirtirilgan sut, qulupnay qatlami va yapon matcha choyi" }, weight: '', price: 45000, badge: 'HIT', img: MATCHA_KLUBNIKA },
-    { id: 'matcha_kiwi', name: { ru: 'Матча с Киви', uz: 'Kivili Matcha' }, desc: { ru: 'Японская зеленая матча с молоком и натуральным пюре из киви', uz: 'Sut va tabiiy kivi pyuresi bilan yashil matcha' }, weight: '', price: 45000, badge: '', img: MATCHA_KIVI },
+    { id: 'matcha_kiwi', name: { ru: 'Матча с Киви', uz: 'Kivili Matcha' }, desc: { ru: 'Японская зеленая матча с молоком и натуральным пюре из киви', uz: 'Sut va tabiiy kivi pyuresi bilan yashil matcha' }, weight: '', price: 45000, badge: '', img: MATCHA_KIVI, imgDesktop: MATCHA_KIVI_DESKTOP },
     { id: 'matcha_apple', name: { ru: 'Матча Яблоко-киви', uz: 'Matcha Olma-kivi' }, desc: { ru: 'Освежающий матча-коктейль с зеленым яблоком и киви', uz: 'Yashil olma va kivi bilan tetiklantiruvchi matcha kokteyli' }, weight: '', price: 45000, badge: '', img: P2 }
   ],
   'milkshakes': [
@@ -503,9 +504,18 @@ function translateStaticUI() {
   }
 }
 
+function getDishImg(d) {
+  if (!d) return P1;
+  if (window.innerWidth >= 768 && d.imgDesktop) {
+    return d.imgDesktop;
+  }
+  return d.img;
+}
+
 // Получить текущий контекст блюда с учетом выбранного варианта
 function getCurrentCartContext() {
   const d = MENU[curCat][curIdx];
+  const dishImg = getDishImg(d);
   if (d.variants && d.variants[curVariantIdx]) {
     const v = d.variants[curVariantIdx];
     return {
@@ -515,7 +525,7 @@ function getCurrentCartContext() {
         uz: `${d.name.uz} (${v.label.uz})`
       },
       price: v.price,
-      img: d.img,
+      img: dishImg,
       isVariant: true
     };
   }
@@ -523,7 +533,7 @@ function getCurrentCartContext() {
     id: d.id,
     name: d.name,
     price: d.price,
-    img: d.img,
+    img: dishImg,
     isVariant: false
   };
 }
@@ -574,6 +584,7 @@ function setDish(cat, idx) {
   dotsEl.classList.remove('paused');
 
   const d = MENU[cat][idx];
+  const dishImg = getDishImg(d);
   const incoming = showingA ? imgB : imgA;
   const outgoing = showingA ? imgA : imgB;
 
@@ -588,7 +599,7 @@ function setDish(cat, idx) {
   outgoing.style.zIndex = '1';
 
   // 2. Загрузить новое фото в полностью невидимый элемент
-  incoming.src = d.img;
+  incoming.src = dishImg;
   incoming.alt = d.name[curLang];
 
   // 3. После перерисовки и декодирования — плавно проявить поверх старого
@@ -1555,6 +1566,15 @@ window.addEventListener('resize', () => {
   setVH();
   const activeTab = tabsEl.querySelector('.cat-tab.active');
   if (activeTab) centerTab(activeTab, false);
+
+  const currentDish = MENU[curCat] && MENU[curCat][curIdx];
+  if (currentDish && currentDish.imgDesktop) {
+    const activeImg = showingA ? imgA : imgB;
+    const targetImg = getDishImg(currentDish);
+    if (!activeImg.src.endsWith(targetImg)) {
+      activeImg.src = targetImg;
+    }
+  }
 });
 
 window.addEventListener('load', () => {

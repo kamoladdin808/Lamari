@@ -521,6 +521,7 @@ function renderVariantSelector(d) {
 }
 
 function setDish(cat, idx) {
+  const catChanged = (curCat !== cat);
   curCat = cat; curIdx = idx;
   curVariantIdx = 0;
   const d = MENU[cat][idx];
@@ -563,7 +564,7 @@ function setDish(cat, idx) {
   updateCartUI();
 
   renderDots(cat, idx);
-  updateActiveTab(true);
+  updateActiveTab(catChanged, true);
 }
 
 function nextDish() {
@@ -686,15 +687,17 @@ function renderTabs() {
       if (hasDraggedTabs) return;
       if (curCat !== c) {
         setDish(c, 0);
+      } else {
+        centerTab(tab, true);
       }
     };
     tabsEl.appendChild(tab);
   });
-  updateActiveTab(false);
+  updateActiveTab(true, false);
   updateTabBadges();
 }
 
-function updateActiveTab(smooth = true) {
+function updateActiveTab(shouldCenter = false, smooth = true) {
   const tabs = tabsEl.querySelectorAll('.cat-tab');
   let activeTabEl = null;
   tabs.forEach(tab => {
@@ -702,7 +705,7 @@ function updateActiveTab(smooth = true) {
     tab.classList.toggle('active', isAct);
     if (isAct) activeTabEl = tab;
   });
-  if (activeTabEl) {
+  if (shouldCenter && activeTabEl) {
     centerTab(activeTabEl, smooth);
   }
 }

@@ -306,6 +306,28 @@ const CAT_NAMES = {
   'desserts': { ru: 'Десерты', uz: 'Desertlar' }
 };
 
+const CAT_TINTS = {
+  'breakfasts': 'radial-gradient(ellipse at 50% 25%, rgba(255, 183, 77, 0.22) 0%, transparent 65%)',
+  'set_breakfast': 'radial-gradient(ellipse at 50% 25%, rgba(255, 183, 77, 0.22) 0%, transparent 65%)',
+  'salads': 'radial-gradient(ellipse at 50% 25%, rgba(129, 199, 132, 0.2) 0%, transparent 65%)',
+  'sandwiches': 'radial-gradient(ellipse at 50% 25%, rgba(255, 167, 38, 0.2) 0%, transparent 65%)',
+  'soups': 'radial-gradient(ellipse at 50% 25%, rgba(255, 112, 67, 0.2) 0%, transparent 65%)',
+  'mains': 'radial-gradient(ellipse at 50% 25%, rgba(255, 138, 101, 0.2) 0%, transparent 65%)',
+  'bowls': 'radial-gradient(ellipse at 50% 25%, rgba(102, 187, 106, 0.2) 0%, transparent 65%)',
+  'sides': 'radial-gradient(ellipse at 50% 25%, rgba(255, 202, 40, 0.18) 0%, transparent 65%)',
+  'pizza': 'radial-gradient(ellipse at 50% 25%, rgba(255, 112, 67, 0.22) 0%, transparent 65%)',
+  'waffles': 'radial-gradient(ellipse at 50% 25%, rgba(186, 104, 200, 0.2) 0%, transparent 65%)',
+  'coffee': 'radial-gradient(ellipse at 50% 25%, rgba(215, 165, 112, 0.24) 0%, transparent 65%)',
+  'lemonades': 'radial-gradient(ellipse at 50% 25%, rgba(255, 87, 34, 0.22) 0%, transparent 65%)',
+  'matcha': 'radial-gradient(ellipse at 50% 25%, rgba(139, 195, 74, 0.25) 0%, transparent 65%)',
+  'milkshakes': 'radial-gradient(ellipse at 50% 25%, rgba(240, 98, 146, 0.2) 0%, transparent 65%)',
+  'fresh': 'radial-gradient(ellipse at 50% 25%, rgba(255, 167, 38, 0.22) 0%, transparent 65%)',
+  'tea_author': 'radial-gradient(ellipse at 50% 25%, rgba(233, 30, 99, 0.22) 0%, transparent 65%)',
+  'tea_classic': 'radial-gradient(ellipse at 50% 25%, rgba(200, 160, 100, 0.2) 0%, transparent 65%)',
+  'soft': 'radial-gradient(ellipse at 50% 25%, rgba(79, 195, 247, 0.2) 0%, transparent 65%)',
+  'desserts': 'radial-gradient(ellipse at 50% 25%, rgba(206, 147, 216, 0.22) 0%, transparent 65%)'
+};
+
 const CATS = Object.keys(MENU);
 
 // Инициализация языка и текущего блюда из параметров URL (Deep Linking)
@@ -601,6 +623,12 @@ function setDish(cat, idx) {
 
   dishCat.textContent = CAT_NAMES[cat][curLang];
   dishTitle.textContent = d.name[curLang];
+
+  // Адаптивный оттенок атмосферного света
+  const ambientTintEl = document.getElementById('ambientTint');
+  if (ambientTintEl && CAT_TINTS[cat]) {
+    ambientTintEl.style.background = CAT_TINTS[cat];
+  }
 
   // Установка бейджа
   if (d.badge) {

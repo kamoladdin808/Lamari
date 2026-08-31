@@ -68,6 +68,7 @@ const MOXITO_KLUBNIKA = "img/moxito_klubnika.webp";
 const LIMONAD_MANGO_MARAKUYA = "img/limonad_mango_marakuya.webp";
 const MOXITO_KLASSIK = "img/moxito_klassik.webp";
 const MOXITO_KIWI = "img/moxito_kiwi.webp";
+const MYATNIY_SMUZI = "img/myatniy_smuzi.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -87,7 +88,7 @@ const MOXITO_KIWI = "img/moxito_kiwi.webp";
   ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI,
   GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS, OMLET_KURITSA,
   OMLET_SIR, OMLET_GRIB, MATCHA_YABLOKO_KIWI, MOXITO_KLUBNIKA,
-  LIMONAD_MANGO_MARAKUYA, MOXITO_KLASSIK, MOXITO_KIWI
+  LIMONAD_MANGO_MARAKUYA, MOXITO_KLASSIK, MOXITO_KIWI, MYATNIY_SMUZI
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -296,7 +297,7 @@ const MENU = {
         { id: 'mojito_kiwi_carafe', label: { ru: 'Графин', uz: 'Grafin' }, price: 70000 }
       ]
     },
-    { id: 'smoothie_mint', name: { ru: 'Смузи мятный', uz: 'Yalpizli smuzi' }, desc: { ru: 'Густой освежающий смузи со свежей мятой, лаймом и яблоком', uz: 'Yalpiz, laym va olma bilan quyuq tetiklantiruvchi smuzi' }, weight: '', price: 45000, badge: '', img: P4 },
+    { id: 'smoothie_mint', name: { ru: 'Смузи мятный', uz: 'Yalpizli smuzi' }, desc: { ru: 'Густой освежающий смузи со свежей мятой, лаймом и яблоком', uz: 'Yalpiz, laym va olma bilan quyuq tetiklantiruvchi smuzi' }, weight: '', price: 45000, badge: '', img: MYATNIY_SMUZI },
     { id: 'smoothie_berry', name: { ru: 'Смузи ягодный', uz: 'Rezavorli smuzi' }, desc: { ru: 'Густой витаминный смузи из лесных и садовых ягод', uz: "O'rmon va bog' rezavorlaridan tayyorlangan vitaminli smuzi" }, weight: '', price: 45000, badge: '', img: P4 }
   ],
   'matcha': [

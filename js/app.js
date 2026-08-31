@@ -931,7 +931,7 @@ let priceAnimFrame = null;
 
 function animatePriceDisplay(targetPrice) {
   const inCartText = curLang === 'ru' ? 'В корзину' : 'Savatga';
-  
+
   if (lastPriceValue === null || lastPriceValue === targetPrice) {
     lastPriceValue = targetPrice;
     pillLabel.innerHTML = `${inCartText} · <span class="price-counter">${money(targetPrice)}</span>`;
@@ -949,7 +949,7 @@ function animatePriceDisplay(targetPrice) {
     const progress = Math.min(elapsed / duration, 1);
     const ease = 1 - Math.pow(1 - progress, 3);
     const currentVal = Math.round((startPrice + (targetPrice - startPrice) * ease) / 500) * 500;
-    
+
     pillLabel.innerHTML = `${inCartText} · <span class="price-counter ${progress < 1 ? 'rolling' : ''}">${money(currentVal)}</span>`;
 
     if (progress < 1) {
@@ -1029,6 +1029,47 @@ function renderCartList() {
   });
 }
 
+function triggerConfettiBurst(targetEl) {
+  if (!targetEl) return;
+  const rect = targetEl.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  const colors = ['#BFE94F', '#FFD700', '#FFFFFF', '#E8D3B1', '#72E1D1'];
+  const count = 16;
+  const container = document.createElement('div');
+  container.className = 'confetti-container';
+  document.body.appendChild(container);
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-particle';
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.6;
+    const distance = 35 + Math.random() * 45;
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance - 15;
+    const rot = Math.random() * 360;
+    const size = 5 + Math.random() * 4;
+
+    p.style.cssText = `
+      left: ${centerX}px;
+      top: ${centerY}px;
+      width: ${size}px;
+      height: ${size * (Math.random() > 0.4 ? 1.4 : 1)}px;
+      background-color: ${color};
+      --tx: ${tx}px;
+      --ty: ${ty}px;
+      --rot: ${rot}deg;
+    `;
+    container.appendChild(p);
+  }
+
+  setTimeout(() => {
+    container.remove();
+  }, 700);
+}
+
 function animateFlyToCart(fromElement, imgSrc) {
   const flyer = document.createElement('img');
   flyer.src = imgSrc;
@@ -1053,6 +1094,7 @@ function animateFlyToCart(fromElement, imgSrc) {
       cartChip.classList.remove('pop');
       void cartChip.offsetWidth;
       cartChip.classList.add('pop');
+      triggerConfettiBurst(cartChip);
     }
   }, 1000);
 
@@ -1081,6 +1123,7 @@ function animateFlyToCart(fromElement, imgSrc) {
       cartChip.classList.remove('pop');
       void cartChip.offsetWidth;
       cartChip.classList.add('pop');
+      triggerConfettiBurst(cartChip);
     }
   }
 
@@ -1269,6 +1312,7 @@ addBtn.addEventListener('click', (e) => {
     }
     addToCart(activeCtx.id, 1, activeCtx);
     showAddToast(activeCtx);
+    triggerConfettiBurst(addBtn);
     animateFlyToCart(addBtn, activeCtx.img);
   } else {
     if (e.target.closest('#pillMinus')) {
@@ -1278,6 +1322,7 @@ addBtn.addEventListener('click', (e) => {
       const plusEl = document.getElementById('pillPlus');
       addToCart(activeCtx.id, 1, activeCtx);
       showAddToast(activeCtx);
+      triggerConfettiBurst(plusEl || addBtn);
       animateFlyToCart(plusEl || addBtn, activeCtx.img);
       e.stopPropagation();
     }

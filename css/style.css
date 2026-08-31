@@ -316,6 +316,7 @@ body {
     opacity: 0;
     transform: translateY(18px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -969,6 +970,48 @@ body {
 
 .price-pill.added .plus {
   background: rgba(58, 47, 30, .12);
+}
+
+/* ===== CONFETTI BURST ===== */
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.confetti-particle {
+  position: absolute;
+  border-radius: 2px;
+  opacity: 1;
+  transform: translate(-50%, -50%) translate(0, 0) scale(1) rotate(0deg);
+  animation: confettiExplode 0.65s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+}
+
+@keyframes confettiExplode {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(0, 0) scale(0.6) rotate(0deg);
+  }
+  60% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(0.35) rotate(var(--rot));
+  }
+}
+
+.flying-dish-item {
+  position: fixed;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 999;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  border: 2px solid #fff;
 }
 
 /* ===== VARIANT SELECTOR ===== */

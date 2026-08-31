@@ -62,6 +62,7 @@ const GRANOLA_KLUBNIKA = "img/granola_s_klubnikoy.webp";
 const DRANIKI_LOSOS = "img/draniki_s_lososem.webp";
 const OMLET_KURITSA = "img/omlet_s_kuritsoy.webp";
 const OMLET_SIR = "img/omlet_s_sirom.webp";
+const OMLET_GRIB = "img/omlet_s_gribami.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -80,7 +81,7 @@ const OMLET_SIR = "img/omlet_s_sirom.webp";
   SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
   ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI,
   GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS, OMLET_KURITSA,
-  OMLET_SIR
+  OMLET_SIR, OMLET_GRIB
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -96,7 +97,7 @@ const MENU = {
     { id: 'shakshuka', name: { ru: 'Шакшука', uz: 'Shakshuka' }, desc: { ru: 'Яйца в ароматном томатном соусе со специями и хрустящим тостом', uz: "Xushbo'y pomidor sousida pishirilgan tuxumlar" }, weight: '', price: 55000, badge: '', img: SHAKSHUKA },
     { id: 'oatmeal', name: { ru: 'Каша Овсяная', uz: 'Suli kasha' }, desc: { ru: 'Нежная овсяная каша на молоке со сливочным маслом', uz: 'Sutda pishirilgan mayin suli kasha' }, weight: '', price: 30000, badge: '', img: KASHA_OVSYANAYA },
     { id: 'semolina', name: { ru: 'Каша манная', uz: 'Manniy kasha' }, desc: { ru: 'Традиционная манная каша со сливочным маслом', uz: "Sariyog' bilan tayyorlangan klassik manniy kasha" }, weight: '', price: 30000, badge: '', img: KASHA_MANNAYA },
-    { id: 'omelette_mushroom', name: { ru: 'Омлет с грибами', uz: "Qo'ziqorinli omlet" }, desc: { ru: 'Пышный омлет с обжаренными лесными грибами и зеленью', uz: "Qovurilgan qo'ziqorinlar bilan yam-yashil omlet" }, weight: '', price: 48000, badge: '', img: P5 },
+    { id: 'omelette_mushroom', name: { ru: 'Омлет с грибами', uz: "Qo'ziqorinli omlet" }, desc: { ru: 'Пышный омлет с обжаренными лесными грибами и зеленью', uz: "Qovurilgan qo'ziqorinlar bilan yam-yashil omlet" }, weight: '', price: 48000, badge: '', img: OMLET_GRIB },
     { id: 'omelette_chicken', name: { ru: 'Омлет с курицей', uz: 'Tovuqli omlet' }, desc: { ru: 'Пышный омлет с нежным куриным филе и травами', uz: "Mayin tovuq filesi bilan to'yimli omlet" }, weight: '', price: 48000, badge: '', img: OMLET_KURITSA },
     { id: 'omelette_cheese', name: { ru: 'Омлет с сыром', uz: 'Pishloqli omlet' }, desc: { ru: 'Нежный классический омлет с тянущимся сыром', uz: "Cho'ziluvchi pishloq bilan mayin классик omlet" }, weight: '', price: 35000, badge: '', img: OMLET_SIR },
     { id: 'syrniki', name: { ru: 'Сырники', uz: 'Sirniklar' }, desc: { ru: 'Нежные творожные сырники со сметаной и ягодным соусом', uz: 'Tvorogli mayin sirniklar, smetana va rezavor sousi' }, weight: '', price: 45000, badge: '', img: SIRNIKI },

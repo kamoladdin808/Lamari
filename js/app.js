@@ -843,6 +843,14 @@ window.addEventListener('mouseup', () => {
   setTimeout(() => { hasDraggedTabs = false; }, 60);
 });
 
+// Горизонтальная прокрутка колесиком мыши на ПК
+tabsViewport.addEventListener('wheel', (e) => {
+  if (e.deltaY !== 0) {
+    e.preventDefault();
+    tabsViewport.scrollLeft += e.deltaY * 0.85;
+  }
+}, { passive: false });
+
 let touchX = null;
 const swipeZone = document.getElementById('swipeZone');
 

@@ -1773,9 +1773,17 @@ body {
     font-size: 16px;
   }
 
+  .tabs-viewport {
+    max-width: 880px;
+    margin: 12px auto 0;
+    mask-image: linear-gradient(to right, transparent 0%, black 30px, black calc(100% - 30px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30px, black calc(100% - 30px), transparent 100%);
+  }
+
   .cat-tab {
-    padding: 14px 24px;
-    font-size: 15.5px;
+    padding: 11px 18px;
+    font-size: 14px;
+    border-radius: 12px;
   }
 
   .var-btn {
@@ -1830,6 +1838,19 @@ body {
 
   .bottom-area {
     padding-bottom: 34px;
+  }
+
+  .tabs-viewport {
+    max-width: 960px;
+    margin: 14px auto 0;
+    mask-image: linear-gradient(to right, transparent 0%, black 36px, black calc(100% - 36px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 36px, black calc(100% - 36px), transparent 100%);
+  }
+
+  .cat-tab {
+    padding: 11px 20px;
+    font-size: 14px;
+    border-radius: 12px;
   }
 
   /* Desktop Hover Effects */

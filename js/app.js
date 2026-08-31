@@ -568,14 +568,17 @@ function setDish(cat, idx) {
   // 3. После перерисовки и декодирования — плавно проявить поверх старого
   const doFade = () => {
     incoming.onload = null;
+    // Двойной rAF: первый — браузер фиксирует opacity:0, второй — запускает плавный переход к opacity:1
     requestAnimationFrame(() => {
-      incoming.style.transition = '';
-      incoming.style.opacity = '';
-      incoming.style.animation = '';
-      incoming.classList.add('active');
-      crossfadeTimer = setTimeout(() => {
-        outgoing.classList.remove('active');
-      }, 380);
+      requestAnimationFrame(() => {
+        incoming.style.transition = '';
+        incoming.style.opacity = '';
+        incoming.style.animation = '';
+        incoming.classList.add('active');
+        crossfadeTimer = setTimeout(() => {
+          outgoing.classList.remove('active');
+        }, 650);
+      });
     });
   };
 

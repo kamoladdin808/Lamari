@@ -324,6 +324,7 @@ if (window.location.search) {
 }
 let curVariantIdx = 0;
 let showingA = true;
+let crossfadeTimer = null;
 const cart = {}; // itemId -> {qty, price, name: {ru, uz}, img}
 
 try {
@@ -550,16 +551,17 @@ function setDish(cat, idx) {
   const incoming = showingA ? imgB : imgA;
   const outgoing = showingA ? imgA : imgB;
 
-  // Бесшовное наложение: новое фото кладется поверх, старое плавно скрывается без мелькания
+  // Бесшовное наложение: входящее фото на z-index 2 плавно накрывает предыдущее без затемнений
+  clearTimeout(crossfadeTimer);
   incoming.style.zIndex = '2';
   outgoing.style.zIndex = '1';
   incoming.alt = d.name[curLang];
 
   const triggerFade = () => {
     incoming.classList.add('active');
-    setTimeout(() => {
+    crossfadeTimer = setTimeout(() => {
       outgoing.classList.remove('active');
-    }, 40);
+    }, 380);
   };
 
   if (incoming.src.endsWith(d.img) || (incoming.complete && incoming.naturalWidth > 0)) {

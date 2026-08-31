@@ -551,29 +551,38 @@ function setDish(cat, idx) {
   const incoming = showingA ? imgB : imgA;
   const outgoing = showingA ? imgA : imgB;
 
-  // Бесшовное наложение: входящее фото на z-index 2 плавно накрывает предыдущее без затемнений
+  // 1. Немедленно спрятать входящий буфер (без CSS-transition), чтобы старое фото не мелькнуло
   clearTimeout(crossfadeTimer);
+  incoming.onload = null;
+  incoming.classList.remove('active');
+  incoming.style.transition = 'none';
+  incoming.style.opacity = '0';
+  incoming.style.animation = 'none';
   incoming.style.zIndex = '2';
   outgoing.style.zIndex = '1';
+
+  // 2. Загрузить новое фото в полностью невидимый элемент
+  incoming.src = d.img;
   incoming.alt = d.name[curLang];
 
-  const triggerFade = () => {
-    incoming.classList.add('active');
-    crossfadeTimer = setTimeout(() => {
-      outgoing.classList.remove('active');
-    }, 380);
+  // 3. После перерисовки и декодирования — плавно проявить поверх старого
+  const doFade = () => {
+    incoming.onload = null;
+    requestAnimationFrame(() => {
+      incoming.style.transition = '';
+      incoming.style.opacity = '';
+      incoming.style.animation = '';
+      incoming.classList.add('active');
+      crossfadeTimer = setTimeout(() => {
+        outgoing.classList.remove('active');
+      }, 380);
+    });
   };
 
-  if (incoming.src.endsWith(d.img) || (incoming.complete && incoming.naturalWidth > 0)) {
-    incoming.src = d.img;
-    triggerFade();
+  if (incoming.complete && incoming.naturalWidth > 0) {
+    doFade();
   } else {
-    incoming.src = d.img;
-    if (incoming.complete) {
-      triggerFade();
-    } else {
-      incoming.onload = triggerFade;
-    }
+    incoming.onload = doFade;
   }
   showingA = !showingA;
 

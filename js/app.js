@@ -549,10 +549,30 @@ function setDish(cat, idx) {
   const d = MENU[cat][idx];
   const incoming = showingA ? imgB : imgA;
   const outgoing = showingA ? imgA : imgB;
-  incoming.src = d.img;
+
+  // Бесшовное наложение: новое фото кладется поверх, старое плавно скрывается без мелькания
+  incoming.style.zIndex = '2';
+  outgoing.style.zIndex = '1';
   incoming.alt = d.name[curLang];
-  incoming.classList.add('active');
-  outgoing.classList.remove('active');
+
+  const triggerFade = () => {
+    incoming.classList.add('active');
+    setTimeout(() => {
+      outgoing.classList.remove('active');
+    }, 40);
+  };
+
+  if (incoming.src.endsWith(d.img) || (incoming.complete && incoming.naturalWidth > 0)) {
+    incoming.src = d.img;
+    triggerFade();
+  } else {
+    incoming.src = d.img;
+    if (incoming.complete) {
+      triggerFade();
+    } else {
+      incoming.onload = triggerFade;
+    }
+  }
   showingA = !showingA;
 
   dishCat.textContent = CAT_NAMES[cat][curLang];

@@ -64,6 +64,7 @@ const OMLET_KURITSA = "img/omlet_s_kuritsoy.webp";
 const OMLET_SIR = "img/omlet_s_sirom.webp";
 const OMLET_GRIB = "img/omlet_s_gribami.webp";
 const MATCHA_YABLOKO_KIWI = "img/matcha_yabloko_kiwi.webp";
+const MOXITO_KLUBNIKA = "img/moxito_klubnika.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -82,7 +83,7 @@ const MATCHA_YABLOKO_KIWI = "img/matcha_yabloko_kiwi.webp";
   SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
   ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI,
   GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS, OMLET_KURITSA,
-  OMLET_SIR, OMLET_GRIB, MATCHA_YABLOKO_KIWI
+  OMLET_SIR, OMLET_GRIB, MATCHA_YABLOKO_KIWI, MOXITO_KLUBNIKA
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -272,7 +273,7 @@ const MENU = {
       weight: '',
       price: 35000,
       badge: 'HIT',
-      img: P4,
+      img: MOXITO_KLUBNIKA,
       variants: [
         { id: 'mojito_strawberry_glass', label: { ru: 'Стакан', uz: 'Stakan' }, price: 35000 },
         { id: 'mojito_strawberry_carafe', label: { ru: 'Графин', uz: 'Grafin' }, price: 70000 }

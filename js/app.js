@@ -63,6 +63,7 @@ const DRANIKI_LOSOS = "img/draniki_s_lososem.webp";
 const OMLET_KURITSA = "img/omlet_s_kuritsoy.webp";
 const OMLET_SIR = "img/omlet_s_sirom.webp";
 const OMLET_GRIB = "img/omlet_s_gribami.webp";
+const MATCHA_YABLOKO_KIWI = "img/matcha_yabloko_kiwi.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -81,7 +82,7 @@ const OMLET_GRIB = "img/omlet_s_gribami.webp";
   SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
   ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI,
   GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS, OMLET_KURITSA,
-  OMLET_SIR, OMLET_GRIB
+  OMLET_SIR, OMLET_GRIB, MATCHA_YABLOKO_KIWI
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -296,7 +297,7 @@ const MENU = {
   'matcha': [
     { id: 'matcha_kiwi', name: { ru: 'Матча с Киви', uz: 'Kivili Matcha' }, desc: { ru: 'Японская зеленая матча с молоком и натуральным пюре из киви', uz: 'Sut va tabiiy kivi pyuresi bilan yashil matcha' }, weight: '', price: 45000, badge: '', img: MATCHA_KIVI },
     { id: 'matcha_strawberry', name: { ru: 'Матча Клубничный', uz: 'Qulupnayli Matcha' }, desc: { ru: 'Церемониальная матча со взбитым молоком и сочным клубничным слоем', uz: "Ko'pirtirilgan sut, qulupnay qatlami va yapon matcha choyi" }, weight: '', price: 45000, badge: 'HIT', img: MATCHA_KLUBNIKA },
-    { id: 'matcha_apple', name: { ru: 'Матча Яблоко-киви', uz: 'Matcha Olma-kivi' }, desc: { ru: 'Освежающий матча-коктейль с зеленым яблоком и киви', uz: 'Yashil olma va kivi bilan tetiklantiruvchi matcha kokteyli' }, weight: '', price: 45000, badge: '', img: P2 },
+    { id: 'matcha_apple', name: { ru: 'Матча Яблоко-киви', uz: 'Matcha Olma-kivi' }, desc: { ru: 'Освежающий матча-коктейль с зеленым яблоком и киви', uz: 'Yashil olma va kivi bilan tetiklantiruvchi matcha kokteyli' }, weight: '', price: 45000, badge: '', img: MATCHA_YABLOKO_KIWI },
     { id: 'anchan_peach', name: { ru: 'Анчан Персик-манго', uz: 'Anchan Shaftoli-mango' }, desc: { ru: 'Натуральный синий чай анчан с сочным персиком и манго со льдом', uz: "Muz, shaftoli va mango bilan tabiiy ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: ANCHAN_PERSIK_MANGO },
     { id: 'anchan_blueberry', name: { ru: 'Анчан с Черникой', uz: 'Chernikali Anchan' }, desc: { ru: 'Натуральный синий чай анчан с черничным пюре и льдом', uz: "Chernika pyuresi va muz bilan ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: ANCHAN_CHERNIROY }
   ],

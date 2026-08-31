@@ -57,6 +57,7 @@ const ANGLIYSKIY_ZAVTRAK = "img/angliyskiy_zavtrak.webp";
 const BLINCHIK_S_MEDOM = "img/blinchik_s_medom.webp";
 const BENEDIKT_LOSOS = "img/benedikt_s_lasosem.webp";
 const SIRNIKI = "img/sirniki.webp";
+const GRANOLA_MANGO = "img/granola_s_mango.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -73,7 +74,8 @@ const SIRNIKI = "img/sirniki.webp";
   SALAT_BURRATA, SALAT_BAKLAJAN, SALAT_TROPICAL, PIZZA_PEPPERONI,
   SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
   SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
-  ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI
+  ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI,
+  GRANOLA_MANGO
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -84,7 +86,7 @@ const MENU = {
     { id: 'french_toast', name: { ru: 'Французский тост с ягодами', uz: 'Rezavorli fransuz tosti' }, desc: { ru: 'Нежный тост со свежими ягодами и натуральным сиропом', uz: 'Yangi rezavorlar va tabiiy sirop bilan mayin fransuz tosti' }, weight: '', price: 35000, badge: '', img: FRANCUZSKIY_TOST },
     { id: 'benedict_salmon', name: { ru: 'Бенедикт с лососем', uz: 'Qizil baliqli Benedikt' }, desc: { ru: 'Бенедикт со слабосоленым лососем и голландским соусом', uz: 'Qizil baliq va golland sousi bilan klassik Benedikt' }, weight: '', price: 65000, badge: 'HIT', img: BENEDIKT_LOSOS },
     { id: 'granola_strawberry', name: { ru: 'Гранола с клубникой', uz: 'Qulupnayli granola' }, desc: { ru: 'Хрустящая запеченная гранола с натуральным йогуртом и клубникой', uz: 'Qarsildoq granola, tabiiy yogurt va yangi qulupnay' }, weight: '', price: 50000, badge: '', img: P3 },
-    { id: 'granola_mango', name: { ru: 'Гранола с манго', uz: 'Mangolik granola' }, desc: { ru: 'Хрустящая гранола с натуральным йогуртом и кусочками спелого манго', uz: 'Qarsildoq granola, tabiiy yogurt va pishgan mango' }, weight: '', price: 50000, badge: '', img: P3 },
+    { id: 'granola_mango', name: { ru: 'Гранола с манго', uz: 'Mangolik granola' }, desc: { ru: 'Хрустящая гранола с натуральным йогуртом и кусочками спелого манго', uz: 'Qarsildoq granola, tabiiy yogurt va pishgan mango' }, weight: '', price: 50000, badge: '', img: GRANOLA_MANGO },
     { id: 'draniki_salmon', name: { ru: 'Драники с лососем', uz: 'Qizil baliqli draniklar' }, desc: { ru: 'Золотистые картофельные драники с нежным лососем и сметаной', uz: 'Qizil baliq va smetana bilan tillarang kartoshka draniklar' }, weight: '', price: 75000, badge: '', img: P5 },
     { id: 'shakshuka', name: { ru: 'Шакшука', uz: 'Shakshuka' }, desc: { ru: 'Яйца в ароматном томатном соусе со специями и хрустящим тостом', uz: "Xushbo'y pomidor sousida pishirilgan tuxumlar" }, weight: '', price: 55000, badge: '', img: SHAKSHUKA },
     { id: 'oatmeal', name: { ru: 'Каша Овсяная', uz: 'Suli kasha' }, desc: { ru: 'Нежная овсяная каша на молоке со сливочным маслом', uz: 'Sutda pishirilgan mayin suli kasha' }, weight: '', price: 30000, badge: '', img: KASHA_OVSYANAYA },

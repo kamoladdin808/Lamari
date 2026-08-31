@@ -59,6 +59,7 @@ const BENEDIKT_LOSOS = "img/benedikt_s_lasosem.webp";
 const SIRNIKI = "img/sirniki.webp";
 const GRANOLA_MANGO = "img/granola_s_mango.webp";
 const GRANOLA_KLUBNIKA = "img/granola_s_klubnikoy.webp";
+const DRANIKI_LOSOS = "img/draniki_s_lososem.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -76,7 +77,7 @@ const GRANOLA_KLUBNIKA = "img/granola_s_klubnikoy.webp";
   SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
   SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
   ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI,
-  GRANOLA_MANGO, GRANOLA_KLUBNIKA
+  GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -88,7 +89,7 @@ const MENU = {
     { id: 'benedict_salmon', name: { ru: 'Бенедикт с лососем', uz: 'Qizil baliqli Benedikt' }, desc: { ru: 'Бенедикт со слабосоленым лососем и голландским соусом', uz: 'Qizil baliq va golland sousi bilan klassik Benedikt' }, weight: '', price: 65000, badge: 'HIT', img: BENEDIKT_LOSOS },
     { id: 'granola_strawberry', name: { ru: 'Гранола с клубникой', uz: 'Qulupnayli granola' }, desc: { ru: 'Хрустящая запеченная гранола с натуральным йогуртом и клубникой', uz: 'Qarsildoq granola, tabiiy yogurt va yangi qulupnay' }, weight: '', price: 50000, badge: '', img: GRANOLA_KLUBNIKA },
     { id: 'granola_mango', name: { ru: 'Гранола с манго', uz: 'Mangolik granola' }, desc: { ru: 'Хрустящая гранола с натуральным йогуртом и кусочками спелого манго', uz: 'Qarsildoq granola, tabiiy yogurt va pishgan mango' }, weight: '', price: 50000, badge: '', img: GRANOLA_MANGO },
-    { id: 'draniki_salmon', name: { ru: 'Драники с лососем', uz: 'Qizil baliqli draniklar' }, desc: { ru: 'Золотистые картофельные драники с нежным лососем и сметаной', uz: 'Qizil baliq va smetana bilan tillarang kartoshka draniklar' }, weight: '', price: 75000, badge: '', img: P5 },
+    { id: 'draniki_salmon', name: { ru: 'Драники с лососем', uz: 'Qizil baliqli draniklar' }, desc: { ru: 'Золотистые картофельные драники с нежным лососем и сметаной', uz: 'Qizil baliq va smetana bilan tillarang kartoshka draniklar' }, weight: '', price: 75000, badge: '', img: DRANIKI_LOSOS },
     { id: 'shakshuka', name: { ru: 'Шакшука', uz: 'Shakshuka' }, desc: { ru: 'Яйца в ароматном томатном соусе со специями и хрустящим тостом', uz: "Xushbo'y pomidor sousida pishirilgan tuxumlar" }, weight: '', price: 55000, badge: '', img: SHAKSHUKA },
     { id: 'oatmeal', name: { ru: 'Каша Овсяная', uz: 'Suli kasha' }, desc: { ru: 'Нежная овсяная каша на молоке со сливочным маслом', uz: 'Sutda pishirilgan mayin suli kasha' }, weight: '', price: 30000, badge: '', img: KASHA_OVSYANAYA },
     { id: 'semolina', name: { ru: 'Каша манная', uz: 'Manniy kasha' }, desc: { ru: 'Традиционная манная каша со сливочным маслом', uz: "Sariyog' bilan tayyorlangan klassik manniy kasha" }, weight: '', price: 30000, badge: '', img: KASHA_MANNAYA },

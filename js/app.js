@@ -70,6 +70,9 @@ const MOXITO_KLASSIK = "img/moxito_klassik.webp";
 const MOXITO_KIWI = "img/moxito_kiwi.webp";
 const MYATNIY_SMUZI = "img/myatniy_smuzi.webp";
 const YAGODNIY_SMUZI = "img/yagodniy_smuzi.webp";
+const TORTILYON_4_SIRA = "img/tortilyon_4_sira.webp";
+const PASTA_BOLONESE = "img/pasta_boloneze.webp";
+const PASTA_ALFREDO = "img/pasta_alfredo.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -90,7 +93,7 @@ const YAGODNIY_SMUZI = "img/yagodniy_smuzi.webp";
   GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS, OMLET_KURITSA,
   OMLET_SIR, OMLET_GRIB, MATCHA_YABLOKO_KIWI, MOXITO_KLUBNIKA,
   LIMONAD_MANGO_MARAKUYA, MOXITO_KLASSIK, MOXITO_KIWI, MYATNIY_SMUZI,
-  YAGODNIY_SMUZI
+  YAGODNIY_SMUZI, TORTILYON_4_SIRA, PASTA_BOLONESE, PASTA_ALFREDO
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -148,9 +151,9 @@ const MENU = {
     { id: 'perlotto_truffle', name: { ru: 'Перлотто с трюфельным соусом', uz: 'Tryufel sousli perlotto' }, desc: { ru: 'Нежное перловое ризотто с благородным трюфельным соусом и пармезаном', uz: "Xushbo'y tryufel sousi va parmezan bilan tayyorlangan arpa risottosi" }, weight: '', price: 60000, badge: 'NEW', img: PERLOTTO_TRUFFLE }
   ],
   'pasta': [
-    { id: 'fettuccine_alfredo', name: { ru: 'Феттучине Альфредо', uz: 'Fettuchine Alfredo' }, desc: { ru: 'Классическая паста феттучине в нежном сливочном соусе Альфредо с пармезаном', uz: 'Qaymoqli Alfredo sousi va parmezan bilan klassik fettuchine pastasi' }, weight: '', price: 65000, badge: '', img: P5 },
-    { id: 'spaghetti_bolognese', name: { ru: 'Спагетти Болоньезе', uz: 'Bolonyeze spagetti' }, desc: { ru: 'Традиционные спагетти с сочным мясным рагу Болоньезе и пармезаном', uz: "Suvli go'shtli Bolonyeze ragusi va parmezan bilan an'anaviy spagetti" }, weight: '', price: 65000, badge: '', img: P5 },
-    { id: 'tortiglioni_4_cheese', name: { ru: 'Тортильони 4 сыра', uz: 'Tortilyoni 4 pishloq' }, desc: { ru: 'Паста тортильони в насыщенном соусе из четырех благородных сыров', uz: "To'rt xil oliy navli pishloqli quyuq sousda tortilyoni pastasi" }, weight: '', price: 70000, badge: '', img: P5 }
+    { id: 'fettuccine_alfredo', name: { ru: 'Феттучине Альфредо', uz: 'Fettuchine Alfredo' }, desc: { ru: 'Классическая паста феттучине в нежном сливочном соусе Альфредо с пармезаном', uz: 'Qaymoqli Alfredo sousi va parmezan bilan klassik fettuchine pastasi' }, weight: '', price: 65000, badge: '', img: PASTA_ALFREDO },
+    { id: 'spaghetti_bolognese', name: { ru: 'Спагетти Болоньезе', uz: 'Bolonyeze spagetti' }, desc: { ru: 'Традиционные спагетти с сочным мясным рагу Болоньезе и пармезаном', uz: "Suvli go'shtli Bolonyeze ragusi va parmezan bilan an'anaviy spagetti" }, weight: '', price: 65000, badge: '', img: PASTA_BOLONESE },
+    { id: 'tortiglioni_4_cheese', name: { ru: 'Тортильони 4 сыра', uz: 'Tortilyoni 4 pishloq' }, desc: { ru: 'Паста тортильони в насыщенном соусе из четырех благородных сыров', uz: "To'rt xil oliy navli pishloqli quyuq sousda tortilyoni pastasi" }, weight: '', price: 70000, badge: '', img: TORTILYON_4_SIRA }
   ],
   'bowls': [
     { id: 'bowl_green', name: { ru: 'Боул зелень с авокадо', uz: "Ko'katli avokado bouli" }, desc: { ru: 'Свежий микс салатов, спелый авокадо, огурцы, эдамаме, семена и легкая заправка', uz: "Yangi salat miksi, pishgan avokado, bodring, edamame va urug'lar" }, weight: '', price: 135000, badge: '', img: BOUL_ZELEN },

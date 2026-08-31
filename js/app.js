@@ -54,6 +54,7 @@ const FRANCUZSKIY_TOST = "img/fransuskiy_tost_s_yagodami.webp";
 const FRANCUZSKIY_ZAVTRAK = "img/fransuskiy_zavtrak.webp";
 const ITALYANSKIY_ZAVTRAK = "img/italyanskiy_zavtrak.webp";
 const ANGLIYSKIY_ZAVTRAK = "img/angliyskiy_zavtrak.webp";
+const BLINCHIK_S_MEDOM = "img/blinchik_s_medom.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 [
@@ -70,7 +71,7 @@ const ANGLIYSKIY_ZAVTRAK = "img/angliyskiy_zavtrak.webp";
   SALAT_BURRATA, SALAT_BAKLAJAN, SALAT_TROPICAL, PIZZA_PEPPERONI,
   SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
   SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
-  ANGLIYSKIY_ZAVTRAK
+  ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM
 ].forEach(src => {
   const img = new Image();
   img.src = src;
@@ -90,7 +91,7 @@ const MENU = {
     { id: 'omelette_chicken', name: { ru: 'Омлет с курицей', uz: 'Tovuqli omlet' }, desc: { ru: 'Пышный омлет с нежным куриным филе и травами', uz: "Mayin tovuq filesi bilan to'yimli omlet" }, weight: '', price: 48000, badge: '', img: P5 },
     { id: 'omelette_cheese', name: { ru: 'Омлет с сыром', uz: 'Pishloqli omlet' }, desc: { ru: 'Нежный классический омлет с тянущимся сыром', uz: "Cho'ziluvchi pishloq bilan mayin klassik omlet" }, weight: '', price: 35000, badge: '', img: P5 },
     { id: 'syrniki', name: { ru: 'Сырники', uz: 'Sirniklar' }, desc: { ru: 'Нежные творожные сырники со сметаной и ягодным соусом', uz: 'Tvorogli mayin sirniklar, smetana va rezavor sousi' }, weight: '', price: 45000, badge: '', img: P3 },
-    { id: 'pancakes_honey', name: { ru: 'Блинчики с медом', uz: 'Asalli blinchiklar' }, desc: { ru: 'Тонкие домашние блинчики со сливочным маслом и натуральным медом', uz: "Sariyog' va tabiiy asal bilan yupqa blinchiklar" }, weight: '', price: 45000, badge: '', img: P3 }
+    { id: 'pancakes_honey', name: { ru: 'Блинчики с медом', uz: 'Asalli blinchiklar' }, desc: { ru: 'Тонкие домашние блинчики со сливочным маслом и натуральным медом', uz: "Sariyog' va tabiiy asal bilan yupqa blinchiklar" }, weight: '', price: 45000, badge: '', img: BLINCHIK_S_MEDOM }
   ],
   'set_breakfast': [
     { id: 'set_italian', name: { ru: 'Итальянский завтрак', uz: 'Italyan nonushtasi' }, desc: { ru: 'Сет: хрустящая фокачча, моцарелла, томаты, яйцо и кофе', uz: 'Set: qarsildoq fokachcha, motsarella, pomidor, tuxum va kofe' }, weight: '', price: 85000, badge: 'СЕТ', img: ITALYANSKIY_ZAVTRAK },

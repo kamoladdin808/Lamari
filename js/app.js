@@ -73,11 +73,13 @@ const YAGODNIY_SMUZI = "img/yagodniy_smuzi.webp";
 const TORTILYON_4_SIRA = "img/tortilyon_4_sira.webp";
 const PASTA_BOLONESE = "img/pasta_boloneze.webp";
 const PASTA_ALFREDO = "img/pasta_alfredo.webp";
+const LOGO_LAMARI = "img/logo_lamari.png";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
 // Батчами по 6 для предотвращения перегрузки iOS Safari TCP-соединений
 (function batchPreload() {
   const allSources = [
+    LOGO_LAMARI,
     P1, P2, P3, P4, P5, P6,
     ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
     CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY,

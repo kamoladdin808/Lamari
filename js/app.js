@@ -434,7 +434,7 @@ const catParam = urlParams.get('cat');
 const dishParam = parseInt(urlParams.get('dish'), 10);
 const langParam = urlParams.get('lang');
 
-let curLang = (langParam === 'ru' || langParam === 'uz') ? langParam : 'ru';
+let curLang = (langParam === 'ru' || langParam === 'uz') ? langParam : (localStorage.getItem('lamari_lang') || 'ru');
 let curCat = 'breakfasts';
 let curIdx = 0;
 
@@ -551,9 +551,10 @@ function closeLangModal() {
   resumeSlider();
 }
 
-function setLanguage(lang) {
-  if (curLang === lang) return;
+function setLanguage(lang, force = false) {
+  if (curLang === lang && !force) return;
   curLang = lang;
+  localStorage.setItem('lamari_lang', lang);
 
   // Обновляем десктоп
   langRuBtn.classList.toggle('active', lang === 'ru');
@@ -1696,6 +1697,9 @@ makeDraggable(waffleModal, document.querySelector('.waffle-handle'), waffleOverl
 renderTabs();
 setDish(curCat, curIdx);
 updateCartUI();
+if (curLang !== 'ru') {
+  setLanguage(curLang, true);
+}
 
 function setVH() {
   const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight) * 0.01;

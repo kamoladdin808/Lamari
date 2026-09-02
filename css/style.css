@@ -59,7 +59,10 @@ body {
 /* ===== LUXURY PRELOADER ===== */
 #preloader {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   z-index: 100;
   background: radial-gradient(circle at 50% 48%, #A39690 0%, #7A6F68 55%, #473F3B 100%);
@@ -140,6 +143,7 @@ body {
     -webkit-filter: blur(4px) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
     filter: blur(4px) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
   }
+
   100% {
     opacity: 1;
     -webkit-transform: translateY(0) scale(1);
@@ -157,6 +161,7 @@ body {
     -webkit-filter: blur(4px) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
     filter: blur(4px) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
   }
+
   100% {
     opacity: 1;
     -webkit-transform: translateY(0) scale(1);
@@ -232,14 +237,20 @@ body {
 /* ===== IMAGE LAYERS (instant hardware-accelerated crossfade + Ken Burns) ===== */
 .player {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   overflow: hidden;
 }
 
 .player img {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   width: 100%;
   height: 100%;
@@ -329,7 +340,10 @@ body {
 /* ===== AMBIENT CATEGORY COLOR TINT ===== */
 .ambient-tint {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   pointer-events: none;
   z-index: 4;
@@ -684,7 +698,10 @@ body {
 /* ===== LANGUAGE MODAL ===== */
 .lang-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(3px);
@@ -911,7 +928,10 @@ body {
 /* ===== DESCRIPTION MODAL ===== */
 .desc-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(3px);
@@ -1058,7 +1078,10 @@ body {
 
 .swipe-zone {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   z-index: 5;
   -webkit-user-select: none;
@@ -1164,7 +1187,10 @@ body {
 /* ===== CONFETTI BURST (JS-driven for Safari compatibility) ===== */
 .confetti-container {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
@@ -1220,7 +1246,10 @@ body {
 /* ===== WAFFLE CUSTOMIZER MODAL ===== */
 .waffle-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(4px);
@@ -1530,7 +1559,10 @@ body {
 /* ===== CART DRAWER ===== */
 .cart-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   inset: 0;
   background: rgba(15, 12, 10, .55);
   backdrop-filter: blur(2px);
@@ -2160,6 +2192,7 @@ body {
 
 /* --- 7. Поддержка reduced-motion (для доступности) --- */
 @media (prefers-reduced-motion: reduce) {
+
   /* Отключаем только бесконечный Ken Burns зум, но сохраняем интерфейсные переходы */
   .player img.active {
     -webkit-animation: none !important;

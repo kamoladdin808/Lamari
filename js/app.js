@@ -1729,10 +1729,23 @@ window.addEventListener('orientationchange', () => {
   setTimeout(setVH, 300);
 });
 
+let preloaderDone = false;
+function finishPreloader() {
+  if (preloaderDone) return;
+  preloaderDone = true;
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    setTimeout(() => {
+      preloader.classList.add('hide');
+      appLoaded = true;
+      renderDots(curCat, curIdx);
+    }, 250);
+  }
+}
+
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('preloader').classList.add('hide');
-    appLoaded = true;
-    renderDots(curCat, curIdx);
-  }, 1900);
+  setTimeout(finishPreloader, 1300);
 });
+
+// Страховочный таймаут при медленном соединении
+setTimeout(finishPreloader, 3500);

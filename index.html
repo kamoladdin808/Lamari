@@ -19,12 +19,23 @@
 
 <body>
 
+  <!-- LUXURY PRELOADER -->
+  <div id="preloader">
+    <div class="pl-glow"></div>
+    <div class="pl-content">
+      <img src="img/logo_lamari.png" alt="La Mari" class="pl-logo">
+      <div class="pl-track">
+        <div class="pl-bar"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="home-container">
 
     <!-- FULLSCREEN VIDEO BACKGROUND -->
     <div class="video-wrapper">
-      <video class="bg-video" id="bgVideo" autoplay muted loop playsinline poster="img/p1.jpg">
-        <source src="video/intro.mp4" type="video/mp4">
+      <video class="bg-video" id="bgVideo" autoplay muted loop playsinline preload="auto" poster="img/p1.jpg">
+        <source src="video/video_lamari.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -41,7 +52,7 @@
   </div>
 
   <script>
-    // Управление высотой вьюпорта для iOS Safari (динамический 100dvh)
+    // 1. Динамическая высота вьюпорта для iOS Safari
     function setVH() {
       const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight) * 0.01;
       document.documentElement.style.setProperty('--vh', vh + 'px');
@@ -56,14 +67,42 @@
       setTimeout(setVH, 300);
     });
 
-    // Автозапуск видео без звука
+    // 2. Плавное снятие прелоадера после готовности видео
+    let preloaderDismissed = false;
+    function dismissPreloader() {
+      if (preloaderDismissed) return;
+      preloaderDismissed = true;
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        setTimeout(() => {
+          preloader.classList.add('hide');
+        }, 200);
+      }
+    }
+
     const bgVideo = document.getElementById('bgVideo');
     if (bgVideo) {
       bgVideo.play().catch(() => {});
+
+      bgVideo.addEventListener('playing', () => {
+        setTimeout(dismissPreloader, 350);
+      }, { once: true });
+
+      bgVideo.addEventListener('loadeddata', () => {
+        setTimeout(dismissPreloader, 600);
+      }, { once: true });
+
       document.addEventListener('touchstart', () => {
         if (bgVideo.paused) bgVideo.play().catch(() => {});
       }, { once: true });
     }
+
+    window.addEventListener('load', () => {
+      setTimeout(dismissPreloader, 1200);
+    });
+
+    // Страховочный таймаут для медленного интернета
+    setTimeout(dismissPreloader, 3500);
   </script>
 </body>
 

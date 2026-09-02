@@ -75,29 +75,43 @@ const PASTA_BOLONESE = "img/pasta_boloneze.webp";
 const PASTA_ALFREDO = "img/pasta_alfredo.webp";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
-[
-  P1, P2, P3, P4, P5, P6,
-  ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
-  CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY,
-  KASHA_OVSYANAYA, KASHA_MANNAYA, SHAKSHUKA, OTVARNOY_RIS, OVOSHI_NA_GRILE,
-  KARTOFEL_PYURE, BARANYA_KOREYKA, BONESTEYK_PAYE, MEDALYON_GRATEN,
-  PERLOTTO_TRUFFLE, KURINOYE_FILE, LOSOS_HOLLANDAISE, KLAB_SANDWICH,
-  SANDWICH_TEXAS, SMASH_BURGER, BOUL_ZELEN, BOUL_LOSOS, BOUL_TUNA,
-  PIZZA_TRUFFLE, PIZZA_SALMON, PIZZA_STRACCIATELLA,
-  SUP_TOMYAM_LOSOS, SUP_CHECHEVICHNIY, SUP_MINESTRONE,
-  SALAT_STRACCIATELLA, PIZZA_AL_POLO, SALAT_ROSTBIF, PIZZA_ROSTBIF,
-  SALAT_BURRATA, SALAT_BAKLAJAN, SALAT_TROPICAL, PIZZA_PEPPERONI,
-  SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
-  SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
-  ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI,
-  GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS, OMLET_KURITSA,
-  OMLET_SIR, OMLET_GRIB, MATCHA_YABLOKO_KIWI, MOXITO_KLUBNIKA,
-  LIMONAD_MANGO_MARAKUYA, MOXITO_KLASSIK, MOXITO_KIWI, MYATNIY_SMUZI,
-  YAGODNIY_SMUZI, TORTILYON_4_SIRA, PASTA_BOLONESE, PASTA_ALFREDO
-].forEach(src => {
-  const img = new Image();
-  img.src = src;
-});
+// Батчами по 6 для предотвращения перегрузки iOS Safari TCP-соединений
+(function batchPreload() {
+  const allSources = [
+    P1, P2, P3, P4, P5, P6,
+    ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
+    CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY,
+    KASHA_OVSYANAYA, KASHA_MANNAYA, SHAKSHUKA, OTVARNOY_RIS, OVOSHI_NA_GRILE,
+    KARTOFEL_PYURE, BARANYA_KOREYKA, BONESTEYK_PAYE, MEDALYON_GRATEN,
+    PERLOTTO_TRUFFLE, KURINOYE_FILE, LOSOS_HOLLANDAISE, KLAB_SANDWICH,
+    SANDWICH_TEXAS, SMASH_BURGER, BOUL_ZELEN, BOUL_LOSOS, BOUL_TUNA,
+    PIZZA_TRUFFLE, PIZZA_SALMON, PIZZA_STRACCIATELLA,
+    SUP_TOMYAM_LOSOS, SUP_CHECHEVICHNIY, SUP_MINESTRONE,
+    SALAT_STRACCIATELLA, PIZZA_AL_POLO, SALAT_ROSTBIF, PIZZA_ROSTBIF,
+    SALAT_BURRATA, SALAT_BAKLAJAN, SALAT_TROPICAL, PIZZA_PEPPERONI,
+    SALAT_GRILL, PIZZA_CHEESE, SALAT_CAESAR, PIZZA_MARGHERITA,
+    SALAT_GRECHESKIY, FRANCUZSKIY_TOST, FRANCUZSKIY_ZAVTRAK, ITALYANSKIY_ZAVTRAK,
+    ANGLIYSKIY_ZAVTRAK, BLINCHIK_S_MEDOM, BENEDIKT_LOSOS, SIRNIKI,
+    GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS, OMLET_KURITSA,
+    OMLET_SIR, OMLET_GRIB, MATCHA_YABLOKO_KIWI, MOXITO_KLUBNIKA,
+    LIMONAD_MANGO_MARAKUYA, MOXITO_KLASSIK, MOXITO_KIWI, MYATNIY_SMUZI,
+    YAGODNIY_SMUZI, TORTILYON_4_SIRA, PASTA_BOLONESE, PASTA_ALFREDO
+  ];
+  const batchSize = 6;
+  let idx = 0;
+  function loadBatch() {
+    const end = Math.min(idx + batchSize, allSources.length);
+    for (let i = idx; i < end; i++) {
+      const img = new Image();
+      img.src = allSources[i];
+    }
+    idx = end;
+    if (idx < allSources.length) {
+      setTimeout(loadBatch, 100);
+    }
+  }
+  loadBatch();
+})();
 
 const MENU = {
   'breakfasts': [
@@ -674,10 +688,15 @@ function setDish(cat, idx) {
   incoming.onload = null;
   incoming.classList.remove('active');
   incoming.style.transition = 'none';
+  incoming.style.webkitTransition = 'none';
   incoming.style.opacity = '0';
   incoming.style.animation = 'none';
+  incoming.style.webkitAnimation = 'none';
   incoming.style.zIndex = '2';
   outgoing.style.zIndex = '1';
+
+  // Safari fix: forced reflow to commit style changes before loading new src
+  void incoming.offsetWidth;
 
   // 2. Загрузить новое фото в полностью невидимый элемент
   incoming.src = dishImg;
@@ -690,8 +709,10 @@ function setDish(cat, idx) {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         incoming.style.transition = '';
+        incoming.style.webkitTransition = '';
         incoming.style.opacity = '';
         incoming.style.animation = '';
+        incoming.style.webkitAnimation = '';
         incoming.classList.add('active');
         crossfadeTimer = setTimeout(() => {
           outgoing.classList.remove('active');
@@ -902,10 +923,14 @@ function centerTab(tabEl, smooth = true) {
   const tabLeft = tabEl.offsetLeft;
   const tabW = tabEl.offsetWidth;
   const targetScrollLeft = tabLeft - (viewW - tabW) / 2;
-  tabsViewport.scrollTo({
-    left: targetScrollLeft,
-    behavior: smooth ? 'smooth' : 'auto'
-  });
+  try {
+    tabsViewport.scrollTo({
+      left: targetScrollLeft,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
+  } catch (e) {
+    tabsViewport.scrollLeft = targetScrollLeft;
+  }
 }
 
 let isTabMouseDown = false;
@@ -1169,6 +1194,7 @@ function triggerConfettiBurst(targetEl) {
   container.className = 'confetti-container';
   document.body.appendChild(container);
 
+  const particles = [];
   for (let i = 0; i < count; i++) {
     const p = document.createElement('div');
     p.className = 'confetti-particle';
@@ -1179,23 +1205,51 @@ function triggerConfettiBurst(targetEl) {
     const ty = Math.sin(angle) * distance - 15;
     const rot = Math.random() * 360;
     const size = 5 + Math.random() * 4;
+    const h = size * (Math.random() > 0.4 ? 1.4 : 1);
 
-    p.style.cssText = `
-      left: ${centerX}px;
-      top: ${centerY}px;
-      width: ${size}px;
-      height: ${size * (Math.random() > 0.4 ? 1.4 : 1)}px;
-      background-color: ${color};
-      --tx: ${tx}px;
-      --ty: ${ty}px;
-      --rot: ${rot}deg;
-    `;
+    p.style.left = centerX + 'px';
+    p.style.top = centerY + 'px';
+    p.style.width = size + 'px';
+    p.style.height = h + 'px';
+    p.style.backgroundColor = color;
+    p.style.opacity = '1';
+    p.style.transform = 'translate(-50%, -50%) scale(0.6)';
+    p.style.webkitTransform = 'translate(-50%, -50%) scale(0.6)';
+
     container.appendChild(p);
+    particles.push({ el: p, tx, ty, rot });
   }
 
-  setTimeout(() => {
-    container.remove();
-  }, 700);
+  // JS-driven animation for Safari compatibility (no CSS custom properties in @keyframes)
+  const startTime = performance.now();
+  const duration = 650;
+
+  function animateParticles(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+    particles.forEach(({ el, tx, ty, rot }) => {
+      const curTx = tx * ease;
+      const curTy = ty * ease;
+      const curRot = rot * ease;
+      const scale = 0.6 + (0.35 - 0.6) * ease;
+      const opacity = t < 0.6 ? 1 : 1 - ((t - 0.6) / 0.4);
+
+      el.style.opacity = Math.max(0, opacity);
+      const tf = `translate(-50%, -50%) translate(${curTx}px, ${curTy}px) scale(${Math.max(0.1, scale)}) rotate(${curRot}deg)`;
+      el.style.transform = tf;
+      el.style.webkitTransform = tf;
+    });
+
+    if (t < 1) {
+      requestAnimationFrame(animateParticles);
+    } else {
+      container.remove();
+    }
+  }
+
+  requestAnimationFrame(animateParticles);
 }
 
 function animateFlyToCart(fromElement, imgSrc) {
@@ -1641,8 +1695,17 @@ renderTabs();
 setDish(curCat, curIdx);
 updateCartUI();
 
-function setVH() { document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px'); }
+function setVH() {
+  const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight) * 0.01;
+  document.documentElement.style.setProperty('--vh', vh + 'px');
+}
 setVH();
+
+// Safari iOS: visualViewport resize fires when address bar appears/disappears
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', setVH);
+}
+
 window.addEventListener('resize', () => {
   setVH();
   const activeTab = tabsEl.querySelector('.cat-tab.active');
@@ -1656,6 +1719,12 @@ window.addEventListener('resize', () => {
       activeImg.src = targetImg;
     }
   }
+});
+
+// Safari iOS: orientation change needs VH recalculation
+window.addEventListener('orientationchange', () => {
+  setTimeout(setVH, 100);
+  setTimeout(setVH, 300);
 });
 
 window.addEventListener('load', () => {

@@ -21,7 +21,10 @@ body {
   margin: 0;
   padding: 0;
   overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
   height: 100%;
+  overflow: hidden;
+  width: 100%;
 }
 
 body {
@@ -29,12 +32,14 @@ body {
   background: #000;
   color: var(--cream);
   min-height: 100vh;
+  min-height: 100dvh;
   min-height: calc(var(--vh, 1vh) * 100);
 }
 
 .stage {
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   height: calc(var(--vh, 1vh) * 100);
   position: relative;
   overflow: hidden;
@@ -54,6 +59,7 @@ body {
 /* ===== PRELOADER ===== */
 #preloader {
   position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   z-index: 100;
   background: var(--taupe);
@@ -91,22 +97,48 @@ body {
   margin-top: 4px;
 }
 
+@-webkit-keyframes plLogoIn {
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1);
+    letter-spacing: 2px;
+  }
+}
+
 @keyframes plLogoIn {
   to {
     opacity: 1;
+    -webkit-transform: translateY(0) scale(1);
     transform: translateY(0) scale(1);
     letter-spacing: 2px;
+  }
+}
+
+@-webkit-keyframes plSubIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 0.85;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
   }
 }
 
 @keyframes plSubIn {
   from {
     opacity: 0;
+    -webkit-transform: translateY(5px);
     transform: translateY(5px);
   }
 
   to {
     opacity: 0.85;
+    -webkit-transform: translateY(0);
     transform: translateY(0);
   }
 }
@@ -119,6 +151,7 @@ body {
   border-radius: 2px;
   overflow: hidden;
   opacity: 0;
+  -webkit-animation: plSubIn .8s ease .9s forwards;
   animation: plSubIn .8s ease .9s forwards;
 }
 
@@ -127,7 +160,14 @@ body {
   width: 0%;
   background: var(--cream);
   border-radius: 2px;
+  -webkit-animation: plBar 1.4s cubic-bezier(.4, 0, .2, 1) 1.0s forwards;
   animation: plBar 1.4s cubic-bezier(.4, 0, .2, 1) 1.0s forwards;
+}
+
+@-webkit-keyframes plBar {
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes plBar {
@@ -139,33 +179,55 @@ body {
 /* ===== IMAGE LAYERS (instant hardware-accelerated crossfade + Ken Burns) ===== */
 .player {
   position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   overflow: hidden;
 }
 
 .player img {
   position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
   will-change: opacity, transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition: opacity 0.6s ease-out;
   transition: opacity 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .player img.active {
   opacity: 1;
+  -webkit-animation: kenBurns 5.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   animation: kenBurns 5.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@-webkit-keyframes kenBurns {
+  from {
+    -webkit-transform: scale(1.01) translate3d(0, 0, 0);
+    transform: scale(1.01) translate3d(0, 0, 0);
+  }
+
+  to {
+    -webkit-transform: scale(1.06) translate3d(0, 0, 0);
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
 }
 
 @keyframes kenBurns {
   from {
-    transform: scale(1.01);
+    -webkit-transform: scale(1.01) translate3d(0, 0, 0);
+    transform: scale(1.01) translate3d(0, 0, 0);
   }
 
   to {
-    transform: scale(1.06);
+    -webkit-transform: scale(1.06) translate3d(0, 0, 0);
+    transform: scale(1.06) translate3d(0, 0, 0);
   }
 }
 
@@ -214,11 +276,12 @@ body {
 /* ===== AMBIENT CATEGORY COLOR TINT ===== */
 .ambient-tint {
   position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   pointer-events: none;
   z-index: 4;
-  opacity: 0.7;
-  mix-blend-mode: screen;
+  opacity: 0.5;
+  -webkit-transition: background 0.8s cubic-bezier(0.25, 1, 0.5, 1);
   transition: background 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -268,12 +331,25 @@ body {
 }
 
 .dots .seg.active i {
+  -webkit-animation: segFill linear forwards;
   animation: segFill linear forwards;
+  -webkit-animation-duration: var(--seg-dur, 4.5s);
   animation-duration: var(--seg-dur, 4.5s);
 }
 
 .dots.paused .seg.active i {
+  -webkit-animation-play-state: paused;
   animation-play-state: paused;
+}
+
+@-webkit-keyframes segFill {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes segFill {
@@ -297,6 +373,7 @@ body {
   align-items: flex-start;
   justify-content: space-between;
   opacity: 0;
+  -webkit-animation: contentFadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) 2.0s forwards;
   animation: contentFadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) 2.0s forwards;
 }
 
@@ -322,42 +399,59 @@ body {
 }
 
 /* ===== STAGGERED TEXT ENTRANCE ===== */
-@keyframes slideUpIn {
+@-webkit-keyframes slideUpIn {
   from {
     opacity: 0;
+    -webkit-transform: translateY(18px);
     transform: translateY(18px);
   }
 
   to {
     opacity: 1;
+    -webkit-transform: translateY(0);
     transform: translateY(0);
   }
 }
 
-.dish-info .dish-cat-row,
-.dish-info .dish-title,
-.dish-info .dish-desc,
-.dish-info .dish-more-btn {
-  will-change: opacity, transform;
+@keyframes slideUpIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(18px);
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
 }
 
 .dish-info.stagger .dish-cat-row {
+  -webkit-animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -webkit-animation-delay: 0s;
   animation-delay: 0s;
 }
 
 .dish-info.stagger .dish-title {
+  -webkit-animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -webkit-animation-delay: 0.08s;
   animation-delay: 0.08s;
 }
 
 .dish-info.stagger .dish-desc {
+  -webkit-animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -webkit-animation-delay: 0.15s;
   animation-delay: 0.15s;
 }
 
 .dish-info.stagger .dish-more-btn {
+  -webkit-animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
 }
 
@@ -534,6 +628,7 @@ body {
 /* ===== LANGUAGE MODAL ===== */
 .lang-overlay {
   position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(3px);
@@ -675,21 +770,44 @@ body {
 }
 
 .cart-chip.pop {
+  -webkit-animation: popEffect 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   animation: popEffect 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-@keyframes popEffect {
+@-webkit-keyframes popEffect {
   0% {
+    -webkit-transform: scale(1);
     transform: scale(1);
   }
 
   50% {
+    -webkit-transform: scale(1.3);
     transform: scale(1.3);
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
   }
 
   100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes popEffect {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
@@ -737,6 +855,7 @@ body {
 /* ===== DESCRIPTION MODAL ===== */
 .desc-overlay {
   position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(3px);
@@ -883,11 +1002,13 @@ body {
 
 .swipe-zone {
   position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   z-index: 5;
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
+  touch-action: pan-y;
 }
 
 /* ===== BOTTOM OVERLAY ===== */
@@ -902,6 +1023,7 @@ body {
   flex-direction: column;
   align-items: center;
   opacity: 0;
+  -webkit-animation: contentFadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) 2.1s forwards;
   animation: contentFadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) 2.1s forwards;
 }
 
@@ -983,9 +1105,10 @@ body {
   background: rgba(58, 47, 30, .12);
 }
 
-/* ===== CONFETTI BURST ===== */
+/* ===== CONFETTI BURST (JS-driven for Safari compatibility) ===== */
 .confetti-container {
   position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
@@ -994,35 +1117,7 @@ body {
 .confetti-particle {
   position: absolute;
   border-radius: 2px;
-  opacity: 1;
-  transform: translate(-50%, -50%) translate(0, 0) scale(1) rotate(0deg);
-  animation: confettiExplode 0.65s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
-}
-
-@keyframes confettiExplode {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(0, 0) scale(0.6) rotate(0deg);
-  }
-  60% {
-    opacity: 0.95;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(0.35) rotate(var(--rot));
-  }
-}
-
-.flying-dish-item {
-  position: fixed;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: cover;
   pointer-events: none;
-  z-index: 999;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-  border: 2px solid #fff;
 }
 
 /* ===== VARIANT SELECTOR ===== */
@@ -1069,6 +1164,7 @@ body {
 /* ===== WAFFLE CUSTOMIZER MODAL ===== */
 .waffle-overlay {
   position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(4px);
@@ -1155,6 +1251,7 @@ body {
 
 .waffle-body {
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -1312,16 +1409,36 @@ body {
   animation: badgePop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-@keyframes badgePop {
+@-webkit-keyframes badgePop {
   0% {
+    -webkit-transform: scale(0);
     transform: scale(0);
   }
 
   80% {
+    -webkit-transform: scale(1.2);
     transform: scale(1.2);
   }
 
   100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes badgePop {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  80% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
@@ -1357,6 +1474,7 @@ body {
 /* ===== CART DRAWER ===== */
 .cart-overlay {
   position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   inset: 0;
   background: rgba(15, 12, 10, .55);
   backdrop-filter: blur(2px);
@@ -1424,6 +1542,7 @@ body {
 
 .drawer-list {
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 10px 20px;
   flex: 1;
 }
@@ -1569,13 +1688,38 @@ body {
 /* Анимация появления строк в корзине */
 .cart-row {
   opacity: 0;
+  -webkit-transform: translateY(12px);
   transform: translateY(12px);
+  -webkit-animation: slideInUp 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   animation: slideInUp 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@-webkit-keyframes slideInUp {
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideInUp {
   to {
     opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(14px);
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
     transform: translateY(0);
   }
 }
@@ -1583,11 +1727,13 @@ body {
 @keyframes contentFadeIn {
   from {
     opacity: 0;
+    -webkit-transform: translateY(14px);
     transform: translateY(14px);
   }
 
   to {
     opacity: 1;
+    -webkit-transform: translateY(0);
     transform: translateY(0);
   }
 }
@@ -1967,21 +2113,9 @@ body {
 
 /* --- 7. Поддержка reduced-motion (для доступности) --- */
 @media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .pl-logo,
-  .pl-sub,
-  .pl-track,
-  .pl-bar {
+  /* Отключаем только бесконечный Ken Burns зум, но сохраняем интерфейсные переходы */
+  .player img.active {
+    -webkit-animation: none !important;
     animation: none !important;
-    opacity: 1 !important;
   }
 }

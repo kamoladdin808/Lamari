@@ -39,8 +39,14 @@
       </video>
     </div>
 
-    <!-- SUBTLE VIGNETTE -->
+    <!-- SUBTLE VIGNETTES -->
+    <div class="home-top-vignette"></div>
     <div class="home-vignette"></div>
+
+    <!-- TOP BAR (LOGO TOP-LEFT) -->
+    <header class="home-top-bar">
+      <img src="img/logo_lamari.png" alt="La Mari" class="home-logo">
+    </header>
 
     <!-- BOTTOM ACTION AREA -->
     <main class="home-bottom-area">
@@ -67,31 +73,39 @@
       setTimeout(setVH, 300);
     });
 
-    // 2. Плавное снятие прелоадера после анимации
+    // 2. Плавный старт видео и бесшовное растворение прелоадера
+    const bgVideo = document.getElementById('bgVideo');
+    const preloader = document.getElementById('preloader');
     let preloaderDismissed = false;
-    function dismissPreloader() {
+
+    function revealVideo() {
       if (preloaderDismissed) return;
       preloaderDismissed = true;
-      const preloader = document.getElementById('preloader');
+      if (bgVideo) bgVideo.classList.add('ready');
       if (preloader) {
         preloader.classList.add('hide');
       }
     }
 
-    const bgVideo = document.getElementById('bgVideo');
     if (bgVideo) {
       bgVideo.play().catch(() => {});
+
+      bgVideo.addEventListener('playing', () => {
+        bgVideo.classList.add('ready');
+      }, { once: true });
+
       document.addEventListener('touchstart', () => {
         if (bgVideo.paused) bgVideo.play().catch(() => {});
       }, { once: true });
     }
 
+    // Завершение анимации прелоадера (1.4с) и плавный переход в видео
     window.addEventListener('load', () => {
-      setTimeout(dismissPreloader, 1300);
+      setTimeout(revealVideo, 1400);
     });
 
-    // Страховочный таймаут для медленного соединения
-    setTimeout(dismissPreloader, 3500);
+    // Страховочный таймаут
+    setTimeout(revealVideo, 3500);
   </script>
 </body>
 

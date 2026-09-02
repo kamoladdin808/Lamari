@@ -34,7 +34,7 @@
 
     <!-- FULLSCREEN VIDEO BACKGROUND -->
     <div class="video-wrapper">
-      <video class="bg-video" id="bgVideo" autoplay muted loop playsinline preload="auto" poster="img/p1.jpg">
+      <video class="bg-video" id="bgVideo" muted loop playsinline preload="auto">
         <source src="video/video_lamari.mp4" type="video/mp4">
       </video>
     </div>
@@ -73,7 +73,7 @@
       setTimeout(setVH, 300);
     });
 
-    // 2. Плавный старт видео и бесшовное растворение прелоадера
+    // 2. Точный запуск видео строго с начала (с 0.0 сек) после прелоадера
     const bgVideo = document.getElementById('bgVideo');
     const preloader = document.getElementById('preloader');
     let preloaderDismissed = false;
@@ -81,25 +81,32 @@
     function revealVideo() {
       if (preloaderDismissed) return;
       preloaderDismissed = true;
-      if (bgVideo) bgVideo.classList.add('ready');
+
+      if (bgVideo) {
+        try {
+          bgVideo.currentTime = 0;
+        } catch (e) {}
+        bgVideo.play().catch(() => {});
+        bgVideo.classList.add('ready');
+      }
+
       if (preloader) {
         preloader.classList.add('hide');
       }
     }
 
     if (bgVideo) {
-      bgVideo.play().catch(() => {});
-
-      bgVideo.addEventListener('playing', () => {
-        bgVideo.classList.add('ready');
-      }, { once: true });
+      // Предзагрузка медиа
+      bgVideo.load();
 
       document.addEventListener('touchstart', () => {
-        if (bgVideo.paused) bgVideo.play().catch(() => {});
+        if (bgVideo.paused) {
+          bgVideo.play().catch(() => {});
+        }
       }, { once: true });
     }
 
-    // Завершение анимации прелоадера (1.4с) и плавный переход в видео
+    // Завершение прелоадера и синхронный старт видео с первого кадра
     window.addEventListener('load', () => {
       setTimeout(revealVideo, 1400);
     });

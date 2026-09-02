@@ -23,6 +23,8 @@ body {
   background: #0d0b0a;
   font-family: 'Jost', sans-serif;
   color: var(--cream);
+}
+
 /* ===== LUXURY PRELOADER ===== */
 #preloader {
   position: fixed;

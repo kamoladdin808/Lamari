@@ -67,41 +67,30 @@
       setTimeout(setVH, 300);
     });
 
-    // 2. Плавное снятие прелоадера после готовности видео
+    // 2. Плавное снятие прелоадера после анимации
     let preloaderDismissed = false;
     function dismissPreloader() {
       if (preloaderDismissed) return;
       preloaderDismissed = true;
       const preloader = document.getElementById('preloader');
       if (preloader) {
-        setTimeout(() => {
-          preloader.classList.add('hide');
-        }, 200);
+        preloader.classList.add('hide');
       }
     }
 
     const bgVideo = document.getElementById('bgVideo');
     if (bgVideo) {
       bgVideo.play().catch(() => {});
-
-      bgVideo.addEventListener('playing', () => {
-        setTimeout(dismissPreloader, 350);
-      }, { once: true });
-
-      bgVideo.addEventListener('loadeddata', () => {
-        setTimeout(dismissPreloader, 600);
-      }, { once: true });
-
       document.addEventListener('touchstart', () => {
         if (bgVideo.paused) bgVideo.play().catch(() => {});
       }, { once: true });
     }
 
     window.addEventListener('load', () => {
-      setTimeout(dismissPreloader, 1200);
+      setTimeout(dismissPreloader, 1300);
     });
 
-    // Страховочный таймаут для медленного интернета
+    // Страховочный таймаут для медленного соединения
     setTimeout(dismissPreloader, 3500);
   </script>
 </body>

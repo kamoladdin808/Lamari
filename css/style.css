@@ -665,7 +665,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 8px;
+  margin-top: 14px;
 }
 
 .lang-mobile-btn {
@@ -1899,7 +1899,7 @@ body {
 
   .header-controls {
     gap: 6px;
-    margin-top: 6px;
+    margin-top: 11px;
   }
 
   .dish-title {
@@ -2000,7 +2000,7 @@ body {
 
   .header-controls {
     gap: 5px;
-    margin-top: 5px;
+    margin-top: 9px;
   }
 
   .dish-title {

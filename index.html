@@ -75,7 +75,7 @@
       setTimeout(setVH, 300);
     });
 
-    // 2. Умный запуск видео и прелоадера без черных экранов
+    // 2. Роскошный прелоадер и запуск видео
     const bgVideo = document.getElementById('bgVideo');
     const preloader = document.getElementById('preloader');
     const enterMenuBtn = document.getElementById('enterMenuBtn');
@@ -95,21 +95,19 @@
       }
     }
 
-    // Если гость уже был на сайте в этой сессии — мгновенный показ без повторной задержки
-    if (sessionStorage.getItem('lamari_visited')) {
-      if (preloader) preloader.style.display = 'none';
-      preloaderDismissed = true;
-      if (bgVideo) {
+    // Запускаем видео сразу под прелоадером, чтобы кадр был готов без черного экрана
+    if (bgVideo) {
+      bgVideo.play().catch(() => {});
+      bgVideo.addEventListener('playing', () => {
         bgVideo.classList.add('ready');
-        bgVideo.play().catch(() => {});
-      }
-    } else {
-      sessionStorage.setItem('lamari_visited', '1');
-      window.addEventListener('load', () => {
-        setTimeout(revealVideo, 1200);
-      });
-      setTimeout(revealVideo, 2800);
+      }, { once: true });
     }
+
+    // Всегда показываем роскошный прелоадер
+    window.addEventListener('load', () => {
+      setTimeout(revealVideo, 1300);
+    });
+    setTimeout(revealVideo, 2800);
 
     // Возобновление при возврате из кэша (bfcache) или переключении вкладок
     window.addEventListener('pageshow', () => {

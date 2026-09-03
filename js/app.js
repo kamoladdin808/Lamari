@@ -1839,35 +1839,24 @@ window.addEventListener('orientationchange', () => {
 });
 
 let preloaderDone = false;
-function finishPreloader(instant = false) {
+function finishPreloader() {
   if (preloaderDone) return;
   preloaderDone = true;
   const preloader = document.getElementById('preloader');
   if (preloader) {
-    if (instant) {
-      preloader.style.display = 'none';
+    setTimeout(() => {
+      preloader.classList.add('hide');
       appLoaded = true;
       renderDots(curCat, curIdx);
-    } else {
-      setTimeout(() => {
-        preloader.classList.add('hide');
-        appLoaded = true;
-        renderDots(curCat, curIdx);
-      }, 250);
-    }
+    }, 250);
   }
 }
 
-// Если гость уже посещал сайт — пропускаем повторную задержку прелоадера
-if (sessionStorage.getItem('lamari_visited')) {
-  finishPreloader(true);
-} else {
-  sessionStorage.setItem('lamari_visited', '1');
-  window.addEventListener('load', () => {
-    setTimeout(() => finishPreloader(false), 1200);
-  });
-  setTimeout(() => finishPreloader(false), 2800);
-}
+// Всегда показываем роскошный прелоадер
+window.addEventListener('load', () => {
+  setTimeout(finishPreloader, 1300);
+});
+setTimeout(finishPreloader, 2800);
 
 // Плавный мягкий переход обратно на главную при нажатии на логотип
 const brandMarkLink = document.querySelector('.brand-mark');

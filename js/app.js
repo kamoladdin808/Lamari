@@ -1839,22 +1839,45 @@ window.addEventListener('orientationchange', () => {
 });
 
 let preloaderDone = false;
-function finishPreloader() {
+function finishPreloader(instant = false) {
   if (preloaderDone) return;
   preloaderDone = true;
   const preloader = document.getElementById('preloader');
   if (preloader) {
-    setTimeout(() => {
-      preloader.classList.add('hide');
+    if (instant) {
+      preloader.style.display = 'none';
       appLoaded = true;
       renderDots(curCat, curIdx);
-    }, 250);
+    } else {
+      setTimeout(() => {
+        preloader.classList.add('hide');
+        appLoaded = true;
+        renderDots(curCat, curIdx);
+      }, 250);
+    }
   }
 }
 
-window.addEventListener('load', () => {
-  setTimeout(finishPreloader, 1300);
-});
+// Если гость уже посещал сайт — пропускаем повторную задержку прелоадера
+if (sessionStorage.getItem('lamari_visited')) {
+  finishPreloader(true);
+} else {
+  sessionStorage.setItem('lamari_visited', '1');
+  window.addEventListener('load', () => {
+    setTimeout(() => finishPreloader(false), 1200);
+  });
+  setTimeout(() => finishPreloader(false), 2800);
+}
 
-// Страховочный таймаут при медленном соединении
-setTimeout(finishPreloader, 3500);
+// Плавный мягкий переход обратно на главную при нажатии на логотип
+const brandMarkLink = document.querySelector('.brand-mark');
+if (brandMarkLink) {
+  brandMarkLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.body.style.transition = 'opacity 0.2s ease-out';
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+      window.location.href = brandMarkLink.href;
+    }, 190);
+  });
+}

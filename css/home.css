@@ -94,8 +94,8 @@ body {
   opacity: 0;
   -webkit-transform: translateY(16px) scale(.94);
   transform: translateY(16px) scale(.94);
-  -webkit-animation: plLogoIn 1.4s cubic-bezier(.22, 1, .36, 1) .1s forwards;
-  animation: plLogoIn 1.4s cubic-bezier(.22, 1, .36, 1) .1s forwards;
+  -webkit-animation: plLogoIn 0.8s cubic-bezier(.22, 1, .36, 1) 0.05s forwards;
+  animation: plLogoIn 0.8s cubic-bezier(.22, 1, .36, 1) 0.05s forwards;
   filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.18));
   -webkit-filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.18));
   user-select: none;
@@ -145,8 +145,8 @@ body {
   border-radius: 999px;
   overflow: hidden;
   opacity: 0;
-  -webkit-animation: plSubIn .7s ease .45s forwards;
-  animation: plSubIn .7s ease .45s forwards;
+  -webkit-animation: plSubIn .5s ease .15s forwards;
+  animation: plSubIn .5s ease .15s forwards;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -156,8 +156,8 @@ body {
   background: linear-gradient(90deg, #E8D3B1 0%, #FFFFFF 100%);
   border-radius: 999px;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 3px #C9A876;
-  -webkit-animation: plBar 1.2s cubic-bezier(.35, 0, .25, 1) .55s forwards;
-  animation: plBar 1.2s cubic-bezier(.35, 0, .25, 1) .55s forwards;
+  -webkit-animation: plBar 1.0s cubic-bezier(.35, 0, .25, 1) .2s forwards;
+  animation: plBar 1.0s cubic-bezier(.35, 0, .25, 1) .2s forwards;
 }
 
 @-webkit-keyframes plBar { to { width: 100%; } }

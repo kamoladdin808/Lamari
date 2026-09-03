@@ -112,20 +112,33 @@
       }
     }
 
-    // Роскошный прелоадер и синхронный старт видео строго с первого кадра
-    window.addEventListener('load', () => {
+    function startPreloader() {
+      preloaderDismissed = false;
+      if (preloader) {
+        preloader.classList.remove('hide');
+        preloader.style.display = '';
+      }
+      if (bgVideo) {
+        try {
+          bgVideo.pause();
+          bgVideo.currentTime = 0;
+        } catch (e) {}
+      }
       setTimeout(revealVideo, 1300);
-    });
+    }
+
+    // Роскошный прелоадер и синхронный старт видео строго с первого кадра
+    window.addEventListener('load', startPreloader);
     setTimeout(revealVideo, 2800);
 
-    // Возобновление при возврате из кэша (bfcache) или переключении вкладок
-    window.addEventListener('pageshow', () => {
-      if (bgVideo && bgVideo.paused) {
-        bgVideo.play().catch(() => {});
+    // Гарантированный показ прелоадера при возврате из меню (BFCache / История)
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) {
+        startPreloader();
       }
     });
     document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && bgVideo && bgVideo.paused) {
+      if (!document.hidden && bgVideo && bgVideo.paused && preloaderDismissed) {
         bgVideo.play().catch(() => {});
       }
     });

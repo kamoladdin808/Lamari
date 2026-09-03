@@ -1859,14 +1859,14 @@ window.addEventListener('load', () => {
 setTimeout(finishPreloader, 2800);
 
 // Плавный мягкий переход обратно на главную при нажатии на логотип
-const brandMarkLink = document.querySelector('.brand-mark');
-if (brandMarkLink) {
-  brandMarkLink.addEventListener('click', (e) => {
+const homeLink = document.querySelector('.wm a') || document.querySelector('.brand-mark a');
+if (homeLink) {
+  homeLink.addEventListener('click', (e) => {
     e.preventDefault();
     document.body.style.transition = 'opacity 0.2s ease-out';
     document.body.style.opacity = '0';
     setTimeout(() => {
-      window.location.href = brandMarkLink.href;
-    }, 190);
+      window.location.href = 'index.html';
+    }, 180);
   });
 }

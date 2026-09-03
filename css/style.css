@@ -9,6 +9,8 @@
   --gold: #C9A876;
   --ink: #2B2723;
   --vh: 1vh;
+  --header-pad-x: 16px;
+  --header-pt: 27px;
 }
 
 * {
@@ -357,13 +359,15 @@ body {
 .dots {
   position: absolute;
   top: 12px;
-  left: 12px;
-  right: 12px;
+  left: 0;
+  right: 0;
   z-index: 10;
-  display: flex;
-  gap: 5px;
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 var(--header-pad-x);
+  box-sizing: border-box;
+  display: flex;
+  gap: 5px;
 }
 
 .dots .seg {
@@ -435,7 +439,10 @@ body {
   left: 0;
   right: 0;
   z-index: 10;
-  padding: 34px 18px 0;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--header-pt) var(--header-pad-x) 0;
+  box-sizing: border-box;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -631,7 +638,7 @@ body {
   flex-direction: column;
   align-items: flex-end;
   flex-shrink: 0;
-  margin-left: 10px;
+  margin-left: 14px;
 }
 
 .brand-mark .wm {
@@ -643,9 +650,9 @@ body {
 }
 
 .brand-mark .wm-logo {
-  height: 28px;
+  height: 22px;
   width: auto;
-  max-width: 135px;
+  max-width: 100px;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
@@ -1848,14 +1855,14 @@ body {
 @supports (padding-top: env(safe-area-inset-top)) {
   .dots {
     top: max(12px, calc(env(safe-area-inset-top) + 4px));
-    left: max(12px, env(safe-area-inset-left));
-    right: max(12px, env(safe-area-inset-right));
+    padding-left: max(var(--header-pad-x), calc(env(safe-area-inset-left) + 8px));
+    padding-right: max(var(--header-pad-x), calc(env(safe-area-inset-right) + 8px));
   }
 
   .top-bar {
-    padding-top: max(34px, calc(env(safe-area-inset-top) + 16px));
-    padding-left: max(18px, calc(env(safe-area-inset-left) + 12px));
-    padding-right: max(18px, calc(env(safe-area-inset-right) + 12px));
+    padding-top: max(var(--header-pt), calc(env(safe-area-inset-top) + 19px));
+    padding-left: max(var(--header-pad-x), calc(env(safe-area-inset-left) + 8px));
+    padding-right: max(var(--header-pad-x), calc(env(safe-area-inset-right) + 8px));
   }
 
   .bottom-area {
@@ -1867,8 +1874,9 @@ body {
 
 /* --- 2. Маленькие мобильные экраны (iPhone SE, mini, Galaxy Fold: width <= 375px) --- */
 @media (max-width: 375px) {
-  .top-bar {
-    padding: 26px 12px 0;
+  :root {
+    --header-pad-x: 12px;
+    --header-pt: 25px;
   }
 
   .dish-info {
@@ -1881,21 +1889,21 @@ body {
   }
 
   .brand-mark {
-    margin-left: 8px;
+    margin-left: 10px;
   }
 
   .brand-mark .wm-logo {
-    height: 22px;
-    max-width: 95px;
+    height: 18px;
+    max-width: 80px;
   }
 
   .header-controls {
     gap: 6px;
-    margin-top: 5px;
+    margin-top: 6px;
   }
 
   .dish-title {
-    font-size: 17.5px;
+    font-size: 16.5px;
     line-height: 1.22;
     margin-top: 3px;
   }
@@ -1976,26 +1984,27 @@ body {
 
 /* --- Экстра-узкие экраны (iPhone 5/SE, Galaxy Fold folded: width <= 330px) --- */
 @media (max-width: 330px) {
-  .top-bar {
-    padding: 24px 8px 0;
+  :root {
+    --header-pad-x: 10px;
+    --header-pt: 24px;
   }
 
   .brand-mark {
-    margin-left: 6px;
+    margin-left: 8px;
   }
 
   .brand-mark .wm-logo {
-    height: 20px;
-    max-width: 82px;
+    height: 16.5px;
+    max-width: 72px;
   }
 
   .header-controls {
     gap: 5px;
-    margin-top: 4px;
+    margin-top: 5px;
   }
 
   .dish-title {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.2;
   }
 
@@ -2026,6 +2035,16 @@ body {
 
 /* --- 3. Средние экраны и фаблеты (width: 376px - 599px) --- */
 @media (min-width: 376px) and (max-width: 599px) {
+  :root {
+    --header-pad-x: 16px;
+    --header-pt: 28px;
+  }
+
+  .brand-mark .wm-logo {
+    height: 20px;
+    max-width: 90px;
+  }
+
   .dish-title {
     font-size: clamp(20px, 6vw, 24px);
   }
@@ -2039,8 +2058,14 @@ body {
 
 /* --- 4. Планшеты и ноутбуки (width: 600px - 1024px) --- */
 @media (min-width: 600px) and (max-width: 1024px) {
-  .top-bar {
-    padding: 38px 24px 0;
+  :root {
+    --header-pad-x: 24px;
+    --header-pt: 34px;
+  }
+
+  .brand-mark .wm-logo {
+    height: 22px;
+    max-width: 100px;
   }
 
   .dish-title {
@@ -2117,8 +2142,14 @@ body {
 
 /* --- 5. Десктопы и большие экраны (width >= 1025px) --- */
 @media (min-width: 1025px) {
-  .top-bar {
-    padding: 38px 24px 0;
+  :root {
+    --header-pad-x: 24px;
+    --header-pt: 34px;
+  }
+
+  .brand-mark .wm-logo {
+    height: 23px;
+    max-width: 105px;
   }
 
   .dish-title {

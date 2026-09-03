@@ -98,9 +98,9 @@
 
       document.addEventListener('touchstart', () => {
         if (bgVideo.paused) {
-          bgVideo.play().catch(() => {});
+          bgVideo.play().catch(() => { });
         }
-      }, { once: true });
+      }, { once: true, passive: true });
     }
 
     // Завершение прелоадера и синхронный старт видео с первого кадра

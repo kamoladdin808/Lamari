@@ -435,8 +435,18 @@ const dishParam = parseInt(urlParams.get('dish'), 10);
 const langParam = urlParams.get('lang');
 
 let curLang = (langParam === 'ru' || langParam === 'uz') ? langParam : (localStorage.getItem('lamari_lang') || 'ru');
+if (curLang !== 'ru' && curLang !== 'uz') curLang = 'ru';
+
 let curCat = 'breakfasts';
 let curIdx = 0;
+
+// Безопасная валидация параметров Deep Linking (защита от out-of-bounds и prototype pollution)
+if (catParam && Object.prototype.hasOwnProperty.call(MENU, catParam)) {
+  curCat = catParam;
+  if (!isNaN(dishParam) && dishParam >= 0 && dishParam < MENU[catParam].length) {
+    curIdx = dishParam;
+  }
+}
 
 // Если открыта ссылка, очищаем адресную строку для будущих обновлений по F5
 if (window.location.search) {
@@ -447,21 +457,59 @@ let showingA = true;
 let crossfadeTimer = null;
 const cart = {}; // itemId -> {qty, price, name: {ru, uz}, img}
 
+// Защищенный парсинг корзины из localStorage (защита от prototype pollution и XSS)
 try {
   const savedCart = localStorage.getItem('lamari_cart');
   if (savedCart) {
-    Object.assign(cart, JSON.parse(savedCart));
+    const parsed = JSON.parse(savedCart);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      for (const [key, item] of Object.entries(parsed)) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+        if (item && typeof item === 'object' && typeof item.price === 'number' && !isNaN(item.price)) {
+          const qty = parseInt(item.qty, 10);
+          if (qty > 0 && qty <= 99) {
+            cart[key] = {
+              id: String(item.id || key),
+              price: Math.max(0, item.price),
+              qty: qty,
+              name: {
+                ru: String(item.name?.ru || 'Блюдо'),
+                uz: String(item.name?.uz || 'Taom')
+              },
+              img: (typeof item.img === 'string' && !/^(javascript|data|vbscript):/i.test(item.img.trim()))
+                ? item.img.trim()
+                : 'img/p1.jpg'
+            };
+          }
+        }
+      }
+    }
   }
 } catch (e) {
   console.error("Ошибка парсинга корзины из localStorage:", e);
+  localStorage.removeItem('lamari_cart');
 }
 
-function money(n) { return n.toLocaleString('ru-RU') + ' сум'; }
+function money(n) { return (typeof n === 'number' && !isNaN(n) ? n : 0).toLocaleString('ru-RU') + ' сум'; }
 
+// Полное экранирование спецсимволов HTML и атрибутов (защита от XSS)
 function escapeHTML(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function sanitizeImgUrl(url) {
+  if (!url || typeof url !== 'string') return 'img/p1.jpg';
+  const clean = url.trim();
+  if (/^(javascript|data|vbscript):/i.test(clean)) {
+    return 'img/p1.jpg';
+  }
+  return escapeHTML(clean);
 }
 
 const imgA = document.getElementById('imgA');
@@ -1166,14 +1214,14 @@ function renderCartList() {
     const el = document.createElement('div');
     el.className = 'cart-row';
     el.innerHTML = `
-      <img src="${escapeHTML(item.img)}" alt="${escapeHTML(item.name[curLang])}">
+      <img src="${sanitizeImgUrl(item.img)}" alt="${escapeHTML(item.name[curLang])}">
       <div class="cr-info">
         <div class="cr-name">${escapeHTML(item.name[curLang])}</div>
         <div class="cr-price">${money(item.price)}</div>
       </div>
       <div class="cr-qty">
         <button class="btn-minus" data-id="${escapeHTML(id)}">−</button>
-        <span>${item.qty}</span>
+        <span>${escapeHTML(item.qty)}</span>
         <button class="btn-plus" data-id="${escapeHTML(id)}">+</button>
       </div>
     `;
@@ -1605,7 +1653,8 @@ cartChip.addEventListener('animationend', () => cartChip.classList.remove('pop')
 const shareDishBtn = document.getElementById('shareDish');
 shareDishBtn.addEventListener('click', async () => {
   const d = MENU[curCat][curIdx];
-  const shareUrl = `${window.location.origin}${window.location.pathname}?cat=${curCat}&dish=${curIdx}&lang=${curLang}`;
+  const baseUrl = window.location.href.split('?')[0];
+  const shareUrl = `${baseUrl}?cat=${encodeURIComponent(curCat)}&dish=${curIdx}&lang=${encodeURIComponent(curLang)}`;
   const shareTitle = d.name[curLang];
   const shareText = curLang === 'ru'
     ? `Посмотри какое вкусное блюдо в La Mari: ${d.name[curLang]}`

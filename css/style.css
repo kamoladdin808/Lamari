@@ -540,6 +540,7 @@ body {
   font-weight: 700;
   margin-top: 6px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+  text-wrap: balance;
 }
 
 .dish-badge {
@@ -1903,9 +1904,10 @@ body {
   }
 
   .dish-title {
-    font-size: 16.5px;
-    line-height: 1.22;
+    font-size: 15.5px;
+    line-height: 1.2;
     margin-top: 3px;
+    text-wrap: balance;
   }
 
   .dish-cat {

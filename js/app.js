@@ -1858,15 +1858,19 @@ window.addEventListener('load', () => {
 });
 setTimeout(finishPreloader, 2800);
 
-// Плавный мягкий переход обратно на главную при нажатии на логотип
+// Плавный переход обратно на главную с мгновенным показом прелоадера (исключает мелькание видео)
 const homeLink = document.querySelector('.wm a') || document.querySelector('.brand-mark a');
 if (homeLink) {
   homeLink.addEventListener('click', (e) => {
     e.preventDefault();
-    document.body.style.transition = 'opacity 0.2s ease-out';
-    document.body.style.opacity = '0';
+    const menuPreloader = document.getElementById('preloader');
+    if (menuPreloader) {
+      menuPreloader.classList.remove('hide');
+      menuPreloader.style.display = 'flex';
+      menuPreloader.style.opacity = '1';
+    }
     setTimeout(() => {
       window.location.href = 'index.html';
-    }, 180);
+    }, 120);
   });
 }

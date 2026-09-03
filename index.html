@@ -81,11 +81,10 @@
     const enterMenuBtn = document.getElementById('enterMenuBtn');
     let preloaderDismissed = false;
 
-    // Подготовка первого кадра под прелоадером без ухода вперед
+    // Подготовка первого кадра строго под прелоадером (БЕЗ преждевременного показа)
     if (bgVideo) {
       const prepareFirstFrame = () => {
         try { bgVideo.currentTime = 0; } catch (e) {}
-        bgVideo.classList.add('ready');
       };
       if (bgVideo.readyState >= 2) {
         prepareFirstFrame();
@@ -103,8 +102,8 @@
         try {
           bgVideo.currentTime = 0;
         } catch (e) {}
-        bgVideo.play().catch(() => {});
         bgVideo.classList.add('ready');
+        bgVideo.play().catch(() => {});
       }
 
       if (preloader) {
@@ -116,9 +115,10 @@
       preloaderDismissed = false;
       if (preloader) {
         preloader.classList.remove('hide');
-        preloader.style.display = '';
+        preloader.style.display = 'flex';
       }
       if (bgVideo) {
+        bgVideo.classList.remove('ready');
         try {
           bgVideo.pause();
           bgVideo.currentTime = 0;
@@ -131,7 +131,20 @@
     window.addEventListener('load', startPreloader);
     setTimeout(revealVideo, 2800);
 
-    // Гарантированный показ прелоадера при возврате из меню (BFCache / История)
+    // Гарантированный возврат прелоадера при уходе/возврате из меню (BFCache / История)
+    window.addEventListener('pagehide', () => {
+      if (preloader) {
+        preloader.classList.remove('hide');
+        preloader.style.display = 'flex';
+      }
+      if (bgVideo) {
+        bgVideo.classList.remove('ready');
+        try {
+          bgVideo.pause();
+          bgVideo.currentTime = 0;
+        } catch (e) {}
+      }
+    });
     window.addEventListener('pageshow', (e) => {
       if (e.persisted) {
         startPreloader();

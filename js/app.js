@@ -453,8 +453,11 @@ if (window.location.search) {
   window.history.replaceState(null, '', window.location.pathname);
 }
 let curVariantIdx = 0;
-let showingA = true;
+let activeImgEl = null;
+let bufferImgEl = null;
 let crossfadeTimer = null;
+let activeSwitchToken = 0;
+let isFirstDishLoad = true;
 const cart = {}; // itemId -> {qty, price, name: {ru, uz}, img}
 
 // Защищенный парсинг корзины из localStorage (защита от prototype pollution и XSS)
@@ -720,6 +723,23 @@ function renderVariantSelector(d) {
   }
 }
 
+function preloadAdjacentDishes(cat, idx) {
+  const list = MENU[cat];
+  if (!list || list.length <= 1) return;
+  const nextIdx = (idx + 1) % list.length;
+  const prevIdx = (idx - 1 + list.length) % list.length;
+
+  [list[nextIdx], list[prevIdx]].forEach(d => {
+    if (d) {
+      const src = getDishImg(d);
+      if (src) {
+        const img = new Image();
+        img.src = src;
+      }
+    }
+  });
+}
+
 function setDish(cat, idx) {
   const catChanged = (curCat !== cat);
   curCat = cat; curIdx = idx;
@@ -731,53 +751,85 @@ function setDish(cat, idx) {
 
   const d = MENU[cat][idx];
   const dishImg = getDishImg(d);
-  const incoming = showingA ? imgB : imgA;
-  const outgoing = showingA ? imgA : imgB;
 
-  // 1. Немедленно спрятать входящий буфер (без CSS-transition), чтобы старое фото не мелькнуло
-  clearTimeout(crossfadeTimer);
-  incoming.onload = null;
-  incoming.classList.remove('active');
-  incoming.style.transition = 'none';
-  incoming.style.webkitTransition = 'none';
-  incoming.style.opacity = '0';
-  incoming.style.animation = 'none';
-  incoming.style.webkitAnimation = 'none';
-  incoming.style.zIndex = '2';
-  outgoing.style.zIndex = '1';
+  // Инициализация при первом открытии страницы
+  if (isFirstDishLoad) {
+    isFirstDishLoad = false;
+    activeImgEl = imgA;
+    bufferImgEl = imgB;
 
-  // Safari fix: forced reflow to commit style changes before loading new src
-  void incoming.offsetWidth;
+    imgA.src = dishImg;
+    imgA.alt = d.name[curLang];
+    imgA.style.opacity = '1';
+    imgA.style.zIndex = '1';
+    imgA.classList.add('active');
 
-  // 2. Загрузить новое фото в полностью невидимый элемент
-  incoming.src = dishImg;
-  incoming.alt = d.name[curLang];
+    imgB.style.opacity = '0';
+    imgB.style.zIndex = '0';
+    imgB.classList.remove('active');
 
-  // 3. После перерисовки и декодирования — плавно проявить поверх старого
-  const doFade = () => {
-    incoming.onload = null;
-    // Двойной rAF: первый — браузер фиксирует opacity:0, второй — запускает плавный переход к opacity:1
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        incoming.style.transition = '';
-        incoming.style.webkitTransition = '';
-        incoming.style.opacity = '';
-        incoming.style.animation = '';
-        incoming.style.webkitAnimation = '';
-        incoming.classList.add('active');
-        crossfadeTimer = setTimeout(() => {
-          outgoing.classList.remove('active');
-        }, 650);
-      });
-    });
-  };
-
-  if (incoming.complete && incoming.naturalWidth > 0) {
-    doFade();
+    preloadAdjacentDishes(cat, idx);
   } else {
-    incoming.onload = doFade;
+    // Бесшовный оверлейный crossfade без затемнения и без черных экранов
+    const currentToken = ++activeSwitchToken;
+    preloadAdjacentDishes(cat, idx);
+
+    const currentVisible = activeImgEl;
+    const incoming = bufferImgEl;
+
+    // Входящее фото подготавливается на верхнем слое (z-index: 2) в скрытом виде
+    clearTimeout(crossfadeTimer);
+    incoming.onload = null;
+    incoming.onerror = null;
+    incoming.style.transition = 'none';
+    incoming.style.webkitTransition = 'none';
+    incoming.style.opacity = '0';
+    incoming.style.animation = 'none';
+    incoming.style.webkitAnimation = 'none';
+    incoming.style.zIndex = '2';
+    // Видимое фото гарантированно удерживается снизу на 100% видимости (z-index: 1)
+    currentVisible.style.zIndex = '1';
+
+    const finishTransition = () => {
+      if (currentToken !== activeSwitchToken) return;
+
+      requestAnimationFrame(() => {
+        if (currentToken !== activeSwitchToken) return;
+        // Мягкое проявление нового фото ПОВЕРХ старого (старое снизу не просвечивает чернотой!)
+        incoming.style.transition = 'opacity 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
+        incoming.style.webkitTransition = 'opacity 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
+        incoming.style.opacity = '1';
+        incoming.classList.add('active');
+
+        crossfadeTimer = setTimeout(() => {
+          if (currentToken !== activeSwitchToken) return;
+          // Старое фото уходит в скрытый буфер ТОЛЬКО ПОСЛЕ того, как новое полностью проявилось
+          currentVisible.classList.remove('active');
+          currentVisible.style.opacity = '0';
+          currentVisible.style.zIndex = '0';
+          incoming.style.zIndex = '1';
+
+          // Меняем буферы местами
+          activeImgEl = incoming;
+          bufferImgEl = currentVisible;
+        }, 300);
+      });
+    };
+
+    incoming.onload = finishTransition;
+    incoming.onerror = () => {
+      if (currentToken !== activeSwitchToken) return;
+      incoming.src = P1;
+      finishTransition();
+    };
+
+    incoming.src = dishImg;
+    incoming.alt = d.name[curLang];
+
+    if (incoming.complete && incoming.naturalWidth > 0) {
+      finishTransition();
+    }
   }
-  showingA = !showingA;
 
   // Staggered text entrance — снимаем и заново запускаем анимацию
   const dishInfoEl = document.querySelector('.dish-info');

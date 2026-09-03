@@ -45,7 +45,7 @@ body {
   height: calc(var(--vh, 1vh) * 100);
   position: relative;
   overflow: hidden;
-  background: #000;
+  background: #15110e;
 }
 
 /* контент внутри верхней/нижней панели не растягивается на весь ультраширокий экран,
@@ -261,8 +261,8 @@ body {
   will-change: opacity, transform;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-transition: opacity 0.6s ease-out;
-  transition: opacity 0.6s ease-out;
+  -webkit-transition: opacity 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 0.28s cubic-bezier(0.25, 1, 0.5, 1);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }

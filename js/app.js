@@ -796,9 +796,11 @@ function setDish(cat, idx) {
       requestAnimationFrame(() => {
         if (currentToken !== activeSwitchToken) return;
         // Мягкое проявление нового фото ПОВЕРХ старого (старое снизу не просвечивает чернотой!)
-        incoming.style.transition = 'opacity 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
-        incoming.style.webkitTransition = 'opacity 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
+        incoming.style.transition = 'opacity 0.32s cubic-bezier(0.25, 1, 0.5, 1)';
+        incoming.style.webkitTransition = 'opacity 0.32s cubic-bezier(0.25, 1, 0.5, 1)';
         incoming.style.opacity = '1';
+        incoming.style.animation = '';
+        incoming.style.webkitAnimation = '';
         incoming.classList.add('active');
 
         crossfadeTimer = setTimeout(() => {
@@ -806,13 +808,15 @@ function setDish(cat, idx) {
           // Старое фото уходит в скрытый буфер ТОЛЬКО ПОСЛЕ того, как новое полностью проявилось
           currentVisible.classList.remove('active');
           currentVisible.style.opacity = '0';
+          currentVisible.style.animation = 'none';
+          currentVisible.style.webkitAnimation = 'none';
           currentVisible.style.zIndex = '0';
           incoming.style.zIndex = '1';
 
           // Меняем буферы местами
           activeImgEl = incoming;
           bufferImgEl = currentVisible;
-        }, 300);
+        }, 340);
       });
     };
 

@@ -36,7 +36,7 @@
 
     <!-- FULLSCREEN VIDEO BACKGROUND -->
     <div class="video-wrapper">
-      <video class="bg-video ready" id="bgVideo" autoplay muted loop playsinline preload="auto">
+      <video class="bg-video" id="bgVideo" muted loop playsinline preload="auto">
         <source src="video/video_lamari.mp4" type="video/mp4">
       </video>
     </div>
@@ -75,19 +75,36 @@
       setTimeout(setVH, 300);
     });
 
-    // 2. Роскошный прелоадер и запуск видео
+    // 2. Старт видео строго с начала (с 0.0 сек) после растворения прелоадера
     const bgVideo = document.getElementById('bgVideo');
     const preloader = document.getElementById('preloader');
     const enterMenuBtn = document.getElementById('enterMenuBtn');
     let preloaderDismissed = false;
+
+    // Подготовка первого кадра под прелоадером без ухода вперед
+    if (bgVideo) {
+      const prepareFirstFrame = () => {
+        try { bgVideo.currentTime = 0; } catch (e) {}
+        bgVideo.classList.add('ready');
+      };
+      if (bgVideo.readyState >= 2) {
+        prepareFirstFrame();
+      } else {
+        bgVideo.addEventListener('loadeddata', prepareFirstFrame, { once: true });
+        bgVideo.addEventListener('canplay', prepareFirstFrame, { once: true });
+      }
+    }
 
     function revealVideo() {
       if (preloaderDismissed) return;
       preloaderDismissed = true;
 
       if (bgVideo) {
-        bgVideo.classList.add('ready');
+        try {
+          bgVideo.currentTime = 0;
+        } catch (e) {}
         bgVideo.play().catch(() => {});
+        bgVideo.classList.add('ready');
       }
 
       if (preloader) {
@@ -95,15 +112,7 @@
       }
     }
 
-    // Запускаем видео сразу под прелоадером, чтобы кадр был готов без черного экрана
-    if (bgVideo) {
-      bgVideo.play().catch(() => {});
-      bgVideo.addEventListener('playing', () => {
-        bgVideo.classList.add('ready');
-      }, { once: true });
-    }
-
-    // Всегда показываем роскошный прелоадер
+    // Роскошный прелоадер и синхронный старт видео строго с первого кадра
     window.addEventListener('load', () => {
       setTimeout(revealVideo, 1300);
     });

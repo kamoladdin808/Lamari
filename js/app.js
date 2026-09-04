@@ -73,6 +73,9 @@ const YAGODNIY_SMUZI = "img/yagodniy_smuzi.webp";
 const TORTILYON_4_SIRA = "img/tortilyon_4_sira.webp";
 const PASTA_BOLONESE = "img/pasta_boloneze.webp";
 const PASTA_ALFREDO = "img/pasta_alfredo.webp";
+const LIMONAD_PINOKALADA = "img/limonad_pinokalada.webp";
+const LIMONAD_MALINA_MARAKUYA = "img/limonad_malina_marakuya.webp";
+const CHAY_YABLOKO_KORITSA = "img/chay_yabloko_koritsa.webp";
 const LOGO_LAMARI = "img/logo_lamari.png";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
@@ -97,7 +100,8 @@ const LOGO_LAMARI = "img/logo_lamari.png";
     GRANOLA_MANGO, GRANOLA_KLUBNIKA, DRANIKI_LOSOS, OMLET_KURITSA,
     OMLET_SIR, OMLET_GRIB, MATCHA_YABLOKO_KIWI, MOXITO_KLUBNIKA,
     LIMONAD_MANGO_MARAKUYA, MOXITO_KLASSIK, MOXITO_KIWI, MYATNIY_SMUZI,
-    YAGODNIY_SMUZI, TORTILYON_4_SIRA, PASTA_BOLONESE, PASTA_ALFREDO
+    YAGODNIY_SMUZI, TORTILYON_4_SIRA, PASTA_BOLONESE, PASTA_ALFREDO,
+    LIMONAD_PINOKALADA, LIMONAD_MALINA_MARAKUYA, CHAY_YABLOKO_KORITSA
   ];
   const batchSize = 6;
   let idx = 0;
@@ -264,7 +268,7 @@ const MENU = {
       weight: '',
       price: 40000,
       badge: '',
-      img: P4,
+      img: LIMONAD_MALINA_MARAKUYA,
       variants: [
         { id: 'lemon_rasp_glass', label: { ru: 'Стакан', uz: 'Stakan' }, price: 40000 },
         { id: 'lemon_rasp_carafe', label: { ru: 'Графин', uz: 'Grafin' }, price: 80000 }
@@ -283,7 +287,7 @@ const MENU = {
         { id: 'lemon_mango_carafe', label: { ru: 'Графин', uz: 'Grafin' }, price: 80000 }
       ]
     },
-    { id: 'pina_colada', name: { ru: 'Лимонад Пина Колада', uz: 'Pina Kolada limonadi' }, desc: { ru: 'Безалкогольный тропический коктейль с кокосовым молоком и ананасом', uz: 'Kokos suti va ananas sharbatli alkogolsiz kokteyl' }, weight: '', price: 40000, badge: '', img: P4 },
+    { id: 'pina_colada', name: { ru: 'Лимонад Пина Колада', uz: 'Pina Kolada limonadi' }, desc: { ru: 'Безалкогольный тропический коктейль с кокосовым молоком и ананасом', uz: 'Kokos suti va ananas sharbatli alkogolsiz kokteyl' }, weight: '', price: 40000, badge: '', img: LIMONAD_PINOKALADA },
     {
       id: 'mojito_classic',
       name: { ru: 'Мохито Классический', uz: 'Klassik Moxito' },
@@ -348,7 +352,7 @@ const MENU = {
     { id: 'tea_mango', name: { ru: 'Чай Манго-маракуйя', uz: 'Mango-marakuya choyi' }, desc: { ru: 'Горячий авторский чай с сочным манго, маракуйей и цитрусами в чайнике', uz: 'Mango, marakuya va sitruslar bilan qaynoq mualliflik choyi' }, weight: '', price: 45000, badge: '', img: CHAY_MANGO_MARAKUYA },
     { id: 'tea_sea_buckthorn', name: { ru: 'Чай Облепиховый', uz: 'Chakandali choy' }, desc: { ru: 'Согревающий витаминный чай с натуральной облепихой, медом и имбирем', uz: "Tabiiy chakanda, asal va zanjabil bilan vitaminli choy" }, weight: '', price: 45000, badge: 'HIT', img: CHAY_OBLEPIKHOVIY },
     { id: 'tea_herbal', name: { ru: 'Чай Травяной', uz: "O'tli choy" }, desc: { ru: 'Успокаивающий сбор из душистых горных трав, ромашки и мяты', uz: "Tog' o'tlari, moychechak va yalpizdan tayyorlangan tinchlantiruvchi choy" }, weight: '', price: 30000, badge: '', img: CHAY_TRAVYANOY },
-    { id: 'tea_apple_cinnamon', name: { ru: 'Чай Яблоко-корица', uz: 'Olma-dolchin choyi' }, desc: { ru: 'Пряный чай со свежими яблоками, палочкой корицы и бадьяном', uz: 'Yangi olma, dolchin tayoqchasi va badyan bilan ziravorli choy' }, weight: '', price: 35000, badge: '', img: P2 },
+    { id: 'tea_apple_cinnamon', name: { ru: 'Чай Яблоко-корица', uz: 'Olma-dolchin choyi' }, desc: { ru: 'Пряный чай со свежими яблоками, палочкой корицы и бадьяном', uz: 'Yangi olma, dolchin tayoqchasi va badyan bilan ziravorli choy' }, weight: '', price: 35000, badge: '', img: CHAY_YABLOKO_KORITSA },
     { id: 'tea_berry', name: { ru: 'Чай Ягодный', uz: 'Rezavorli choy' }, desc: { ru: 'Ароматный чай со сбором лесных ягод, мятой и медом', uz: "O'rmon rezavorlari, yalpiz va asal bilan xushbo'y choy" }, weight: '', price: 45000, badge: '', img: CHAY_YAGODNIY }
   ],
   'tea_classic': [

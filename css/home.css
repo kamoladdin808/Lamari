@@ -261,7 +261,7 @@ body {
   pointer-events: none;
 }
 
-/* ===== TOP BAR (LANGUAGE TOP-LEFT, LOGO TOP-RIGHT) ===== */
+/* ===== TOP BAR (LOGO TOP-LEFT, LANGUAGE TOP-RIGHT) ===== */
 .home-top-bar {
   position: absolute;
   top: 0;

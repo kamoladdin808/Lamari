@@ -252,10 +252,10 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 180px;
+  height: 210px;
   background: linear-gradient(to top,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.18) 60%,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.22) 65%,
       transparent 100%);
   z-index: 2;
   pointer-events: none;
@@ -297,10 +297,12 @@ body {
   right: 0;
   width: 100%;
   z-index: 10;
-  padding: 0 20px calc(48px + env(safe-area-inset-bottom));
+  padding: 0 20px calc(24px + env(safe-area-inset-bottom));
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 16px;
   pointer-events: none;
 }
 
@@ -347,6 +349,71 @@ body {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
+/* ===== CREATOR CREDIT (GOLDEN PIXEL) ===== */
+.home-credit {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: 'Jost', sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: rgba(20, 16, 14, 0.42);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  user-select: none;
+}
+
+.home-credit:hover {
+  color: #FFFFFF;
+  background: rgba(32, 26, 22, 0.68);
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 14px rgba(185, 134, 51, 0.28);
+  transform: translateY(-1px);
+}
+
+.home-credit:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.credit-label {
+  opacity: 0.8;
+  font-size: 11px;
+}
+
+.credit-name {
+  font-weight: 500;
+  color: #EBD7B4;
+  transition: color 0.25s ease;
+}
+
+.home-credit:hover .credit-name {
+  color: #FFFFFF;
+}
+
+.credit-logo {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.home-credit:hover .credit-logo {
+  transform: rotate(15deg) scale(1.1);
+}
+
 /* ===== SAFE AREA ===== */
 @supports (padding-top: env(safe-area-inset-top)) {
   .home-top-bar {
@@ -357,7 +424,7 @@ body {
 
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .home-bottom-area {
-    padding-bottom: max(40px, calc(env(safe-area-inset-bottom) + 24px));
+    padding-bottom: max(20px, calc(env(safe-area-inset-bottom) + 14px));
   }
 }
 

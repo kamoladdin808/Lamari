@@ -185,7 +185,7 @@ const MENU = {
     { id: 'bowl_tuna', name: { ru: 'Боул с тунцом', uz: 'Tunetsli boul' }, desc: { ru: 'Обожженный тунец, рис, свежие овощи, водоросли нори и соус понзу', uz: 'Yengil qovurilgan tunets, guruch, yangi sabzavotlar va ponzu sousi' }, weight: '', price: 70000, badge: '', img: BOUL_TUNA }
   ],
   'sides': [
-    { id: 'potato_village', name: { ru: 'Картофель по-деревенски', uz: 'Qishloqcha kartoshka' }, desc: { ru: 'Ароматные картофельные дольки, запеченные с розмарином и чесноком', uz: "Rozmarin va sarimsoq bilan pishirilgan xushbo'y kartoshka" }, weight: '160 г', price: 15000, badge: '', img: P4 },
+    { id: 'potato_village', name: { ru: 'Картофель по-деревенски', uz: 'Qishloqcha kartoshka' }, desc: { ru: 'Ароматные картофельные дольки, запеченные с розмарином и чесноком', uz: "Rozmarin va sarimsoq bilan pishirilgan xushbo'y kartoshka" }, weight: '160 г', price: 20000, badge: '', img: P4 },
     { id: 'fries', name: { ru: 'Картофель фри', uz: 'Kartoshka fri' }, desc: { ru: 'Классический хрустящий картофель фри с легкой солью', uz: 'Klassik qarsildoq kartoshka fri' }, weight: '160 г', price: 15000, badge: '', img: P4 },
     { id: 'mashed_potato', name: { ru: 'Картофельное пюре', uz: 'Kartoshka pyuresi' }, desc: { ru: 'Воздушное нежное пюре из отборного картофеля со сливочным маслом и молоком', uz: "Sariyog' va sut bilan tayyorlangan mayin kartoshka pyuresi" }, weight: '', price: 20000, badge: '', img: KARTOFEL_PYURE },
     { id: 'grilled_veg', name: { ru: 'Овощи на гриле', uz: 'Grildagi sabzavotlar' }, desc: { ru: 'Цукини, баклажан, болгарский перец, томаты и грибы с дымком', uz: "Kabaxti, baqlajon, bulg'or qalampiri, pomidor va qo'ziqorinlar" }, weight: '', price: 28000, badge: '', img: OVOSHI_NA_GRILE },

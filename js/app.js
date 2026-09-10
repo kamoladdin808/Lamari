@@ -76,6 +76,9 @@ const PASTA_ALFREDO = "img/pasta_alfredo.webp";
 const LIMONAD_PINOKALADA = "img/limonad_pinokalada.webp";
 const LIMONAD_MALINA_MARAKUYA = "img/limonad_malina_marakuya.webp";
 const CHAY_YABLOKO_KORITSA = "img/chay_yabloko_koritsa.webp";
+const MILK_SHOKOLAD = "img/milksheyk_shokolad.webp";
+const MILK_BANAN = "img/milksheyk_bananoviy.webp";
+const MILK_KLUBNIKA = "img/milksheyk_klubnichniy.webp";
 const LOGO_LAMARI = "img/logo_lamari.png";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
@@ -101,7 +104,8 @@ const LOGO_LAMARI = "img/logo_lamari.png";
     OMLET_SIR, OMLET_GRIB, MATCHA_YABLOKO_KIWI, MOXITO_KLUBNIKA,
     LIMONAD_MANGO_MARAKUYA, MOXITO_KLASSIK, MOXITO_KIWI, MYATNIY_SMUZI,
     YAGODNIY_SMUZI, TORTILYON_4_SIRA, PASTA_BOLONESE, PASTA_ALFREDO,
-    LIMONAD_PINOKALADA, LIMONAD_MALINA_MARAKUYA, CHAY_YABLOKO_KORITSA
+    LIMONAD_PINOKALADA, LIMONAD_MALINA_MARAKUYA, CHAY_YABLOKO_KORITSA,
+    MILK_SHOKOLAD, MILK_BANAN, MILK_KLUBNIKA
   ];
   const batchSize = 6;
   let idx = 0;
@@ -338,9 +342,9 @@ const MENU = {
     { id: 'anchan_blueberry', name: { ru: 'Анчан с Черникой', uz: 'Chernikali Anchan' }, desc: { ru: 'Натуральный синий чай анчан с черничным пюре и льдом', uz: "Chernika pyuresi va muz bilan ko'k anchan choyi" }, weight: '', price: 45000, badge: '', img: ANCHAN_CHERNIROY }
   ],
   'milkshakes': [
-    { id: 'milk_banana', name: { ru: 'Милкшейк Банановый', uz: 'Bananli milksheyk' }, desc: { ru: 'Сливочное мороженое, свежее молоко и спелый банан', uz: 'Qaymoqli muzqaymoq, yangi sut va pishgan banan' }, weight: '', price: 35000, badge: '', img: P4 },
-    { id: 'milk_strawberry', name: { ru: 'Милкшейк Клубничный', uz: 'Qulupnayli milksheyk' }, desc: { ru: 'Густой молочный коктейль со сливочным пломбиром и клубникой', uz: 'Qaymoqli plombir va yangi qulupnayli quyuq kokteyl' }, weight: '', price: 35000, badge: '', img: P4 },
-    { id: 'milk_chocolate', name: { ru: 'Милкшейк Шоколадный', uz: 'Shokoladli milksheyk' }, desc: { ru: 'Насыщенный шоколадный пломбир, молоко и топленый шоколад', uz: 'Shokoladli plombir, sut va eritilgan shokolad' }, weight: '', price: 35000, badge: '', img: P4 }
+    { id: 'milk_banana', name: { ru: 'Милкшейк Банановый', uz: 'Bananli milksheyk' }, desc: { ru: 'Сливочное мороженое, свежее молоко и спелый банан', uz: 'Qaymoqli muzqaymoq, yangi sut va pishgan banan' }, weight: '', price: 35000, badge: '', img: MILK_BANAN },
+    { id: 'milk_strawberry', name: { ru: 'Милкшейк Клубничный', uz: 'Qulupnayli milksheyk' }, desc: { ru: 'Густой молочный коктейль со сливочным пломбиром и клубникой', uz: 'Qaymoqli plombir va yangi qulupnayli quyuq kokteyl' }, weight: '', price: 35000, badge: '', img: MILK_KLUBNIKA },
+    { id: 'milk_chocolate', name: { ru: 'Милкшейк Шоколадный', uz: 'Shokoladli milksheyk' }, desc: { ru: 'Насыщенный шоколадный пломбир, молоко и топленый шоколад', uz: 'Shokoladli plombir, sut va eritilgan shokolad' }, weight: '', price: 35000, badge: '', img: MILK_SHOKOLAD }
   ],
   'fresh': [
     { id: 'juice_orange', name: { ru: 'Сок Апельсиновый', uz: 'Apelsin freshi' }, desc: { ru: '100% свежевыжатый сок из сладких отборных апельсинов', uz: '100% yangi siqilgan shirin apelsin sharbati' }, weight: '', price: 50000, badge: '', img: P4 },

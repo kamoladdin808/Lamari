@@ -176,9 +176,9 @@ const MENU = {
     { id: 'tortiglioni_4_cheese', name: { ru: 'Тортильони 4 сыра', uz: 'Tortilyoni 4 pishloq' }, desc: { ru: 'Паста тортильони в насыщенном соусе из четырех благородных сыров', uz: "To'rt xil oliy navli pishloqli quyuq sousda tortilyoni pastasi" }, weight: '', price: 70000, badge: '', img: TORTILYON_4_SIRA }
   ],
   'bowls': [
-    { id: 'bowl_green', name: { ru: 'Овощной боул', uz: 'Sabzavotli boul' }, desc: { ru: 'Боул с брокколи, цветной капустой, цукини и свежей зеленью', uz: 'Brokkoli, gulkaram, zukini va yangi ko‘katli boul' }, weight: '', price: 135000, badge: '', img: BOUL_ZELEN },
-    { id: 'bowl_salmon', name: { ru: 'Боул с лососем', uz: 'Qizil baliqli boul' }, desc: { ru: 'Свежий лосось, рис, авокадо, бобы эдамаме, чука и кунжутный соус', uz: 'Yangi qizil baliq, guruch, avokado, edamame, chuka va kunjut sousi' }, weight: '', price: 150000, badge: 'HIT', img: BOUL_LOSOS },
-    { id: 'bowl_tuna', name: { ru: 'Боул с тунцом', uz: 'Tunetsli boul' }, desc: { ru: 'Обожженный тунец, рис, свежие овощи, водоросли нори и соус понзу', uz: 'Yengil qovurilgan tunets, guruch, yangi sabzavotlar va ponzu sousi' }, weight: '', price: 75000, badge: '', img: BOUL_TUNA }
+    { id: 'bowl_green', name: { ru: 'Овощной боул', uz: 'Sabzavotli boul' }, desc: { ru: 'Боул с брокколи, цветной капустой, цукини и свежей зеленью', uz: 'Brokkoli, gulkaram, zukini va yangi ko‘katli boul' }, weight: '', price: 80000, badge: '', img: BOUL_ZELEN },
+    { id: 'bowl_salmon', name: { ru: 'Боул с лососем', uz: 'Qizil baliqli boul' }, desc: { ru: 'Свежий лосось, рис, авокадо, бобы эдамаме, чука и кунжутный соус', uz: 'Yangi qizil baliq, guruch, avokado, edamame, chuka va kunjut sousi' }, weight: '', price: 80000, badge: 'HIT', img: BOUL_LOSOS },
+    { id: 'bowl_tuna', name: { ru: 'Боул с тунцом', uz: 'Tunetsli boul' }, desc: { ru: 'Обожженный тунец, рис, свежие овощи, водоросли нори и соус понзу', uz: 'Yengil qovurilgan tunets, guruch, yangi sabzavotlar va ponzu sousi' }, weight: '', price: 70000, badge: '', img: BOUL_TUNA }
   ],
   'sides': [
     { id: 'potato_village', name: { ru: 'Картофель по-деревенски', uz: 'Qishloqcha kartoshka' }, desc: { ru: 'Ароматные картофельные дольки, запеченные с розмарином и чесноком', uz: "Rozmarin va sarimsoq bilan pishirilgan xushbo'y kartoshka" }, weight: '160 г', price: 15000, badge: '', img: P4 },

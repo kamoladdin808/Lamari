@@ -125,7 +125,7 @@ const LOGO_LAMARI = "img/logo_lamari.png";
 
 const MENU = {
   'breakfasts': [
-    { id: 'french_toast', name: { ru: 'Французский тост с ягодами', uz: 'Rezavorli fransuz tosti' }, desc: { ru: 'Нежный тост со свежими ягодами и натуральным сиропом', uz: 'Yangi rezavorlar va tabiiy sirop bilan mayin fransuz tosti' }, weight: '', price: 35000, badge: '', img: FRANCUZSKIY_TOST },
+    { id: 'french_toast', name: { ru: 'Французский тост с ягодами', uz: 'Rezavorli fransuz tosti' }, desc: { ru: 'Нежный тост со свежими ягодами и натуральным сиропом', uz: 'Yangi rezavorlar va tabiiy sirop bilan mayin fransuz tosti' }, weight: '', price: 40000, badge: '', img: FRANCUZSKIY_TOST },
     { id: 'benedict_salmon', name: { ru: 'Бенедикт с лососем', uz: 'Qizil baliqli Benedikt' }, desc: { ru: 'Бенедикт со слабосоленым лососем и голландским соусом', uz: 'Qizil baliq va golland sousi bilan klassik Benedikt' }, weight: '', price: 65000, badge: 'HIT', img: BENEDIKT_LOSOS },
     { id: 'granola_strawberry', name: { ru: 'Гранола с клубникой', uz: 'Qulupnayli granola' }, desc: { ru: 'Хрустящая запеченная гранола с натуральным йогуртом и клубникой', uz: 'Qarsildoq granola, tabiiy yogurt va yangi qulupnay' }, weight: '', price: 50000, badge: '', img: GRANOLA_KLUBNIKA },
     { id: 'granola_mango', name: { ru: 'Гранола с манго', uz: 'Mangolik granola' }, desc: { ru: 'Хрустящая гранола с натуральным йогуртом и кусочками спелого манго', uz: 'Qarsildoq granola, tabiiy yogurt va pishgan mango' }, weight: '', price: 50000, badge: '', img: GRANOLA_MANGO },

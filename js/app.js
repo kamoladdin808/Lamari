@@ -79,6 +79,16 @@ const CHAY_YABLOKO_KORITSA = "img/chay_yabloko_koritsa.webp";
 const MILK_SHOKOLAD = "img/milksheyk_shokolad.webp";
 const MILK_BANAN = "img/milksheyk_bananoviy.webp";
 const MILK_KLUBNIKA = "img/milksheyk_klubnichniy.webp";
+const CHAY_MILKY_WAY = "img/chay_milk_way.webp";
+const BAMBL_KOFE = "img/bambl_kofe.webp";
+const MEDOVIK = "img/medovik_klassicheskiy.webp";
+const NAPOLEON = "img/napaleon_fistashka_malina.webp";
+const CHEESECAKE_OREO = "img/cheese_cake_oreo.webp";
+const CHEESECAKE_PISTACHIO = "img/cheese_cake_fistashkoviy.webp";
+const SAN_SEB_BLUEBERRY = "img/san_sebastyan_yagodniy.webp";
+const SAN_SEB_PISTACHIO = "img/san_sebastyan_fistashka.webp";
+const SAN_SEB_NUTELLA = "img/san_sebastyan_nutella.webp";
+const CHEESECAKE_HAZELNUT = "img/cheese_cake_funduk.webp";
 const LOGO_LAMARI = "img/logo_lamari.png";
 
 // Предзагрузка всех изображений в память для мгновенного переключения без задержек
@@ -105,7 +115,10 @@ const LOGO_LAMARI = "img/logo_lamari.png";
     LIMONAD_MANGO_MARAKUYA, MOXITO_KLASSIK, MOXITO_KIWI, MYATNIY_SMUZI,
     YAGODNIY_SMUZI, TORTILYON_4_SIRA, PASTA_BOLONESE, PASTA_ALFREDO,
     LIMONAD_PINOKALADA, LIMONAD_MALINA_MARAKUYA, CHAY_YABLOKO_KORITSA,
-    MILK_SHOKOLAD, MILK_BANAN, MILK_KLUBNIKA
+    MILK_SHOKOLAD, MILK_BANAN, MILK_KLUBNIKA,
+    CHAY_MILKY_WAY, BAMBL_KOFE, MEDOVIK, NAPOLEON,
+    CHEESECAKE_OREO, CHEESECAKE_PISTACHIO, SAN_SEB_BLUEBERRY,
+    SAN_SEB_PISTACHIO, SAN_SEB_NUTELLA, CHEESECAKE_HAZELNUT
   ];
   const batchSize = 6;
   let idx = 0;
@@ -232,7 +245,7 @@ const MENU = {
     { id: 'iced_americano', name: { ru: 'Айс Американо', uz: 'Ays Amerikano' }, desc: { ru: 'Двойной эспрессо с фильтрованной холодной водой и кубиками льда', uz: "Muz va sovuq suv bilan tayyorlangan tetiklantiruvchi espresso" }, weight: '', price: 30000, badge: '', img: P2 },
     { id: 'iced_latte', name: { ru: 'Айс Латте', uz: 'Ays Latte' }, desc: { ru: 'Эспрессо со свежим холодным молоком и кубиками льда', uz: "Yangi sovuq sut, espresso va muz bo'laklari" }, weight: '', price: 35000, badge: '', img: P2 },
     { id: 'americano', name: { ru: 'Американо', uz: 'Amerikano' }, desc: { ru: 'Классический эспрессо с добавлением горячей воды', uz: "Issiq suv qo'shilgan klassik espresso" }, weight: '', price: 25000, badge: '', img: P2 },
-    { id: 'bumble', name: { ru: 'Бамбл-кофе', uz: 'Bambl-kofe' }, desc: { ru: 'Слоистый кофейный коктейль: эспрессо, апельсиновый сок и карамельный сироп', uz: 'Espresso, yangi apelsin sharbati va karamel siropi' }, weight: '', price: 35000, badge: 'NEW', img: P2 },
+    { id: 'bumble', name: { ru: 'Бамбл-кофе', uz: 'Bambl-kofe' }, desc: { ru: 'Слоистый кофейный коктейль: эспрессо, апельсиновый сок и карамельный сироп', uz: 'Espresso, yangi apelsin sharbati va karamel siropi' }, weight: '', price: 35000, badge: 'NEW', img: BAMBL_KOFE },
     {
       id: 'cappuccino',
       name: { ru: 'Капучино', uz: 'Kapuchino' },
@@ -361,7 +374,7 @@ const MENU = {
   ],
   'tea_classic': [
     { id: 'tea_earl_grey', name: { ru: 'Чай Earl Grey', uz: 'Earl Grey choyi' }, desc: { ru: 'Благородный черный чай с натуральным маслом бергамота в чайнике', uz: 'Bergamot moyi bilan boyitilgan oliy navli qora choy' }, weight: '', price: 20000, badge: '', img: P2 },
-    { id: 'tea_milky_way', name: { ru: 'Чай Milky Way', uz: 'Milky Way choyi' }, desc: { ru: 'Фирменный чай с мягкими сливочно-карамельными нотками', uz: "Mayin qaymoqli-karamel ta'mli maxsus choy" }, weight: '', price: 30000, badge: '', img: P2 },
+    { id: 'tea_milky_way', name: { ru: 'Чай Milky Way', uz: 'Milky Way choyi' }, desc: { ru: 'Фирменный чай с мягкими сливочно-карамельными нотками', uz: "Mayin qaymoqli-karamel ta'mli maxsus choy" }, weight: '', price: 30000, badge: '', img: CHAY_MILKY_WAY },
     { id: 'tea_dahongpao', name: { ru: 'Чай Да Хун Пао', uz: 'Da Xun Pao choyi' }, desc: { ru: 'Знаменитый китайский утесный улун с глубоким дымно-карамельным вкусом', uz: "Chuqur tutunli-karamel ta'mga ega mashhur xitoy ulun choyi" }, weight: '', price: 30000, badge: '', img: P2 },
     { id: 'tea_jasmine', name: { ru: 'Чай Жасмин', uz: 'Yasminli choy' }, desc: { ru: 'Зеленый чай высшего сорта с натуральными цветками жасмина', uz: "Tabiiy yasmin gullari bilan xushbo'y yashil choy" }, weight: '', price: 20000, badge: '', img: P2 },
     { id: 'tea_milk_oolong', name: { ru: 'Чай Молочный улун', uz: 'Sutli ulun choyi' }, desc: { ru: 'Слабоферментированный улун с нежным сливочно-молочным ароматом', uz: "Mayin qaymoqli-sutli xushbo'ylikka ega yashil ulun choyi" }, weight: '', price: 25000, badge: '', img: P2 }
@@ -377,14 +390,14 @@ const MENU = {
     { id: 'viko', name: { ru: 'Сок Viko', uz: 'Viko sharbati' }, desc: { ru: 'Пакетированный сок в ассортименте', uz: 'Assortimentdagi paketlangan sharbat' }, weight: '0.25 л', price: 10000, badge: '', img: P4 }
   ],
   'desserts': [
-    { id: 'san_seb_nutella', name: { ru: 'Сан-Себастьян с нутеллой', uz: 'Nutellali San-Sebastyan' }, desc: { ru: 'Нежнейший баскский обожженный чизкейк с щедрой порцией Nutella', uz: 'Nutella bilan qoplangan mayin bask chizkeyki' }, weight: '', price: 50000, badge: '', img: P4 },
-    { id: 'san_seb_blueberry', name: { ru: 'Сан-Себастьян с голубикой', uz: "Ko'k rezavorli San-Sebastyan" }, desc: { ru: 'Баскский обожженный чизкейк со свежей голубикой и ягодным соусом', uz: "Yangi ko'k rezavor va sous bilan bask chizkeyki" }, weight: '', price: 50000, badge: '', img: P4 },
-    { id: 'san_seb_pistachio', name: { ru: 'Сан-Себастьян с фисташками', uz: 'Pistali San-Sebastyan' }, desc: { ru: 'Баскский обожженный чизкейк с натуральной фисташковой пастой', uz: "Tabiiy pista pastasi va pista bo'laklari bilan bask chizkeyki" }, weight: '', price: 60000, badge: 'HIT', img: P4 },
-    { id: 'cheesecake_oreo', name: { ru: 'Чизкейк Oreo', uz: 'Oreo chizkeyk' }, desc: { ru: 'Нежный сливочный чизкейк с кусочками хрустящего печенья Oreo', uz: "Qarsildoq Oreo pechenesi bo'laklari bilan mayin chizkeyk" }, weight: '', price: 40000, badge: '', img: P4 },
-    { id: 'cheesecake_hazelnut', name: { ru: 'Чизкейк с фундуком', uz: 'Funduqli chizkeyk' }, desc: { ru: 'Сливочный чизкейк с карамелизированным дробленым фундуком', uz: 'Karamellangan maydalangan funduq bilan qaymoqli chizkeyk' }, weight: '', price: 35000, badge: '', img: P4 },
-    { id: 'cheesecake_pistachio', name: { ru: 'Чизкейк Фисташковый', uz: 'Pistali chizkeyk' }, desc: { ru: 'Изысканный чизкейк с бархатным вкусом отборной фисташки', uz: "Tanlangan pista ta'miga ega nafis qaymoqli chizkeyk" }, weight: '', price: 40000, badge: '', img: P4 },
-    { id: 'medovik', name: { ru: 'Медовик классический', uz: 'Klassik medovik' }, desc: { ru: 'Тонкие медовые коржи со сметанно-сливочным кремом по домашнему рецепту', uz: 'Mayin smetana-qaymoq kremi bilan klassik asalli tort' }, weight: '', price: 30000, badge: '', img: P4 },
-    { id: 'napoleon', name: { ru: 'Наполеон с фисташкой и малиной', uz: 'Pista va malinali Napoleon' }, desc: { ru: 'Хрустящие слоеные коржи с фисташковым заварным кремом и свежей малиной', uz: 'Pista kremi va yangi malina bilan qarsildoq qavatli Napoleon' }, weight: '', price: 30000, badge: 'NEW', img: P4 }
+    { id: 'san_seb_nutella', name: { ru: 'Сан-Себастьян с нутеллой', uz: 'Nutellali San-Sebastyan' }, desc: { ru: 'Нежнейший баскский обожженный чизкейк с щедрой порцией Nutella', uz: 'Nutella bilan qoplangan mayin bask chizkeyki' }, weight: '', price: 50000, badge: '', img: SAN_SEB_NUTELLA },
+    { id: 'san_seb_blueberry', name: { ru: 'Сан-Себастьян с голубикой', uz: "Ko'k rezavorli San-Sebastyan" }, desc: { ru: 'Баскский обожженный чизкейк со свежей голубикой и ягодным соусом', uz: "Yangi ko'k rezavor va sous bilan bask chizkeyki" }, weight: '', price: 50000, badge: '', img: SAN_SEB_BLUEBERRY },
+    { id: 'san_seb_pistachio', name: { ru: 'Сан-Себастьян с фисташками', uz: 'Pistali San-Sebastyan' }, desc: { ru: 'Баскский обожженный чизкейк с натуральной фисташковой пастой', uz: "Tabiiy pista pastasi va pista bo'laklari bilan bask chizkeyki" }, weight: '', price: 60000, badge: 'HIT', img: SAN_SEB_PISTACHIO },
+    { id: 'cheesecake_oreo', name: { ru: 'Чизкейк Oreo', uz: 'Oreo chizkeyk' }, desc: { ru: 'Нежный сливочный чизкейк с кусочками хрустящего печенья Oreo', uz: "Qarsildoq Oreo pechenesi bo'laklari bilan mayin chizkeyk" }, weight: '', price: 40000, badge: '', img: CHEESECAKE_OREO },
+    { id: 'cheesecake_hazelnut', name: { ru: 'Чизкейк с фундуком', uz: 'Funduqli chizkeyk' }, desc: { ru: 'Сливочный чизкейк с карамелизированным дробленым фундуком', uz: 'Karamellangan maydalangan funduq bilan qaymoqli chizkeyk' }, weight: '', price: 35000, badge: '', img: CHEESECAKE_HAZELNUT },
+    { id: 'cheesecake_pistachio', name: { ru: 'Чизкейк Фисташковый', uz: 'Pistali chizkeyk' }, desc: { ru: 'Изысканный чизкейк с бархатным вкусом отборной фисташки', uz: "Tanlangan pista ta'miga ega nafis qaymoqli chizkeyk" }, weight: '', price: 40000, badge: '', img: CHEESECAKE_PISTACHIO },
+    { id: 'medovik', name: { ru: 'Медовик классический', uz: 'Klassik medovik' }, desc: { ru: 'Тонкие медовые коржи со сметанно-сливочным кремом по домашнему рецепту', uz: 'Mayin smetana-qaymoq kremi bilan klassik asalli tort' }, weight: '', price: 30000, badge: '', img: MEDOVIK },
+    { id: 'napoleon', name: { ru: 'Наполеон с фисташкой и малиной', uz: 'Pista va malinali Napoleon' }, desc: { ru: 'Хрустящие слоеные коржи с фисташковым заварным кремом и свежей малиной', uz: 'Pista kremi va yangi malina bilan qarsildoq qavatli Napoleon' }, weight: '', price: 30000, badge: 'NEW', img: NAPOLEON }
   ]
 };
 

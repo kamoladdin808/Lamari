@@ -662,3 +662,114 @@ body {
     letter-spacing: 2.5px;
   }
 }
+
+/* La Mari — entrance redesign: the oven's warmth leads into the menu. */
+@media (width: 0px) {
+:root {
+  --home-ink: #171511;
+  --home-cream: #fff8ed;
+  --home-gold: #efbd77;
+  --home-ember: #dc5b3c;
+}
+
+.home-top-vignette {
+  height: 42%;
+  background: linear-gradient(180deg, rgba(18,13,10,.78), rgba(18,13,10,.42) 62%, transparent);
+}
+
+.home-vignette {
+  background: linear-gradient(0deg, rgba(18,13,10,.88), rgba(18,13,10,.42) 42%, transparent 78%);
+}
+
+.home-top-bar {
+  align-items: flex-start;
+}
+
+.home-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.home-logo {
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,.38));
+}
+
+.home-kicker {
+  margin: 0;
+  color: var(--home-gold);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.home-bottom-area {
+  align-items: flex-start;
+  gap: 13px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.enter-menu-btn {
+  min-width: 212px;
+  justify-content: space-between;
+  padding: 8px 10px 8px 24px;
+  border-radius: 18px;
+  border-color: rgba(255,248,237,.32);
+  background: linear-gradient(110deg, #9e301f, var(--home-ember));
+  box-shadow: 0 14px 34px rgba(68,16,8,.4), inset 0 1px rgba(255,255,255,.26);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .12em;
+}
+
+.enter-menu-btn:hover {
+  background: linear-gradient(110deg, #b33c25, #e96f4b);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 42px rgba(68,16,8,.5), inset 0 1px rgba(255,255,255,.3);
+}
+
+.btn-arrow {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(255,255,255,.18);
+  font-size: 21px;
+  line-height: 1;
+  transition: transform .25s ease, background .25s ease;
+}
+
+.enter-menu-btn:hover .btn-arrow { transform: translateX(3px); background: rgba(255,255,255,.28); }
+
+.home-caption {
+  max-width: 295px;
+  margin: 0;
+  color: rgba(255,248,237,.72);
+  font-size: 12px;
+  line-height: 1.45;
+  text-shadow: 0 2px 10px rgba(0,0,0,.55);
+}
+
+.home-credit {
+  align-self: center;
+  border-radius: 10px;
+  background: rgba(23,21,17,.48);
+  border-color: rgba(255,248,237,.14);
+}
+
+@media (max-width: 599px) {
+  .home-kicker { font-size: 8px; letter-spacing: .14em; }
+  .home-bottom-area { align-items: center; }
+  .home-caption { text-align: center; max-width: 260px; font-size: 11px; }
+  .enter-menu-btn { min-width: 208px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter-menu-btn,
+  .btn-arrow { transition: none; }
+}
+}

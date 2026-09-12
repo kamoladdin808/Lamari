@@ -2407,3 +2407,394 @@ body {
     animation: none !important;
   }
 }
+
+/* ========================================================================
+   LA MARI — OVEN HOUSE UI REFRESH
+   The menu is built like a warm service card placed over the dish, rather
+   than a collection of unrelated floating controls.
+   ======================================================================== */
+@media (width: 0px) {
+:root {
+  --ink: #171511;
+  --cream: #fff8ed;
+  --cream-dim: #e7d9c9;
+  --gold: #efbd77;
+  --ember: #dc5b3c;
+  --ember-deep: #9e301f;
+  --leaf: #b8d78f;
+  --glass: rgba(25, 20, 16, 0.72);
+}
+
+body,
+.stage {
+  background: var(--ink);
+}
+
+.stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: .18;
+  background-image: radial-gradient(rgba(255,255,255,.4) .45px, transparent .55px);
+  background-size: 5px 5px;
+  mix-blend-mode: soft-light;
+}
+
+.ambient-tint {
+  opacity: .38;
+  mix-blend-mode: color;
+}
+
+.veil-top {
+  height: 260px;
+  background: linear-gradient(180deg, rgba(18, 13, 10, .88), rgba(18, 13, 10, .51) 55%, transparent);
+}
+
+.veil-bottom {
+  height: 320px;
+  background: linear-gradient(0deg, rgba(18, 13, 10, .95), rgba(18, 13, 10, .72) 45%, transparent 100%);
+}
+
+.dots {
+  top: max(10px, calc(env(safe-area-inset-top) + 4px));
+  gap: 4px;
+  z-index: 12;
+}
+
+.dots .seg {
+  height: 2px;
+  background: rgba(255, 248, 237, .25);
+}
+
+.dots .seg i {
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(239, 189, 119, .65);
+}
+
+.dots .seg.in-cart,
+.dots .seg.in-cart i {
+  background: var(--ember);
+  box-shadow: 0 0 8px rgba(220, 91, 60, .6);
+}
+
+.top-bar {
+  z-index: 12;
+  padding-top: max(32px, calc(env(safe-area-inset-top) + 18px));
+}
+
+.dish-info {
+  max-width: min(490px, calc(100vw - 122px));
+  padding: 13px 15px 14px;
+  border: 1px solid rgba(255, 248, 237, .18);
+  border-left: 3px solid var(--ember);
+  border-radius: 5px 24px 24px 24px;
+  background: linear-gradient(125deg, rgba(31, 23, 18, .87), rgba(31, 23, 18, .46));
+  backdrop-filter: blur(13px) saturate(120%);
+  -webkit-backdrop-filter: blur(13px) saturate(120%);
+  box-shadow: 0 14px 42px rgba(0, 0, 0, .28);
+}
+
+.dish-cat-row {
+  gap: 6px 8px;
+}
+
+.dish-cat,
+.dish-progress {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.dish-cat { color: var(--gold); }
+
+.dish-progress {
+  color: rgba(255, 248, 237, .7);
+  padding-left: 8px;
+  border-left: 1px solid rgba(255, 248, 237, .28);
+}
+
+.dish-title {
+  margin-top: 8px;
+  font-size: clamp(22px, 6vw, 31px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+
+.dish-desc {
+  display: -webkit-box !important;
+  max-width: 420px;
+  margin-top: 8px;
+  padding: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(255, 248, 237, .82);
+  font-size: 12px;
+  line-height: 1.42;
+  text-shadow: 0 1px 5px rgba(0,0,0,.6);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.dish-more-btn {
+  margin-top: 9px;
+  padding: 0;
+  color: var(--gold);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.dish-more-btn::after {
+  content: ' ↗';
+  font-size: 13px;
+}
+
+.dish-badge,
+.dish-in-cart-badge {
+  border-radius: 999px;
+  background: var(--ember);
+  color: #fff8ed;
+  box-shadow: none;
+}
+
+.dish-time-badge {
+  border-radius: 999px;
+  background: rgba(239, 189, 119, .16);
+  border-color: rgba(239, 189, 119, .35);
+  color: var(--gold);
+  box-shadow: none;
+}
+
+.brand-mark { gap: 10px; }
+
+.brand-mark .wm-logo {
+  height: 25px;
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,.42));
+}
+
+.header-controls { gap: 8px; }
+
+.lang-mobile-btn,
+.cart-chip {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 248, 237, .22);
+  background: rgba(31, 23, 18, .66);
+  box-shadow: 0 8px 22px rgba(0,0,0,.22);
+}
+
+.cart-chip {
+  color: var(--cream);
+  border-radius: 14px;
+}
+
+.cart-chip:hover,
+.cart-chip:focus-visible {
+  background: var(--cream);
+  color: var(--ember-deep);
+  transform: translateY(-2px);
+}
+
+.cart-chip .badge {
+  top: -6px;
+  right: -6px;
+  background: var(--ember);
+  color: #fff;
+  border-color: var(--ink);
+}
+
+.dish-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 12;
+  width: 42px;
+  height: 64px;
+  padding: 0;
+  border: 1px solid rgba(255,248,237,.22);
+  color: var(--cream);
+  background: rgba(23,21,17,.32);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font: 400 42px/1 'Jost', sans-serif;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity .2s ease, background .2s ease, transform .2s ease;
+}
+
+.dish-nav:hover,
+.dish-nav:focus-visible {
+  opacity: 1;
+  background: rgba(220, 91, 60, .82);
+}
+
+.dish-nav-prev { left: 0; border-radius: 0 18px 18px 0; }
+.dish-nav-next { right: 0; border-radius: 18px 0 0 18px; }
+.dish-nav-prev:hover { transform: translateX(2px); }
+.dish-nav-next:hover { transform: translateX(-2px); }
+
+.bottom-area {
+  z-index: 12;
+  padding: 0 16px max(24px, calc(env(safe-area-inset-bottom) + 14px));
+}
+
+.variant-selector { margin-bottom: 12px; }
+
+.var-btn {
+  border-color: rgba(255,248,237,.2);
+  border-radius: 999px;
+  background: rgba(31,23,18,.62);
+  color: var(--cream);
+}
+
+.var-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+}
+
+.price-pill {
+  max-width: 580px;
+  min-height: 56px;
+  padding: 7px 8px 7px 20px;
+  border: 1px solid rgba(255, 248, 237, .28);
+  border-radius: 18px;
+  background: linear-gradient(110deg, var(--ember-deep), var(--ember));
+  color: #fffdf8;
+  box-shadow: 0 13px 28px rgba(104, 28, 16, .42), inset 0 1px rgba(255,255,255,.25);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .035em;
+}
+
+.price-pill::after { display: none; }
+
+.price-pill .plus,
+.price-pill .pill-minus {
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background: rgba(255, 248, 237, .18);
+  color: #fff;
+  font-size: 22px;
+}
+
+.tabs-viewport {
+  max-width: 720px;
+  margin-top: 13px;
+  padding: 2px 0 5px;
+  mask-image: linear-gradient(to right, transparent, black 18px, black calc(100% - 18px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 18px, black calc(100% - 18px), transparent);
+}
+
+.cat-tabs { gap: 7px; }
+
+.cat-tab {
+  border: 1px solid rgba(255,248,237,.17);
+  border-radius: 999px;
+  background: rgba(23,21,17,.48);
+  color: rgba(255,248,237,.73);
+  padding: 9px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+.cat-tab.active {
+  border-color: var(--cream);
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: 0 6px 18px rgba(0,0,0,.24);
+}
+
+.cart-drawer,
+.desc-modal,
+.waffle-modal,
+.lang-modal {
+  background: #fff8ed;
+  color: var(--ink);
+  border-color: rgba(115, 68, 44, .16);
+  box-shadow: 0 -18px 52px rgba(0,0,0,.38);
+}
+
+.drawer-handle,
+.desc-modal-handle,
+.waffle-handle,
+.lang-modal-handle { background: rgba(23,21,17,.22); }
+
+.drawer-header,
+#descModalTitle,
+#langModalTitle,
+.waffle-title { color: var(--ink); }
+
+.drawer-footer { border-color: rgba(23,21,17,.12); }
+.drawer-total { color: var(--ink); }
+.drawer-total b { color: var(--ember-deep); }
+
+.cart-row { border-color: rgba(23,21,17,.1); }
+.cr-name { color: var(--ink); }
+.cr-price { color: var(--ember-deep); }
+
+.checkout-btn,
+.waffle-add-btn {
+  border-radius: 14px;
+  background: var(--ember);
+  color: #fff;
+}
+
+.checkout-btn:disabled { background: #d8cec1; color: #897d71; }
+
+.lang-select-btn {
+  color: var(--ink);
+  background: #fffdf8;
+  border-color: rgba(23,21,17,.12);
+}
+
+.lang-select-btn.active {
+  border-color: var(--ember);
+  background: rgba(220,91,60,.1);
+  color: var(--ember-deep);
+}
+
+button:focus-visible,
+.dish-more-btn:focus-visible,
+.cat-tab:focus-visible,
+.var-btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 599px) {
+  .dish-info { max-width: calc(100vw - 112px); padding: 11px 12px 12px; }
+  .dish-title { font-size: clamp(20px, 6vw, 25px); }
+  .dish-nav { display: none; }
+  .dish-desc { font-size: 11.5px; }
+  .dish-more-btn { font-size: 10px; }
+  .brand-mark .wm-logo { height: 21px; }
+  .lang-mobile-btn,
+  .cart-chip { width: 35px; height: 35px; border-radius: 12px; }
+  .price-pill { min-height: 52px; border-radius: 16px; }
+  .price-pill .plus,
+  .price-pill .pill-minus { width: 36px; height: 36px; border-radius: 11px; }
+  .cat-tab { padding: 8px 12px; font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dish-nav,
+  .cart-chip,
+  .price-pill,
+  .cat-tab { transition: none; }
+}
+}

@@ -100,7 +100,7 @@ const LOGO_LAMARI = "img/logo_lamari.png";
     ANCHAN_PERSIK_MANGO, ANCHAN_CHERNIROY, MATCHA_KLUBNIKA, MATCHA_KIVI,
     CHAY_MANGO_MARAKUYA, CHAY_OBLEPIKHOVIY, CHAY_TRAVYANOY, CHAY_YAGODNIY,
     KASHA_OVSYANAYA, KASHA_MANNAYA, SHAKSHUKA, OTVARNOY_RIS, OVOSHI_NA_GRILE,
-    KARTOFEL_PYURE, BARANYA_KOREYKA, BONESTEYK_PAYE, MEDALYON_GRATEN,
+    KARTOFEL_PYURE, BONESTEYK_PAYE, MEDALYON_GRATEN,
     PERLOTTO_TRUFFLE, KURINOYE_FILE, LOSOS_HOLLANDAISE, KLAB_SANDWICH,
     SANDWICH_TEXAS, SMASH_BURGER, BOUL_ZELEN, BOUL_LOSOS, BOUL_TUNA,
     PIZZA_TRUFFLE, PIZZA_SALMON, PIZZA_STRACCIATELLA,
@@ -174,13 +174,13 @@ const MENU = {
     { id: 'mortadella_sandwich', name: { ru: 'Сэндвич с мортаделлой', uz: 'Mortadellali sendvich' }, desc: { ru: 'Итальянская мортаделла, сливочный сыр, руккола и фисташковый акцент', uz: 'Italyan mortadellasi, qaymoqli pishloq, rukkola va pista' }, weight: '', price: 65000, badge: '', img: P3 }
   ],
   'soups': [
-    { id: 'mexican_soup', name: { ru: 'Суп мексиканский', uz: "Meksika sho'rvasi" }, desc: { ru: 'Пряный наваристый суп с фасолью, кукурузой, фаршем и перцем чили', uz: "Loviya, makkajo'xori, qiyma va achchiq chili bilan ziravorli sho'rva" }, weight: '', price: 40000, badge: '', img: P4 },
+    { id: 'borscht', name: { ru: 'Суп Борщ', uz: "Borsh sho'rvasi" }, desc: { ru: 'Наваристый традиционный борщ с нежной говядиной, свеклой и свежей зеленью', uz: "Mol go'shti, lavlagi va yangi ko'katlar bilan boy an'anaviy borsh" }, weight: '', price: 40000, badge: '', img: P4 },
     { id: 'minestrone', name: { ru: 'Зелёный крем-суп', uz: 'Yashil krem-sho‘rva' }, desc: { ru: 'Нежный зелёный крем-суп с хрустящими гренками', uz: 'Qarsildoq suxariklar bilan mayin yashil krem-sho‘rva' }, weight: '', price: 35000, badge: '', img: SUP_MINESTRONE },
     { id: 'tom_yam', name: { ru: 'Суп Том ям с лососем', uz: 'Qizil baliqli Tom yam' }, desc: { ru: 'Знаменитый тайский кисло-острый суп с лососем, кокосовым молоком и грибами', uz: "Qizil baliq, kokos suti va qo'ziqorinlar bilan nordon-achchiq tayland sho'rvasi" }, weight: '', price: 55000, badge: 'HIT', img: SUP_TOMYAM_LOSOS },
     { id: 'lentil_soup', name: { ru: 'Чечевичный суп', uz: "Yasmiq sho'rvasi" }, desc: { ru: 'Бархатистый крем-суп из красной чечевицы с восточными специями и лимоном', uz: "Sharqona ziravorlar va limon bilan qizil yasmiqdan tayyorlangan krem-sho'rva" }, weight: '', price: 35000, badge: '', img: SUP_CHECHEVICHNIY }
   ],
   'mains': [
-    { id: 'lamb_rack', name: { ru: 'Баранья корейка с овощами', uz: "Sabzavotli qo'y qovurg'asi" }, desc: { ru: 'Нежная обжаренная корейка ягненка с гарниром из овощей гриль', uz: "Grilda pishirilgan sabzavotlar bilan mayin qo'y qovurg'asi" }, weight: '', price: 135000, badge: '', img: BARANYA_KOREYKA },
+    { id: 'medallion_grilled_veg', name: { ru: 'Медальон с овощами на гриле', uz: 'Grildagi sabzavotlar bilan medalon' }, desc: { ru: 'Сочные медальоны из говядины с гарниром из овощей гриль', uz: "Grilda pishirilgan sabzavotlar bilan mayin mol go'shti medalonlari" }, weight: '', price: 180000, badge: '', img: P3 },
     { id: 'bone_steak', name: { ru: 'Стейк с картофелем', uz: 'Kartoshkali steyk' }, desc: { ru: 'Сочный стейк с картофелем-гармошкой и соусом', uz: 'Kartoshka-garmoshka va sous bilan suvli steyk' }, weight: '', price: 180000, badge: 'HIT', img: BONESTEYK_PAYE },
     { id: 'chicken_mushroom', name: { ru: 'Куриное филе с грибным соусом', uz: "Qo'ziqorin sousli tovuq filesi" }, desc: { ru: 'Нежнейшее куриное филе под сливочно-грибным соусом с травами', uz: "Qaymoqli-qo'ziqorinli sousda pishirilgan mayin tovuq filesi" }, weight: '', price: 75000, badge: '', img: KURINOYE_FILE },
     { id: 'salmon_hollandaise', name: { ru: 'Лосось под голландским соусом', uz: 'Golland sousli qizil baliq' }, desc: { ru: 'Стейк из лосося идеальной прожарки под шелковистым соусом голландез', uz: 'Ipakdek mayin golland sousi bilan pishirilgan qizil baliq steyki' }, weight: '', price: 160000, badge: '', img: LOSOS_HOLLANDAISE },
@@ -210,7 +210,7 @@ const MENU = {
     { id: 'pizza_margherita', name: { ru: 'Пицца Маргарита', uz: 'Margarita pitsa' }, desc: { ru: 'Классика Неаполя: фирменный томатный соус, моцарелла и свежий базилик', uz: 'Neapol klassikasi: maxsus pomidor sousi, motsarella va yangi rayhon' }, weight: '', price: 75000, badge: '', img: PIZZA_MARGHERITA },
     { id: 'pizza_pepperoni', name: { ru: 'Пицца Пепперони', uz: 'Pepperoni pitsa' }, desc: { ru: 'Пикантная пепперони, много тянущейся моцареллы и томатный соус', uz: "Pikant pepperoni, ko'p cho'ziluvchi motsarella va pomidor sousi" }, weight: '', price: 85000, badge: 'HIT', img: PIZZA_PEPPERONI },
     { id: 'pizza_roastbeef', name: { ru: 'Пицца Ростбиф', uz: 'Rostbif pitsa' }, desc: { ru: 'Ломтики ростбифа, сыр моцарелла, свежая руккола и соус бальзамик', uz: "Rostbif bo'laklari, motsarella, yangi rukkola va balzamik sousi" }, weight: '', price: 115000, badge: '', img: PIZZA_ROSTBIF },
-    { id: 'pizza_truffle', name: { ru: 'Пицца с трюфельной пастой', uz: 'Tryufel pastali pitsa' }, desc: { ru: 'Белый сливочный соус, моцарелла, шампиньоны и ароматная трюфельная паста', uz: "Oq qaymoqli sous, motsarella, shampinyonlar va xushbo'y tryufel pastasi" }, weight: '', price: 90000, badge: '', img: PIZZA_TRUFFLE },
+    { id: 'pizza_truffle', name: { ru: 'Пицца с трюфельной пастой', uz: 'Tryufel pastali pitsa' }, desc: { ru: 'Белый сливочный соус, моцарелла, шампиньоны и ароматная трюфельная паста', uz: "Oq qaymoqli sous, motsarella, shampinyonlar va xushbo'y tryufel pastasi" }, weight: '', price: 105000, badge: '', img: PIZZA_TRUFFLE },
     { id: 'pizza_salmon', name: { ru: 'Пицца Сальмон бьянка', uz: 'Salmon byanka pitsa' }, desc: { ru: 'Сливочная основа, филе лосося, сыр моцарелла, каперсы и зелень', uz: "Qaymoqli asos, qizil baliq filesi, motsarella va ko'katlar" }, weight: '', price: 110000, badge: '', img: PIZZA_SALMON },
     { id: 'pizza_stracciatella', name: { ru: 'Пицца Страчателла с томатами', uz: 'Pomidorli Strachatella pitsa' }, desc: { ru: 'Хрустящий бортик, сливочная страчателла, сладкие томаты черри и песто', uz: 'Qarsildoq xamir, qaymoqli strachatella, shirin cherri va pesto' }, weight: '', price: 110000, badge: '', img: PIZZA_STRACCIATELLA },
     { id: 'pizza_cheese', name: { ru: 'Пицца Сырная', uz: 'Pishloqli pitsa' }, desc: { ru: 'Четыре благородных сыра: моцарелла, горгонзола, пармезан и гауда', uz: "To'rt xil oliy navli pishloq: motsarella, gorgonzola, parmezan va gauda" }, weight: '', price: 90000, badge: '', img: PIZZA_CHEESE }
